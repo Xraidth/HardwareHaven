@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+.font-Montserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.font-Montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Aplica fondo personalizado al header */
+header {
+    background-color: #1B212C;
+}
+
+.bg-body-tertiary {
+    background-color: transparent !important; /* Quita el color de fondo de Bootstrap */
+}
