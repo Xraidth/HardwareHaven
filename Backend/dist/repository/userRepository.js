@@ -1,4 +1,4 @@
-import { User } from "../model/user.entity.js";
+import { User } from "../Model/user.entity.js";
 import { orm } from '../shared/db/orm.js';
 const em = orm.em;
 export class UserRepository {

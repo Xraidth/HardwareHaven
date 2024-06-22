@@ -1,5 +1,5 @@
 import { CompraRepository } from '../repository/compraRepository.js';
-import { Compra } from '../model/compra.entity.js';
+import { Compra } from '../Model/compra.entity.js';
 import { UserRepository } from '../repository/userRepository.js';
 const compraRepo = new CompraRepository();
 const userRepo = new UserRepository();

@@ -1,5 +1,5 @@
 import { CategoriaRepository } from '../repository/catergoriaRespository.js';
-import { Categoria } from '../model/categoria.entity.js';
+import { Categoria } from '../Model/categoria.entity.js';
 import { ComponenteRepository } from '../repository/componenteRepository.js';
 const categoriaRepo = new CategoriaRepository();
 const componenteRepo = new ComponenteRepository();

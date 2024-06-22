@@ -1,4 +1,4 @@
-import { Compra } from '../model/compra.entity.js';
+import { Compra } from '../Model/compra.entity.js';
 import { orm } from '../shared/db/orm.js';
 const em = orm.em;
 export class CompraRepository {
