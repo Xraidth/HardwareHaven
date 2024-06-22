@@ -15,7 +15,6 @@ export class LineaCompraService {
     return this.http.get(`${this.baseUrl}getAll`);
   }
 
-  
   getOne(id: number) {
     return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
