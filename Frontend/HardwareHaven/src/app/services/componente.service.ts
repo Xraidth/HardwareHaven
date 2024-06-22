@@ -1,50 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http/index.js';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ComponenteService {
 
-  private baseUrl = 'http://localhost:3000/api/user/';
+  private baseUrl = 'http://localhost:3000/api/componente/';
 
   constructor(    
     private http: HttpClient
   ) { }
-
-
   getAll(){
     return this.http.get(`${this.baseUrl}getAll`);
   }
-
-  
   getOne(id: number) {
     return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
-  create(body:{name:string, password:string}){
+  create(body:{ name: string, description: string, categoriaId: number}){ 
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.post(`${this.baseUrl}register`, body, { headers });
+    return this.http.post(`${this.baseUrl}insert`, body, { headers });
   }
 
   delete(id: number) {
     return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{ newPassword: string, oldPassword:string,newUserName:string}){
+  update( id: number, body:{ newCompName:string, newDescription:string, categoriaId:number}){ 
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
+  }
+  updateDescription( id: number, body:{ newDescription:string, oldDescription: string}){ 
+    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
+    return this.http.put(`${this.baseUrl}updateDescription/${id}`, body, { headers });
   }
 
-  updateUserName( id: number, body:{ newUserName:string, password: string}){
+  updateCompName( id: number, body:{newCompName: string}){ 
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
+    return this.http.put(`${this.baseUrl}updateDescription/${id}`, body, { headers });
   }
-  updateUserPassword( id: number, body:{ newPassword: string, oldPassword:string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
-  }
-
 
 }
