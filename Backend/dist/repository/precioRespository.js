@@ -1,4 +1,4 @@
-import { Precio } from '../model/precio.entity.js';
+import { Precio } from '../Model/precio.entity.js';
 import { orm } from '../shared/db/orm.js';
 const em = orm.em;
 export class PrecioRepository {

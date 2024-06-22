@@ -1,4 +1,4 @@
-import { Componente } from "../model/componente.entity.js";
+import { Componente } from "../Model/componente.entity.js";
 import { orm } from '../shared/db/orm.js';
 const em = orm.em;
 export class ComponenteRepository {

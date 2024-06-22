@@ -1,5 +1,5 @@
 import { UserRepository } from "../repository/userRepository.js";
-import { User } from '../model/user.entity.js';
+import { User } from '../Model/user.entity.js';
 const userRepo = new UserRepository();
 const userRegisterController = async (req, res) => {
     const { name, password } = req.body;
