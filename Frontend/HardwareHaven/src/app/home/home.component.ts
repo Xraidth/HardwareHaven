@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service.js';
+import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   public username: string = '';
   public password: string = '';
 
-  constructor(private serverUser: UserService) {}
+  constructor(private serverUser: UserService, private router: Router) {}
   
 
   ngOnInit(): void {
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     
     if (user) {
       console.log('Acceso concedido');
+      this.router.navigate(['productList']);
     } else {
       console.log('Acceso denegado');
     }
