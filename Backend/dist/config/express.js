@@ -8,8 +8,9 @@ import precioRouter from "../routers/precioRouter.js";
 import lineaCompraRouter from "../routers/lineCompraRouter.js";
 import compraRouter from "../routers/compraRouter.js";
 import compRouter from "../routers/componenteRouter.js";
-//import cors from 'cors';
+import cors from 'cors';
 const HarwareHavenexpressApp = express();
+HarwareHavenexpressApp.use(cors());
 //All the middlewares, routers BASE
 HarwareHavenexpressApp.use(express.json());
 //HarwareHavenexpressApp.use(cors());
