@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 ;
 
 @Component({
-  selector: 'app-product-list',
+  selector: 'productList',
   standalone: true,
   imports: [],
   templateUrl: './product-list.component.html',
@@ -11,3 +11,4 @@ import { Component } from '@angular/core';
 export class ProductListComponent {
 
 }
+

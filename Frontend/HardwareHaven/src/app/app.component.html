@@ -1,0 +1,15 @@
+<ng-container *ngIf="page.includes('home'); else productOrError">
+  <home (goToProductList)="setPage($event)"></home>
+</ng-container>
+
+<ng-template #productOrError>
+  <ng-container *ngIf="page.includes('productList'); else error">
+    <productList></productList>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <p>Error desconocido</p>
+</ng-template>
+
+
