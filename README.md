@@ -4,7 +4,8 @@
 ISI COM 304 
 ### Integrantes 
 * 45767 - Rodriguez, Ignacio
-* 48839 - Juliana, Caldani
+* 44178 - Moreal, Franco
+* 43700 - Molinari, Andrés
 
 ### Repositorios
 * [Repositorio](https://github.com/jcaldani/DSW-2024-Hardware-Haven.git)
