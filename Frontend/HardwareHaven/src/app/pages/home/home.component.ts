@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Bienvenido a Hardware Haven');
-    this.getAllUsers();
+    this.getAllUsers(); //Se busca cada usuario
   }
 
   login() {
