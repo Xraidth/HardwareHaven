@@ -5,7 +5,7 @@
     </p>
     <div class="dropdown-menu" [class.show]="isDropdownOpen">
       <a class="dropdown-item" [routerLink]="['/perfil']">Perfil</a>
-      <a class="dropdown-item" href="#">Configuraciones</a>
+      <a class="dropdown-item" (click)="configurarCuenta()">Configuraciones</a>
       <a class="dropdown-item" href="#">Cerrar sesión</a>
     </div>
   </div>
