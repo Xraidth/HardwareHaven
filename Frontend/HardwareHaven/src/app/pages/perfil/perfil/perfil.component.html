@@ -1,0 +1,55 @@
+<div class="bg-black">
+    <header>
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand font-Montserrat text-light" href="#">
+                <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex justify-content-center w-100">
+              <div class="w-50">
+              
+               </div>
+              </div>
+                <div class="ms-auto ">
+                    <app-user-nav [usuario]="usuario"></app-user-nav>
+                </div>
+                <div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+    </header>
+    <main >
+        <h1 class="text-center title-perfil mb-4 mt-3">Perfil</h1>
+        
+        <div class="custom-contenedor d-flex flex-column  justify-content-center align-items-center">
+            <div class="d-flex justify-content-start align-items-center w-100 ">
+                <button class="btn btn-primary btn-lg btn-custom-sg fixed-button" (click)="goBack()">Volver</button>
+                
+            </div>
+            <div class="d-flex flex-column  justify-content-center align-items-center">
+            <div class="profile-item mt-3">
+                <label for="username">Nombre de Usuario</label>
+                <span id="username">{{ usuario?.username || 'Usuario'}}</span>
+            </div>
+            <div class="profile-item">
+                <label for="password">Contraseña:</label>
+                <div class="ms-5" style="display: flex; align-items: center;">
+                    <input class="custom-password-pf" [type]="passwordFieldType" id="password" [value]="usuario?.password || 'contraseña'" readonly>
+                    <button class="toggle-password" (click)="togglePassword()">👁️</button>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        
+    </main>
+</div>
