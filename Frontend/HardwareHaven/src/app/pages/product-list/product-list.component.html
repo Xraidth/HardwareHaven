@@ -1,0 +1,67 @@
+<div class="bg-black">
+    <header>
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand font-Montserrat text-light" href="#">
+                <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex justify-content-center w-100">
+              <div class="w-50">
+              <form class="d-flex me-auto" role="search" (submit)="onSearch($event)">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" [(ngModel)]="searchQuery" name="searchQuery">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+              </form>
+               </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center" (click)="pasarAcompra()">
+              <img src="assets\images\Carrito.png" width="25" height="25" alt="" title="" class="img-small">
+              <span class="ms-1 text-light">
+              <p class="carrito-cant">{{carrito.length}}</p>
+              </span>
+              </div>
+                <div class="ms-auto ">
+                    <app-user-nav [usuario]="usuario"></app-user-nav>
+                </div>
+                <div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+    </header>
+    <main>
+      <h1 class="text-center title-product mb-4 mt-3">Productos</h1>
+
+      <div class="d-flex justify-content-center align-items-center" >
+      <div>
+        <select class="form-select" aria-label="Default select example" (change)="onSortChange($event)">
+          <option value="Or" selected>Ordenar Por:</option>
+          <option value="az">Ordenar A/Z</option>
+          <option value="za">Ordenar Z/A</option>
+          <option value="highPrice">Mayor Precio</option>
+          <option value="lowPrice">Menor precio</option>
+        </select>
+      </div>
+    
+    </div>
+      <div class="row mt-5 justify-content-center">
+        
+        <div *ngIf="products.length > 0; else noProducts" class="row">
+          <div class="col-md-4 mb-4" *ngFor="let product of products">
+             <app-card [product]="product" (productSelected)="onProductSelected($event)" (productUnSelected)="onProductUnSelected($event)"></app-card>
+          </div>
+        </div>
+        <ng-template #noProducts>
+          <p class="text-center">No hay productos disponibles.</p>
+        </ng-template>
+      </div>
+      
+    </main>
+</div>

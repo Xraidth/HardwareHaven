@@ -1,0 +1,28 @@
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+body{
+    background-color: black;
+}
+
+
+
+.toastify {
+    position: absolute;
+    
+    width: 100%; 
+    height: 80px;
+    
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-size: 2rem; 
+  }
+  
+ .swal2-container {
+    background-color: rgba(0, 0, 0, 0.856) !important;
+  }
+ 
+ 

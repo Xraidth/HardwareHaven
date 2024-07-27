@@ -1,0 +1,206 @@
+
+//------------------Usuario-------------------------------
+###GetAll 
+GET http://localhost:3000/api/user/getAll
+
+###GetOne
+GET http://localhost:3000/api/user/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "name":"Pedro", 
+    "password":"pedriño"
+}
+###Delete
+DELETE  http://localhost:3000/api/user/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/user/update/2
+Content-Type: application/json
+
+{
+"newPassword":"nacho55", 
+"oldPassword":"Nacho44", 
+"newUserName":"Ignacio Rodriguez"
+}
+
+###PATCH
+PATCH http://localhost:3000/api/user/updateUserName/:id
+Content-Type: application/json
+
+{
+"newUserName":"", 
+"password":""
+}
+
+###PATCH
+PATCH http://localhost:3000/api/user/updatePassword/:id
+Content-Type: application/json
+
+{
+"newPassword":"", 
+"oldPassword":""
+}
+
+//------------------Compra-------------------------------
+###GetAll 
+GET http://localhost:3000/api/compra/getAll
+
+###GetOne
+GET http://localhost:3000/api/compra/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/compra/insert
+Content-Type: application/json
+
+{
+    "userId":"2"
+}
+###Delete
+DELETE  http://localhost:3000/api/compra/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/compra/update/2
+Content-Type: application/json
+
+{
+"fechaCompra": "2024-04-04",
+"fechaCancel": "2024-04-29",
+"total": "200"
+}
+
+//------------------Componente-------------------------------
+###GetAll 
+GET http://localhost:3000/api/componente/getAll
+
+###GetOne
+GET http://localhost:3000/api/componente/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/componente/insert
+Content-Type: application/json
+
+{
+"name":"TOYIBA", 
+"description":"CAPUTACHA",
+"categoriaId":"3"
+}
+###Delete
+DELETE  http://localhost:3000/api/componente/deleteOne/4
+
+###Put
+PUT   http://localhost:3000/api/componente/update/2
+Content-Type: application/json
+
+{
+"newCompName":"Wegger 4444", 
+"newDescription":"Mouse hiper fast",
+"categoriaId":"2"
+}
+###PATCH
+PATCH   http://localhost:3000/api/componente/updateCompName/2
+Content-Type: application/json
+
+{
+"newCompName":"Hammilton Vega 78"
+}
+###PATCH
+PATCH   http://localhost:3000/api/componente/updateDescription/2
+Content-Type: application/json
+
+{
+"newDescription":"Keyboard with lights", 
+"oldDescription":"Mouse hiper fast"
+}
+
+
+//------------------Categoria-------------------------------
+###GetAll 
+GET http://localhost:3000/api/categoria/getAll
+
+###GetOne
+GET http://localhost:3000/api/categoria/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/categoria/insert
+Content-Type: application/json
+
+{
+"descripcion":"Periferico"
+}
+###Delete
+DELETE  http://localhost:3000/api/categoria/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/categoria/update/:id
+Content-Type: application/json
+
+{
+"descripcion":"Periferico Orvital"
+
+}
+
+
+
+//------------------Precio-------------------------------
+###GetAll 
+GET http://localhost:3000/api/precio/getAll
+
+###GetOne
+GET http://localhost:3000/api/precio/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/precio/insert
+Content-Type: application/json
+
+{
+"fechaDesde":"20240502",
+"componenteId":"11",
+"valor":"10"
+}
+###Delete
+DELETE  http://localhost:3000/api/precio/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/precio/update/:id
+Content-Type: application/json
+
+{
+"fechaDesde":"20240502",
+"componenteId":"11",
+"valor":"72000"
+}
+
+
+//------------------LineaCompra-------------------------------
+###GetAll 
+GET http://localhost:3000/api/lineaCompra/getAll
+
+###GetOne
+GET http://localhost:3000/api/lineaCompra/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/lineaCompra/insert
+Content-Type: application/json
+
+{
+  "compraId": "2",
+  "cantidad": "20",
+  "componenteId": "6"
+}
+###Delete
+DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/lineaCompra/update/:id
+Content-Type: application/json
+
+{
+"compraId":"2", 
+"cantidad":"20", 
+"subTotal":"200",
+"componenteId":"6"
+}

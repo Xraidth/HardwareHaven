@@ -1,0 +1,12 @@
+
+<div class="dropdown" [class.show]="isDropdownOpen">
+    <p class="user-nav dropdown-toggle" type="button" (click)="toggleDropdown()">
+      {{ userName }}
+    </p>
+    <div class="dropdown-menu" [class.show]="isDropdownOpen">
+      <a class="dropdown-item" href="#">Perfil</a>
+      <a class="dropdown-item" href="#">Configuraciones</a>
+      <a class="dropdown-item" href="#">Cerrar sesión</a>
+    </div>
+  </div>
+  

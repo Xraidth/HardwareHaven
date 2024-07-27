@@ -1,0 +1,117 @@
+import { Component, OnInit } from '@angular/core';
+import { ComponenteService } from '../../core/services/entities/componente.service.js';
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { CardComponent } from '../../features/products/components/card/card.component.js';
+import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
+import { FormsModule } from '@angular/forms';
+import { SessionService } from '../../core/services/share/session.service.js';
+
+
+@Component({
+  selector: 'productList',
+  standalone: true,
+  imports: [HttpClientModule, CommonModule, CardComponent, UserNavComponent, FormsModule],
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.css',
+  providers: [ComponenteService]
+})
+export class ProductListComponent implements OnInit {
+
+  public products: any[] = [];  
+  searchQuery: string = '';
+  public carrito: any[] = [];  
+  sortCriteria: string = '';
+  public usuario: any;
+
+  constructor(private serverProduct: ComponenteService, private router: Router) {}
+
+  ngOnInit(): void {
+   
+    
+    this.usuario=SessionService.usuario;
+    this.getAllProducts();
+  }
+
+
+    getAllProducts() {
+  this.serverProduct.getAll().subscribe({
+    next: (r: any) => {
+      try {
+        if (r && r.data && Array.isArray(r.data)) {
+          const products: any[] = r.data; 
+          this.products = products;
+        } else {
+          console.log('El objeto recibido no tiene la estructura esperada.');
+        }
+      } catch (error) {
+        console.error('Error al procesar los datos:', error);
+        console.log('Objeto recibido:', r); 
+      }
+    },
+    error: (e) => {
+      console.error('Error en la llamada HTTP:', e);
+    }
+  });
+
+  }
+
+ 
+  onSearch(event: Event) {
+    event.preventDefault();
+    this.products = this.products.filter(product =>
+      product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+    if(this.searchQuery ==""){this.getAllProducts();}
+  }
+
+  onProductSelected(productCard: any) {
+    this.carrito.push(productCard);
+  }
+
+  onProductUnSelected(productCard: any) {
+    const index = this.carrito.indexOf(productCard);
+    if (index > -1) {
+      this.carrito.splice(index, 1);
+    }
+  }
+  
+
+  onSortChange(event: any) {
+    this.sortCriteria = event.target.value;
+    this.sortProducts();
+  }
+
+  sortProducts() {
+    if (this.sortCriteria === 'Or') {this.getAllProducts();}
+      else if (this.sortCriteria === 'az') {
+      this.products.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (this.sortCriteria === 'za') {
+      this.products.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (this.sortCriteria === 'highPrice') {
+      this.products.sort((a, b) => this.getMaxPrice(b.precios) - this.getMaxPrice(a.precios));
+    } else if (this.sortCriteria === 'lowPrice') {
+      this.products.sort((a, b) => this.getMaxPrice(a.precios) - this.getMaxPrice(b.precios));
+    }
+  }
+
+  getMaxPrice(precios: any[]): number {
+    precios.sort((a, b) => {
+      if (a.fecha && b.fecha) {
+        return b.fecha.getTime() - a.fecha.getTime();
+      }
+      return 0; 
+    });
+    return precios[0]?.valor || 0;
+  }
+
+  pasarAcompra(){
+    SessionService.usuario.carrito = this.carrito;
+    this.router.navigate(['compra']);
+  
+  }
+
+}
+
+

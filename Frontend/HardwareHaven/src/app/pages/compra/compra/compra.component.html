@@ -1,0 +1,49 @@
+<div class="bg-black">
+    <header>
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand font-Montserrat text-light" href="#">
+                <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex justify-content-center w-100">
+              <div class="w-50">
+              
+               </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center"  (click)="pasarAListaProductos()">
+              <img src="assets\images\Carrito.png" width="25" height="25" alt="" title="" class="img-small">
+              <span class="ms-1 text-light">
+              <p class="carrito-cant">{{carrito.length}}</p>
+              </span>
+              </div>
+                <div class="ms-auto ">
+                    <app-user-nav [usuario]="usuario"></app-user-nav>
+                </div>
+                <div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+    </header>
+    <main class="custom-main">
+      <h1 class="text-center title-product mb-4 mt-3">Carrito de Compra</h1>
+
+      <div class="d-flex justify-content-center align-items-center">
+        <app-carrito></app-carrito>
+      </div>
+      <div class="w-100 d-flex justify-content-center align-items-center">
+      <div class="custom-botom-banner">
+      <button *ngIf="mostrarBoton" class="btn-custom-compra btn btn-primary" (click)="realizarCompra()">Comprar</button>
+      </div>
+      </div>
+      
+    </main>
+</div>

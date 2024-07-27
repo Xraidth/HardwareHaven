@@ -1,0 +1,10 @@
+.user-nav {
+    width: 225px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: white;
+  }
+  
