@@ -1,9 +1,10 @@
 import { Component, Input, OnInit} from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-nav',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './user-nav.component.html',
   styleUrl: './user-nav.component.css'
 })
