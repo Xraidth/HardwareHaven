@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CompraService } from '../../../../core/services/entities/compra.service';
 import { LineaCompraService } from '../../../../core/services/entities/linea-compra.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resumen-compra',
@@ -9,7 +10,7 @@ import { LineaCompraService } from '../../../../core/services/entities/linea-com
   imports: [],
   templateUrl: './resumen-compra.component.html',
   styleUrl: './resumen-compra.component.css',
-  providers:[CompraService, LineaCompraService]
+  providers:[CompraService, LineaCompraService, CommonModule]
 })
 export class ResumenCompraComponent implements OnInit {
   public usuario:any;
