@@ -1,0 +1,65 @@
+.custom-conteiner {
+    background-color: rgb(4, 0, 24);
+    width: 800px;
+    height: auto;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.table-container {
+ 
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+}
+
+
+
+
+
+.table-container {
+    
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgb(4, 0, 24); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    border: 1px solid white; /* Bordes blancos */
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid white; 
+    padding: 8px;
+    text-align: left; 
+}
+
+.custom-table th {
+    text-align: center;
+}
+
+.custom-table .text-end {
+    text-align: right; 
+}
+
+.custom-table .text-center {
+    text-align: center; 
+}
+
+.highlight-message {
+    font-size: 2em;
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}

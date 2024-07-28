@@ -21,7 +21,7 @@ import { CategoriaService } from '../../core/services/entities/categoria.service
 export class ProductListComponent implements OnInit {
 
   public products: any[] = [];
-  public allProducts: any[] = [];  // Para guardar la lista completa de productos
+  public allProducts: any[] = [];  
   public categorias: any[] = [];
   searchQuery: string = '';
   public carrito: any[] = [];

@@ -4,11 +4,12 @@ import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
 import { Router } from '@angular/router';
 import { CarritoComponent } from '../../../features/compras/carrito/carrito/carrito.component';
 import { CommonModule } from '@angular/common';
+import { ResumenCompraComponent } from '../../../features/compras/resumenCompra/resumen-compra/resumen-compra.component';
 
 @Component({
   selector: 'app-compra',
   standalone: true,
-  imports: [UserNavComponent, CarritoComponent, CommonModule],
+  imports: [UserNavComponent, CarritoComponent, CommonModule, ResumenCompraComponent],
   templateUrl: './compra.component.html',
   styleUrl: './compra.component.css'
 })
@@ -16,6 +17,7 @@ export class CompraComponent implements OnInit {
   public usuario:any;
   public carrito:any;
   mostrarBoton: boolean = false;
+  mostrarResumen: boolean = false;
 constructor(private router: Router){}
 ngOnInit(): void {
   this.usuario = SessionService.usuario;
@@ -30,7 +32,8 @@ pasarAListaProductos(){
 }
 
 realizarCompra(){
-  
+  this.mostrarResumen = true;
+    this.mostrarBoton = false; 
 }
 }
 
