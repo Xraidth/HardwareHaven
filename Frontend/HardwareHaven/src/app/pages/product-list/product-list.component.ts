@@ -7,6 +7,7 @@ import { CardComponent } from '../../features/products/components/card/card.comp
 import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
+import { CategoriaService } from '../../core/services/entities/categoria.service.js';
 
 
 @Component({
@@ -15,55 +16,79 @@ import { SessionService } from '../../core/services/share/session.service.js';
   imports: [HttpClientModule, CommonModule, CardComponent, UserNavComponent, FormsModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ComponenteService]
+  providers: [ComponenteService, CategoriaService]
 })
 export class ProductListComponent implements OnInit {
 
-  public products: any[] = [];  
+  public products: any[] = [];
+  public allProducts: any[] = [];  // Para guardar la lista completa de productos
+  public categorias: any[] = [];
   searchQuery: string = '';
-  public carrito: any[] = [];  
+  public carrito: any[] = [];
   sortCriteria: string = '';
+  sortCriteriaMenu: string = '';
   public usuario: any;
 
-  constructor(private serverProduct: ComponenteService, private router: Router) {}
+  constructor(
+    private serverProduct: ComponenteService,
+    private serverCategori: CategoriaService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-   
-    
-    this.usuario=SessionService.usuario;
+    this.usuario = SessionService.usuario;
     this.getAllProducts();
+    this.getAllCategori();
   }
 
-
-    getAllProducts() {
-  this.serverProduct.getAll().subscribe({
-    next: (r: any) => {
-      try {
-        if (r && r.data && Array.isArray(r.data)) {
-          const products: any[] = r.data; 
-          this.products = products;
-        } else {
-          console.log('El objeto recibido no tiene la estructura esperada.');
+  getAllProducts() {
+    this.serverProduct.getAll().subscribe({
+      next: (r: any) => {
+        try {
+          if (r && r.data && Array.isArray(r.data)) {
+            const products: any[] = r.data;
+            this.products = products;
+            this.allProducts = [...products];  // Guardar la lista completa
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+          }
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+          console.log('Objeto recibido:', r);
         }
-      } catch (error) {
-        console.error('Error al procesar los datos:', error);
-        console.log('Objeto recibido:', r); 
+      },
+      error: (e) => {
+        console.error('Error en la llamada HTTP:', e);
       }
-    },
-    error: (e) => {
-      console.error('Error en la llamada HTTP:', e);
-    }
-  });
-
+    });
   }
 
- 
+  getAllCategori() {
+    this.serverCategori.getAll().subscribe({
+      next: (r: any) => {
+        try {
+          if (r && r.data && Array.isArray(r.data)) {
+            const categorias: any[] = r.data;
+            this.categorias = categorias;
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+          }
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+          console.log('Objeto recibido:', r);
+        }
+      },
+      error: (e) => {
+        console.error('Error en la llamada HTTP:', e);
+      }
+    });
+  }
+
   onSearch(event: Event) {
     event.preventDefault();
-    this.products = this.products.filter(product =>
+    this.products = this.allProducts.filter(product =>
       product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
-    if(this.searchQuery ==""){this.getAllProducts();}
   }
 
   onProductSelected(productCard: any) {
@@ -76,16 +101,16 @@ export class ProductListComponent implements OnInit {
       this.carrito.splice(index, 1);
     }
   }
-  
 
-  onSortChange(event: any) {
+  onSortChangeOrden(event: any) {
     this.sortCriteria = event.target.value;
     this.sortProducts();
   }
 
   sortProducts() {
-    if (this.sortCriteria === 'Or') {this.getAllProducts();}
-      else if (this.sortCriteria === 'az') {
+    if (this.sortCriteria === 'Or') {
+      this.products = [...this.allProducts];  // Restablecer la lista completa
+    } else if (this.sortCriteria === 'az') {
       this.products.sort((a, b) => a.name.localeCompare(b.name));
     } else if (this.sortCriteria === 'za') {
       this.products.sort((a, b) => b.name.localeCompare(a.name));
@@ -101,17 +126,27 @@ export class ProductListComponent implements OnInit {
       if (a.fecha && b.fecha) {
         return b.fecha.getTime() - a.fecha.getTime();
       }
-      return 0; 
+      return 0;
     });
     return precios[0]?.valor || 0;
   }
 
-  pasarAcompra(){
+  pasarAcompra() {
     SessionService.usuario.carrito = this.carrito;
     this.router.navigate(['compra']);
-  
+  }
+
+  onSortChangeMenu(event: any) {
+    this.sortCriteriaMenu = event.target.value;
+    this.sortByCategoria();
+  }
+
+  sortByCategoria() {
+    if (this.sortCriteriaMenu === 'Or') {
+      this.products = [...this.allProducts];  // Restablecer la lista completa
+    } else {
+      this.products = this.allProducts.filter(p => p.categoria.descripcion === this.sortCriteriaMenu);
+    }
   }
 
 }
-
-

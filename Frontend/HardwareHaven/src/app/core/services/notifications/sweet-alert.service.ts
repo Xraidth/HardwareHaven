@@ -73,7 +73,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
   }
 
 
-  mostrarConfigurarCuenta(usuario: any): Promise<{username: string, password: string} | undefined> {
+  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string} | undefined> {
     return Swal.fire({
       title: "Configura tu cuenta",
       html: `
@@ -98,8 +98,9 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
           return false;
         } else {
           return {
-            username: username,
-            password: password
+            newUserName: username,
+            newPassword: password,
+            oldPassword: password,
           };
         }
       }
