@@ -1,7 +1,7 @@
 
 <div class="dropdown" [class.show]="isDropdownOpen">
     <p class="user-nav dropdown-toggle" type="button" (click)="toggleDropdown()">
-      {{ userName }}
+      {{ userName||'Usuario' }}
     </p>
     <div class="dropdown-menu" [class.show]="isDropdownOpen">
       <a class="dropdown-item" [routerLink]="['/perfil']">Perfil</a>

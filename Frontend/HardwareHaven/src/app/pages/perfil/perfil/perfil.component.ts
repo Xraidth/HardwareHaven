@@ -18,7 +18,6 @@ public passwordFieldType: string = 'password';
   constructor(private router: Router){}
   ngOnInit(): void {
   this.usuario = SessionService.usuario;
-  
 }
 togglePassword() {
   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
