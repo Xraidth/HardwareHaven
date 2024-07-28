@@ -1,0 +1,30 @@
+<div class="custom-conteiner table-container"  *ngIf="lineasCompra.length && compraRealizada; else noCompra">
+    <table class="custom-table ">
+        <thead>
+            <tr>
+                <th colspan="3" class="text-center">Fecha de Compra: {{compraRealizada.fechaCompra}}</th>
+            </tr>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lineaCompra of lineasCompra">
+                <td>{{lineaCompra.componente.name}}</td>
+                <td>x{{lineaCompra.cantidad}}</td>
+                <td class="text-center">${{lineaCompra.subTotal}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-end">Total:</td>
+                <td class="text-center">${{compraRealizada.total}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #noCompra>
+    <div class="no-compra">
+        <p class="highlight-message">Compra no realizada</p>
+    </div>
+</ng-template>

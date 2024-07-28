@@ -34,16 +34,20 @@
     
     </header>
     <main class="custom-main">
-      <h1 class="text-center title-product mb-4 mt-3">Carrito de Compra</h1>
-
+      <h1 class="text-center title-product mb-4 mt-3">
+          {{ mostrarResumen ? 'Resumen de Compra' : 'Carrito de Compra' }}
+      </h1>
+  
       <div class="d-flex justify-content-center align-items-center">
-        <app-carrito></app-carrito>
+          <app-carrito *ngIf="!mostrarResumen"></app-carrito>
+          <app-resumen-compra *ngIf="mostrarResumen"></app-resumen-compra>
       </div>
+  
       <div class="w-100 d-flex justify-content-center align-items-center">
-      <div class="custom-botom-banner">
-      <button *ngIf="mostrarBoton" class="btn-custom-compra btn btn-primary" (click)="realizarCompra()">Comprar</button>
+          <div class="custom-botom-banner">
+              <button *ngIf="!mostrarResumen && mostrarBoton" class="btn-custom-compra btn btn-primary" (click)="realizarCompra()">Comprar</button>
+          </div>
       </div>
-      </div>
-      
-    </main>
+  </main>
+  
 </div>

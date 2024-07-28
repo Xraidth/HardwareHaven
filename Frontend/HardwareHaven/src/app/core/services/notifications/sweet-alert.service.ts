@@ -74,6 +74,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
 
 
   mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string} | undefined> {
+    //Falta la validacion del usuario que no se repita en la base
     return Swal.fire({
       title: "Configura tu cuenta",
       html: `
@@ -100,7 +101,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
           return {
             newUserName: username,
             newPassword: password,
-            oldPassword: password,
+            oldPassword: usuario.password,
           };
         }
       }
