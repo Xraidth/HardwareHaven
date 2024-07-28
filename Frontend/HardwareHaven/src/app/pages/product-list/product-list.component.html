@@ -40,14 +40,15 @@
       <h1 class="text-center title-product mb-4 mt-3">Productos</h1>
 
       <div class="d-flex justify-content-center align-items-center position-relative" >
+        <div>
+          <select class="form-select custom-menu" aria-label="Default select example" (change)="onSortChangeMenu($event)">
+            <option value="Or" selected>Menu:</option>
+            <option *ngFor="let categoria of categorias" [value]="categoria.descripcion">{{categoria.descripcion}}</option>
+          </select>
+        </div>
+        
       <div>
-        <select class="form-select custom-menu" aria-label="Default select example" (change)="onSortChange($event)">
-          <option value="Or" selected>Menu:</option>
-          <!--option value=[categoria.name] *ngFor="let categoria of categorias">{{categoria}}</option-->
-        </select>
-      </div>
-      <div>
-        <select class="form-select" aria-label="Default select example" (change)="onSortChange($event)">
+        <select class="form-select" aria-label="Default select example" (change)="onSortChangeOrden($event)">
           <option value="Or" selected>Ordenar Por:</option>
           <option value="az">Ordenar A/Z</option>
           <option value="za">Ordenar Z/A</option>
