@@ -22,9 +22,9 @@ Información necesaria para comprender y utilizar el proyecto
 Herramienta para comprender y facilitar la representación de entidades de la base de datos.​(Entidad-Relación)
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
-**3. Vista Previa de la Plataforma**
+### Vista Previa de la Plataforma
 ![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot.png)
-_Figura 1: Página principal de la plataforma, mostrando una selección de componentes de hardware disponibles._
+_Figura 1: Página principal inicio de la plataforma
 
 ### Videos y tutoriales
 [Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
