@@ -7,6 +7,8 @@ import { SweetAlertService } from '../../core/services/notifications/sweet-alert
 import { ToastService } from '../../core/services/notifications/toast.service.js';
 import { SessionService } from '../../core/services/share/session.service.js';
 
+declare var bootstrap: any; 
+
 @Component({
   selector: 'home',
   standalone: true,
@@ -21,12 +23,13 @@ export class HomeComponent implements OnInit {
   public username: string = '';
   public password: string = '';
   public recordarClave: boolean = false;
-
+  private intervalId: any;
   constructor(
     private serverUser: UserService, 
     private router: Router, 
     private sweetAlertService: SweetAlertService,
     private toastService: ToastService,
+    
   ) {}
 
   
@@ -38,6 +41,28 @@ export class HomeComponent implements OnInit {
     }
     else{
       this.getAllUsers();
+    }
+
+     
+    this.iniciarCarousel(5000);
+  }
+
+  iniciarCarousel(time:number){
+    const myCarousel = document.querySelector('#carouselExample') as HTMLElement;
+    const carousel = new bootstrap.Carousel(myCarousel, {
+      interval: time, 
+      ride: 'carousel'
+    });
+
+  
+    this.intervalId = setInterval(() => {
+      carousel.next();
+    }, time); 
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 
