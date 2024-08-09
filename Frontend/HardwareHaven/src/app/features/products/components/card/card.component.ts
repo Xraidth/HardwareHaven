@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, NgModule , OnInit } from '@angu
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -18,7 +19,7 @@ export class CardComponent implements OnInit {
   public isSelected: boolean= false;
   products: { name: string, imageUrl: string }[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sweetAlertService: SweetAlertService) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -68,6 +69,10 @@ export class CardComponent implements OnInit {
       this.product.imageUrl = "https://www.smarttools.com.mx/wp-content/uploads/2019/05/imagen-no-disponible.png";
       
     }
+  }
+
+  infoProduct(){
+    this.sweetAlertService.mostrarDetalleProducto(this.product);
   }
  
   
