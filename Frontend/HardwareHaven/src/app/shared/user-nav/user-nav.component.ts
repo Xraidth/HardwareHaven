@@ -65,4 +65,7 @@ export class UserNavComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  cerrarSesion(){
+    SessionService.borrarSession();
+  }
 }

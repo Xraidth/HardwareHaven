@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   private user: any;
   public username: string = '';
   public password: string = '';
+  public recordarClave: boolean = false;
 
   constructor(
     private serverUser: UserService, 
@@ -32,7 +33,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Bienvenido a Hardware Haven');
-    this.getAllUsers(); //Se busca cada usuario
+    if(SessionService.recordarSession()){
+      this.router.navigate(['productList']);
+    }
+    else{
+      this.getAllUsers();
+    }
   }
 
   login() {
@@ -50,6 +56,7 @@ export class HomeComponent implements OnInit {
     
     if (user) {
       SessionService.usuario = user
+      if(this.recordarClave){SessionService.guardarSession();}
       this.router.navigate(['productList']);
     } else {
       this.toastService.showToast('Acceso denegado');

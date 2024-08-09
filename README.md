@@ -26,6 +26,9 @@ Herramienta para comprender y facilitar la representación de entidades de la ba
 ![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot.png)
 Figura 1: Página principal inicio de la plataforma
 
+![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot2.png)
+Figura 2: Listado de productos
+
 ### Videos y tutoriales
 [Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
 
