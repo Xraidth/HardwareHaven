@@ -74,7 +74,6 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
 
 
   mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string} | undefined> {
-    //Falta la validacion del usuario que no se repita en la base
     return Swal.fire({
       title: "Configura tu cuenta",
       html: `
@@ -117,6 +116,39 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
     });
   }
   
+  mostrarDetalleProducto(producto: any) {
+    return Swal.fire({
+      title: producto.name,
+      html: `
+        <div class="text-center">
+          <img src="${producto.imageUrl}" class="img-fluid rounded-top mb-3" style="max-width: 150px;" alt="Imagen del producto">
+          <div class="d-flex flex-column justify-content-center align-items-center bg-light p-3 rounded-bottom shadow-sm">
+            <p class="mb-1 fw-bold text-dark">${producto.description}</p>
+            <p class="mb-2 text-muted">${producto.categoria.descripcion}</p>
+            <span class="fs-5 text-danger fw-semibold">$ ${this.getMaxPrice(producto.precios)}</span>
+          </div>
+        </div>
+      `,
+      showConfirmButton: false,  
+      focusConfirm: false,
+      showCancelButton: false,   
+    });
+  }
+  
+
+
+
+
+  getMaxPrice(precios: any[]): number {
+    precios.sort((a, b) => {
+      if (a.fecha && b.fecha) {
+        return b.fecha.getTime() - a.fecha.getTime();
+      }
+      return 0; 
+    });
+    return precios[0]?.valor || 0;
+  }  
+
   
 
 
