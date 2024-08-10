@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit(): void {
-    console.log('Bienvenido a Hardware Haven');
+    this.sweetAlertService.recibirOfertas();
     if(SessionService.recordarSession()){
       this.router.navigate(['productList']);
     }

@@ -136,6 +136,37 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
   }
   
 
+  recibirOfertas() {
+    return Swal.fire({
+      title: "¿Deseas recibir ofertas?",
+      html: `
+        <div class="text-center">
+         <img src="../../../../assets/images/ofertas.png" class="img-fluid rounded-top mb-3" style="max-width: 300px;" alt="Imagen del producto">
+          <input type="email" id="email" class="swal2-input" placeholder="Ingresa su email">
+        </div>
+      `,
+      showConfirmButton: true,  
+      confirmButtonText: 'Enviar',
+      focusConfirm: false,
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        if (!email) {
+          Swal.showValidationMessage('Por favor, ingrese un email válido');
+          return false;
+        }
+        return email;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const email = result.value;
+        console.log('Email ingresado:', email); //luego hacer algo con el email
+      }
+    });
+  }
+  
+
 
 
 
