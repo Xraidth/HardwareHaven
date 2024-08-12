@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service.js';
 import { ToastService } from '../../core/services/notifications/toast.service.js';
 import { SessionService } from '../../core/services/share/session.service.js';
+import { CommonModule } from '@angular/common';
 
 declare var bootstrap: any; 
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [HttpClientModule, FormsModule],
+  imports: [HttpClientModule, FormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [UserService]
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   public password: string = '';
   public recordarClave: boolean = false;
   private intervalId: any;
+  public errorServer: boolean = false;
   constructor(
     private serverUser: UserService, 
     private router: Router, 
@@ -98,6 +100,7 @@ export class HomeComponent implements OnInit {
           if (r && r.data && Array.isArray(r.data)) {
             const users: any[] = r.data; 
             this.users = users;
+            this.errorServer=false;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
           }
@@ -108,6 +111,7 @@ export class HomeComponent implements OnInit {
       },
       error: (e) => {
         console.error('Error en la llamada HTTP:', e);
+        this.errorServer=true;
       }
     });
   }
