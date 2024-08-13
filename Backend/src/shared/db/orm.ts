@@ -23,10 +23,10 @@ export const syncSchema = async () => {
   
 
   
-  /*
+  
   await generator.dropSchema()
   await generator.createSchema()
-  */
+  
 
   await generator.updateSchema()
 }

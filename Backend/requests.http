@@ -12,19 +12,21 @@ Content-Type: application/json
 
 {
     "name":"Pedro", 
-    "password":"pedriño"
+    "password":"pedriño",
+    "email":"asus@gmail.com"
 }
 ###Delete
 DELETE  http://localhost:3000/api/user/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/user/update/2
+PUT   http://localhost:3000/api/user/update/1
 Content-Type: application/json
 
 {
 "newPassword":"nacho55", 
-"oldPassword":"Nacho44", 
-"newUserName":"Ignacio Rodriguez"
+"oldPassword":"pedriño", 
+"newUserName":"Ignacio Rodriguez",
+ "newEmail":"asus@gmail55.com"
 }
 
 ###PATCH

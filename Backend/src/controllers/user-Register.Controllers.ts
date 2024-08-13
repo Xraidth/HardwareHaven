@@ -5,13 +5,13 @@ import { User } from '../Model/user.entity.js';
 const userRepo = new UserRepository();
 
 const userRegisterController = async (req: Request, res: Response): Promise<void> => {       
-    const {name, password} = req.body; 
+    const {name, password, email} = req.body; 
 
     try{
         const user = await userRepo.findName({name: name});
 
         if (!user) {
-            const new_user = new User(name, password);
+            const new_user = new User(name, password, email);
            userRepo.add(new_user);
            res.status(201).json({
                 data: new_user,

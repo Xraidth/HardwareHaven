@@ -37,7 +37,7 @@ export class UserNavComponent implements OnInit {
   async configurarCuenta(){
     let credenciales = await this.swa.mostrarConfigurarCuenta(this.usuario);
     if (credenciales) {
-      this.serverUser.update(SessionService.usuario.id,{newPassword: credenciales.newPassword, newUserName: credenciales.newUserName, oldPassword: credenciales.oldPassword}).subscribe({
+      this.serverUser.update(SessionService.usuario.id,{newPassword: credenciales.newPassword, newUserName: credenciales.newUserName, oldPassword: credenciales.oldPassword, newEmail: credenciales.newEmail}).subscribe({
         next: (r: any) => {
           try {
             if (r && r.data) {
