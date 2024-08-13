@@ -16,13 +16,17 @@ export class User extends BaseEntity {
     @Property({nullable:false})
     password!: string;
 
+    @Property({nullable:false})
+    email!: string;
+
     @OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] })
     compras = new Collection<Compra>(this);
 
-    constructor(name:string, password: string) {
+    constructor(name:string, password: string, email: string) {
       super(); 
       this.name = name;
       this.password = password;
+      this.email = email;
   }
 }
 

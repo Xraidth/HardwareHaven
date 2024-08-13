@@ -24,7 +24,7 @@ export class UserService {
     return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
-  create(body:{name:string, password:string}){
+  create(body:{name:string, password:string, email:string}){
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.post(`${this.baseUrl}register`, body, { headers });
   }
@@ -33,7 +33,7 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{ newPassword: string, oldPassword:string,newUserName:string}){
+  update( id: number, body:{ newPassword: string, oldPassword:string,newUserName:string, newEmail: string}){
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
   }

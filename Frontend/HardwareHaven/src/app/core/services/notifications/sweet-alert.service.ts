@@ -26,11 +26,12 @@ export class SweetAlertService {
       cancelButtonText: 'No, conservarlo'
     });
   }
-mostrarFormularioRegistro(): Promise<{username: string, password: string} | undefined> {
+mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string} | undefined> {
     return Swal.fire({
       title: "Crea tu cuenta",
       html: `
         <input id="swal-input-username" class="swal2-input" placeholder="Nombre de usuario">
+        <input id="swal-input-email" class="swal2-input" type="email" class="swal2-email" placeholder="email">
         <input id="swal-input-password" type="password" class="swal2-input" placeholder="Contraseña">
         <input id="swal-input-confirm-password" type="password" class="swal2-input" placeholder="Confirmar contraseña">
       `,
@@ -41,6 +42,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
       preConfirm: () => {
         const username = (document.getElementById('swal-input-username') as HTMLInputElement).value;
         const password = (document.getElementById('swal-input-password') as HTMLInputElement).value;
+        const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
 
         if (!username) {
@@ -52,10 +54,15 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
         } else if (password !== confirmPassword) {
           Swal.showValidationMessage('Las contraseñas no coinciden');
           return false;
-        } else {
+        } else if (!email) {
+        Swal.showValidationMessage('Por favor, ingresa un email');
+        return false;
+        }
+         else {
           return {
             username: username,
-            password: password
+            password: password,
+            email:email
           };
         }
       }
@@ -73,11 +80,12 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
   }
 
 
-  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string} | undefined> {
+  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string} | undefined> {
     return Swal.fire({
       title: "Configura tu cuenta",
       html: `
         <input id="swal-input-username" class="swal2-input" placeholder="Nombre de usuario" value="${usuario.name||"usuario"}">
+        <input id="swal-input-email" class="swal2-input" placeholder="email" value="${usuario.email||"email"}">
         <input id="swal-input-password" type="password" class="swal2-input" placeholder="Nueva contraseña (opcional)">
         <input id="swal-input-confirm-password" type="password" class="swal2-input" placeholder="Confirmar nueva contraseña (opcional)">
       `,
@@ -88,6 +96,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
       preConfirm: () => {
         const username = (document.getElementById('swal-input-username') as HTMLInputElement).value;
         const password = (document.getElementById('swal-input-password') as HTMLInputElement).value;
+        const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
   
         if (!username) {
@@ -96,11 +105,15 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string} | unde
         } else if (password && password !== confirmPassword) {
           Swal.showValidationMessage('Las contraseñas no coinciden');
           return false;
-        } else {
+        } else if (!email) {
+          Swal.showValidationMessage('Por favor, ingresa un email');
+          return false;
+          } else {
           return {
             newUserName: username,
             newPassword: password,
             oldPassword: usuario.password,
+            newEmail: email
           };
         }
       }
