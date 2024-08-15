@@ -48,7 +48,7 @@ export class ProductListComponent implements OnInit {
           if (r && r.data && Array.isArray(r.data)) {
             const products: any[] = r.data;
             this.products = products;
-            this.allProducts = [...products];  // Guardar la lista completa
+            this.allProducts = [...products];  
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
           }
@@ -109,7 +109,7 @@ export class ProductListComponent implements OnInit {
 
   sortProducts() {
     if (this.sortCriteria === 'Or') {
-      this.products = [...this.allProducts];  // Restablecer la lista completa
+      this.products = [...this.allProducts]; 
     } else if (this.sortCriteria === 'az') {
       this.products.sort((a, b) => a.name.localeCompare(b.name));
     } else if (this.sortCriteria === 'za') {
@@ -143,7 +143,7 @@ export class ProductListComponent implements OnInit {
 
   sortByCategoria() {
     if (this.sortCriteriaMenu === 'Or') {
-      this.products = [...this.allProducts];  // Restablecer la lista completa
+      this.products = [...this.allProducts];  
     } else {
       this.products = this.allProducts.filter(p => p.categoria.descripcion === this.sortCriteriaMenu);
     }

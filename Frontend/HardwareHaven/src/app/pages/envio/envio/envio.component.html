@@ -1,0 +1,55 @@
+<div class="bg-black">
+    <header>
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand font-Montserrat text-light" href="#">
+                <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex justify-content-center w-100">
+              <div class="w-50">
+              
+               </div>
+              </div>
+                <div class="ms-auto ">
+                    <app-user-nav [usuario]="usuario"></app-user-nav>
+                </div>
+                <div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+    </header>
+    <main>
+        <h1 class="text-center title-envio mb-4 mt-3">Envio</h1>
+        <div class="custom-contenedor d-flex flex-column justify-content-center align-items-center">
+            <form class="w-50">
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Calle Falsa 123">
+                </div>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad" placeholder="Rosario">
+                </div>
+                <div class="mb-3">
+                    <label for="codigo-postal" class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" id="codigo-postal" placeholder="2000">
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="123456789">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2">Confirmar Envío</button>
+            </form>
+        </div>
+    </main>
+    
+</div>
