@@ -1,0 +1,71 @@
+<div class="bg-black">
+    <header>
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand font-Montserrat text-light" href="#">
+                <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex justify-content-center w-100">
+              <div class="w-50">
+              
+               </div>
+              </div>
+                <div class="ms-auto ">
+                    <app-user-nav [usuario]="usuario"></app-user-nav>
+                </div>
+                <div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+    </header>
+    <main >
+        <h1 class="text-center title-inventario mb-4 mt-3">Inventario</h1>
+        
+
+        
+        <div class="button-container">
+            <div class="button-list">
+                <button class="button-item" (click)="click_Usuarios()">Usuarios</button>
+                <button class="button-item" (click)="click_Compras()">Compras</button>
+                <button class="button-item" (click)="click_LineaCompras()">LineaCompras</button>
+                <button class="button-item" (click)="click_Componentes()">Componentes</button>
+                <button class="button-item" (click)="click_Precios()">Precios</button>
+                <button class="button-item" (click)="click_Categorias()">Categorias</button>
+            </div>
+        </div>
+
+        <div class="custom-contenedor d-flex flex-column  justify-content-center align-items-center">
+            <table class="styled-table">
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of columns">{{ column }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items">
+                    <td *ngFor="let column of columnsLw">{{specialFiltro(column, item[column]) || '-' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div  *ngIf="inventarioVacio" class="inventarioVacio">
+                <p>Inventario vacío</p>
+              </div>
+              
+                           
+              
+        </div>
+        
+        
+        
+    </main>
+</div>

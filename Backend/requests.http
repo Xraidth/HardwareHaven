@@ -59,7 +59,7 @@ POST  http://localhost:3000/api/compra/insert
 Content-Type: application/json
 
 {
-    "userId":"2"
+    "userId":"1"
 }
 ###Delete
 DELETE  http://localhost:3000/api/compra/deleteOne/:id
@@ -189,9 +189,9 @@ POST  http://localhost:3000/api/lineaCompra/insert
 Content-Type: application/json
 
 {
-  "compraId": "2",
-  "cantidad": "20",
-  "componenteId": "6"
+  "compraId": "1",
+  "cantidad": "2",
+  "componenteId": "1"
 }
 ###Delete
 DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id

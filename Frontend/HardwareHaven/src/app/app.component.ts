@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './pages/product-list/product-list.component.js';
 import { RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-root',
   standalone: true,
