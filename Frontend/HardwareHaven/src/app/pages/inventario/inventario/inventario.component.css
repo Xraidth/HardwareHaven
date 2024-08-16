@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+.font-Montserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-Montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+header {
+    background-color: #01060F;
+}
+
+.bg-body-tertiary {
+    background-color: transparent !important; 
+}
+
+
+  
+  .title_home{
+    width: 200px;
+}
+
+.carrito-cant {
+    background-color: rgb(2, 6, 66);
+    width: 26px; 
+    height: 26px; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+}
+
+
+.custom-contenedor {
+    background-color: rgb(4, 0, 24);
+    width: auto;
+    height: auto;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-inventario{
+    color: #bbb9b9;
+  }
+
+
+
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1a1a2e;
+    color: #ffffff; 
+    table-layout: auto; 
+  }
+  
+  .styled-table thead tr {
+    background-color: #162447; 
+    color: #ffffff;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .styled-table tbody tr:hover {
+    background-color: #039734; 
+    color: #ffffff;
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .styled-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  .button-container {
+    margin-bottom: 20px; /* Espacio debajo de la botonera */
+  }
+  
+  .button-list {
+    display: flex; /* Mostrar los botones en una fila */
+    gap: 10px; /* Espacio entre los botones */
+    justify-content: center; /* Alinear horizontalmente en el centro */
+  }
+  
+  .button-item {
+    background-color: #162447; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Quitar el borde predeterminado */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Alinear texto en el centro */
+    cursor: pointer; /* Cursor de puntero al pasar por encima */
+    transition: background-color 0.3s ease; /* Transición para el efecto hover */
+    font-size: 16px; /* Tamaño del texto */
+  }
+  
+  .button-item:hover {
+    background-color: #1a1a2e; /* Color de fondo al pasar el mouse */
+  }
+  .inventarioVacio{
+    font-size: 20px;
+  }

@@ -6,6 +6,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { CompraComponent } from './pages/compra/compra/compra.component.js';
 import { PerfilComponent } from './pages/perfil/perfil/perfil.component.js';
 import {EnvioComponent} from './pages/envio/envio/envio.component.js';
+import {InventarioComponent} from './pages/inventario/inventario/inventario.component.js';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -13,7 +14,9 @@ export const routes: Routes = [
   { path: 'compra', component: CompraComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'envio', component: EnvioComponent},
+  { path: 'inventario', component: InventarioComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' } 
+  
   
   ];
 

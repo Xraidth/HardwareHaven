@@ -17,14 +17,14 @@ export class UserNavComponent implements OnInit {
   
   
   @Input() usuario:any;
-  public userName:string= "";
+  public userName:string= "Usuario";
   isDropdownOpen = false;
   constructor(private swa:SweetAlertService, 
     private serverUser: UserService 
   ){}
 
   ngOnInit(): void {
-    this.userName= this.truncateString(this.usuario.name);
+    this.userName = this.usuario ? this.truncateString(this.usuario.name) : "Usuario";
   }
 
   truncateString(str: string, maxLength: number = 17): string {
