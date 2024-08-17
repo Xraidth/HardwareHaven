@@ -53,9 +53,64 @@ constructor(
   public columnsLw: string[] = [];
   public items: any[] = [];
   public inventarioVacio: boolean = false;
+  public nowType ="";
 ngOnInit(): void {
   this.usuario = SessionService.usuario;
   this.click_Usuarios();
+}
+
+
+plusButton(){
+switch (this.nowType) {
+    case "Usuario":break;
+    case "Compra": break;
+    case "LineaCompra": break;
+    case"Componente": break;
+    case"Precio": break;
+    case "Categoria": break;    
+  }
+}
+
+editarItem(item: any) {
+  console.log('Editar item:', item, this.nowType);
+
+  /*switch (this.nowType) {
+    case "Usuario": this.conectorUsuarioServer.update;break;
+    case "Compra": this.conectorCompraServer.update;break;
+    case "LineaCompra": this.conectorLineaCompraServer.update;break;
+    case"Componente": this.conectorComponenteServer.update;break;
+    case"Precio": this.conectorPrecioServer.update;break;
+    case "Categoria": this.conectorCategoriaServer.update;break;    
+  }*/
+  
+}
+
+eliminarItem(item: any) {
+  //console.log('Eliminar item:', item, this.nowType);
+
+  switch (this.nowType) {
+    case "Usuario": 
+    this.conectorUsuarioServer.delete(item.id);
+    this.click_Usuarios();
+    break;
+    case "Compra": this.conectorCompraServer.delete(item.id);
+    this.click_Compras();
+    break;
+    case "LineaCompra": this.conectorLineaCompraServer.delete(item.id);
+    this.click_LineaCompras();
+    break;
+    case"Componente": this.conectorComponenteServer.delete(item.id);
+    this.click_Componentes();
+    break;
+    case"Precio": this.conectorPrecioServer.delete(item.id);
+    this.click_Precios();
+    break;
+    case "Categoria": this.conectorCategoriaServer.delete(item.id);
+    this.click_Categorias();
+    break;
+  }
+  
+
 }
 
 public vaciarlista(){
@@ -67,6 +122,7 @@ public cargarColumnas(){
     this.inventarioVacio = false;
     this.columnsLw = Object.keys(this.items[0])
     this.columns = this.capitalizeFirstLetterOfEachWord(this.columnsLw);
+    this.columns.push("Editar", "Eliminar");
   }
   else{ 
     this.columns = [];
@@ -84,31 +140,37 @@ public capitalizeFirstLetterOfEachWord(arr: string[]): string[] {
 
 
 click_Usuarios(){
+  this.nowType = "Usuario";
   this.vaciarlista();
   this.items = this.conectorUsuarioServer.getAll();
 this.cargarColumnas();
 }
 click_Compras(){
+  this.nowType = "Compra";
   this.vaciarlista();
   this.items = this.conectorCompraServer.getAll();
 this.cargarColumnas();
 }
 click_LineaCompras(){
+  this.nowType = "LineaCompra";
   this.vaciarlista();
   this.items = this.conectorLineaCompraServer.getAll();
 this.cargarColumnas();
 }
 click_Componentes(){
+this.nowType = "Componente";
 this.vaciarlista();
 this.items = this.conectorComponenteServer.getAll();
 this.cargarColumnas();
 }
 click_Precios(){
+  this.nowType = "Precio";
   this.vaciarlista();
   this.items = this.conectorPrecioServer.getAll();
 this.cargarColumnas();
 }
 click_Categorias(){
+  this.nowType = "Categoria";
   this.vaciarlista();
   this.items = this.conectorCategoriaServer.getAll();
 this.cargarColumnas();
@@ -180,6 +242,9 @@ else if (nombre.includes("lineasCompras")){
 }
 else if (nombre === "compra"){
   f= dato.id.toString();
+    
+}else if (nombre === "user"){
+  f= dato.name;
     
 }
 else if (nombre.includes("compras")){

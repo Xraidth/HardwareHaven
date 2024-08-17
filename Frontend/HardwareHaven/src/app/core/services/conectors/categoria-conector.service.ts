@@ -6,6 +6,7 @@ import { CategoriaService } from '../entities/categoria.service';
 })
 export class CategoriaConectorService {
   private categorias:any[]=[];
+  private categoria:any;
   constructor(
     private serverCategoria: CategoriaService
   ) { }
@@ -30,6 +31,51 @@ export class CategoriaConectorService {
       }
     });
     return this.categorias
+  }
+
+
+  public delete(id:number) {
+    this.serverCategoria.delete(id).subscribe({
+      next: (r: any) => {
+        try {
+          if (r && r.data && Array.isArray(r.data)) {
+            const categoria: any = r.data;
+            this.categoria = categoria;
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+          }
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+          console.log('Objeto recibido:', r);
+        }
+      },
+      error: (e) => {
+        console.error('Error en la llamada HTTP:', e);
+      }
+    });
+    return this.categoria
+  }
+
+  public update(id:number, descripcion:string) {
+    this.serverCategoria.update(id, {descripcion}).subscribe({
+      next: (r: any) => {
+        try {
+          if (r && r.data && Array.isArray(r.data)) {
+            const categoria: any = r.data;
+            this.categoria = categoria;
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+          }
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+          console.log('Objeto recibido:', r);
+        }
+      },
+      error: (e) => {
+        console.error('Error en la llamada HTTP:', e);
+      }
+    });
+    return this.categoria
   }
 
 }

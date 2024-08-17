@@ -82,7 +82,7 @@ main{
   }
   
   .styled-table tbody tr:hover {
-    background-color: #039734; 
+    background-color: #0395a8;
     color: #ffffff;
   }
   
@@ -117,8 +117,35 @@ main{
   }
   
   .button-item:hover {
-    background-color: #1a1a2e; /* Color de fondo al pasar el mouse */
+    background-color: #0395a8; 
   }
   .inventarioVacio{
     font-size: 20px;
   }
+
+  .float-button {
+    position: fixed;
+    bottom: 20px; /* Ajusta según necesites */right: 20px;  /* Ajusta según necesites */z-index: 1;
+  }
+  
+  .custom-plus-buttom {
+    background-color: rgb(23, 1, 73); 
+    color: white; 
+    border-radius: 50%;
+    width: 60px;
+    height: 55px; 
+    font-size: 30px;
+    border: none; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    transition: background-color 0.1s, transform 0.1s; 
+  }
+  
+  .custom-plus-buttom:hover {
+    background-color: #0395a8;
+    transform: scale(1.01); 
+  }
+  
+  
+  

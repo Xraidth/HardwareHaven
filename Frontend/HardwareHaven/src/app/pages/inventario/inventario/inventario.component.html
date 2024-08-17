@@ -43,6 +43,11 @@
             </div>
         </div>
 
+
+        <div class="float-button">
+          <button class="custom-plus-buttom" (click)="plusButton()">+</button>
+        </div>
+        
         <div class="custom-contenedor d-flex flex-column  justify-content-center align-items-center">
             <table class="styled-table">
                 <thead>
@@ -53,15 +58,21 @@
                 <tbody>
                   <tr *ngFor="let item of items">
                     <td *ngFor="let column of columnsLw">{{specialFiltro(column, item[column]) || '-' }}</td>
+                    <td>
+                      <button class="btn btn-light" (click)="editarItem(item)">Editar</button>
+                    </td>
+                    <td>
+                    <button class="btn btn-danger" (click)="eliminarItem(item)">Eliminar</button>
+                  </td>
                   </tr>
                 </tbody>
               </table>
               
+              
               <div  *ngIf="inventarioVacio" class="inventarioVacio">
                 <p>Inventario vacío</p>
               </div>
-              
-                           
+                  
               
         </div>
         
