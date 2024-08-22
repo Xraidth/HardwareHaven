@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PrecioService } from '../entities/precio.service';
+import { SweetAlertService } from '../notifications/sweet-alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class PrecioConectorService {
   private precios: any[] =[];
   private precio: any;
   constructor(
-    private serverPrecio: PrecioService
+    private serverPrecio: PrecioService,
+    private sweetAlertService: SweetAlertService
   ) { }
 
   
@@ -87,4 +89,35 @@ export class PrecioConectorService {
     return this.precio
   }
 
+
+
+  async InsertarPrecio() {
+    const credenciales = await this.sweetAlertService.InsertPrecio();
+    if (credenciales) {
+      this.serverPrecio.create({
+        fechaDesde: credenciales.fechaDesde,
+        componenteId: credenciales.componenteId,
+        valor: credenciales.valor
+      }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const precio: any = r.data; 
+              this.precio = precio;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+    
+  }
 }

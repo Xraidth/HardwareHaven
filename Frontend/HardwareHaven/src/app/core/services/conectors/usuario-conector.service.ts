@@ -58,19 +58,17 @@ export class UsuarioConectorService {
     return this.usuario
   }
 
-  public update( 
-    id: number,
-    newPassword: string,
-    oldPassword: string,
-    newUserName: string,
-    newEmail: string,
-  ) {
-    this.serverUser.update(id, 
+  async update(user:any) {
+    const credenciales = await this.sweetAlertService.mostrarConfigurarCuenta(user);
+    if (credenciales) {
+    this.serverUser.update(
+      user.id, 
       {
-    newPassword,
-    oldPassword,
-    newUserName,
-    newEmail
+        newPassword: credenciales.newPassword,
+        oldPassword: credenciales.oldPassword,
+        newUserName: credenciales.newUserName,
+        newEmail: credenciales.newEmail
+    ,
     }
     ).subscribe({
       next: (r: any) => {
@@ -90,7 +88,10 @@ export class UsuarioConectorService {
         console.error('Error en la llamada HTTP:', e);
       }
     });
+  
     return this.usuario
+  }
+  else return null
   }
 
 

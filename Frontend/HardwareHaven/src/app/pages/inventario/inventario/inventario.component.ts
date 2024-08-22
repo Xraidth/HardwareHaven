@@ -95,25 +95,12 @@ export class InventarioComponent implements OnInit {
   }
 
   plusButton(): void {
-    switch (this.nowType) {
-      case 'Usuario':
-        this.conectorUsuarioServer.registrarUsuario();
-        break;  // Agregar break para evitar el "fall-through" a los siguientes casos
-      case 'Compra':
-        // Lógica para 'Compra'
-        break;
-      case 'LineaCompra':
-        // Lógica para 'LineaCompra'
-        break;
-      case 'Precio':
-        // Lógica para 'Precio'
-        break;
-      case 'Componente':
-        // Lógica para 'Componente'
-        break;
-      case 'Categoria':
-        // Lógica para 'Categoria'
-        break;
+    switch (this.nowType) { case 'Usuario': this.conectorUsuarioServer.registrarUsuario(); break;  
+      case 'Compra':this.conectorCompraServer.InsertarCompra(); break;
+      case 'LineaCompra': this.conectorLineaCompraServer.InsertarLineaCompra(); break;
+      case 'Precio':this.conectorPrecioServer.InsertarPrecio(); break;
+      case 'Componente': this.conectorComponenteServer.InsertarComponente(); break;
+      case 'Categoria':  this.conectorCategoriaServer.InsertarCategoria(); break;
     }
   }
   

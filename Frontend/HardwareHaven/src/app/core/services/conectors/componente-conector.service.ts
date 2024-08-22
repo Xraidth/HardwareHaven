@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponenteService } from '../entities/componente.service';
+import { SweetAlertService } from '../notifications/sweet-alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class ComponenteConectorService {
   private componentes:any[]=[];
   private componente:any;
   constructor(
-    private serverComponente: ComponenteService
+    private serverComponente: ComponenteService,
+    private sweetAlertService: SweetAlertService
   ) { }
   
   public getAll() {
@@ -80,6 +82,38 @@ export class ComponenteConectorService {
       }
     });
     return this.componente
+  }
+
+
+  async InsertarComponente() {
+    const credenciales = await this.sweetAlertService.InsertComponente();
+    if (credenciales) {
+      this.serverComponente.create({
+        name: credenciales.name,
+        description: credenciales.description,
+        categoriaId: credenciales.categoriaId
+      }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const componente: any = r.data; 
+              this.componente = componente;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+
+
   }
 
 }
