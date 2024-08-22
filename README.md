@@ -32,6 +32,9 @@ Figura 2: Listado de productos
 ![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot3.png)
 Figura 3: Carrito de compras
 
+![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot4.png)
+Figura 4: Gestion de inventario
+
 ### Videos y tutoriales
 [Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
 

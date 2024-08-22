@@ -131,16 +131,18 @@ main{
   .custom-plus-buttom {
     background-color: rgb(23, 1, 73); 
     color: white; 
-    border-radius: 50%;
-    width: 60px;
-    height: 55px; 
-    font-size: 30px;
+    border-radius: 50%; /* Cambia el radio del borde a 50% para hacerlo redondo */
+    width: 60px; 
+    height: 60px; /* Asegúrate de que el ancho y la altura sean iguales */
+    font-size: 30px; 
     border: none; 
     display: flex; 
     justify-content: center; 
-    align-items: center;
+    align-items: center; 
     transition: background-color 0.1s, transform 0.1s; 
-  }
+    text-align: center; /* Alinea el texto en el centro */
+}
+
   
   .custom-plus-buttom:hover {
     background-color: #0395a8;

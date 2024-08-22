@@ -16,246 +16,170 @@ import { ComponenteConectorService } from '../../../core/services/conectors/comp
 import { ComponenteService } from '../../../core/services/entities/componente.service';
 import { CategoriaConectorService } from '../../../core/services/conectors/categoria-conector.service';
 import { CategoriaService } from '../../../core/services/entities/categoria.service';
-
-
-
-
+import { FormsModule } from '@angular/forms';
+import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 
 
 @Component({
   selector: 'app-inventario',
   standalone: true,
-  imports: [UserNavComponent, CommonModule, HttpClientModule],
+  imports: [UserNavComponent, CommonModule, FormsModule],
   templateUrl: './inventario.component.html',
-  styleUrl: './inventario.component.css',
+  styleUrls: ['./inventario.component.css'],
   providers: [
     UsuarioConectorService, UserService,
     CompraConectorService, CompraService,
     LineaDeCompraConectorService, LineaCompraService,
-    PrecioConectorService,PrecioService,
+    PrecioConectorService, PrecioService,
     ComponenteConectorService, ComponenteService,
-    CategoriaConectorService, CategoriaService
+    CategoriaConectorService, CategoriaService, SweetAlertService
   ]
 })
 export class InventarioComponent implements OnInit {
-constructor(
- private conectorUsuarioServer: UsuarioConectorService,
- private conectorCompraServer: CompraConectorService,
- private conectorLineaCompraServer: LineaDeCompraConectorService,
- private conectorPrecioServer: PrecioConectorService,
- private conectorComponenteServer: ComponenteConectorService,
- private conectorCategoriaServer: CategoriaConectorService,
-  
-){}
+  searchQuery: string = '';
+  items: any[] = [];
+  allItems: any[] = [];
+  columns: string[] = [];
+  columnsLw: string[] = [];
+  nowType: string = '';
+  inventarioVacio: boolean = false;
+  usuario: any;
 
-  public usuario:any;
-  public columns: string[] = [];
-  public columnsLw: string[] = [];
-  public items: any[] = [];
-  public inventarioVacio: boolean = false;
-  public nowType ="";
-ngOnInit(): void {
-  this.usuario = SessionService.usuario;
-  this.click_Usuarios();
-}
+  constructor(
+    private conectorUsuarioServer: UsuarioConectorService,
+    private conectorCompraServer: CompraConectorService,
+    private conectorLineaCompraServer: LineaDeCompraConectorService,
+    private conectorPrecioServer: PrecioConectorService,
+    private conectorComponenteServer: ComponenteConectorService,
+    private conectorCategoriaServer: CategoriaConectorService
+  ) {}
 
-
-plusButton(){
-switch (this.nowType) {
-    case "Usuario":break;
-    case "Compra": break;
-    case "LineaCompra": break;
-    case"Componente": break;
-    case"Precio": break;
-    case "Categoria": break;    
+  ngOnInit(): void {
+    this.usuario = SessionService.usuario;
+    this.loadItems('Usuario');
   }
-}
 
-editarItem(item: any) {
-  console.log('Editar item:', item, this.nowType);
+  loadItems(type: string): void {
+    this.nowType = type;
+    this.items = [];
+    this.allItems = [];
 
-  /*switch (this.nowType) {
-    case "Usuario": this.conectorUsuarioServer.update;break;
-    case "Compra": this.conectorCompraServer.update;break;
-    case "LineaCompra": this.conectorLineaCompraServer.update;break;
-    case"Componente": this.conectorComponenteServer.update;break;
-    case"Precio": this.conectorPrecioServer.update;break;
-    case "Categoria": this.conectorCategoriaServer.update;break;    
-  }*/
-  
-}
-
-eliminarItem(item: any) {
-  //console.log('Eliminar item:', item, this.nowType);
-
-  switch (this.nowType) {
-    case "Usuario": 
-    this.conectorUsuarioServer.delete(item.id);
-    this.click_Usuarios();
-    break;
-    case "Compra": this.conectorCompraServer.delete(item.id);
-    this.click_Compras();
-    break;
-    case "LineaCompra": this.conectorLineaCompraServer.delete(item.id);
-    this.click_LineaCompras();
-    break;
-    case"Componente": this.conectorComponenteServer.delete(item.id);
-    this.click_Componentes();
-    break;
-    case"Precio": this.conectorPrecioServer.delete(item.id);
-    this.click_Precios();
-    break;
-    case "Categoria": this.conectorCategoriaServer.delete(item.id);
-    this.click_Categorias();
-    break;
-  }
-  
-
-}
-
-public vaciarlista(){
-  this.items=[];
-}
-
-public cargarColumnas(){
-  if(this.items[0]){
-    this.inventarioVacio = false;
-    this.columnsLw = Object.keys(this.items[0])
-    this.columns = this.capitalizeFirstLetterOfEachWord(this.columnsLw);
-    this.columns.push("Editar", "Eliminar");
-  }
-  else{ 
-    this.columns = [];
-    this.inventarioVacio = true;}
-}
-
-public capitalizeFirstLetterOfEachWord(arr: string[]): string[] {
-  return arr.map(column => 
-    column
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
-  );
-}
-
-
-click_Usuarios(){
-  this.nowType = "Usuario";
-  this.vaciarlista();
-  this.items = this.conectorUsuarioServer.getAll();
-this.cargarColumnas();
-}
-click_Compras(){
-  this.nowType = "Compra";
-  this.vaciarlista();
-  this.items = this.conectorCompraServer.getAll();
-this.cargarColumnas();
-}
-click_LineaCompras(){
-  this.nowType = "LineaCompra";
-  this.vaciarlista();
-  this.items = this.conectorLineaCompraServer.getAll();
-this.cargarColumnas();
-}
-click_Componentes(){
-this.nowType = "Componente";
-this.vaciarlista();
-this.items = this.conectorComponenteServer.getAll();
-this.cargarColumnas();
-}
-click_Precios(){
-  this.nowType = "Precio";
-  this.vaciarlista();
-  this.items = this.conectorPrecioServer.getAll();
-this.cargarColumnas();
-}
-click_Categorias(){
-  this.nowType = "Categoria";
-  this.vaciarlista();
-  this.items = this.conectorCategoriaServer.getAll();
-this.cargarColumnas();
-}
-
-
-
-getMaxPrice(precios: any[]): number {
-  precios.sort((a, b) => {
-    if (a.fecha && b.fecha) {
-      return b.fecha.getTime() - a.fecha.getTime();
+    switch (type) {
+      case 'Usuario': this.allItems = this.conectorUsuarioServer.getAll(); break;
+      case 'Compra': this.allItems = this.conectorCompraServer.getAll(); break;
+      case 'LineaCompra': this.allItems = this.conectorLineaCompraServer.getAll(); break;
+      case 'Componente': this.allItems = this.conectorComponenteServer.getAll(); break;
+      case 'Precio': this.allItems = this.conectorPrecioServer.getAll(); break;
+      case 'Categoria': this.allItems = this.conectorCategoriaServer.getAll(); break;
     }
-    return 0;
-  });
-  return precios[0]?.valor || 0;
-}
 
+    this.items = [...this.allItems];
+    this.cargarColumnas();
+  }
 
-formatDateTime(isoString: string): string {
+  onSearch(event: Event): void {
+    event.preventDefault();
+    this.items = this.allItems.filter(item => this.getSearchText(item).toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+
+  getSearchText(item: any): string {
+    switch (this.nowType) {
+      case 'Usuario': return item.name;
+      case 'Compra': return item.user.name; 
+      case 'LineaCompra': return item.componente.name;
+      case 'Precio': return item.componente.name;
+      case 'Componente': return item.name;
+      case 'Categoria': return item.descripcion;
+      default: return '';
+    }
+  }
+
+  plusButton(): void {
+    switch (this.nowType) {
+      case 'Usuario':
+        this.conectorUsuarioServer.registrarUsuario();
+        break;  // Agregar break para evitar el "fall-through" a los siguientes casos
+      case 'Compra':
+        // Lógica para 'Compra'
+        break;
+      case 'LineaCompra':
+        // Lógica para 'LineaCompra'
+        break;
+      case 'Precio':
+        // Lógica para 'Precio'
+        break;
+      case 'Componente':
+        // Lógica para 'Componente'
+        break;
+      case 'Categoria':
+        // Lógica para 'Categoria'
+        break;
+    }
+  }
   
-  const date = new Date(isoString);
 
+  editarItem(item: any): void {
+    console.log('Editar item:', item, this.nowType);
+  }
 
-  const options: Intl.DateTimeFormatOptions = {
+  eliminarItem(item: any): void {
+    switch (this.nowType) {
+      case 'Usuario': this.conectorUsuarioServer.delete(item.id); break;
+      case 'Compra': this.conectorCompraServer.delete(item.id); break;
+      case 'LineaCompra': this.conectorLineaCompraServer.delete(item.id); break;
+      case 'Componente': this.conectorComponenteServer.delete(item.id); break;
+      case 'Precio': this.conectorPrecioServer.delete(item.id); break;
+      case 'Categoria': this.conectorCategoriaServer.delete(item.id); break;
+    }
+    this.loadItems(this.nowType);
+  }
+
+  cargarColumnas(): void {
+    if (this.items.length > 0) {
+      this.inventarioVacio = false;
+      this.columnsLw = Object.keys(this.items[0]);
+      this.columns = this.columnsLw.map(this.capitalizeFirstLetterOfEachWord);
+      this.columns.push("Editar", "Eliminar");
+    } else {
+      this.columns = [];
+      this.inventarioVacio = true;
+    }
+  }
+
+  capitalizeFirstLetterOfEachWord(column: string): string {
+    return column.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  formatDateTime(isoString: string): string {
+    const date = new Date(isoString);
+    return date.toLocaleString('es-ES', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit',
-      
-  };
+      second: '2-digit'
+    });
+  }
 
+  specialFiltro(nombre: string, dato: any): string {
+    if (nombre.includes("precios")) return `$${this.getMaxPrice(dato)}`;
+    if (nombre.includes("categoria")) return dato.descripcion;
+    if (nombre.includes("componente")) return dato.name;
+    if (nombre === "componentes") return Array.isArray(dato) ? (dato.length > 0 ? "Posee componentes" : "No posee componentes") : "-";
+    if (nombre.includes("valor")) return `$${dato}`;
+    if (nombre.includes("fechaDesde") || nombre.includes("fechaCompra") || nombre.includes("fechaCancel")) return this.formatDateTime(dato);
+    if (nombre.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
+    if (nombre === "compra") return dato.id.toString();
+    if (nombre === "user") return dato.name;
+    if (nombre.includes("compras")) return Array.isArray(dato) ? (dato.length > 0 ? "Realizo compras" : "No compro") : "-";
+    return dato;
+  }
 
-  return date.toLocaleString('es-ES', options);
-}
-
-specialFiltro(nombre: string, dato: any) {
-let f = "-"
-
-if(nombre.includes("precios")){
-  f = "$"+ this.getMaxPrice(dato).toString();
-}
-else if (nombre.includes("categoria")){
-  f = dato.descripcion;
-}
-else if (nombre.includes("componente")){
-  f = dato.name;
-}
-else if (nombre==="componentes"){
-  if (Array.isArray(dato)) {
-    f = dato.length > 0 ? "Posee componentes" : "No posee componentes";}
-}
-else if (nombre.includes("valor")){
-  f = "$"+ (dato).toString();
-}
-else if (nombre.includes("fechaDesde")){
-  f = this.formatDateTime(dato.toString());
-}
-else if (nombre.includes("fechaCompra")){
-  f = this.formatDateTime(dato.toString());
-}
-else if (nombre.includes("fechaCancel")){
-  if(dato){ f = this.formatDateTime(dato.toString());} 
-}
-else if (nombre.includes("lineasCompras")){
-  if (Array.isArray(dato)) {
-    f = dato.length > 0 ? "Posee lineas" : "Vacia";}
-}
-else if (nombre === "compra"){
-  f= dato.id.toString();
-    
-}else if (nombre === "user"){
-  f= dato.name;
-    
-}
-else if (nombre.includes("compras")){
-  if (Array.isArray(dato)) {
-     f = dato.length > 0 ? "Realizo compras" : "No compro";}
-}
-else{
-  f= dato;
-}
-
-return f
-}
-
+  getMaxPrice(precios: any[]): number {
+    precios.sort((a, b) => b.fecha?.getTime() - a.fecha?.getTime() || 0);
+    return precios[0]?.valor || 0;
+  }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../entities/user.service';
+import { SweetAlertService } from '../notifications/sweet-alert.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -7,7 +8,8 @@ export class UsuarioConectorService {
   private usuarios: any[] = [];
   private usuario: any = [];
   constructor(
-    private serverUser: UserService, 
+    private serverUser: UserService,
+    private sweetAlertService:SweetAlertService 
   
   ) { }
 
@@ -89,6 +91,34 @@ export class UsuarioConectorService {
       }
     });
     return this.usuario
+  }
+
+
+
+  async registrarUsuario() {
+    const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
+    if (credenciales) {
+      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email}).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const user: any = r.data; 
+              this.usuario = user;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+    
   }
 
 

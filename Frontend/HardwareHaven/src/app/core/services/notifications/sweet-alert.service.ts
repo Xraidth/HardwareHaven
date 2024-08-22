@@ -28,7 +28,7 @@ export class SweetAlertService {
   }
 mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string} | undefined> {
     return Swal.fire({
-      title: "Crea tu cuenta",
+      title: "Crea una cuenta",
       html: `
         <input id="swal-input-username" class="swal2-input" placeholder="Nombre de usuario">
         <input id="swal-input-email" class="swal2-input" type="email" class="swal2-email" placeholder="email">
