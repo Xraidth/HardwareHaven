@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LineaCompraService } from '../entities/linea-compra.service';
+import { SweetAlertService } from '../notifications/sweet-alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class LineaDeCompraConectorService {
   private lineas: any[]=[];
   private linea: any;
   constructor(
-    private serverLineaCompra: LineaCompraService
+    private serverLineaCompra: LineaCompraService,
+    private sweetAlertService: SweetAlertService
   ) { }
 
 
@@ -90,4 +92,36 @@ export class LineaDeCompraConectorService {
     return this.linea
   }
 
+
+
+  async InsertarLineaCompra() {
+    const credenciales = await this.sweetAlertService.InsertLineaCompra();
+    if (credenciales) {
+      this.serverLineaCompra.create({
+        compraId: credenciales.compraId,
+        cantidad: credenciales.cantidad,
+        componenteId: credenciales.componenteId
+      }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const lineaCompra: any = r.data; 
+              this.linea = lineaCompra;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+
+
+  }
 }
