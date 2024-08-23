@@ -193,13 +193,6 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     return precios[0]?.valor || 0;
   }  
 
-  
-
-
-
-
-
-
 
 
   InsertCompra(): Promise<{userId:number} | undefined> {
@@ -214,7 +207,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       cancelButtonText: "Cancelar",
       preConfirm: () => {
         const userId = (document.getElementById('swal-input-userId') as HTMLInputElement).value;
-        //Validar que el usuario este registrado
+        
         if (!userId) {
           Swal.showValidationMessage('Por favor, ingresa un id de usuario valido');
           return false;
@@ -417,7 +410,254 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     });
   }
 
-  
+updateCompra(compra:any): Promise<{ 
+  userId: number,
+  fechaCompra: Date,
+  fechaCancel: Date|undefined,
+  total: number} | undefined> {
+    return Swal.fire({
+      title: "Modificar una compra",
+      html: `
+        <input id="swal-input-fechaCompra" class="swal2-input" placeholder="fechaCompra" value="${compra.fechaCompra}">
+        <input id="swal-input-fechaCancel" class="swal2-input" placeholder="fechaCancel" value="${compra.fechaCancel}">
+        <input id="swal-input-total" class="swal2-input" placeholder="total" value="${compra.total}">
+        <input id="swal-input-userId" class="swal2-input" placeholder="userId" value="${compra.usuario.Id}">
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Insertar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const fechaCompra = (document.getElementById('swal-input-fechaCompra') as HTMLInputElement).value;
+        const fechaCancel = (document.getElementById('swal-input-fechaCancel') as HTMLInputElement).value;
+        const total = (document.getElementById('swal-input-total') as HTMLInputElement).value;
+        const userId = (document.getElementById('swal-input-userId') as HTMLInputElement).value;
+        
+        if (!userId) {
+          Swal.showValidationMessage('Por favor, ingresa un id de usuario valido');
+          return false;
+        }
+        else if(!fechaCompra){
+          Swal.showValidationMessage('Por favor, ingresa una fecha de compra valido');
+          return false;
+        }
+        else if(!total){
+          Swal.showValidationMessage('Por favor, ingresa un total valido');
+          return false;
+        }
+       
+         else {
+          return {
+            userId: userId,
+            fechaCompra: fechaCompra,
+            fechaCancel: fechaCancel||undefined,
+            total: total,
+          };
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Compra creada!',"Listo")
+        return result.value;
+      } else {
+        return undefined;
+      }
+    });
+  }
 
+
+  updateComponente(componente:any): Promise<{name: string, description: string, categoriaId: number} | undefined> {
+    return Swal.fire({
+      title: "Modificar un componente",
+      html: `
+        <input id="swal-input-nameComponente" class="swal2-input" placeholder="nameComponente" value="${componente.name}">
+        <input id="swal-input-descComponent" class="swal2-input" placeholder="descComponent" value="${componente.description}">
+        <input id="swal-input-categoriaId" class="swal2-input" placeholder="categoriaId" value="${componente.categoria.id}">
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Insertar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const name = (document.getElementById('swal-input-nameComponente') as HTMLInputElement).value;
+        const description = (document.getElementById('swal-input-descComponent') as HTMLInputElement).value;
+        const categoriaId = (document.getElementById('swal-input-categoriaId') as HTMLInputElement).value;
+        
+        if (!name) {
+          Swal.showValidationMessage('Por favor, ingresa un name componente valido');
+          return false;
+        }
+        else if (!description) {
+          Swal.showValidationMessage('Por favor, ingresa una descripcion valida');
+          return false;
+        }
+        else if (!categoriaId) {
+          Swal.showValidationMessage('Por favor, ingresa una categoriaId valida');
+          return false;
+        }
+         else {
+          return {
+            name: name,
+            description: description,
+            categoriaId: categoriaId
+          };
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Componente creado!',"Listo")
+        return result.value;
+      } else {
+        return undefined;
+      }
+    });
+  }
+
+
+  
+ updateCategoria(categoria:any): Promise<{description: string} | undefined> {
+    return Swal.fire({
+      title: "Modificar un categoira",
+      html: `
+        
+        <input id="swal-input-descCategoria" class="swal2-input" placeholder="Descripcion" value="${categoria.descripcion}">
+        
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Insertar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const description = (document.getElementById('swal-input-descCategoria') as HTMLInputElement).value;
+        
+        if (!description) {
+          Swal.showValidationMessage('Por favor, ingresa una descripcion valida');
+          return false;
+        }
+         else {
+          return {
+            description: description,
+          };
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Categoria creada!',"Listo")
+        return result.value;
+      } else {
+        return undefined;
+      }
+    });
+  }
+
+
+  updatePrecio(precio:any): Promise<{ fechaDesde: Date, componenteId: number, valor: number,} | undefined> {
+    return Swal.fire({
+      title: "Crea un componente",
+      html: `
+        <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde" value="${precio.fechaDesde}">
+        <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${precio.componente.id}">
+        <input id="swal-input-valor" class="swal2-input" placeholder="valor" value="${precio.valor}">
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Insertar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const fechaDesde = (document.getElementById('swal-input-fechaDesde') as HTMLInputElement).value;
+        const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
+        const valor = (document.getElementById('swal-input-valor') as HTMLInputElement).value;
+        
+        if (!fechaDesde) {
+          Swal.showValidationMessage('Por favor, ingresa una fecha desde valido');
+          return false;
+        } else if (!componenteId) {
+          Swal.showValidationMessage('Por favor, ingresa un componente valido');
+          return false;
+        }else if (!valor) {
+          Swal.showValidationMessage('Por favor, ingresa un valor valido');
+          return false;
+        }
+         else {
+          return {
+            fechaDesde: fechaDesde,
+            componenteId: componenteId,
+            valor: valor,
+          };
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Precio creado!',"Listo")
+        return result.value;
+      } else {
+        return undefined;
+      }
+    });
+  }
+
+
+
+  
+  updateLineaCompra(linea:any): Promise<{ compraId: number, componenteId: number, cantidad: number, subTotal:number} | undefined> {
+    return Swal.fire({
+      title: "Crea un Linea de Compra",
+      html: `
+       <input id="swal-input-compraId" class="swal2-input" placeholder="compraId" value="${linea.compra.Id}">
+       <input id="swal-input-cantidad" class="swal2-input" placeholder="cantidad" value="${linea.cantidad}">
+       <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${linea.componente.Id}">
+       <input id="swal-input-subTotal" class="swal2-input" placeholder="subTotal" value="${linea.subTotal}">
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Insertar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const compraId = (document.getElementById('swal-input-compraId') as HTMLInputElement).value;
+        const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
+        const cantidad = (document.getElementById('swal-input-cantidad') as HTMLInputElement).value;
+        const subTotal = (document.getElementById('swal-input-subTotal') as HTMLInputElement).value;
+        
+        if (!compraId) {
+          Swal.showValidationMessage('Por favor, ingresa una compra valida');
+          return false;
+        } else if (!componenteId) {
+          Swal.showValidationMessage('Por favor, ingresa un componente valido');
+          return false;
+        }else if (!cantidad) {
+          Swal.showValidationMessage('Por favor, ingresa una cantidad valida');
+          return false;
+        }
+        else if (!subTotal) {
+          Swal.showValidationMessage('Por favor, ingresa un subTotal valida');
+          return false;
+        }
+         else {
+          return {
+            compraId: compraId,
+            componenteId: componenteId,
+            cantidad: cantidad,
+            subTotal: subTotal
+          };
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Precio creado!',"Listo")
+        return result.value;
+      } else {
+        return undefined;
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+  
 
 }

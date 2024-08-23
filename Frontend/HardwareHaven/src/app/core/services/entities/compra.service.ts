@@ -31,7 +31,7 @@ export class CompraService {
     return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{fechaCompra: Date, fechaCancel: Date, total: number}){ 
+  update( id: number, body:{fechaCompra: Date, fechaCancel: Date| undefined, total: number}){ 
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
   }

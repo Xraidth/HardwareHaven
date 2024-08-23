@@ -59,7 +59,7 @@ export class InventarioComponent implements OnInit {
     this.loadItems('Usuario');
   }
 
-  loadItems(type: string): void {
+ loadItems(type: string): void {
     this.nowType = type;
     this.items = [];
     this.allItems = [];
@@ -102,11 +102,20 @@ export class InventarioComponent implements OnInit {
       case 'Componente': this.conectorComponenteServer.InsertarComponente(); break;
       case 'Categoria':  this.conectorCategoriaServer.InsertarCategoria(); break;
     }
+    this.loadItems(this.nowType);
   }
   
 
   editarItem(item: any): void {
-    console.log('Editar item:', item, this.nowType);
+    switch (this.nowType) {
+      case 'Usuario': this.conectorUsuarioServer.update(item); break;
+      case 'Compra': this.conectorCompraServer.updateCompra(item); break;
+      case 'LineaCompra': this.conectorLineaCompraServer.updateLineaCompra(item); break;
+      case 'Componente': this.conectorComponenteServer.updateComponente(item); break;
+      case 'Precio': this.conectorPrecioServer.updatePrecio(item); break;
+      case 'Categoria': this.conectorCategoriaServer.updateCategoria(item); break;
+    }
+    this.loadItems(this.nowType);
   }
 
   eliminarItem(item: any): void {
@@ -169,4 +178,10 @@ export class InventarioComponent implements OnInit {
     precios.sort((a, b) => b.fecha?.getTime() - a.fecha?.getTime() || 0);
     return precios[0]?.valor || 0;
   }
+
+
+
+  
+
+
 }

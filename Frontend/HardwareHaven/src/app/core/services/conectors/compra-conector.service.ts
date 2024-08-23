@@ -58,31 +58,7 @@ export class CompraConectorService {
     return this.compra
   }
 
-  public update(id:number,
-    fechaCompra: Date,
-    fechaCancel: Date,
-    total: number
-  ) {
-    this.serverCompra.update(id, {fechaCompra, fechaCancel, total}).subscribe({
-      next: (r: any) => {
-        try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const compra: any = r.data;
-            this.compra = compra;
-          } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
-          }
-        } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
-        }
-      },
-      error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
-      }
-    });
-    return this.compra
-  }
+ 
 
 
 
@@ -92,6 +68,40 @@ export class CompraConectorService {
       this.serverCompra.create({
         userId: credenciales.userId
       }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const compra: any = r.data; 
+              this.compra = compra;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+
+
+  }
+
+
+  async updateCompra(compra:any) {
+    const credenciales = await this.sweetAlertService.updateCompra(compra);
+    if (credenciales) {
+      this.serverCompra.update(
+        compra.id, 
+        {
+        fechaCompra: credenciales.fechaCompra ,
+        fechaCancel: credenciales.fechaCancel,
+        total: credenciales.total}
+      ).subscribe({
         next: (r: any) => {
           try {
             if (r && r.data) {
