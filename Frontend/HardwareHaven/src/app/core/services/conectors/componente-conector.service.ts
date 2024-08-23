@@ -116,4 +116,37 @@ export class ComponenteConectorService {
 
   }
 
+  async updateComponente(componente:any) {
+    const credenciales = await this.sweetAlertService.updateComponente(componente);
+    if (credenciales) {
+      this.serverComponente.update(
+        componente.id, 
+        {
+          newCompName: credenciales.name,
+          newDescription: credenciales.description,
+          categoriaId: credenciales.categoriaId
+      }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const componente: any = r.data; 
+              this.componente = componente;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+
+
+  }
+
 }

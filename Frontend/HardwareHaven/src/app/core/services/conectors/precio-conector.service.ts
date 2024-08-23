@@ -120,4 +120,35 @@ export class PrecioConectorService {
     }
     
   }
+
+
+  async updatePrecio(precio:any) {
+    const credenciales = await this.sweetAlertService.updatePrecio(precio);
+    if (credenciales) {
+      this.serverPrecio.update(precio.id,{
+        fechaDesde: credenciales.fechaDesde,
+        componenteId: credenciales.componenteId,
+        valor: credenciales.valor
+      }).subscribe({
+        next: (r: any) => {
+          try {
+            if (r && r.data) {
+              const precio: any = r.data; 
+              this.precio = precio;
+            } else {
+              
+            }
+          } catch (error) {
+            console.error('Error al procesar los datos:', error);
+            console.log('Objeto recibido:', r); 
+          }
+        },
+        error: (e) => {
+          console.error('Error en la llamada HTTP:', e);
+        }
+      });
+      
+    }
+    
+  }
 }
