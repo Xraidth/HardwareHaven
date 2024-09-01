@@ -13,7 +13,7 @@ const compraFacturationController = async (req: Request, res: Response): Promise
 
         if (compra) {
             const filePath = generateInvoicePDF(compra);
-            await sendInvoiceEmail(compra.user.email, filePath);
+           // await sendInvoiceEmail(compra.user.email, filePath);
 
             //Falta actualizar el estado de la compra a facturada si es que se quiere facturar una sola vez
 

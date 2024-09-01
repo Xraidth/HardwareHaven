@@ -74,6 +74,7 @@ Content-Type: application/json
 "total": "200"
 }
 
+###PATCH
 PATCH  http://localhost:3000/api/compra/Facturate/:id
 
 //------------------Componente-------------------------------
