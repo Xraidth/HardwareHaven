@@ -19,7 +19,7 @@ export class SessionService {
       this.usuario = JSON.parse(item);
       return this.usuario; 
     }
-    return null; 
+    return undefined; 
   }
 
   public static borrarSession(): void {

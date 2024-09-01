@@ -26,14 +26,35 @@ export class SweetAlertService {
       cancelButtonText: 'No, conservarlo'
     });
   }
-mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string} | undefined> {
+mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string, userType:string} | undefined> {
     return Swal.fire({
       title: "Crea una cuenta",
       html: `
-        <input id="swal-input-username" class="swal2-input" placeholder="Nombre de usuario">
-        <input id="swal-input-email" class="swal2-input" type="email" class="swal2-email" placeholder="email">
-        <input id="swal-input-password" type="password" class="swal2-input" placeholder="Contraseña">
-        <input id="swal-input-confirm-password" type="password" class="swal2-input" placeholder="Confirmar contraseña">
+       <div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <input id="swal-input-username" class="form-control" placeholder="Nombre de usuario">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-email" class="form-control" type="email" placeholder="Email">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-password" type="password" class="form-control" placeholder="Contraseña">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar contraseña">
+      </div>
+      <div class="mb-3">
+        <select id="swal-input-user-type" class="form-select">
+          <option value="cliente">Cliente</option>
+          <option value="administrador">Administrador</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -44,7 +65,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const password = (document.getElementById('swal-input-password') as HTMLInputElement).value;
         const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
-
+        const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
           return false;
@@ -62,7 +83,8 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           return {
             username: username,
             password: password,
-            email:email
+            email:email,
+            userType: userType
           };
         }
       }
@@ -80,14 +102,34 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   }
 
 
-  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string} | undefined> {
+  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string, newUserType: string} | undefined> {
     return Swal.fire({
       title: "Configura tu cuenta",
       html: `
-        <input id="swal-input-username" class="swal2-input" placeholder="Nombre de usuario" value="${usuario.name||"usuario"}">
-        <input id="swal-input-email" class="swal2-input" placeholder="email" value="${usuario.email||"email"}">
-        <input id="swal-input-password" type="password" class="swal2-input" placeholder="Nueva contraseña (opcional)">
-        <input id="swal-input-confirm-password" type="password" class="swal2-input" placeholder="Confirmar nueva contraseña (opcional)">
+    <div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <input id="swal-input-username" class="form-control" placeholder="Nombre de usuario" value="${usuario.name || 'usuario'}">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-email" class="form-control" placeholder="Email" value="${usuario.email || 'email'}">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-password" type="password" class="form-control" placeholder="Nueva contraseña (opcional)">
+      </div>
+      <div class="mb-3">
+        <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar nueva contraseña (opcional)">
+      </div>
+      <div class="mb-3">
+        <select id="swal-input-user-type" class="form-select">
+          <option value="cliente" ${usuario.tipoUsuario === 'cliente' ? 'selected' : ''}>Cliente</option>
+          <option value="administrador" ${usuario.tipoUsuario === 'administrador' ? 'selected' : ''}>Administrador</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -98,6 +140,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const password = (document.getElementById('swal-input-password') as HTMLInputElement).value;
         const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
+        const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
   
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
@@ -113,7 +156,8 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
             newUserName: username,
             newPassword: password,
             oldPassword: usuario.password,
-            newEmail: email
+            newEmail: email,
+            newUserType: userType
           };
         }
       }

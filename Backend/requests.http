@@ -13,7 +13,8 @@ Content-Type: application/json
 {
     "name":"Pedro", 
     "password":"pedriño",
-    "email":"asus@gmail.com"
+    "email":"asus@gmail.com",
+    "tipoUsuario":"Administrador"
 }
 ###Delete
 DELETE  http://localhost:3000/api/user/deleteOne/:id
@@ -26,7 +27,8 @@ Content-Type: application/json
 "newPassword":"nacho55", 
 "oldPassword":"pedriño", 
 "newUserName":"Ignacio Rodriguez",
- "newEmail":"asus@gmail55.com"
+ "newEmail":"asus@gmail55.com",
+ "newUserType":"Cliente"
 }
 
 ###PATCH

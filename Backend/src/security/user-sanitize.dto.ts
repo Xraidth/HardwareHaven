@@ -11,7 +11,9 @@ export function sanitizeUserInput(req: Request, res: Response, next: NextFunctio
         password: req.body.password,
         newPassword:req.body.newPassword,
         oldPassword:req.body.oldPassword,
-        newUserName:req.body.newUserName
+        newUserName:req.body.newUserName,
+        tipoUsuario:req.body.tipoUsuario,
+        newUserType:req.body.newUserType
       };
   
     Object.keys(req.body.sanitizedUser).forEach((key) => {

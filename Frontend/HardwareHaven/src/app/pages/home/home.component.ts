@@ -122,7 +122,7 @@ export class HomeComponent implements OnInit {
 async registrarUsuario() {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
     if (credenciales) {
-      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email}).subscribe({
+      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario: credenciales.userType}).subscribe({
         next: (r: any) => {
           try {
             if (r && r.data) {

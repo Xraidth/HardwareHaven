@@ -67,7 +67,8 @@ export class UsuarioConectorService {
         newPassword: credenciales.newPassword,
         oldPassword: credenciales.oldPassword,
         newUserName: credenciales.newUserName,
-        newEmail: credenciales.newEmail
+        newEmail: credenciales.newEmail,
+        newUserType: credenciales.newUserType
     ,
     }
     ).subscribe({
@@ -99,7 +100,7 @@ export class UsuarioConectorService {
   async registrarUsuario() {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
     if (credenciales) {
-      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email}).subscribe({
+      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario:credenciales.userType}).subscribe({
         next: (r: any) => {
           try {
             if (r && r.data) {
