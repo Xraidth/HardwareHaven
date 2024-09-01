@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usuario = SessionService.usuario;
+    this.usuario = SessionService.usuario||SessionService.recordarSession()||undefined
     this.getAllProducts();
     this.getAllCategori();
   }

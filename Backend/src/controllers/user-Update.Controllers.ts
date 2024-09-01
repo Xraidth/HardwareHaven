@@ -5,7 +5,7 @@ import { User } from '../Model/user.entity.js';
 const userRepo = new UserRepository();
 
 const userUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {newPassword, oldPassword, newUserName, newEmail} = req.body; 
+    const {newPassword, oldPassword, newUserName, newEmail, newUserType} = req.body; 
     const id =  parseInt(req.params.id);
 
     try{
@@ -18,6 +18,7 @@ const userUpdateController = async (req: Request, res: Response): Promise<void> 
                 user.name = newUserName;
                 user.password = newPassword;
                 user.email = newEmail;
+                user.tipoUsuario=newUserType;
                 const user_updated = await userRepo.update(user);
                 res.status(200).json({
                     data: user_updated,
