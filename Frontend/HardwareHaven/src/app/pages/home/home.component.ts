@@ -84,7 +84,14 @@ export class HomeComponent implements OnInit {
     if (user) {
       SessionService.usuario = user
       if(this.recordarClave){SessionService.guardarSession();}
-      this.router.navigate(['productList']);
+      if(user.tipoUsuario ==="administrador"){
+        this.router.navigate(['inventario']); 
+      }
+      else{
+        this.router.navigate(['productList']);
+      }
+      
+      
     } else {
       this.toastService.showToast('Acceso denegado');
       
@@ -129,7 +136,12 @@ async registrarUsuario() {
               const user: any = r.data; 
               this.user = user;
               SessionService.usuario = this.user
-              this.router.navigate(['productList']);
+              if(user.tipoUsuario ==="administrador"){
+                this.router.navigate(['inventario']); 
+              }
+              else{
+                this.router.navigate(['productList']);
+              }
             } else {
               
             }
