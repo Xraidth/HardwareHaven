@@ -21,7 +21,7 @@
                   </div>
                 </div>
                 <div class="me-2">
-                  <input class="form-control" type="password" placeholder="Contraseña" aria-label="Search" [(ngModel)]="password" name="password" tabindex="2">
+                  <input class="form-control" type="password" placeholder="Contraseña" aria-label="Search" [(ngModel)]="password" name="password" tabindex="2" (keydown.enter)="login()">
                   <div class="form-check">
                     <input [(ngModel)]="recordarClave" class="form-check-input" type="checkbox" id="recordarContraseña" value="" aria-label="Recordar contraseña" [ngModelOptions]="{standalone: true}" >
                     <label class="form-check-label small text-light" for="recordarContraseña">Recordar sesión</label>
