@@ -6,11 +6,15 @@ const userRepo = new UserRepository();
 
 const userRegisterController = async (req: Request, res: Response): Promise<void> => {       
     const {name, password, email, tipoUsuario} = req.body; 
+    const mail = await userRepo.findEmail({email: email});
 
     try{
         const user = await userRepo.findName({name: name});
+        const mail = await userRepo.findEmail({email: email});
 
-        if (!user) {
+        console.log(mail);
+
+        if (!user && !mail) {
             const new_user = new User(name, password, email, tipoUsuario);
            userRepo.add(new_user);
            res.status(201).json({
@@ -20,7 +24,7 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
         } else {
             res.status(404).json({
                 data: undefined,
-                message: 'User incorrect credentials'
+                message: 'El usuario o el email ya se escuentran registrados.'
             });
         }
 

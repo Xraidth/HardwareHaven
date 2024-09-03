@@ -86,6 +86,20 @@ export class UserRepository  {
         }
     }
 
+    async findEmail(item: { email: string }): Promise<User | undefined> {
+        try {
+            
+            const user = await em.findOneOrFail(
+                User,
+                { email: item.email }
+                ,{ populate: ['compras'] }
+            );
+            return user;
+        } catch (error: any) {
+            return undefined;
+        }
+    }
+
     async updatePassword(item: User, newPassword:string): Promise<User | undefined> {
         try {
             const id = item.id;

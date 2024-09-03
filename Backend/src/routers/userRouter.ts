@@ -21,7 +21,7 @@ userRouter.post('/register',sanitizeUserInput,  userRegisterController);
 userRouter.patch('/updatePassword/:id',sanitizeUserInput, userUpdatePasswordController);
 userRouter.patch('/updateUserName/:id',sanitizeUserInput, userUpdateUserNameController);
 userRouter.delete('/deleteOne/:id',userDeleteOneController);
-userRouter.put('/Update/:id',sanitizeUserInput, userUpdateController)
+userRouter.put('/update/:id',sanitizeUserInput, userUpdateController)
 
 
 export default userRouter;
