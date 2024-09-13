@@ -17,8 +17,8 @@ export const routes: Routes = [
   { path: 'envio', component: EnvioComponent},
   { path: 'inventario', component: InventarioComponent},
   { path: 'inventario/usuario', component: UsuarioComponent},
-  //{ path: '', redirectTo: '/home', pathMatch: 'full' } 
-  { path: '', redirectTo: '/inventario/usuario', pathMatch: 'full' } 
+  { path: '', redirectTo: '/home', pathMatch: 'full' } 
+  
   
   
   ];

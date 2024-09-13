@@ -44,8 +44,12 @@
     
     
     <ng-container [ngSwitch]="nowType">
-      <app-usuario *ngSwitchCase="'Usuario'"></app-usuario>
-      <app-precio *ngSwitchCase="'Precio'"></app-precio>
+      <app-usuario *ngSwitchCase="'Usuario'" [searchQuery]="searchQuery"></app-usuario>
+      <app-precio *ngSwitchCase="'Precio'" [searchQuery]="searchQuery"></app-precio>
+      <app-linea-compra *ngSwitchCase="'LineaCompra'" [searchQuery]="searchQuery"></app-linea-compra>
+      <app-compra *ngSwitchCase="'Compra'" [searchQuery]="searchQuery"></app-compra>
+      <app-componente *ngSwitchCase="'Componente'" [searchQuery]="searchQuery"></app-componente>
+      <app-categoria *ngSwitchCase="'Categoria'" [searchQuery]="searchQuery"></app-categoria>
       <p *ngSwitchDefault>Por favor, selecciona un tipo válido.</p>
     </ng-container>
     
