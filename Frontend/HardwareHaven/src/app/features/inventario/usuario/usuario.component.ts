@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { CommonModule } from '@angular/common';
@@ -21,6 +21,8 @@ import {
   providers: [UserService, SweetAlertService]
 })
 export class UsuarioComponent implements OnInit {
+  @Input() searchQuery: string| undefined;
+
   usuarios: any[] = [];
   usuario: any = {};
   inventarioVacio = false;
@@ -38,7 +40,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   cargarEntidad(): void {
-    this.getAllUsuarios();
+    this.getAll();
   }
 
   cargarColumnas(): void {
@@ -54,7 +56,7 @@ export class UsuarioComponent implements OnInit {
   }
 
 
-  getAllUsuarios(): void {
+  getAll(): void {
     this.isLoading = true; // Muestra el indicador de carga
     this.serverUser.getAll().pipe(
       map((response: any) => response?.data || []),

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PrecioService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
@@ -17,6 +17,7 @@ import { capitalizeFirstLetterOfEachWord, specialFiltro } from '../share/inventa
   providers: [PrecioService, SweetAlertService]
 })
 export class PrecioComponent implements OnInit {
+  @Input() searchQuery: string| undefined;
   precios: any[] = [];
   precio: any = {};
   inventarioVacio = false;
@@ -36,6 +37,9 @@ export class PrecioComponent implements OnInit {
   cargarEntidad(): void {
     this.getAllPrecios();
   }
+
+ 
+
 
   cargarColumnas(): void {
     if (this.precios.length > 0) {
