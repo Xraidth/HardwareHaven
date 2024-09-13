@@ -123,10 +123,6 @@ main{
     font-size: 20px;
   }
 
- 
+
   
   
-  .float-button {
-    position: fixed;
-    bottom: 20px; /* Ajusta según necesites */right: 20px;  /* Ajusta según necesites */z-index: 1;
-  }

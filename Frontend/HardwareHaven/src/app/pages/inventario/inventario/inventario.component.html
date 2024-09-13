@@ -39,32 +39,16 @@
     </div>
 
     <div class="float-button">
-      <button class="custom-plus-buttom" (click)="plusButton()">+</button>
+      <app-plus-button [nowType] = "nowType"></app-plus-button>
     </div>
-
-    <div class="custom-contenedor d-flex flex-column justify-content-center align-items-center">
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th *ngFor="let column of columns">{{ column }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of items">
-            <td *ngFor="let column of columnsLw">{{ specialFiltro(column, item[column]) || '-' }}</td>
-            <td>
-              <button class="btn btn-light" (click)="editarItem(item)">Editar</button>
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="eliminarItem(item)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div *ngIf="inventarioVacio" class="inventarioVacio">
-        <p>Inventario vacío</p>
-      </div>
-    </div>
+    
+    
+    <ng-container [ngSwitch]="nowType">
+      <app-usuario *ngSwitchCase="'Usuario'"></app-usuario>
+      <app-precio *ngSwitchCase="'Precio'"></app-precio>
+      <p *ngSwitchDefault>Por favor, selecciona un tipo válido.</p>
+    </ng-container>
+    
+    
   </main>
 </div>
