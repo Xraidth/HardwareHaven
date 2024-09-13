@@ -1,0 +1,21 @@
+
+  .custom-plus-buttom {
+    background-color: rgb(23, 1, 73); 
+    color: white; 
+    border-radius: 50%;
+    width: 60px; 
+    height: 60px; 
+    font-size: 30px; 
+    border: none; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    transition: background-color 0.1s, transform 0.1s; 
+    text-align: center; 
+}
+
+  
+  .custom-plus-buttom:hover {
+    background-color: #0395a8;
+    transform: scale(1.01); 
+  }
