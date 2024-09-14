@@ -4,13 +4,14 @@ import { SweetAlertService } from '../../../core/services/notifications/sweet-al
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, share } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 import { 
   capitalizeFirstLetterOfEachWord, 
   getErrorMessage, 
   specialFiltro 
 } from '../share/inventario-functions';
+
 
 
 
@@ -36,7 +37,6 @@ export class UsuarioComponent implements OnInit {
   isLoading = false; 
 
   
-  
 
   constructor(
     private serverUser: UserService,
@@ -45,12 +45,15 @@ export class UsuarioComponent implements OnInit {
     
   ) {}
 
+  subscription: any;
+
   ngOnInit(): void {
     this.cargarEntidad();
-
-   
-    
+ 
   }
+  
+  
+  
 
 
 
@@ -72,7 +75,7 @@ export class UsuarioComponent implements OnInit {
 
 
   getAll(): void {
-    this.isLoading = true; // Muestra el indicador de carga
+    this.isLoading = true;
     this.serverUser.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
@@ -84,7 +87,7 @@ export class UsuarioComponent implements OnInit {
     ).subscribe((usuarios: any[]) => {
       this.usuarios = usuarios;
       this.cargarColumnas();
-      this.isLoading = false; // Oculta el indicador de carga
+      this.isLoading = false; 
     });
   }
 

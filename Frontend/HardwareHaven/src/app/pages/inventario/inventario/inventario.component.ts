@@ -51,12 +51,13 @@ import { CategoriaComponent } from '../../../features/inventario/categoria/categ
 export class InventarioComponent implements OnInit {
   searchQuery: string = '';
   nowType: string = '';
-  inventarioVacio: boolean = false;
+  carga:string = ""
   usuario: any;
 
   constructor(
     
   ) {}
+
 
   ngOnInit(): void {
     this.usuario = SessionService.usuario;
@@ -81,8 +82,15 @@ export class InventarioComponent implements OnInit {
     }
   }
 
-  plusButton(): void {
- 
+  getplusbuttonChange(e: string): void {
+    
+    this.carga = "Cargando...";
+    this.loadItems("Cargando");
+    
+    setTimeout(() => {
+      this.carga = '';
+      this.loadItems(e);
+    }, 2000); 
   }
   
 }

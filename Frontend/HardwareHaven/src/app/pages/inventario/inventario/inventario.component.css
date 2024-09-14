@@ -123,6 +123,12 @@ main{
     font-size: 20px;
   }
 
+  .button-item.selected {
+    background-color: #007bff; /* Background color for the selected button */
+    color: white; /* Text color for the selected button */
+    border-color: #007bff; /* Border color for the selected button */
+  }
+
  
   
   
