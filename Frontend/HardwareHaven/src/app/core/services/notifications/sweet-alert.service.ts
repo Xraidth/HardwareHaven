@@ -12,6 +12,17 @@ export class SweetAlertService {
     Swal.fire(message);
   }
 
+  mostrarError(message: string): void {
+    Swal.fire({
+      title: 'Error',
+      text: message,  
+      icon: 'error',  
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#d33',  
+    });
+  }
+  
+
   alertWithSuccess(title: string, message: string) {
     Swal.fire(title, message, 'success');
   }
