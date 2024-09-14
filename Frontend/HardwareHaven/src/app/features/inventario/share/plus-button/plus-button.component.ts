@@ -8,6 +8,7 @@ import { LineaCompraService } from '../../../../core/services/entities/linea-com
 import { CompraService } from '../../../../core/services/entities/compra.service';
 import { ComponenteService } from '../../../../core/services/entities/componente.service';
 import { CategoriaService } from '../../../../core/services/entities/categoria.service';
+import { ShareService } from '../../../../core/services/share/share.service';
 
 
 
@@ -21,7 +22,7 @@ import { CategoriaService } from '../../../../core/services/entities/categoria.s
 })
 export class PlusButtonComponent {
   @Input() nowType: string | undefined;
-  
+  @Output() changeEntityEvent = new EventEmitter<string>()
   usuario: any;
   precio: any;
   linea: any;
@@ -44,7 +45,7 @@ export class PlusButtonComponent {
     private serverCompra: CompraService,
     private serverComponente: ComponenteService,
     private serverCategoria: CategoriaService ,
-    
+  
   ) {}
   
   plusButton(){
@@ -58,13 +59,14 @@ export class PlusButtonComponent {
     }
   }
 
-  setChangesToAdd(){
-    if(this.nowType){
-      
-      
+  setChangesToAdd() {
+    if (this.nowType) {
+  this.changeEntityEvent.emit(this.nowType);
+    } else {
+      console.log("Error: nowType no está definido");
     }
-    else{console.log("Error");}
   }
+  
 
   async insertUsuario(): Promise<void> {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();

@@ -29,17 +29,17 @@
 
     <div class="button-container">
       <div class="button-list">
-        <button class="button-item" (click)="loadItems('Usuario')">Usuarios</button>
-        <button class="button-item" (click)="loadItems('Compra')">Compras</button>
-        <button class="button-item" (click)="loadItems('LineaCompra')">Líneas de Compra</button>
-        <button class="button-item" (click)="loadItems('Componente')">Componentes</button>
-        <button class="button-item" (click)="loadItems('Precio')">Precios</button>
-        <button class="button-item" (click)="loadItems('Categoria')">Categorías</button>
+        <button class="button-item" (click)="loadItems('Usuario') "  [ngClass]="{'selected': nowType === 'Usuario'}">Usuarios</button>
+        <button class="button-item" (click)="loadItems('Compra')"[ngClass]="{'selected': nowType === 'Compra'}">Compras</button>
+        <button class="button-item" (click)="loadItems('LineaCompra')"[ngClass]="{'selected': nowType === 'LineaCompra'}">Líneas de Compra</button>
+        <button class="button-item" (click)="loadItems('Componente')"[ngClass]="{'selected': nowType === 'Componente'}">Componentes</button>
+        <button class="button-item" (click)="loadItems('Precio')"[ngClass]="{'selected': nowType === 'Precio'}">Precios</button>
+        <button class="button-item" (click)="loadItems('Categoria')"[ngClass]="{'selected': nowType === 'Categoria'}">Categorías</button>
       </div>
     </div>
 
     <div class="float-button">
-      <app-plus-button [nowType] = "nowType"></app-plus-button>
+      <app-plus-button [nowType] = "nowType" (changeEntityEvent)="getplusbuttonChange($event)"></app-plus-button>
     </div>
     
     
@@ -50,6 +50,9 @@
       <app-compra *ngSwitchCase="'Compra'" [searchQuery]="searchQuery"></app-compra>
       <app-componente *ngSwitchCase="'Componente'" [searchQuery]="searchQuery"></app-componente>
       <app-categoria *ngSwitchCase="'Categoria'" [searchQuery]="searchQuery"></app-categoria>
+      <div  *ngSwitchCase="'Cargando'">
+        <p>{{carga}}</p>
+      </div>
       <p *ngSwitchDefault>Por favor, selecciona un tipo válido.</p>
     </ng-container>
     

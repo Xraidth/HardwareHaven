@@ -3,6 +3,7 @@ export function specialFiltro(nombre: string, dato: any): string {
     if (nombre.includes("categoria")) return dato.descripcion;
     if (nombre.includes("componente")) return dato.name;
     if (nombre.includes("componentes")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee componentes" : "No posee componentes") : "-";
+    if(nombre.includes("subTotal"))return `$${dato}`;
     if (nombre.includes("valor")) return `$${dato}`;
     if (nombre.includes("fechaDesde") || nombre.includes("fechaCompra") || nombre.includes("fechaCancel")) return formatDateTime(dato);
     if (nombre.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
