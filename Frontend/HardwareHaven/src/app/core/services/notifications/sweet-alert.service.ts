@@ -338,7 +338,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   
   InsertCategoria(): Promise<{description: string} | undefined> {
     return Swal.fire({
-      title: "Crea un componente",
+      title: "Crea una categoria",
       html: `
         
         <input id="swal-input-descCategoria" class="swal2-input" placeholder="description">
@@ -374,7 +374,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
   InsertPrecio(): Promise<{ fechaDesde: Date, componenteId: number, valor: number,} | undefined> {
     return Swal.fire({
-      title: "Crea un componente",
+      title: "Crea un precio",
       html: `
         <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde">
         <input id="swal-input-componenteId" class="swal2-input" placeholder="Componente Id">
@@ -422,7 +422,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   
   InsertLineaCompra(): Promise<{ compraId: number, componenteId: number, cantidad: number,} | undefined> {
     return Swal.fire({
-      title: "Crea un componente",
+      title: "Crea una linea de compra",
       html: `
        <input id="swal-input-compraId" class="swal2-input" placeholder="Compra Id">
        <input id="swal-input-cantidad" class="swal2-input" placeholder="Cantidad">
@@ -608,7 +608,7 @@ updateCompra(compra:any): Promise<{
 
   updatePrecio(precio:any): Promise<{ fechaDesde: Date, componenteId: number, valor: number,} | undefined> {
     return Swal.fire({
-      title: "Crea un componente",
+      title: "Actualizar precio",
       html: `
         <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde" value="${precio.fechaDesde}">
         <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${precio.componente.id}">

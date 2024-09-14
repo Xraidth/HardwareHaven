@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-categoria',
@@ -25,15 +26,22 @@ export class CategoriaComponent implements OnInit {
   columnsLw: string[] = [];
   isLoading = false;
 
+
+  
+
   constructor(
     private serverCategoria: CategoriaService ,
-    private sweetAlertService: SweetAlertService
+    private sweetAlertService: SweetAlertService,
+  
   ) {}
 
 
   ngOnInit(): void {
     this.cargarEntidad();
+  
+  
   }
+ 
 
   cargarEntidad(): void {
     this.getAll();
@@ -112,7 +120,7 @@ export class CategoriaComponent implements OnInit {
   
   
 
-  async InsertarCategoria() {
+  async insertarCategoria() {
     const credenciales = await this.sweetAlertService.InsertCategoria();
     if (credenciales) {
       this.serverCategoria.create({

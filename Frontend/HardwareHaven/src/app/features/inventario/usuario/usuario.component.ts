@@ -1,16 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { 
   capitalizeFirstLetterOfEachWord, 
   getErrorMessage, 
   specialFiltro 
 } from '../share/inventario-functions';
+
+
 
 
 @Component({
@@ -24,6 +26,8 @@ import {
 export class UsuarioComponent implements OnInit {
   @Input() searchQuery: string| undefined;
 
+  
+
   usuarios: any[] = [];
   usuario: any = {};
   inventarioVacio = false;
@@ -31,14 +35,24 @@ export class UsuarioComponent implements OnInit {
   columnsLw: string[] = [];
   isLoading = false; 
 
+  
+  
+
   constructor(
     private serverUser: UserService,
-    private sweetAlertService: SweetAlertService
+    private sweetAlertService: SweetAlertService,
+    
+    
   ) {}
 
   ngOnInit(): void {
     this.cargarEntidad();
+
+   
+    
   }
+
+
 
   cargarEntidad(): void {
     this.getAll();
