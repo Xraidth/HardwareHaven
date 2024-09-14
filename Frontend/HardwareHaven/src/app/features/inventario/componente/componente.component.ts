@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponenteService } from '../../../core/services/entities/componente.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { capitalizeFirstLetterOfEachWord, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,22 +51,23 @@ export class ComponenteComponent implements OnInit{
     }
   }
 
-
   getAll(): void {
     this.isLoading = true; 
     this.serverComponente.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        console.error('Error en la llamada HTTP:', error);
-        return of([]);
+        this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
+        return of([]); 
       })
     ).subscribe((componentes: any[]) => {
       this.componentes = componentes;
-      
-      this.cargarColumnas();
+      this.cargarColumnas();  // Load columns after fetching data
       this.isLoading = false; 
     });
   }
+  
 
   eliminarItem(componente: any): void {
     this.delete(componente.id);
@@ -78,26 +79,35 @@ export class ComponenteComponent implements OnInit{
     this.cargarEntidad();
   }
 
-  public delete(id:number) {
-    this.serverComponente.delete(id).subscribe({
-      next: (r: any) => {
-        try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const componente: any = r.data;
+   
+  public delete(id: number) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
+      if (result.isConfirmed) {
+        this.serverComponente.delete(id).pipe(
+          map((response: any) => {
+            if (response && response.data) {
+              return response.data; 
+            } else {
+              console.log('El objeto recibido no tiene la estructura esperada.');
+              return null;
+            }
+          }),
+          catchError((error) => {
+            this.isLoading = false;
+            const errorMessage = getErrorMessage(error);
+            this.sweetAlertService.mostrarError(errorMessage);  
+            return of(null);  
+          })
+        ).subscribe((componente: any) => {
+          if (componente) {
             this.componente = componente;
-          } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+            this.cargarEntidad();  
           }
-        } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
-        }
-      },
-      error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+        });
+      } else if (result.isDismissed) {
+        console.log('El usuario canceló la eliminación.');
       }
     });
-    return this.componente
   }
 
 
@@ -109,62 +119,62 @@ export class ComponenteComponent implements OnInit{
         name: credenciales.name,
         description: credenciales.description,
         categoriaId: credenciales.categoriaId
-      }).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const componente: any = r.data; 
-              this.componente = componente;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+      }).pipe(
+        map((response: any) => {
+          if (response && response.data) {
+            return response.data;  
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
           }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null);  
+        })
+      ).subscribe((componente: any) => {
+        if (componente) {
+          this.componente = componente;
+          this.cargarEntidad();  // Reload entity after creation
         }
       });
-      
     }
-
-
   }
+  
 
-  async update(componente:any) {
+  async update(componente: any) {
     const credenciales = await this.sweetAlertService.updateComponente(componente);
     if (credenciales) {
-      this.serverComponente.update(
-        componente.id, 
-        {
-          newCompName: credenciales.name,
-          newDescription: credenciales.description,
-          categoriaId: credenciales.categoriaId
-      }).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const componente: any = r.data; 
-              this.componente = componente;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+      this.serverComponente.update(componente.id, {
+        newCompName: credenciales.name,
+        newDescription: credenciales.description,
+        categoriaId: credenciales.categoriaId
+      }).pipe(
+        map((response: any) => {
+          if (response && response.data) {
+            return response.data;  // Return the updated componente
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
           }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+          const errorMessage = getErrorMessage(error);
+          this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null); 
+        })
+      ).subscribe((componente: any) => {
+        if (componente) {
+          this.componente = componente;
+          this.cargarEntidad();  // Reload entity after update
         }
       });
-      
     }
-
-
   }
+  
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

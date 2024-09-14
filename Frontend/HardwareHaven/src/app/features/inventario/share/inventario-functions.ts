@@ -35,3 +35,13 @@ export function specialFiltro(nombre: string, dato: any): string {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   }
+  export function getErrorMessage(error: any): string {
+    if (error.error && error.error.message) {
+      return error.error.message;  
+    } else if (error.status) {
+      return `Error ${error.status}: ${error.statusText}`;  
+    } else {
+      return 'Error desconocido. Inténtalo más tarde.';  
+    }
+  }
+  

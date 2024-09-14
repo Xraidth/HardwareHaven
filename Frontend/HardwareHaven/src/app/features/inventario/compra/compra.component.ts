@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CompraService } from '../../../core/services/entities/compra.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { capitalizeFirstLetterOfEachWord, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-compra',
@@ -52,26 +54,29 @@ export class CompraComponent implements OnInit {
 
 
   public getAll() {
-    this.serverCompra.getAll().subscribe({
-      next: (r: any) => {
-        try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const compras: any[] = r.data;
-            this.compras = compras;
-          } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
-          }
-        } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
+    this.serverCompra.getAll().pipe(
+      map((r: any) => {
+        if (r && r.data && Array.isArray(r.data)) {
+          return r.data;  // Return the compras array
+        } else {
+          console.log('El objeto recibido no tiene la estructura esperada.');
+          return [];
         }
-      },
-      error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+      }),
+      catchError((error) => {
+        this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
+        return of([]);  
+      })
+    ).subscribe({
+      next: (compras: any[]) => {
+        this.compras = compras;
+        this.cargarColumnas();  // Load columns after fetching data
       }
     });
-    return this.compras
   }
+  
 
 
   eliminarItem(linea: any): void {
@@ -85,27 +90,36 @@ export class CompraComponent implements OnInit {
   }
 
 
-  public delete(id:number) {
-    this.serverCompra.delete(id).subscribe({
-      next: (r: any) => {
-        try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const compra: any = r.data;
+  public delete(id: number) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
+      if (result.isConfirmed) {
+        this.serverCompra.delete(id).pipe(
+          map((response: any) => {
+            if (response && response.data) {
+              return response.data; 
+            } else {
+              console.log('El objeto recibido no tiene la estructura esperada.');
+              return null;
+            }
+          }),
+          catchError((error) => {
+            this.isLoading = false;
+            const errorMessage = getErrorMessage(error);
+            this.sweetAlertService.mostrarError(errorMessage);  
+            return of(null);  
+          })
+        ).subscribe((compra: any) => {
+          if (compra) {
             this.compra = compra;
-          } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+            this.cargarEntidad();  
           }
-        } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
-        }
-      },
-      error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+        });
+      } else if (result.isDismissed) {
+        console.log('El usuario canceló la eliminación.');
       }
     });
-    return this.compra
   }
+  
 
  
 
@@ -116,63 +130,67 @@ export class CompraComponent implements OnInit {
     if (credenciales) {
       this.serverCompra.create({
         userId: credenciales.userId
-      }).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const compra: any = r.data; 
-              this.compra = compra;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+      }).pipe(
+        map((r: any) => {
+          if (r && r.data) {
+            return r.data;  // Return the newly created compra
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
           }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null);  // Return null in case of error
+        })
+      ).subscribe({
+        next: (compra: any) => {
+          if (compra) {
+            this.compra = compra;
+            this.cargarEntidad();  // Reload entity after creation
+          }
         }
       });
-      
     }
-
-
   }
+  
 
 
-  async update(compra:any) {
+  async update(compra: any) {
     const credenciales = await this.sweetAlertService.updateCompra(compra);
     if (credenciales) {
-      this.serverCompra.update(
-        compra.id, 
-        {
-        fechaCompra: credenciales.fechaCompra ,
+      this.serverCompra.update(compra.id, {
+        fechaCompra: credenciales.fechaCompra,
         fechaCancel: credenciales.fechaCancel,
-        total: credenciales.total}
-      ).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const compra: any = r.data; 
-              this.compra = compra;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+        total: credenciales.total
+      }).pipe(
+        map((r: any) => {
+          if (r && r.data) {
+            return r.data;  // Return the updated compra
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
           }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null);  // Return null in case of error
+        })
+      ).subscribe({
+        next: (compra: any) => {
+          if (compra) {
+            this.compra = compra;
+            this.cargarEntidad();  // Reload entity after update
+          }
         }
       });
-      
     }
-
-
   }
+  
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CategoriaService } from '../../../core/services/entities/categoria.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { capitalizeFirstLetterOfEachWord, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -80,87 +80,98 @@ export class CategoriaComponent implements OnInit {
     this.cargarEntidad();
   }
 
-  public delete(id:number) {
-    this.serverCategoria.delete(id).subscribe({
-      next: (r: any) => {
-        try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const categoria: any = r.data;
+  public delete(id: number) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
+      if (result.isConfirmed) {
+        this.serverCategoria.delete(id).pipe(
+          map((response: any) => {
+            if (response && response.data) {
+              return response.data; 
+            } else {
+              console.log('El objeto recibido no tiene la estructura esperada.');
+              return null;
+            }
+          }),
+          catchError((error) => {
+            this.isLoading = false;
+            const errorMessage = getErrorMessage(error);
+            this.sweetAlertService.mostrarError(errorMessage);  
+            return of(null);  
+          })
+        ).subscribe((categoria: any) => {
+          if (categoria) {
             this.categoria = categoria;
-          } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+            this.cargarEntidad();  
           }
-        } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
-        }
-      },
-      error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+        });
+      } else if (result.isDismissed) {
+        console.log('El usuario canceló la eliminación.');
       }
     });
-    return this.categoria
   }
-
-  async update(categoria:any) {
-    const credenciales = await this.sweetAlertService.updateCategoria(categoria);
-    if (credenciales) {
-      this.serverCategoria.update(categoria.id,{
-        descripcion: credenciales.description
-      }).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const categoria: any = r.data; 
-              this.categoria = categoria;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
-          }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
-        }
-      });
-      
-    }
-    
-  }
-
-
-
   
+  
+
   async InsertarCategoria() {
     const credenciales = await this.sweetAlertService.InsertCategoria();
     if (credenciales) {
       this.serverCategoria.create({
         descripcion: credenciales.description
-      }).subscribe({
-        next: (r: any) => {
-          try {
-            if (r && r.data) {
-              const categoria: any = r.data; 
-              this.categoria = categoria;
-            } else {
-              
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+      }).pipe(
+        map((response: any) => {
+          if (response && response.data) {
+            return response.data;  // Return the newly created categoria
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
           }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+          const errorMessage = getErrorMessage(error);
+          this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null);  
+        })
+      ).subscribe((categoria: any) => {
+        if (categoria) {
+          this.categoria = categoria;
+          this.cargarEntidad();  // Reload entity after creation
         }
       });
-      
     }
-
-
   }
+  
+
+  async update(categoria: any) {
+    const credenciales = await this.sweetAlertService.updateCategoria(categoria);
+    if (credenciales) {
+      this.serverCategoria.update(categoria.id, {
+        descripcion: credenciales.description
+      }).pipe(
+        map((response: any) => {
+          if (response && response.data) {
+            return response.data;  // Return the updated categoria
+          } else {
+            console.log('El objeto recibido no tiene la estructura esperada.');
+            return null;
+          }
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+          const errorMessage = getErrorMessage(error);
+          this.sweetAlertService.mostrarError(errorMessage); 
+          return of(null);
+        })
+      ).subscribe((categoria: any) => {
+        if (categoria) {
+          this.categoria = categoria;
+          this.cargarEntidad();  // Reload entity after update
+        }
+      });
+    }
+  }
+  
+
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

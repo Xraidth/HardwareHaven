@@ -6,7 +6,7 @@ import { PrecioService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { capitalizeFirstLetterOfEachWord, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
 
 @Component({
   selector: 'app-precio',
@@ -35,7 +35,7 @@ export class PrecioComponent implements OnInit {
   }
 
   cargarEntidad(): void {
-    this.getAllPrecios();
+    this.getAll();
   }
 
  
@@ -55,12 +55,14 @@ export class PrecioComponent implements OnInit {
 
   
 
-  getAllPrecios(): void {
+  getAll(): void {
     this.isLoading = true;
     this.serverPrecio.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        console.error('Error en la llamada HTTP:', error);
+        this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
         this.isLoading = false;
         return of([]);
       })
@@ -72,29 +74,46 @@ export class PrecioComponent implements OnInit {
   }
 
   eliminarItem(precio: any): void {
-    this.deletePrecio(precio.id);
+    this.delete(precio.id);
     this.cargarEntidad();
   }
 
   editarItem(precio: any): void {
-    this.updatePrecio(precio);
+    this.update(precio);
     this.cargarEntidad();
   }
 
-  deletePrecio(id: number): void {
-    this.serverPrecio.delete(id).pipe(
-      catchError((error) => {
-        console.error('Error al eliminar precio:', error);
-        return of(null);
-      })
-    ).subscribe((response: any) => {
-      if (response?.data) {
-        this.precios = this.precios.filter(p => p.id !== id);
+  public delete(id: number) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
+      if (result.isConfirmed) {
+        this.serverPrecio.delete(id).pipe(
+          map((response: any) => {
+            if (response && response.data) {
+              return response.data; 
+            } else {
+              console.log('El objeto recibido no tiene la estructura esperada.');
+              return null;
+            }
+          }),
+          catchError((error) => {
+            this.isLoading = false;
+            const errorMessage = getErrorMessage(error);
+            this.sweetAlertService.mostrarError(errorMessage);  
+            return of(null);  
+          })
+        ).subscribe((precio: any) => {
+          if (precio) {
+            this.precio = precio;
+            this.cargarEntidad();  
+          }
+        });
+      } else if (result.isDismissed) {
+        console.log('El usuario canceló la eliminación.');
       }
     });
   }
 
-  async insertPrecio(): Promise<void> {
+  async insert(): Promise<void> {
     const credenciales = await this.sweetAlertService.InsertPrecio();
     if (credenciales) {
       this.serverPrecio.create({
@@ -103,7 +122,9 @@ export class PrecioComponent implements OnInit {
         valor: credenciales.valor
       }).pipe(
         catchError((error) => {
-          console.error('Error al registrar precio:', error);
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
           return of(null);
         })
       ).subscribe((response: any) => {
@@ -114,7 +135,7 @@ export class PrecioComponent implements OnInit {
     }
   }
 
-  async updatePrecio(precio: any): Promise<void> {
+  async update(precio: any): Promise<void> {
     const credenciales = await this.sweetAlertService.updatePrecio(precio);
     if (credenciales) {
       this.serverPrecio.update(precio.id, {
@@ -123,7 +144,9 @@ export class PrecioComponent implements OnInit {
         valor: credenciales.valor
       }).pipe(
         catchError((error) => {
-          console.error('Error al actualizar precio:', error);
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
           return of(null);
         })
       ).subscribe((response: any) => {

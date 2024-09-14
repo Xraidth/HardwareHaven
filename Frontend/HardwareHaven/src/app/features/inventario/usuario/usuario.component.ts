@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { 
   capitalizeFirstLetterOfEachWord, 
+  getErrorMessage, 
   specialFiltro 
 } from '../share/inventario-functions';
 
@@ -61,7 +62,9 @@ export class UsuarioComponent implements OnInit {
     this.serverUser.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        console.error('Error en la llamada HTTP:', error);
+        this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
         return of([]);
       })
     ).subscribe((usuarios: any[]) => {
@@ -81,15 +84,32 @@ export class UsuarioComponent implements OnInit {
     this.cargarEntidad();
   }
 
-  delete(id: number): void {
-    this.serverUser.delete(id).pipe(
-      catchError((error) => {
-        console.error('Error al eliminar usuario:', error);
-        return of(null);
-      })
-    ).subscribe((response: any) => {
-      if (response?.data) {
-        this.usuarios = this.usuarios.filter(u => u.id !== id);
+  public delete(id: number) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
+      if (result.isConfirmed) {
+        this.serverUser.delete(id).pipe(
+          map((response: any) => {
+            if (response && response.data) {
+              return response.data; 
+            } else {
+              console.log('El objeto recibido no tiene la estructura esperada.');
+              return null;
+            }
+          }),
+          catchError((error) => {
+            this.isLoading = false;
+            const errorMessage = getErrorMessage(error);
+            this.sweetAlertService.mostrarError(errorMessage);  
+            return of(null);  
+          })
+        ).subscribe((usuario: any) => {
+          if (usuario) {
+            this.usuario = usuario;
+            this.cargarEntidad();  
+          }
+        });
+      } else if (result.isDismissed) {
+        console.log('El usuario canceló la eliminación.');
       }
     });
   }
@@ -104,7 +124,9 @@ export class UsuarioComponent implements OnInit {
         tipoUsuario: credenciales.userType
       }).pipe(
         catchError((error) => {
-          console.error('Error al registrar usuario:', error);
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
           return of(null);
         })
       ).subscribe((response: any) => {
@@ -126,7 +148,9 @@ export class UsuarioComponent implements OnInit {
         newUserType: credenciales.newUserType
       }).pipe(
         catchError((error) => {
-          console.error('Error al actualizar usuario:', error);
+          this.isLoading = false;
+        const errorMessage = getErrorMessage(error);
+        this.sweetAlertService.mostrarError(errorMessage); 
           return of(null);
         })
       ).subscribe((response: any) => {
