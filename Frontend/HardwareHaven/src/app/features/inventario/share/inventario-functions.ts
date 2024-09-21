@@ -46,3 +46,4 @@ export function specialFiltro(nombre: string, dato: any): string {
     }
   }
   
+

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PrecioService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
@@ -24,11 +24,29 @@ export class PrecioComponent implements OnInit {
   columns: string[] = [];
   columnsLw: string[] = [];
   isLoading = false;
+  originalprecios: any[] = [];
 
   constructor(
     private serverPrecio: PrecioService,
     private sweetAlertService: SweetAlertService
   ) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
+  
+      if (this.searchQuery === '') {
+        
+        this.precios = [...this.originalprecios]; 
+      } else {
+        
+        this.precios = this.originalprecios.filter(x => 
+          x.componente.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.cargarEntidad();
@@ -68,6 +86,7 @@ export class PrecioComponent implements OnInit {
       })
     ).subscribe((precios: any[]) => {
       this.precios = precios;
+      this.originalprecios = [...precios];
       this.cargarColumnas();
       this.isLoading = false;
     });

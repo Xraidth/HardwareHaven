@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -424,9 +426,9 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     return Swal.fire({
       title: "Crea una linea de compra",
       html: `
-       <input id="swal-input-compraId" class="swal2-input" placeholder="Compra Id">
+       <input id="swal-input-compraId" class="swal2-input" placeholder="CompraId">
        <input id="swal-input-cantidad" class="swal2-input" placeholder="Cantidad">
-       <input id="swal-input-componenteId" class="swal2-input" placeholder="Componente Id">
+       <input id="swal-input-componenteId" class="swal2-input" placeholder="ComponenteId">
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -476,7 +478,7 @@ updateCompra(compra:any): Promise<{
         <input id="swal-input-fechaCompra" class="swal2-input" placeholder="fechaCompra" value="${compra.fechaCompra}">
         <input id="swal-input-fechaCancel" class="swal2-input" placeholder="fechaCancel" value="${compra.fechaCancel}">
         <input id="swal-input-total" class="swal2-input" placeholder="total" value="${compra.total}">
-        <input id="swal-input-userId" class="swal2-input" placeholder="userId" value="${compra.usuario.Id}">
+        <input id="swal-input-userId" class="swal2-input" placeholder="userId" value="${compra.user.id}">
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -658,9 +660,9 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Crea un Linea de Compra",
       html: `
-       <input id="swal-input-compraId" class="swal2-input" placeholder="compraId" value="${linea.compra.Id}">
+       <input id="swal-input-compraId" class="swal2-input" placeholder="compraId" value="${linea.compra.id}">
        <input id="swal-input-cantidad" class="swal2-input" placeholder="cantidad" value="${linea.cantidad}">
-       <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${linea.componente.Id}">
+       <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${linea.componente.id}">
        <input id="swal-input-subTotal" class="swal2-input" placeholder="subTotal" value="${linea.subTotal}">
       `,
       focusConfirm: false,

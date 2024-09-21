@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CompraService } from '../../../core/services/entities/compra.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
@@ -24,11 +24,30 @@ export class CompraComponent implements OnInit {
   columns: string[] = [];
   columnsLw: string[] = [];
   isLoading = false;
+  originalcompras: any[] = [];
 
   constructor(
     private serverCompra: CompraService,
     private sweetAlertService: SweetAlertService
   ) {}
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
+  
+      if (this.searchQuery === '') {
+        
+        this.compras = [...this.originalcompras]; 
+      } else {
+        
+        this.compras = this.originalcompras.filter(x => 
+          x.user.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.cargarEntidad();
@@ -57,7 +76,7 @@ export class CompraComponent implements OnInit {
     this.serverCompra.getAll().pipe(
       map((r: any) => {
         if (r && r.data && Array.isArray(r.data)) {
-          return r.data;  // Return the compras array
+          return r.data;  
         } else {
           console.log('El objeto recibido no tiene la estructura esperada.');
           return [];
@@ -72,7 +91,8 @@ export class CompraComponent implements OnInit {
     ).subscribe({
       next: (compras: any[]) => {
         this.compras = compras;
-        this.cargarColumnas();  // Load columns after fetching data
+        this.originalcompras = [...compras];
+        this.cargarColumnas();  
       }
     });
   }
@@ -133,7 +153,7 @@ export class CompraComponent implements OnInit {
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
-            return r.data;  // Return the newly created compra
+            return r.data; 
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -143,13 +163,13 @@ export class CompraComponent implements OnInit {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
         this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  // Return null in case of error
+          return of(null);  
         })
       ).subscribe({
         next: (compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();  // Reload entity after creation
+            this.cargarEntidad();  
           }
         }
       });

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { CommonModule } from '@angular/common';
@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit {
   columns: string[] = [];
   columnsLw: string[] = [];
   isLoading = false; 
-
+  originalusuarios: any[] = [];
   
 
   constructor(
@@ -51,7 +51,24 @@ export class UsuarioComponent implements OnInit {
     this.cargarEntidad();
  
   }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
   
+      if (this.searchQuery === '') {
+        
+        this.usuarios = [...this.originalusuarios]; 
+      } else {
+        
+        this.usuarios = this.originalusuarios.filter(x => 
+          x.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
   
   
 
@@ -86,6 +103,7 @@ export class UsuarioComponent implements OnInit {
       })
     ).subscribe((usuarios: any[]) => {
       this.usuarios = usuarios;
+      this.originalusuarios = [...usuarios];
       this.cargarColumnas();
       this.isLoading = false; 
     });
