@@ -16,6 +16,16 @@ Content-Type: application/json
     "email":"asus@gmail.com",
     "tipoUsuario":"Administrador"
 }
+
+###
+POST  http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "name":"nacho", 
+    "password":"nacho"
+}
+
 ###Delete
 DELETE  http://localhost:3000/api/user/deleteOne/:id
 
@@ -48,6 +58,9 @@ Content-Type: application/json
 "newPassword":"", 
 "oldPassword":""
 }
+
+
+
 
 //------------------Compra-------------------------------
 ###GetAll 

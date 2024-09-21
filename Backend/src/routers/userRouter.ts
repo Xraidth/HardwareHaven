@@ -10,6 +10,7 @@ import userDeleteOneController from "../controllers/user-DeleteOne.Controllers.j
 import userUpdateController from "../controllers/user-Update.Controllers.js";
 //Imports de validaciones
 import {sanitizeUserInput} from "../security/user-sanitize.dto.js"
+import userLoginController from "../controllers/user-Login.Controllers.js";
 const userRouter = Router();
 
 
@@ -18,10 +19,12 @@ const userRouter = Router();
 userRouter.get('/getAll', userGetAllController)
 userRouter.get('/getOne/:id', userGetOneController)
 userRouter.post('/register',sanitizeUserInput,  userRegisterController);
+userRouter.post('/login',sanitizeUserInput, userLoginController)
 userRouter.patch('/updatePassword/:id',sanitizeUserInput, userUpdatePasswordController);
 userRouter.patch('/updateUserName/:id',sanitizeUserInput, userUpdateUserNameController);
 userRouter.delete('/deleteOne/:id',userDeleteOneController);
-userRouter.put('/Update/:id',sanitizeUserInput, userUpdateController)
+userRouter.put('/update/:id',sanitizeUserInput, userUpdateController)
+
 
 
 export default userRouter;
