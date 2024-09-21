@@ -47,5 +47,10 @@ export class UserService {
     return this.http.put(`${this.baseUrl}updatePassword/${id}`, body, { headers });
   }
 
+  login(body:{name: string, password:string}){
+    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
+    return this.http.post(`${this.baseUrl}login/`, body, { headers });
+  }
+
 
 }
