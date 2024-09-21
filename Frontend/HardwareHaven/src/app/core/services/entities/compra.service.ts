@@ -35,4 +35,9 @@ export class CompraService {
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
   }
+  facturate(id: number) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
+    return this.http.patch(`${this.baseUrl}Facturate/${id}`, {}, { headers });
+}
+
 }

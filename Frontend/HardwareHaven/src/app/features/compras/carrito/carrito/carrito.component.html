@@ -5,8 +5,9 @@
             <li class="fw-bold">Nombre</li>
             <li class="fw-bold">Descripción</li>
             <li class="fw-bold">Categoría</li>
-            <li class="fw-bold">Precio</li>
+            <li class="fw-bold ">Precio</li>
             <li class="fw-bold">Cantidad</li>
+            <li class="fw-bold">Eliminar</li>
             
         </ul>    
     </div>
@@ -23,7 +24,7 @@
     
     <hr>
     
-    <div *ngIf="mostrarBoton" class="row">
+    <div *ngIf="mostrarBoton && carrito.length > 0 " class="row">
         <div class="col-12 d-flex justify-content-end me-3">
             <p>Total: <span class="fw-bold">{{ total | currency }}</span></p>
         </div>
