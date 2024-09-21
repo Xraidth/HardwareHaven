@@ -19,7 +19,7 @@ declare var bootstrap: any;
   providers: [UserService]
 })
 export class HomeComponent implements OnInit {
-  private users: any[] = [];
+  
   private user: any;
   public username: string = '';
   public password: string = '';
@@ -34,16 +34,23 @@ export class HomeComponent implements OnInit {
     
   ) {}
 
-  
-
-  ngOnInit(): void {
-    this.sweetAlertService.recibirOfertas();
-    if(SessionService.recordarSession()){
-      this.router.navigate(['productList']);
+  directed(tipoUsuario: string){
+    if(tipoUsuario =="administrador"){
+      this.router.navigate(['inventario']); 
     }
     else{
-      this.getAllUsers();
+      this.router.navigate(['productList']);
     }
+  }
+
+  ngOnInit(): void {
+    //this.sweetAlertService.recibirOfertas();
+    const usuariarioAnterior =SessionService.recordarSession()
+    if(usuariarioAnterior){
+      
+     this.directed(usuariarioAnterior.tipoUsuario);
+    }
+   
 
      
     this.iniciarCarousel(5000);
@@ -68,46 +75,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  login() {
-    const user = this.users.find(x => 
-      x.name.toLowerCase().includes(this.username.toLowerCase()) && 
-      x.password.includes(this.password) &&
-      this.username !== '' && this.password !== ''
-    );
 
-    if (this.username.trim() === '' || this.password.trim() === '') {
-      console.log('Por favor ingrese un nombre de usuario y una contraseña.');
-      this.toastService.showToast('Por favor ingrese un nombre de usuario y una contraseña.');
-      return;
-    }
-    
-    if (user) {
-      SessionService.usuario = user
-      if(this.recordarClave){SessionService.guardarSession();}
-      if(user.tipoUsuario ==="administrador"){
-        this.router.navigate(['inventario']); 
-      }
-      else{
-        this.router.navigate(['productList']);
-      }
-      
-      
-    } else {
-      this.toastService.showToast('Acceso denegado');
-      
-    }
-  }
-
-  
-
-  getAllUsers() {
-    this.serverUser.getAll().subscribe({
+  login(){
+    this.serverUser.login({name:this.username, password:this.password}).subscribe({
       next: (r: any) => {
         try {
-          if (r && r.data && Array.isArray(r.data)) {
-            const users: any[] = r.data; 
-            this.users = users;
+          
+          if (r && r.data) {
+            
+            this.user = r.data; 
+            SessionService.usuario = this.user;
+            if(this.recordarClave){SessionService.guardarSession();}
             this.errorServer=false;
+            this.directed(this.user.tipoUsuario)
+
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
           }
@@ -118,12 +99,11 @@ export class HomeComponent implements OnInit {
       },
       error: (e) => {
         console.error('Error en la llamada HTTP:', e);
+        this.toastService.showToast('Acceso denegado');
         this.errorServer=true;
       }
     });
   }
-
-
 
 
 async registrarUsuario() {
@@ -136,12 +116,7 @@ async registrarUsuario() {
               const user: any = r.data; 
               this.user = user;
               SessionService.usuario = this.user
-              if(user.tipoUsuario ==="administrador"){
-                this.router.navigate(['inventario']); 
-              }
-              else{
-                this.router.navigate(['productList']);
-              }
+              this.directed(user.tipoUsuario);
             } else {
               
             }
