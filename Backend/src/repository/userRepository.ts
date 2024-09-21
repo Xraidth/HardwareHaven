@@ -72,19 +72,17 @@ export class UserRepository  {
 
     }
     
-    async findName(item: { name: string }): Promise<User | undefined> {
+    async findName(name: string): Promise<User | undefined> {
         try {
             
-            const user = await em.findOneOrFail(
-                User,
-                { name: item.name }
-                ,{ populate: ['compras'] }
-            );
+            const user = await em.findOneOrFail(User, { name }, { populate: ['compras'] });
             return user;
         } catch (error: any) {
-            return undefined;
+            console.error(`User not found or database error: ${error.message}`);
+            return undefined; 
         }
     }
+    
 
     async updatePassword(item: User, newPassword:string): Promise<User | undefined> {
         try {

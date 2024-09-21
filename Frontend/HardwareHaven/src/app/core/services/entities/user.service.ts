@@ -40,11 +40,11 @@ export class UserService {
 
   updateUserName( id: number, body:{ newUserName:string, password: string}){
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
+    return this.http.put(`${this.baseUrl}updateUserName/${id}`, body, { headers });
   }
   updateUserPassword( id: number, body:{ newPassword: string, oldPassword:string}){
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, { headers });
+    return this.http.put(`${this.baseUrl}updatePassword/${id}`, body, { headers });
   }
 
 
