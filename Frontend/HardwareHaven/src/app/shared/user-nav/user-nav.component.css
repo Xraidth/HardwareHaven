@@ -8,3 +8,64 @@
     color: white;
   }
   
+
+  
+
+
+
+
+
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .user-nav {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #000000;
+    color: white;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px; /* Ajusta este valor al largo deseado */
+    text-align: center;
+}
+
+  
+  
+  .user-nav:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Alinea el menú con el botón */
+    left: 0;
+    background-color: white; /* Color de fondo del menú */
+    border: 1px solid #ccc; /* Bordes del menú */
+    border-radius: 4px; /* Bordes redondeados del menú */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: none; /* Oculto por defecto */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  }
+  
+  .dropdown-menu.show {
+    display: block; /* Muestra el menú cuando está activo */
+  }
+  
+  .dropdown-item {
+    padding: 10px 15px; /* Espaciado del ítem */
+    color: #333; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: block; /* Asegúrate de que ocupe todo el ancho */
+    transition: background-color 0.3s; /* Transición suave */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f1f1f1; /* Color al pasar el ratón sobre los ítems */
+  }
+  
+  
