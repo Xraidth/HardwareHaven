@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';  
 import { SessionService } from '../../../../../core/services/share/session.service';
+import { getMaxPrice } from '../../../../inventario/share/inventario-functions';
 
 @Component({
   selector: 'app-carrito-card',
@@ -12,6 +13,7 @@ import { SessionService } from '../../../../../core/services/share/session.servi
 export class CarritoCardComponent implements OnInit {
   public quantity: number = 1;  
   public carrito: any;
+  productoDelCarro: any;
   @Input() product: any;
   @Output() quantityChange = new EventEmitter<void>();  // Nuevo Output para emitir cambios
 
@@ -20,24 +22,17 @@ export class CarritoCardComponent implements OnInit {
       console.error('Product is undefined');
     }
     this.carrito = SessionService.usuario.carrito;
+    this.productoDelCarro = this.carrito.find((item: any) => item.id == this.product.id);
+    this.productoDelCarro.quantity = 1;
   }
 
-  getMaxPrice(precios: any[]): number {
-    precios.sort((a, b) => {
-      if (a.fecha && b.fecha) {
-        return b.fecha.getTime() - a.fecha.getTime();
-      }
-      return 0; 
-    });
-    const maxPrice = precios[0]?.valor || 0;
-    return parseFloat(maxPrice.toFixed(2));
-  }
+
 
  
 
   calculateLineCarrito(precios:any[]){
     
-    return parseFloat((this.getMaxPrice(precios)*this.quantity).toFixed(2));
+    return parseFloat((getMaxPrice(precios)*this.quantity).toFixed(2));
   }
 
   decrementQuantity() {
@@ -54,7 +49,23 @@ export class CarritoCardComponent implements OnInit {
     this.quantityChange.emit();  // Emitir el evento
   }
 
-  guardarCantidad(){
-    this.carrito.find((item: any) => item.id === this.product.id).quantity = this.quantity;
+  guardarCantidad() {
+    if (this.productoDelCarro) {
+        // Si el producto ya existe, actualiza la cantidad
+        this.productoDelCarro.quantity = this.quantity;
+    } 
+}
+
+removeProduct() {
+  if (this.productoDelCarro) {
+      const index = this.carrito.indexOf(this.productoDelCarro);
+      if (index !== -1) {
+          this.carrito.splice(index, 1); 
+          SessionService.usuario.carrito = this.carrito;
+          this.quantityChange.emit();
+      }
   }
+}
+
+
 }

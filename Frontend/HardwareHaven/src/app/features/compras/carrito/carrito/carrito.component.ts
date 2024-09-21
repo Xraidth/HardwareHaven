@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoCardComponent } from '../../../products/components/carritoCard/carrito-card/carrito-card.component';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
+import { getMaxPrice } from '../../../inventario/share/inventario-functions';
 
 @Component({
   selector: 'app-carrito',
@@ -23,19 +24,12 @@ export class CarritoComponent implements OnInit{
   }
   
 
-  getMaxPrice(precios: any[]): number {
-    precios.sort((a, b) => {
-      if (a.fecha && b.fecha) {
-        return b.fecha.getTime() - a.fecha.getTime();
-      }
-      return 0; 
-    });
-    return precios[0]?.valor || 0;
-  }
+  
 
   calculateTotal() {
     this.total = this.carrito.reduce((sum: number, product: any) => 
-      sum + (this.getMaxPrice(product.precios) * (product.quantity||1) || 0), 0);
+      sum + (getMaxPrice(product.precios) * (product.quantity||1) || 0), 0);
+    SessionService.usuario.carrito.total = this.total;
   }
 
   onQuantityChange() {

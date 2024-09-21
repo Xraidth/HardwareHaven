@@ -8,6 +8,7 @@ import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
 import { CategoriaService } from '../../core/services/entities/categoria.service.js';
+import { getMaxPrice } from '../../features/inventario/share/inventario-functions.js';
 
 
 @Component({
@@ -115,21 +116,13 @@ export class ProductListComponent implements OnInit {
     } else if (this.sortCriteria === 'za') {
       this.products.sort((a, b) => b.name.localeCompare(a.name));
     } else if (this.sortCriteria === 'highPrice') {
-      this.products.sort((a, b) => this.getMaxPrice(b.precios) - this.getMaxPrice(a.precios));
+      this.products.sort((a, b) => getMaxPrice(b.precios) - getMaxPrice(a.precios));
     } else if (this.sortCriteria === 'lowPrice') {
-      this.products.sort((a, b) => this.getMaxPrice(a.precios) - this.getMaxPrice(b.precios));
+      this.products.sort((a, b) => getMaxPrice(a.precios) - getMaxPrice(b.precios));
     }
   }
 
-  getMaxPrice(precios: any[]): number {
-    precios.sort((a, b) => {
-      if (a.fecha && b.fecha) {
-        return b.fecha.getTime() - a.fecha.getTime();
-      }
-      return 0;
-    });
-    return precios[0]?.valor || 0;
-  }
+
 
   pasarAcompra() {
     SessionService.usuario.carrito = this.carrito;

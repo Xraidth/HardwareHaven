@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { SessionService } from '../../../../core/services/share/session.service';
+import { getMaxPrice } from '../../../inventario/share/inventario-functions';
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -36,13 +37,7 @@ export class CardComponent implements OnInit {
   
 
   getMaxPrice(precios: any[]): number {
-    precios.sort((a, b) => {
-      if (a.fecha && b.fecha) {
-        return b.fecha.getTime() - a.fecha.getTime();
-      }
-      return 0; 
-    });
-    return precios[0]?.valor || 0;
+    return getMaxPrice(precios);
   }
   
 

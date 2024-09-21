@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { formatDateToYYYYMMDD } from '../../../features/inventario/share/inventario-functions';
+import { formatDateToYYYYMMDD, getMaxPrice } from '../../../features/inventario/share/inventario-functions';
 
 
 
@@ -196,7 +196,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           <div class="d-flex flex-column justify-content-center align-items-center bg-light p-3 rounded-bottom shadow-sm">
             <p class="mb-1 fw-bold text-dark">${producto.description}</p>
             <p class="mb-2 text-muted">${producto.categoria.descripcion}</p>
-            <span class="fs-5 text-danger fw-semibold">$ ${this.getMaxPrice(producto.precios)}</span>
+            <span class="fs-5 text-danger fw-semibold">$ ${getMaxPrice(producto.precios)}</span>
           </div>
         </div>
       `,
@@ -241,16 +241,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
 
 
-  getMaxPrice(precios: any[]): number {
-    precios.sort((a, b) => {
-      if (a.fecha && b.fecha) {
-        return b.fecha.getTime() - a.fecha.getTime();
-      }
-      return 0; 
-    });
-    return precios[0]?.valor || 0;
-  }  
-
+  
 
 
   InsertCompra(): Promise<{userId:number} | undefined> {

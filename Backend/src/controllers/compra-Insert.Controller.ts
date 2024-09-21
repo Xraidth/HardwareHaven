@@ -8,30 +8,37 @@ const compraRepo = new CompraRepository();
 const userRepo = new UserRepository();
 
 const compraInsertController = async (req: Request, res: Response): Promise<void> => {       
-    const {userId} = req.body; 
+    const { userId } = req.body; 
 
-    try{
+    try {
+        const user = await userRepo.findOne({ id: userId });
 
-        const user = await userRepo.findOne({id:userId});
-
-        if(!user){
+        if (!user) {
             res.status(404).json({
                 data: undefined,
                 message: "Error in compra data"
-                    });
-        return; 
+            });
+            return; 
         }
 
         const new_compra = new Compra(user);
-        compraRepo.add(new_compra);
-        res.status(201).json({
-        data: new_compra,
-        message: "The compra was added"
+        const createdCompra = await compraRepo.add(new_compra); 
+
+        if (!createdCompra) {
+            res.status(500).json({
+                data: undefined,
+                message: "Failed to add compra"
             });
-    }
-    catch (error) {
+            return;
+        }
+
+        res.status(201).json({
+            data: createdCompra, 
+            message: "The compra was added"
+        });
+    } catch (error) {
         console.error(error);
-         res.status(500).json({
+        res.status(500).json({
             data: undefined,
             message: 'There was a server error'
         });

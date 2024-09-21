@@ -38,13 +38,31 @@ export class CompraRepository  {
 
     async add(item: Compra): Promise<Compra | undefined> {
         try {
-            const new_compra = em.create(Compra, item)
-            await em.flush()
-            return new_compra;
-          } catch (error: any) {
-           return undefined;
-          }
+            const new_compra = em.create(Compra, item);
+            await em.persistAndFlush(new_compra);
+            return new_compra; 
+        } catch (error: any) {
+            console.error(error); 
+            return undefined; 
+        }
     }
+    
+    async getLastCompra(): Promise<Compra | undefined> {
+        try {
+            const lastCompra = await em.findOne(Compra, {}, {
+                orderBy: { fechaCompra: 'DESC' }
+            });
+    
+            
+            return lastCompra ?? undefined; 
+        } catch (error: any) {
+            console.error(error);
+            return undefined; 
+        }
+    }
+    
+    
+    
 
     async update(item: Compra): Promise<Compra | undefined>{
         try {            
