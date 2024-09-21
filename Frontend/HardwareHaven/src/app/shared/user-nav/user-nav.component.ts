@@ -27,7 +27,7 @@ export class UserNavComponent implements OnInit {
     this.userName = this.usuario ? this.truncateString(this.usuario.name) : "Usuario";
   }
 
-  truncateString(str: string, maxLength: number = 17): string {
+  truncateString(str: string, maxLength: number = 8): string {
     if (str.length > maxLength) {
       return str.slice(0, maxLength) + '...';
     } else {
