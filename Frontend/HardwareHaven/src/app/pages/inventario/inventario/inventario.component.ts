@@ -50,6 +50,7 @@ import { CategoriaComponent } from '../../../features/inventario/categoria/categ
 })
 export class InventarioComponent implements OnInit {
   searchQuery: string = '';
+  auxsearchQuery: string = '';
   nowType: string = '';
   carga:string = ""
   usuario: any;
@@ -61,14 +62,14 @@ export class InventarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = SessionService.usuario;
-    this.nowType="Usuario"
+    this.getplusbuttonChange("Usuario");
   }
   loadItems(type:string){
   this.nowType=type;
   }
   onSearch(event: Event): void {
     event.preventDefault();
-   // this.items = this.allItems.filter(item => this.getSearchText(item).toLowerCase().includes(this.searchQuery.toLowerCase()));
+   this.searchQuery = this.auxsearchQuery
   }
   getSearchText(item: any): string {
     switch (this.nowType) {

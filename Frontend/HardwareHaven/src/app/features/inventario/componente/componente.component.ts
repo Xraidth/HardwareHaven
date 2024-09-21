@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ComponenteService } from '../../../core/services/entities/componente.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
@@ -23,12 +23,30 @@ export class ComponenteComponent implements OnInit{
   inventarioVacio = false;
   columns: string[] = [];
   columnsLw: string[] = [];
+  originalcomponentes: any[] = [];
+
   isLoading = false;
   constructor(
     private serverComponente: ComponenteService ,
     private sweetAlertService: SweetAlertService
   ) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
+  
+      if (this.searchQuery === '') {
+        
+        this.componentes = [...this.originalcomponentes]; 
+      } else {
+        
+        this.componentes = this.originalcomponentes.filter(x => 
+          x.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.cargarEntidad();
@@ -63,6 +81,7 @@ export class ComponenteComponent implements OnInit{
       })
     ).subscribe((componentes: any[]) => {
       this.componentes = componentes;
+      this.originalcomponentes = [...componentes];
       this.cargarColumnas();  // Load columns after fetching data
       this.isLoading = false; 
     });

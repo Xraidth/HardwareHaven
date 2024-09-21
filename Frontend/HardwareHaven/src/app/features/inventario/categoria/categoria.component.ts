@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CategoriaService } from '../../../core/services/entities/categoria.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
@@ -25,8 +25,7 @@ export class CategoriaComponent implements OnInit {
   columns: string[] = [];
   columnsLw: string[] = [];
   isLoading = false;
-
-
+  originalCategorias: any[] = [];
   
 
   constructor(
@@ -35,11 +34,27 @@ export class CategoriaComponent implements OnInit {
   
   ) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
+  
+      if (this.searchQuery === '') {
+        
+        this.categorias = [...this.originalCategorias]; 
+      } else {
+        
+        this.categorias = this.originalCategorias.filter(x => 
+          x.descripcion.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
+  
+
 
   ngOnInit(): void {
     this.cargarEntidad();
-  
-  
   }
  
 
@@ -71,6 +86,8 @@ export class CategoriaComponent implements OnInit {
       })
     ).subscribe((categorias: any[]) => {
       this.categorias = categorias;
+
+      this.originalCategorias = [...categorias];
       
       this.cargarColumnas();
       this.isLoading = false; 

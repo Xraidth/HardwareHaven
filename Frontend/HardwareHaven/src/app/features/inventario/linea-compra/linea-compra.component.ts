@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { LineaCompraService } from '../../../core/services/entities/linea-compra.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
@@ -24,11 +24,31 @@ export class LineaCompraComponent  implements OnInit {
   columnsLw: string[] = [];
   inventarioVacio = false;
   isLoading = false;
+  originallineas: any[] = [];
+  
 
   constructor(
     private serverLineaCompra: LineaCompraService,
     private sweetAlertService: SweetAlertService
   ) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      const currentValue = changes['searchQuery'].currentValue;
+      this.searchQuery = currentValue || '';
+  
+      if (this.searchQuery === '') {
+        
+        this.lineas = [...this.originallineas]; 
+      } else {
+        
+        this.lineas = this.originallineas.filter(x => 
+          x.descripcion.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        );
+      }
+    }
+  }
+
 
   ngOnInit(): void {
     this.cargarEntidad();
@@ -71,6 +91,7 @@ export class LineaCompraComponent  implements OnInit {
     ).subscribe({
       next: (lineas: any[]) => {
         this.lineas = lineas;
+        this.originallineas = [...lineas];
         this.cargarColumnas();  
         this.isLoading = false;
       }
