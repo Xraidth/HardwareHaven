@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { formatDateToYYYYMMDD } from '../../../features/inventario/share/inventario-functions';
 
 
 
@@ -475,8 +476,8 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Modificar una compra",
       html: `
-        <input id="swal-input-fechaCompra" class="swal2-input" placeholder="fechaCompra" value="${compra.fechaCompra}">
-        <input id="swal-input-fechaCancel" class="swal2-input" placeholder="fechaCancel" value="${compra.fechaCancel}">
+        <input id="swal-input-fechaCompra" class="swal2-input" type="date" placeholder="fechaCompra" value="${formatDateToYYYYMMDD(compra.fechaCompra)}">
+        <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="fechaCancel" value="${formatDateToYYYYMMDD(compra.fechaCancel)||'No posee'}">
         <input id="swal-input-total" class="swal2-input" placeholder="total" value="${compra.total}">
         <input id="swal-input-userId" class="swal2-input" placeholder="userId" value="${compra.user.id}">
       `,
@@ -612,7 +613,7 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Actualizar precio",
       html: `
-        <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde" value="${precio.fechaDesde}">
+        <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde" value="${ formatDateToYYYYMMDD(precio.fechaDesde)}">
         <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${precio.componente.id}">
         <input id="swal-input-valor" class="swal2-input" placeholder="valor" value="${precio.valor}">
       `,
