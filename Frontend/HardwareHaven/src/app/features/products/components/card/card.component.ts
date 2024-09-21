@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
+import { SessionService } from '../../../../core/services/share/session.service';
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -23,7 +24,16 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+    this.verificateSelection();
   }
+  verificateSelection(): void {
+    const carrito = SessionService.usuario?.carrito || [];
+    const productInCart = carrito.find((item: any) => item.id == this.product.id);
+    if (productInCart) {
+      this.selectProduct();
+    }
+  }
+  
 
   getMaxPrice(precios: any[]): number {
     precios.sort((a, b) => {
