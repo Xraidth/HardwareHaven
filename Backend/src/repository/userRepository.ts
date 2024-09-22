@@ -78,7 +78,6 @@ export class UserRepository  {
             const user = await em.findOneOrFail(User, { name }, { populate: ['compras'] });
             return user;
         } catch (error: any) {
-            console.error(`User not found or database error: ${error.message}`);
             return undefined; 
         }
     }

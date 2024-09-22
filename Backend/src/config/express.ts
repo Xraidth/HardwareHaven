@@ -32,6 +32,9 @@ HarwareHavenexpressApp.use('/api/precio', precioRouter);
 HarwareHavenexpressApp.use('/api/categoria', categoriaRouter);
 HarwareHavenexpressApp.use('/api/componente', compRouter);
 
+//Routers del Servidor-------------------------------
+HarwareHavenexpressApp.get('/health', (req, res) => { res.status(200).json({ status: 'OK' });});
+
 
 
 
