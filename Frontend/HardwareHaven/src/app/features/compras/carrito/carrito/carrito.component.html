@@ -1,6 +1,6 @@
 
 <div class="carrito container">
-    <div class="row">
+    <div class="row" *ngIf="mostrarBoton && carrito.length > 0 ">
         <ul class="list-unstyled d-flex justify-content-evenly align-items-center col-12">
             <li class="fw-bold">Nombre</li>
             <li class="fw-bold">Descripción</li>
