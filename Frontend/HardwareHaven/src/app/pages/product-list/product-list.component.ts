@@ -142,4 +142,11 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+
+
+  vaciarCarro(){
+    this.carrito=[]
+    SessionService.usuario.carrito= this.carrito;
+    this.getAllProducts();
+  }
 }

@@ -38,12 +38,13 @@ header {
 
 
 .custom-menu{
-    
-    position: absolute;
-    width: 146px;
-    left: 50px;
-    bottom: 10px;
-    z-index: 1;
+   display: flex;
+   justify-content: space-between;
+   align-items: center; 
+   width: 75%;
+   margin-right: 50px;
+   
+   
 }
 
 
