@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { SessionService } from '../../../../core/services/share/session.service';
-import { getMaxPrice } from '../../../inventario/share/inventario-functions';
+import { getMaxPrice } from '../../../../shared/functions/functions';
 @Component({
   selector: 'app-card',
   standalone: true,

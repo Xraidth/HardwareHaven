@@ -5,6 +5,8 @@ import lineaCompraInsertController from "../controllers/lineaCompra-Insert.Contr
 import lineaCompraDeleteOneController from "../controllers/lineaCompra-DeleteOne.Controllers.js";
 import lineaCompraUpdateController from "../controllers/lineaCompra-Update.Controllers.js";
 import { sanitizeLineaCompraInput } from "../security/lineaCompra-sanitize.dto.js";
+import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
+import userJWTDTO from "../dto/userJWTDTO.js";
 
 
 const lineaCompraRouter = Router();
@@ -12,11 +14,11 @@ const lineaCompraRouter = Router();
 
 
 //middlewares
-lineaCompraRouter.get('/getAll', lineaCompraGetAllController)
-lineaCompraRouter.get('/getOne/:id', lineaCompraGetOneController)
-lineaCompraRouter.post('/insert',sanitizeLineaCompraInput,  lineaCompraInsertController);
-lineaCompraRouter.delete('/deleteOne/:id',lineaCompraDeleteOneController);
-lineaCompraRouter.put('/Update/:id',sanitizeLineaCompraInput, lineaCompraUpdateController)
+lineaCompraRouter.get('/getAll',userJWTDTOAdmin, lineaCompraGetAllController)
+lineaCompraRouter.get('/getOne/:id',userJWTDTOAdmin, lineaCompraGetOneController)
+lineaCompraRouter.post('/insert',sanitizeLineaCompraInput,userJWTDTO, lineaCompraInsertController);
+lineaCompraRouter.delete('/deleteOne/:id',userJWTDTO, lineaCompraDeleteOneController);
+lineaCompraRouter.put('/update/:id',userJWTDTO, sanitizeLineaCompraInput, lineaCompraUpdateController)
 
 
 export default lineaCompraRouter;

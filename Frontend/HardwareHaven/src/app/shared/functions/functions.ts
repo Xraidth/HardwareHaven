@@ -1,3 +1,6 @@
+import { HttpHeaders } from "@angular/common/http";
+import { SessionService } from "../../core/services/share/session.service";
+
 export function specialFiltro(nombre: string, dato: any): string {
     if (nombre.includes("precios")) return `$${getMaxPrice(dato)}`;
     if (nombre.includes("categoria")) return dato.descripcion;
@@ -55,4 +58,20 @@ export  function formatDateToYYYYMMDD(isoDate: string): string {
     return `${year}-${month}-${day}`; 
 
 
+}
+
+ 
+ export function getHeaders(includeToken: boolean = true) {
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json; charset=UTF-8',
+  });
+
+  if (includeToken) {
+    const token = SessionService.usuario.jwt || null;
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+  }
+
+  return { headers };
 }

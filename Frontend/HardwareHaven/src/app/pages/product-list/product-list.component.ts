@@ -8,7 +8,7 @@ import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
 import { CategoriaService } from '../../core/services/entities/categoria.service.js';
-import { getMaxPrice } from '../../features/inventario/share/inventario-functions.js';
+import { getMaxPrice } from '../../shared/functions/functions.js';
 
 
 @Component({

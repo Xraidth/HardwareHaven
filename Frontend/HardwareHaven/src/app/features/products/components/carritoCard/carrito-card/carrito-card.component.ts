@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';  
 import { SessionService } from '../../../../../core/services/share/session.service';
-import { getMaxPrice } from '../../../../inventario/share/inventario-functions';
+import { getMaxPrice } from '../../../../../shared/functions/functions';
 
 @Component({
   selector: 'app-carrito-card',

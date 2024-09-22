@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges  } from '@angular/core';
 import { UserService } from '../../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
-import { getErrorMessage } from '../inventario-functions';
+import { getErrorMessage } from '../../../../shared/functions/functions';
 import { catchError, map, of } from 'rxjs';
 import { PrecioService } from '../../../../core/services/entities/precio.service';
 import { LineaCompraService } from '../../../../core/services/entities/linea-compra.service';

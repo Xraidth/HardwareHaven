@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule ,  NgIf} from '@angular/common';
-import { formatDateToYYYYMMDD } from '../../../inventario/share/inventario-functions';
+import { formatDateToYYYYMMDD } from '../../../../shared/functions/functions';
 
 @Component({
   selector: 'app-resumen-compra',

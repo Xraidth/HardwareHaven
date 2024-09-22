@@ -35,7 +35,12 @@ const userJWTDTO = async (req: CustomRequest, res: Response, next: NextFunction)
     req.tipoUsuario = payload.tipoUsuario; 
 
     next();
-  } catch (error) {
+  } catch (error:any) {
+    if (error.code === 'ERR_JWT_EXPIRED') {
+      return res.status(401).send('Token expirado');
+    } else if (error.code === 'ERR_JWT_INVALID') {
+      return res.status(401).send('Token inválido');
+    }
     console.error('JWT verification error:', error); 
     return res.status(401).send('Usuario no autorizado');
   }
