@@ -7,6 +7,7 @@ import { SweetAlertService } from '../../core/services/notifications/sweet-alert
 import { ToastService } from '../../core/services/notifications/toast.service.js';
 import { SessionService } from '../../core/services/share/session.service.js';
 import { CommonModule } from '@angular/common';
+import { ShareService } from '../../core/services/share/share.service.js';
 
 declare var bootstrap: any; 
 
@@ -16,7 +17,7 @@ declare var bootstrap: any;
   imports: [HttpClientModule, FormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [UserService]
+  providers: [UserService, ShareService]
 })
 export class HomeComponent implements OnInit {
   
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
     private router: Router, 
     private sweetAlertService: SweetAlertService,
     private toastService: ToastService,
-    
+    private shareServer:ShareService
   ) {}
 
   directed(tipoUsuario: string){
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     //this.sweetAlertService.recibirOfertas();
+    this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
       
@@ -87,20 +89,19 @@ export class HomeComponent implements OnInit {
             SessionService.usuario = this.user;
             if(this.recordarClave){SessionService.guardarSession();}
             this.errorServer=false;
+            SessionService.usuario.jwt = r.jwt;
             this.directed(this.user.tipoUsuario)
-
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+            this.sweetAlertService.mostrarError("La respuesta del servidor es inválida.");
           }
         } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r); 
+          const mensajeError = String(error);
+          this.sweetAlertService.mostrarError(mensajeError);
         }
       },
       error: (e) => {
         console.error('Error en la llamada HTTP:', e);
         this.toastService.showToast('Acceso denegado');
-        this.errorServer=true;
       }
     });
   }
@@ -130,7 +131,20 @@ async registrarUsuario() {
         }
       });
       
-    }
+    }    
+  }
+
+  checkServer() {
+    this.shareServer.ComeOn().subscribe({
+        next: (r: any) => {
+            this.errorServer = !(r && r.status); 
+        },
+        error: () => {
+            this.errorServer = true; 
+        }
+    });}
+
+
     
   }
   
@@ -141,4 +155,4 @@ async registrarUsuario() {
 
 
 
-}
+
