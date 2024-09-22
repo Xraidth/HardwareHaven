@@ -9,18 +9,20 @@ import compDeleteOneController from "../controllers/componente-DeleteOne.Control
 import compUpdateController from "../controllers/componente-Update.Controllers.js";
 //Imports de validaciones
 import {sanitizeComponenteInput} from "../security/componente-sanitize.dto .js"
+import userJWTDTO from "../dto/userJWTDTO.js";
+import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
 const compRouter = Router();
 
 
 
 //middlewares
-compRouter.get('/getAll', compGetAllController)
-compRouter.get('/getOne/:id', compGetOneController)
-compRouter.post('/insert',sanitizeComponenteInput,  compInsertController);
-compRouter.patch('/updateDescription/:id',sanitizeComponenteInput, compUpdateDescriptionController);
-compRouter.patch('/updateCompName/:id',sanitizeComponenteInput, compUpdateCompNameController);
-compRouter.delete('/deleteOne/:id',compDeleteOneController);
-compRouter.put('/update/:id',sanitizeComponenteInput, compUpdateController)
+compRouter.get('/getAll', userJWTDTO, compGetAllController)
+compRouter.get('/getOne/:id', userJWTDTO, compGetOneController)
+compRouter.post('/insert',sanitizeComponenteInput, userJWTDTOAdmin,  compInsertController);
+compRouter.patch('/updateDescription/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateDescriptionController);
+compRouter.patch('/updateCompName/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateCompNameController);
+compRouter.delete('/deleteOne/:id',userJWTDTOAdmin,compDeleteOneController);
+compRouter.put('/update/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateController)
 
 
 export default compRouter;

@@ -6,7 +6,7 @@ import { SweetAlertService } from '../../../core/services/notifications/sweet-al
 import { catchError, map, share } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 import { UserService } from '../../../core/services/entities/user.service';
-import { getErrorMessage } from '../../../features/inventario/share/inventario-functions';
+import { getErrorMessage } from '../../../shared/functions/functions';
 
 
 @Component({

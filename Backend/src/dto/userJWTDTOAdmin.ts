@@ -12,7 +12,7 @@ interface Payload {
   tipoUsuario: string; 
 }
 
-const userJWTDTO = async (req: CustomRequest, res: Response, next: NextFunction) => {
+const userJWTDTOAdmin = async (req: CustomRequest, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).send('Usuario no autorizado');
 
@@ -41,4 +41,4 @@ const userJWTDTO = async (req: CustomRequest, res: Response, next: NextFunction)
   }
 };
 
-export default userJWTDTO;
+export default userJWTDTOAdmin;

@@ -6,7 +6,7 @@ import { PrecioService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
 
 @Component({
   selector: 'app-precio',

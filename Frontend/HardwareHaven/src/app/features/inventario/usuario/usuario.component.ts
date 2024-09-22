@@ -10,7 +10,7 @@ import {
   capitalizeFirstLetterOfEachWord, 
   getErrorMessage, 
   specialFiltro 
-} from '../share/inventario-functions';
+} from '../../../shared/functions/functions';
 
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { formatDateToYYYYMMDD, getMaxPrice } from '../../../features/inventario/share/inventario-functions';
+import { formatDateToYYYYMMDD, getMaxPrice } from '../../../shared/functions/functions';
 
 
 

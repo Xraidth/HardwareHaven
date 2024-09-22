@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoCardComponent } from '../../../products/components/carritoCard/carrito-card/carrito-card.component';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
-import { getMaxPrice } from '../../../inventario/share/inventario-functions';
+import { getMaxPrice } from '../../../../shared/functions/functions';
 
 @Component({
   selector: 'app-carrito',

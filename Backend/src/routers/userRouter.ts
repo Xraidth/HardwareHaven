@@ -11,19 +11,21 @@ import userUpdateController from "../controllers/user-Update.Controllers.js";
 //Imports de validaciones
 import {sanitizeUserInput} from "../security/user-sanitize.dto.js"
 import userLoginController from "../controllers/user-Login.Controllers.js";
+import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
+import userJWTDTO from "../dto/userJWTDTO.js";
 const userRouter = Router();
 
 
 
 //middlewares
-userRouter.get('/getAll', userGetAllController)
-userRouter.get('/getOne/:id', userGetOneController)
-userRouter.post('/register',sanitizeUserInput,  userRegisterController);
-userRouter.post('/login',sanitizeUserInput, userLoginController)
-userRouter.patch('/updatePassword/:id',sanitizeUserInput, userUpdatePasswordController);
-userRouter.patch('/updateUserName/:id',sanitizeUserInput, userUpdateUserNameController);
-userRouter.delete('/deleteOne/:id',userDeleteOneController);
-userRouter.put('/update/:id',sanitizeUserInput, userUpdateController)
+userRouter.get('/getAll',userJWTDTOAdmin, userGetAllController)
+userRouter.get('/getOne/:id',userJWTDTOAdmin, userGetOneController)
+userRouter.post('/register',sanitizeUserInput, userRegisterController);
+userRouter.post('/login',userJWTDTO, sanitizeUserInput, userLoginController)
+userRouter.patch('/updatePassword/:id',userJWTDTO, sanitizeUserInput, userUpdatePasswordController);
+userRouter.patch('/updateUserName/:id',userJWTDTO , sanitizeUserInput, userUpdateUserNameController);
+userRouter.delete('/deleteOne/:id',userJWTDTO, userDeleteOneController);
+userRouter.put('/update/:id',userJWTDTO, sanitizeUserInput, userUpdateController)
 
 
 

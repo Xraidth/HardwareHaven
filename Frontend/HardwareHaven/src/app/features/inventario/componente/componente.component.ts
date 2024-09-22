@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ComponenteService } from '../../../core/services/entities/componente.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../share/inventario-functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
