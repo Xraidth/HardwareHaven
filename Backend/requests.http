@@ -3,6 +3,11 @@
 ###GetAll 
 GET http://localhost:3000/api/user/getAll
 
+
+###GetAll 
+GET http://localhost:3000/api/user/getAll
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MiwidGlwb1VzdWFyaW8iOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzI3Mzk4MjUxLCJleHAiOjE3MjgwMDMwNTF9.Cl3o7qWN9VHUjlZ7O-ZjP5ZOogkV-PUTXONsDFbj0Oo
+
 ###GetOne
 GET http://localhost:3000/api/user/getOne/:id
 
@@ -22,8 +27,8 @@ POST  http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "name":"nacho", 
-    "password":"nacho"
+    "name":"Pedro", 
+    "password":"pedriño"
 }
 
 ###Delete
@@ -95,7 +100,7 @@ PATCH  http://localhost:3000/api/compra/facturate/:id
 //------------------Componente-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/componente/getAll
-
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MiwidGlwb1VzdWFyaW8iOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzI3Mzk4MjUxLCJleHAiOjE3MjgwMDMwNTF9.Cl3o7qWN9VHUjlZ7O-ZjP5ZOogkV-PUTXONsDFbj0Oo
 ###GetOne
 GET http://localhost:3000/api/componente/getOne/:id
 

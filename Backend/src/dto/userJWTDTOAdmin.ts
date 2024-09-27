@@ -14,10 +14,10 @@ interface Payload {
 
 const userJWTDTOAdmin = async (req: CustomRequest, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
-  if (!authorization) return res.status(401).send('Usuario no autorizado');
+  if (!authorization) return res.status(401).send('Usuario no autorizado "No hay autorization" ');
 
   const jwt = authorization.split(' ')[1];
-  if (!jwt) return res.status(401).send('Usuario no autorizado');
+  if (!jwt) return res.status(401).send('Usuario no autorizado "No hay jwt"');
 
   try {
     const encoder = new TextEncoder();
@@ -27,8 +27,8 @@ const userJWTDTOAdmin = async (req: CustomRequest, res: Response, next: NextFunc
     ) as { payload: Payload }; 
 
    
-    if (!['administrador'].includes(payload.tipoUsuario)) {
-        return res.status(403).send('Acceso denegado'); 
+    if (!['Administrador'].includes(payload.tipoUsuario)) {
+        return res.status(403).send('Acceso denegado por tipo de usuario'); 
     }
     
     req.id = payload.id;
@@ -37,7 +37,7 @@ const userJWTDTOAdmin = async (req: CustomRequest, res: Response, next: NextFunc
     next();
   } catch (error) {
     console.error('JWT verification error:', error); 
-    return res.status(401).send('Usuario no autorizado');
+    return res.status(401).send('Usuario no autorizado "JWT"');
   }
 };
 

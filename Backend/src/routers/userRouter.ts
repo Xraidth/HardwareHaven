@@ -21,7 +21,7 @@ const userRouter = Router();
 userRouter.get('/getAll',userJWTDTOAdmin, userGetAllController)
 userRouter.get('/getOne/:id',userJWTDTOAdmin, userGetOneController)
 userRouter.post('/register',sanitizeUserInput, userRegisterController);
-userRouter.post('/login',userJWTDTO, sanitizeUserInput, userLoginController)
+userRouter.post('/login', sanitizeUserInput, userLoginController)
 userRouter.patch('/updatePassword/:id',userJWTDTO, sanitizeUserInput, userUpdatePasswordController);
 userRouter.patch('/updateUserName/:id',userJWTDTO , sanitizeUserInput, userUpdateUserNameController);
 userRouter.delete('/deleteOne/:id',userJWTDTO, userDeleteOneController);
