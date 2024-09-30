@@ -48,33 +48,39 @@ export class ResumenCompraComponent implements OnInit {
     
   }
 
-  generarCompra() {
-    this.estado= "cargando";
-    this.serverCompra.create({ userId: this.usuario.id }).subscribe({
-      next: (r: any) => {
-        if (r && r.data) {
-          const compraRealizada: any = r.data;
-          this.compraRealizada = compraRealizada;
-          if (this.carrito && this.carrito.length) {
-            this.carrito.forEach((p: any) => this.generarLineaCompra(p));
-            this.total = SessionService.usuario.carrito.total;
-            this.estado= "compraRealizada";
-            this.facturate(this.compraRealizada.id);
-          } else {
-            this.sweetAlertService.mostrarError('El carrito está vacío');
-            this.estado= "";
-          }
+  async generarCompra() {
+    this.estado = "cargando";
+    try {
+      const r: any = await this.serverCompra.create({ userId: this.usuario.id }).toPromise();
+  
+      if (r && r.data) {
+        const compraRealizada: any = r.data;
+        this.compraRealizada = compraRealizada;
+  
+        if (this.carrito && this.carrito.length) {
+          
+          const promises = this.carrito.map((p: any) => this.generarLineaCompra(p));
+  
+          
+          await Promise.all(promises);
+  
+          this.total = SessionService.usuario.carrito.total;
+          this.compraRealizada.total = this.total;
+          this.estado = "compraRealizada";
         } else {
-          this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
+          this.sweetAlertService.mostrarError('El carrito está vacío');
+          this.estado = "";
         }
-      },
-      error: (e) => {
-        this.estado= "";
-        console.error('Error en la llamada HTTP:', e);
-        this.sweetAlertService.mostrarError('Error al generar la compra');
+      } else {
+        this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
       }
-    });
+    } catch (e) {
+      this.estado = "";
+      console.error('Error en la llamada HTTP:', e);
+      this.sweetAlertService.mostrarError('Error al generar la compra');
+    }
   }
+  
 
   generarLineaCompra(p: any) {
     if (!this.compraRealizada || !this.compraRealizada.id) {
@@ -112,7 +118,8 @@ export class ResumenCompraComponent implements OnInit {
     this.serverCompra.facturate(id).subscribe({
       next: (r: any) => {
         if (r && r.data && r.message) {
-          this.sweetAlertService.alertWithSuccess("Facturacion realizada",r.message)
+          this.sweetAlertService.alertWithSuccess("Facturación realizada", r.message);  
+          
         } else {
           this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
         }
@@ -124,4 +131,9 @@ export class ResumenCompraComponent implements OnInit {
       }
     });
   }
+
+facturaBoton(){
+  this.facturate(this.compraRealizada.id);
+}
+
 }

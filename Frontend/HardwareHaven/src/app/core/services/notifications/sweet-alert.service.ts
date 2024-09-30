@@ -61,8 +61,8 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       </div>
       <div class="mb-3">
         <select id="swal-input-user-type" class="form-select">
-          <option value="cliente">Cliente</option>
-          <option value="administrador">Administrador</option>
+          <option value="Cliente">Cliente</option>
+          <option value="Administrador">Administrador</option>
         </select>
       </div>
     </div>
