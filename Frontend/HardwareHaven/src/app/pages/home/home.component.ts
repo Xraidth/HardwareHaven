@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   directed(tipoUsuario: string){
-    if(tipoUsuario =="administrador"){
+    if(tipoUsuario =="Administrador"){
       this.router.navigate(['inventario']); 
     }
     else{
