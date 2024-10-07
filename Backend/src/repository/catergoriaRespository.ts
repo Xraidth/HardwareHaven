@@ -117,17 +117,18 @@ export class CategoriaRepository  {
        
         async findByDescription(item: { descripcion: string }): Promise<Categoria | undefined> {
             try {
-                
-                const categoria = await em.findOneOrFail(
+                const categoria = await em.findOne(
                     Categoria,
-                    { descripcion: item.descripcion }
-                    ,{ populate: ['componentes'] }
+                    { descripcion: item.descripcion },
+                    { populate: ['componentes'] }
                 );
-                return categoria;
+                return categoria || undefined;
             } catch (error: any) {
+                console.error("Error fetching category by description:", error);
                 return undefined;
             }
         }
+        
 
 
 }
