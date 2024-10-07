@@ -144,6 +144,9 @@ async registrarUsuario() {
         }
     });}
 
+gotoAyuda(){
+  this.router.navigate(['ayuda']);
+}
 
     
   }
