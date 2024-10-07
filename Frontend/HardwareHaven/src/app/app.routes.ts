@@ -8,6 +8,7 @@ import { PerfilComponent } from './pages/perfil/perfil/perfil.component.js';
 import {EnvioComponent} from './pages/envio/envio/envio.component.js';
 import {InventarioComponent} from './pages/inventario/inventario/inventario.component.js';
 import { UsuarioComponent } from './features/inventario/usuario/usuario.component.js';
+import { AyudaComponent } from './pages/ayuda/ayuda.component.js';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -17,7 +18,9 @@ export const routes: Routes = [
   { path: 'envio', component: EnvioComponent},
   { path: 'inventario', component: InventarioComponent},
   { path: 'inventario/usuario', component: UsuarioComponent},
+  { path: 'ayuda', component: AyudaComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' } 
+  
   
   
   

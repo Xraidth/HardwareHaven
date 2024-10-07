@@ -8,7 +8,8 @@ export function specialFiltro(nombre: string, dato: any): string {
     if (nombre.includes("componentes")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee componentes" : "No posee componentes") : "-";
     if(nombre.includes("subTotal"))return `$${dato}`;
     if (nombre.includes("valor")) return `$${dato}`;
-    if (nombre.includes("fechaDesde") || nombre.includes("fechaCompra") || nombre.includes("fechaCancel")) return formatDateTime(dato);
+    if (nombre.includes("fechaDesde") || nombre.includes("fechaCompra")) return formatDateTime(dato);
+    if(nombre.includes("fechaCancel")) return (dato) ? formatDateTime(dato): "-";
     if (nombre.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
     if (nombre === "compra") return dato.id.toString();
     if (nombre === "user") return dato.name;

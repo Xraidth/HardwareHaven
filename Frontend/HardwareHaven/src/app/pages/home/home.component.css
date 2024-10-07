@@ -128,3 +128,15 @@ header {
     font-size: 18px;
     color: red;
   }
+
+  .ayuda-div {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 3px;
+    z-index: 9999;
+  }
+
+  
+
+  
