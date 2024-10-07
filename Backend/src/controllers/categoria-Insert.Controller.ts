@@ -13,7 +13,7 @@ const categoriaInsertController = async (req: Request, res: Response): Promise<v
 
     try{
 
-        const categoria = await categoriaRepo.findByDescription(descripcion);
+        const categoria = await categoriaRepo.findByDescription({descripcion:descripcion});
         
      if (!categoria) {
             
