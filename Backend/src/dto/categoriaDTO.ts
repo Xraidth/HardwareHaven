@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import addErrors from "ajv-errors";
 import { Response, NextFunction } from "express";
-import { CategoriaDTOSchema } from "../../lib/categoria-typesSchema";
+import { CategoriaDTOSchema } from "../lib/categoria-typesSchema";
 import { CustomRequest } from "../Interfaces/interfaces";
 // Instancia de Ajv
 const ajv = new Ajv({ allErrors: true });
