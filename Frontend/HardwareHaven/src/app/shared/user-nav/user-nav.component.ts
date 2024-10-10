@@ -14,13 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [UserService]
 })
 export class UserNavComponent implements OnInit {
-  
-  
+
+
   @Input() usuario:any;
   public userName:string= "Usuario";
   isDropdownOpen = false;
-  constructor(private swa:SweetAlertService, 
-    private serverUser: UserService 
+  constructor(private swa:SweetAlertService,
+    private serverUser: UserService
   ){}
 
   ngOnInit(): void {
@@ -40,34 +40,34 @@ export class UserNavComponent implements OnInit {
       this.serverUser.update(
         SessionService.usuario.id,
         {
-          newPassword: credenciales.newPassword, 
-          newUserName: credenciales.newUserName, 
-          oldPassword: credenciales.oldPassword, 
-          newEmail: credenciales.newEmail, 
+          newPassword: credenciales.newPassword,
+          newUserName: credenciales.newUserName,
+          oldPassword: credenciales.oldPassword,
+          newEmail: credenciales.newEmail,
           newUserType: credenciales.newUserType
         }).subscribe({
         next: (r: any) => {
           try {
             if (r && r.data) {
-              const user: any = r.data; 
+              const user: any = r.data;
               this.usuario = user;
               SessionService.usuario = this.usuario;
             } else {
-              
+
             }
           } catch (error) {
             console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+            console.log('Objeto recibido:', r);
           }
         },
         error: (e) => {
           console.error('Error en la llamada HTTP:', e);
         }
       });
-      
+
     }
   }
-  
+
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;

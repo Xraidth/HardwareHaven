@@ -26,37 +26,37 @@ export class CategoriaComponent implements OnInit {
   columnsLw: string[] = [];
   isLoading = false;
   originalCategorias: any[] = [];
-  
+
 
   constructor(
     private serverCategoria: CategoriaService ,
     private sweetAlertService: SweetAlertService,
-  
+
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.categorias = [...this.originalCategorias]; 
+
+        this.categorias = [...this.originalCategorias];
       } else {
-        
-        this.categorias = this.originalCategorias.filter(x => 
+
+        this.categorias = this.originalCategorias.filter(x =>
           x.descripcion.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
     }
   }
-  
+
 
 
   ngOnInit(): void {
     this.cargarEntidad();
   }
- 
+
 
   cargarEntidad(): void {
     this.getAll();
@@ -74,10 +74,10 @@ export class CategoriaComponent implements OnInit {
     }
   }
 
-  
+
 
   getAll(): void {
-    this.isLoading = true; 
+    this.isLoading = true;
     this.serverCategoria.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
@@ -88,9 +88,9 @@ export class CategoriaComponent implements OnInit {
       this.categorias = categorias;
 
       this.originalCategorias = [...categorias];
-      
+
       this.cargarColumnas();
-      this.isLoading = false; 
+      this.isLoading = false;
     });
   }
 
@@ -111,7 +111,7 @@ export class CategoriaComponent implements OnInit {
         this.serverCategoria.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -120,13 +120,13 @@ export class CategoriaComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((categoria: any) => {
           if (categoria) {
             this.categoria = categoria;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -134,8 +134,8 @@ export class CategoriaComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
 
   async insertarCategoria() {
     const credenciales = await this.sweetAlertService.InsertCategoria();
@@ -154,18 +154,26 @@ export class CategoriaComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  
+          this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
-      ).subscribe((categoria: any) => {
-        if (categoria) {
-          this.categoria = categoria;
-          this.cargarEntidad();  // Reload entity after creation
+      ).subscribe({
+        next: (categoria: any) => {
+            if (categoria) {
+                this.categoria = categoria;
+                this.cargarEntidad();
+            }
+        },
+        error: (e) => {
+            const errores = e.error?.errors || [];
+            const mensajeErrores = errores.join(', ');
+            this.sweetAlertService.mostrarError(mensajeErrores);
         }
-      });
+    });
+
     }
   }
-  
+
 
   async update(categoria: any) {
     const credenciales = await this.sweetAlertService.updateCategoria(categoria);
@@ -184,18 +192,26 @@ export class CategoriaComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage); 
+          this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((categoria: any) => {
+      ).subscribe(
+        {
+        next:(categoria: any) => {
         if (categoria) {
           this.categoria = categoria;
-          this.cargarEntidad();  // Reload entity after update
+          this.cargarEntidad();
         }
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
       });
     }
   }
-  
+
 
 
   specialFiltro(nombre: string, dato: any): string {

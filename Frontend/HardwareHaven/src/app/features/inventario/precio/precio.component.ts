@@ -35,13 +35,13 @@ export class PrecioComponent implements OnInit {
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.precios = [...this.originalprecios]; 
+
+        this.precios = [...this.originalprecios];
       } else {
-        
-        this.precios = this.originalprecios.filter(x => 
+
+        this.precios = this.originalprecios.filter(x =>
           x.componente.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
@@ -56,7 +56,7 @@ export class PrecioComponent implements OnInit {
     this.getAll();
   }
 
- 
+
 
 
   cargarColumnas(): void {
@@ -71,7 +71,7 @@ export class PrecioComponent implements OnInit {
     }
   }
 
-  
+
 
   getAll(): void {
     this.isLoading = true;
@@ -80,7 +80,7 @@ export class PrecioComponent implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
         this.isLoading = false;
         return of([]);
       })
@@ -108,7 +108,7 @@ export class PrecioComponent implements OnInit {
         this.serverPrecio.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -117,13 +117,13 @@ export class PrecioComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((precio: any) => {
           if (precio) {
             this.precio = precio;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -143,13 +143,22 @@ export class PrecioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
+      ).subscribe(
+        {
+        next:
+        (response: any) => {
         if (response?.data) {
           this.precios.push(response.data);
         }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
@@ -165,13 +174,22 @@ export class PrecioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
+      ).subscribe(
+       {next:
+        (response: any) => {
         if (response?.data) {
           this.precios = this.precios.map(p => p.id === precio.id ? response.data : p);
         }
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
+
       });
     }
   }

@@ -35,13 +35,13 @@ export class ComponenteComponent implements OnInit{
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.componentes = [...this.originalcomponentes]; 
+
+        this.componentes = [...this.originalcomponentes];
       } else {
-        
-        this.componentes = this.originalcomponentes.filter(x => 
+
+        this.componentes = this.originalcomponentes.filter(x =>
           x.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
@@ -56,7 +56,7 @@ export class ComponenteComponent implements OnInit{
     this.getAll();
   }
 
-  
+
   cargarColumnas(): void {
     if (this.componentes.length > 0) {
       this.inventarioVacio = false;
@@ -70,23 +70,24 @@ export class ComponenteComponent implements OnInit{
   }
 
   getAll(): void {
-    this.isLoading = true; 
+    this.isLoading = true;
     this.serverComponente.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
-        return of([]); 
+        this.sweetAlertService.mostrarError(errorMessage);
+        return of([]);
       })
-    ).subscribe((componentes: any[]) => {
+    ).subscribe(
+      (componentes: any[]) => {
       this.componentes = componentes;
       this.originalcomponentes = [...componentes];
       this.cargarColumnas();  // Load columns after fetching data
-      this.isLoading = false; 
+      this.isLoading = false;
     });
   }
-  
+
 
   eliminarItem(componente: any): void {
     this.delete(componente.id);
@@ -98,14 +99,14 @@ export class ComponenteComponent implements OnInit{
     this.cargarEntidad();
   }
 
-   
+
   public delete(id: number) {
     this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
       if (result.isConfirmed) {
         this.serverComponente.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -114,13 +115,13 @@ export class ComponenteComponent implements OnInit{
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((componente: any) => {
           if (componente) {
             this.componente = componente;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -141,7 +142,7 @@ export class ComponenteComponent implements OnInit{
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
-            return response.data;  
+            return response.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -150,18 +151,25 @@ export class ComponenteComponent implements OnInit{
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  
+        this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
-      ).subscribe((componente: any) => {
+      ).subscribe(
+       { next: (componente: any) => {
         if (componente) {
           this.componente = componente;
-          this.cargarEntidad();  // Reload entity after creation
+          this.cargarEntidad();
         }
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
       });
     }
   }
-  
+
 
   async update(componente: any) {
     const credenciales = await this.sweetAlertService.updateComponente(componente);
@@ -182,18 +190,26 @@ export class ComponenteComponent implements OnInit{
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null); 
+          this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
-      ).subscribe((componente: any) => {
+      ).subscribe(
+            {
+              next:
+          (componente: any) => {
         if (componente) {
           this.componente = componente;
-          this.cargarEntidad();  // Reload entity after update
-        }
+          this.cargarEntidad(); }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
-  
+
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

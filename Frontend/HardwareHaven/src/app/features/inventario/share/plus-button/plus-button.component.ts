@@ -45,9 +45,9 @@ export class PlusButtonComponent {
     private serverCompra: CompraService,
     private serverComponente: ComponenteService,
     private serverCategoria: CategoriaService ,
-  
+
   ) {}
-  
+
   plusButton(){
     switch (this.nowType) {
       case "Usuario": this.insertUsuario(); break;
@@ -66,7 +66,7 @@ export class PlusButtonComponent {
       console.log("Error: nowType no está definido");
     }
   }
-  
+
 
   async insertUsuario(): Promise<void> {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
@@ -80,15 +80,25 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
+      ).subscribe(
+        {next:
+        (response: any) => {
         if (response?.data) {
           this.usuario = response.data;
           this.setChangesToAdd();
         }
-      });
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
+    }
+
+    );
     }
   }
 
@@ -103,15 +113,25 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
+      ).subscribe(
+
+    { next:
+        (response: any) => {
         if (response?.data) {
           this.precio = response.data;
           this.setChangesToAdd();
         }
-      });
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
+    }
+    );
     }
   }
 
@@ -134,16 +154,22 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
       ).subscribe({
+
         next: (lineaCompra: any) => {
           if (lineaCompra) {
             this.linea = lineaCompra
             this.setChangesToAdd();
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
@@ -156,7 +182,7 @@ export class PlusButtonComponent {
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
-            return r.data; 
+            return r.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -165,7 +191,7 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
       ).subscribe({
@@ -174,11 +200,16 @@ export class PlusButtonComponent {
             this.compra = compra
             this.setChangesToAdd();
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
-  
+
   async insertComponente() {
     const credenciales = await this.sweetAlertService.InsertComponente();
     if (credenciales) {
@@ -189,7 +220,7 @@ export class PlusButtonComponent {
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
-            return response.data;  
+            return response.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -198,19 +229,30 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  
+        this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
-      ).subscribe((componente: any) => {
-        if (componente) {
-          this.componente = componente;
-          this.setChangesToAdd();
+      ).subscribe(
+        {
+       next:
+          (componente: any) => {
+            if (componente) {
+              this.componente = componente;
+              this.setChangesToAdd();
+            }
+          },
+          error: (e) => {
+            const errores = e.error?.errors || [];
+            const mensajeErrores = errores.join(', ');
+            this.sweetAlertService.mostrarError(mensajeErrores);
         }
-      });
+
+        }
+    );
     }
   }
 
-  
+
   async insertCategoria() {
     const credenciales = await this.sweetAlertService.InsertCategoria();
     if (credenciales) {
@@ -219,7 +261,7 @@ export class PlusButtonComponent {
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
-            return response.data;  
+            return response.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -228,16 +270,29 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  
+          this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
-      ).subscribe((categoria: any) => {
+      ).subscribe(
+
+     {
+      next:
+        (categoria: any) => {
         if (categoria) {
           this.categoria = categoria;
           this.setChangesToAdd();
         }
-      });
+      },
+      error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
+    }
+
+
+    );
     }
   }
-  
+
 }
