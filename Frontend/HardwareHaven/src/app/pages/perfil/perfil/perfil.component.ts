@@ -6,7 +6,7 @@ import { SweetAlertService } from '../../../core/services/notifications/sweet-al
 import { catchError, map, share } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 import { UserService } from '../../../core/services/entities/user.service';
-import { getErrorMessage } from '../../../shared/functions/functions';
+import { directed, getErrorMessage } from '../../../shared/functions/functions';
 
 
 @Component({
@@ -30,7 +30,7 @@ togglePassword() {
   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
 }
 goBack() {
-  this.router.navigate(['/productList']); 
+  directed(this.usuario.tipoUsuario, this.router)
 }
 
 borrarCuenta(){
