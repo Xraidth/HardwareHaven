@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { CustomRequest } from '../Interfaces/interfaces';
 
-export function sanitizeLineaCompraInput(req: Request, res: Response, next: NextFunction) {
+export function sanitizeLineaCompraInput(req: CustomRequest, res: Response, next: NextFunction) {
   
     if (!req.body || typeof req.body !== 'object') {
       return next();

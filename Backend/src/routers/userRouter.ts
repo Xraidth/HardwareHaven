@@ -13,6 +13,7 @@ import {sanitizeUserInput} from "../security/user-sanitize.dto.js"
 import userLoginController from "../controllers/user-Login.Controllers.js";
 import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
 import userJWTDTO from "../dto/userJWTDTO.js";
+import userDTO from "../dto/userDTO.js";
 const userRouter = Router();
 
 
@@ -20,12 +21,12 @@ const userRouter = Router();
 //middlewares
 userRouter.get('/getAll',userJWTDTOAdmin, userGetAllController)
 userRouter.get('/getOne/:id',userJWTDTOAdmin, userGetOneController)
-userRouter.post('/register',sanitizeUserInput, userRegisterController);
-userRouter.post('/login', sanitizeUserInput, userLoginController)
-userRouter.patch('/updatePassword/:id',userJWTDTO, sanitizeUserInput, userUpdatePasswordController);
-userRouter.patch('/updateUserName/:id',userJWTDTO , sanitizeUserInput, userUpdateUserNameController);
+userRouter.post('/register',sanitizeUserInput, userDTO, userRegisterController);
+userRouter.post('/login', sanitizeUserInput,userDTO, userLoginController)
+userRouter.patch('/updatePassword/:id',userJWTDTO, sanitizeUserInput,userDTO, userUpdatePasswordController);
+userRouter.patch('/updateUserName/:id',userJWTDTO , sanitizeUserInput,userDTO, userUpdateUserNameController);
 userRouter.delete('/deleteOne/:id',userJWTDTO, userDeleteOneController);
-userRouter.put('/update/:id',userJWTDTO, sanitizeUserInput, userUpdateController)
+userRouter.put('/update/:id',userJWTDTO, sanitizeUserInput,userDTO, userUpdateController)
 
 
 

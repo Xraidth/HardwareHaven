@@ -1,7 +1,7 @@
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import { ComponenteRepository } from '../repository/componenteRepository.js'; 
-import { Compra } from '../Model/compra.entity.js';
+import { Compra } from '../model/compra.entity.js';
 import { CompraRepository } from '../repository/compraRepository.js';
 
 const componenteRepo = new ComponenteRepository();

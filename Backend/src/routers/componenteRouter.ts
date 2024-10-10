@@ -11,6 +11,7 @@ import compUpdateController from "../controllers/componente-Update.Controllers.j
 import {sanitizeComponenteInput} from "../security/componente-sanitize.dto .js"
 import userJWTDTO from "../dto/userJWTDTO.js";
 import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
+import { componenteDTO } from "../dto/componenteDTO.js";
 const compRouter = Router();
 
 
@@ -18,11 +19,11 @@ const compRouter = Router();
 //middlewares
 compRouter.get('/getAll', userJWTDTO, compGetAllController)
 compRouter.get('/getOne/:id', userJWTDTO, compGetOneController)
-compRouter.post('/insert',sanitizeComponenteInput, userJWTDTOAdmin,  compInsertController);
-compRouter.patch('/updateDescription/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateDescriptionController);
-compRouter.patch('/updateCompName/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateCompNameController);
+compRouter.post('/insert',  userJWTDTOAdmin, sanitizeComponenteInput, componenteDTO, compInsertController);
+compRouter.patch('/updateDescription/:id',  userJWTDTOAdmin, sanitizeComponenteInput, componenteDTO, compUpdateDescriptionController);
+compRouter.patch('/updateCompName/:id', userJWTDTOAdmin, sanitizeComponenteInput, componenteDTO, compUpdateCompNameController);
 compRouter.delete('/deleteOne/:id',userJWTDTOAdmin,compDeleteOneController);
-compRouter.put('/update/:id',sanitizeComponenteInput, userJWTDTOAdmin, compUpdateController)
+compRouter.put('/update/:id',  userJWTDTOAdmin, sanitizeComponenteInput,componenteDTO, compUpdateController)
 
 
 export default compRouter;

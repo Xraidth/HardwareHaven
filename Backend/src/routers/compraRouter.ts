@@ -8,6 +8,7 @@ import { sanitizeCompraInput } from "../security/compra-sanitize.dto.js";
 import compraFacturationController from "../controllers/compra-Facturation.Controllers.js";
 import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
 import userJWTDTO from "../dto/userJWTDTO.js";
+import { compraDTO } from "../dto/compraDTO.js";
 
 
 const compraRouter = Router();
@@ -17,9 +18,9 @@ const compraRouter = Router();
 //middlewares
 compraRouter .get('/getAll', userJWTDTOAdmin, compraGetAllController)
 compraRouter .get('/getOne/:id', userJWTDTOAdmin, compraGetOneController)
-compraRouter .post('/insert',sanitizeCompraInput, userJWTDTO, compraInsertController);
+compraRouter .post('/insert', userJWTDTO, sanitizeCompraInput,  compraDTO, compraInsertController);
 compraRouter .delete('/deleteOne/:id',userJWTDTOAdmin,compraDeleteOneController);
-compraRouter .put('/update/:id',sanitizeCompraInput, userJWTDTO, compraUpdateController)
-compraRouter .patch('/facturate/:id',userJWTDTO, compraFacturationController)
+compraRouter .put('/update/:id', userJWTDTO, sanitizeCompraInput,  compraDTO, compraUpdateController)
+compraRouter .patch('/facturate/:id',userJWTDTO, compraFacturationController) 
 
 export default compraRouter ;

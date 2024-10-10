@@ -1,11 +1,14 @@
-// Instancia de Ajv
+
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
-import {  Response, NextFunction } from "express";
-import { CompraDTOSchema } from "../lib/compra-typesSchema";
-import { CustomRequest } from "../Interfaces/interfaces";
+import { NextFunction, Response } from "express";
+import { CustomRequest } from "../Interfaces/interfaces"; 
+import { CompraDTOSchema } from "../lib/compra-typesSchema.js";
+
 
 const ajv = new Ajv({ allErrors: true });
+addFormats(ajv);
 addErrors(ajv);
 
 // Compila el esquema

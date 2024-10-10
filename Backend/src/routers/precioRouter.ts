@@ -9,6 +9,7 @@ import precioUpdateController from "../controllers/precio-Update.Controllers.js"
 
 import {sanitizePrecioInput} from "../security/precio-sanitize.dto.js"
 import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
+import precioDTO from "../dto/precioDTO.js";
 const precioRouter = Router();
 
 
@@ -16,9 +17,9 @@ const precioRouter = Router();
 //middlewares
 precioRouter.get('/getAll',userJWTDTOAdmin, precioGetAllController)
 precioRouter.get('/getOne/:id',userJWTDTOAdmin, precioGetOneController)
-precioRouter.post('/insert',sanitizePrecioInput, userJWTDTOAdmin,  precioInsertController);
+precioRouter.post('/insert',sanitizePrecioInput, userJWTDTOAdmin, precioDTO, precioInsertController);
 precioRouter.delete('/deleteOne/:id',userJWTDTOAdmin, precioDeleteOneController);
-precioRouter.put('/update/:id',sanitizePrecioInput, userJWTDTOAdmin, precioUpdateController)
+precioRouter.put('/update/:id',userJWTDTOAdmin,sanitizePrecioInput, precioDTO, precioUpdateController)
 
 
 export default precioRouter;

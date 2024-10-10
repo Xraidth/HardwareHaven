@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ComponenteRepository } from "../repository/componenteRepository.js";
-import { Componente} from '../Model/componente.entity.js';
+import { Componente} from '../model/componente.entity.js';
 
 const compRepo = new ComponenteRepository();
 
