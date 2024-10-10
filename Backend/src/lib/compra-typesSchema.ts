@@ -2,32 +2,40 @@
 import { Type } from "@sinclair/typebox";
 
 export const CompraDTOSchema = Type.Object({
-    userId: Type.Number({ 
+    userId: 
+    Type.Optional( 
+    Type.Number({ 
       minimum: 0, 
       errorMessage: {
           type: 'El tipo de userId no es válido, debe ser un número',
           minimum: 'El valor debe ser mayor o igual a 0',
       }
-  }), 
-    fechaCompra: Type.String({
+  })), 
+    fechaCompra: 
+    Type.Optional( 
+    Type.String({
         format: 'date-time',
         errorMessage: {
             type: 'La fecha de compra debe ser una cadena',
             format: 'El formato de la fecha de compra no es válido',
         }
-    }),
-    fechaCancel: Type.String({
+    })),
+    fechaCancel: 
+    Type.Optional( 
+    Type.String({
         format: 'date-time',
         errorMessage: {
             type: 'La fecha de cancelación debe ser una cadena',
             format: 'El formato de la fecha de cancelación no es válido',
         }
-    }),
-    total: Type.Number({
+    })),
+    total: 
+    Type.Optional( 
+    Type.Number({
         minimum: 0,
         errorMessage: {
             type: 'El total debe ser un número',
             minimum: 'El total no puede ser negativo',
         }
-    }),
-}, { additionalProperties: false });
+    })),
+}, { additionalProperties: true });

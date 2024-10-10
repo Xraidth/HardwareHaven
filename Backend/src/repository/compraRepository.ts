@@ -1,5 +1,5 @@
-import { Compra } from '../Model/compra.entity.js';
-import { LineaCompra } from '../Model/lineaCompra.entity.js';
+import { Compra } from '../model/compra.entity.js';
+import { LineaCompra } from '../model/lineaCompra.entity.js';
 import { orm } from '../shared/db/orm.js';
 
 const em = orm.em;

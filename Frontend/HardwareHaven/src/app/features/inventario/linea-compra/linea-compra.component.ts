@@ -25,7 +25,7 @@ export class LineaCompraComponent  implements OnInit {
   inventarioVacio = false;
   isLoading = false;
   originallineas: any[] = [];
-  
+
 
   constructor(
     private serverLineaCompra: LineaCompraService,
@@ -36,13 +36,13 @@ export class LineaCompraComponent  implements OnInit {
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.lineas = [...this.originallineas]; 
+
+        this.lineas = [...this.originallineas];
       } else {
-        
-        this.lineas = this.originallineas.filter(x => 
+
+        this.lineas = this.originallineas.filter(x =>
           x.descripcion.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
@@ -70,7 +70,7 @@ export class LineaCompraComponent  implements OnInit {
       this.inventarioVacio = true;
     }
   }
-  
+
   getAll() {
     this.isLoading = true;
     this.serverLineaCompra.getAll().pipe(
@@ -85,19 +85,19 @@ export class LineaCompraComponent  implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
         return of([]);  // Return an empty array if there's an error
       })
     ).subscribe({
       next: (lineas: any[]) => {
         this.lineas = lineas;
         this.originallineas = [...lineas];
-        this.cargarColumnas();  
+        this.cargarColumnas();
         this.isLoading = false;
       }
     });
   }
-  
+
 
 
   eliminarItem(linea: any): void {
@@ -116,7 +116,7 @@ export class LineaCompraComponent  implements OnInit {
         this.serverLineaCompra.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -125,13 +125,13 @@ export class LineaCompraComponent  implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((linea: any) => {
           if (linea) {
             this.linea = linea;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -139,7 +139,7 @@ export class LineaCompraComponent  implements OnInit {
       }
     });
   }
-  
+
 
   async InsertarLineaCompra() {
     const credenciales = await this.sweetAlertService.InsertLineaCompra();
@@ -160,7 +160,7 @@ export class LineaCompraComponent  implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
       ).subscribe({
@@ -169,11 +169,17 @@ export class LineaCompraComponent  implements OnInit {
             this.linea = lineaCompra;
             this.cargarEntidad();  // Reload entity after insertion
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
+
       });
     }
   }
-  
+
 
 
   async update(lineaCompra: any) {
@@ -196,20 +202,25 @@ export class LineaCompraComponent  implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
       ).subscribe({
         next: (lineaCompra: any) => {
           if (lineaCompra) {
             this.linea = lineaCompra;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
-  
+
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

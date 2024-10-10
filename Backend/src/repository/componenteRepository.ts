@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { Componente } from "../Model/componente.entity.js";
+import { Componente } from "../model/componente.entity.js";
 import { orm } from '../shared/db/orm.js'
 
 const em = orm.em;

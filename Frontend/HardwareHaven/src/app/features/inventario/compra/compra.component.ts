@@ -36,13 +36,13 @@ export class CompraComponent implements OnInit {
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.compras = [...this.originalcompras]; 
+
+        this.compras = [...this.originalcompras];
       } else {
-        
-        this.compras = this.originalcompras.filter(x => 
+
+        this.compras = this.originalcompras.filter(x =>
           x.user.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
@@ -76,7 +76,7 @@ export class CompraComponent implements OnInit {
     this.serverCompra.getAll().pipe(
       map((r: any) => {
         if (r && r.data && Array.isArray(r.data)) {
-          return r.data;  
+          return r.data;
         } else {
           console.log('El objeto recibido no tiene la estructura esperada.');
           return [];
@@ -85,18 +85,18 @@ export class CompraComponent implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
-        return of([]);  
+        this.sweetAlertService.mostrarError(errorMessage);
+        return of([]);
       })
     ).subscribe({
       next: (compras: any[]) => {
         this.compras = compras;
         this.originalcompras = [...compras];
-        this.cargarColumnas();  
+        this.cargarColumnas();
       }
     });
   }
-  
+
 
 
   eliminarItem(linea: any): void {
@@ -116,7 +116,7 @@ export class CompraComponent implements OnInit {
         this.serverCompra.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -125,13 +125,13 @@ export class CompraComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -139,9 +139,9 @@ export class CompraComponent implements OnInit {
       }
     });
   }
-  
 
- 
+
+
 
 
 
@@ -153,7 +153,7 @@ export class CompraComponent implements OnInit {
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
-            return r.data; 
+            return r.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -162,20 +162,25 @@ export class CompraComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
-          return of(null);  
+        this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
       ).subscribe({
         next: (compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
-  
+
 
 
   async update(compra: any) {
@@ -197,7 +202,7 @@ export class CompraComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);  // Return null in case of error
         })
       ).subscribe({
@@ -206,11 +211,16 @@ export class CompraComponent implements OnInit {
             this.compra = compra;
             this.cargarEntidad();  // Reload entity after update
           }
-        }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+      }
       });
     }
   }
-  
+
 
   specialFiltro(nombre: string, dato: any): string {
     return specialFiltro(nombre,dato);

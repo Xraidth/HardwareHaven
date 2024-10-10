@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { PrecioRepository } from '../repository/precioRespository.js';
-import { Precio } from '../Model/precio.entity.js';
+import { Precio } from '../model/precio.entity.js';
 import { ComponenteRepository } from '../repository/componenteRepository.js';
 
 

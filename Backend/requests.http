@@ -2,11 +2,12 @@
 //------------------Usuario-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/user/getAll
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTEsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODU5ODIyMywiZXhwIjoxNzI5MjAzMDIzfQ.BvqHIDwMLMm0RiQrkn1ClsuO1bUxQ5lODi-lGNI--_c
 
 
 ###GetAll 
 GET http://localhost:3000/api/user/getAll
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MiwidGlwb1VzdWFyaW8iOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzI3Mzk4MjUxLCJleHAiOjE3MjgwMDMwNTF9.Cl3o7qWN9VHUjlZ7O-ZjP5ZOogkV-PUTXONsDFbj0Oo
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTMsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODYwMjMxOSwiZXhwIjoxNzI5MjA3MTE5fQ.nNYqov05Rc65pmrN9iI2sa27sF8DepYOOmzZBdoYCeg
 
 ###GetOne
 GET http://localhost:3000/api/user/getOne/:id
@@ -17,8 +18,8 @@ Content-Type: application/json
 
 {
     "name":"Pedro", 
-    "password":"pedriño",
-    "email":"asus@gmail.com",
+    "password":"pedr",
+    "email":"com@gmail.com",
     "tipoUsuario":"Administrador"
 }
 
@@ -27,8 +28,8 @@ POST  http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "name":"Pedro", 
-    "password":"pedriño"
+    "name":"AdministradorSuper", 
+    "password":"nacho55123"
 }
 
 ###Delete
@@ -70,6 +71,7 @@ Content-Type: application/json
 //------------------Compra-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/compra/getAll
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTMsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODYwMjMxOSwiZXhwIjoxNzI5MjA3MTE5fQ.nNYqov05Rc65pmrN9iI2sa27sF8DepYOOmzZBdoYCeg
 
 ###GetOne
 GET http://localhost:3000/api/compra/getOne/:id
@@ -100,7 +102,7 @@ PATCH  http://localhost:3000/api/compra/facturate/:id
 //------------------Componente-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/componente/getAll
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MiwidGlwb1VzdWFyaW8iOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzI3Mzk4MjUxLCJleHAiOjE3MjgwMDMwNTF9.Cl3o7qWN9VHUjlZ7O-ZjP5ZOogkV-PUTXONsDFbj0Oo
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTMsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODYwMjMxOSwiZXhwIjoxNzI5MjA3MTE5fQ.nNYqov05Rc65pmrN9iI2sa27sF8DepYOOmzZBdoYCeg
 ###GetOne
 GET http://localhost:3000/api/componente/getOne/:id
 
@@ -146,15 +148,17 @@ Content-Type: application/json
 ###GetAll 
 GET http://localhost:3000/api/categoria/getAll
 
+
 ###GetOne
 GET http://localhost:3000/api/categoria/getOne/:id
 
 ###Post 
 POST  http://localhost:3000/api/categoria/insert
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTEsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODU5ODIyMywiZXhwIjoxNzI5MjAzMDIzfQ.BvqHIDwMLMm0RiQrkn1ClsuO1bUxQ5lODi-lGNI--_c
 Content-Type: application/json
 
 {
-"descripcion":"Periferico"
+"descripcion":"P"
 }
 ###Delete
 DELETE  http://localhost:3000/api/categoria/deleteOne/:id

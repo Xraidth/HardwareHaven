@@ -18,13 +18,13 @@ export class SweetAlertService {
   mostrarError(message: string): void {
     Swal.fire({
       title: 'Error',
-      text: message,  
-      icon: 'error',  
+      text: message,
+      icon: 'error',
       confirmButtonText: 'OK',
-      confirmButtonColor: '#d33',  
+      confirmButtonColor: '#d33',
     });
   }
-  
+
 
   alertWithSuccess(title: string, message: string) {
     Swal.fire(title, message, 'success');
@@ -92,7 +92,15 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         } else if (!email) {
         Swal.showValidationMessage('Por favor, ingresa un email');
         return false;
-        }
+        }else if (email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+              Swal.showValidationMessage("Ingrese un email válido");
+              return false;
+          }
+          return true;
+      }
+
          else {
           return {
             username: username,
@@ -107,7 +115,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         this.alertWithSuccess('¡Cuenta creada!',
           `Nombre de usuario: ${result.value.username} registrado`)
 
-        
+
         return result.value;
       } else {
         return undefined;
@@ -155,7 +163,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
         const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
-  
+
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
           return false;
@@ -165,7 +173,16 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         } else if (!email) {
           Swal.showValidationMessage('Por favor, ingresa un email');
           return false;
-          } else {
+          } else if (email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el email
+            if (!emailRegex.test(email)) {
+                Swal.showValidationMessage("Ingrese un email válido");
+                return false; // Retorna false si el email no es válido
+            }
+
+            return true; // Retorna true si el email es válido
+        }
+        else {
           return {
             newUserName: username,
             newPassword: password,
@@ -179,14 +196,14 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       if (result.isConfirmed) {
         this.alertWithSuccess('¡Cuenta actualizada!',
           `Nombre de usuario: ${result.value.username} actualizado`);
-  
+
         return result.value;
       } else {
         return undefined;
       }
     });
   }
-  
+
   mostrarDetalleProducto(producto: any) {
     return Swal.fire({
       title: producto.name,
@@ -200,12 +217,12 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           </div>
         </div>
       `,
-      showConfirmButton: false,  
+      showConfirmButton: false,
       focusConfirm: false,
-      showCancelButton: false,   
+      showCancelButton: false,
     });
   }
-  
+
 
   recibirOfertas() {
     return Swal.fire({
@@ -216,7 +233,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           <input type="email" id="email" class="swal2-input" placeholder="Ingresa su email">
         </div>
       `,
-      showConfirmButton: true,  
+      showConfirmButton: true,
       confirmButtonText: 'Enviar',
       focusConfirm: false,
       showCancelButton: true,
@@ -226,7 +243,16 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         if (!email) {
           Swal.showValidationMessage('Por favor, ingrese un email válido');
           return false;
-        }
+        }else if (email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el email
+          if (!emailRegex.test(email)) {
+              Swal.showValidationMessage("Ingrese un email válido");
+              return false; // Retorna false si el email no es válido
+          }
+
+          return true; // Retorna true si el email es válido
+      }
+
         return email;
       }
     }).then((result) => {
@@ -236,12 +262,12 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       }
     });
   }
-  
 
 
 
 
-  
+
+
 
 
   InsertCompra(): Promise<{userId:number} | undefined> {
@@ -256,7 +282,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       cancelButtonText: "Cancelar",
       preConfirm: () => {
         const userId = (document.getElementById('swal-input-userId') as HTMLInputElement).value;
-        
+
         if (!userId) {
           Swal.showValidationMessage('Por favor, ingresa un id de usuario valido');
           return false;
@@ -279,7 +305,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
 
 
-  
+
 
   InsertComponente(): Promise<{name: string, description: string, categoriaId: number} | undefined> {
     return Swal.fire({
@@ -297,7 +323,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const name = (document.getElementById('swal-input-nameComponente') as HTMLInputElement).value;
         const description = (document.getElementById('swal-input-descComponent') as HTMLInputElement).value;
         const categoriaId = (document.getElementById('swal-input-categoriaId') as HTMLInputElement).value;
-        
+
         if (!name) {
           Swal.showValidationMessage('Por favor, ingresa un name componente valido');
           return false;
@@ -329,14 +355,14 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   }
 
 
-  
+
   InsertCategoria(): Promise<{description: string} | undefined> {
     return Swal.fire({
       title: "Crea una categoria",
       html: `
-        
+
         <input id="swal-input-descCategoria" class="swal2-input" placeholder="description">
-        
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -344,7 +370,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       cancelButtonText: "Cancelar",
       preConfirm: () => {
         const description = (document.getElementById('swal-input-descCategoria') as HTMLInputElement).value;
-        
+
         if (!description) {
           Swal.showValidationMessage('Por favor, ingresa una descripcion valida');
           return false;
@@ -382,7 +408,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const fechaDesde = (document.getElementById('swal-input-fechaDesde') as HTMLInputElement).value;
         const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
         const valor = (document.getElementById('swal-input-valor') as HTMLInputElement).value;
-        
+
         if (!fechaDesde) {
           Swal.showValidationMessage('Por favor, ingresa una fecha desde valido');
           return false;
@@ -413,7 +439,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
 
 
-  
+
   InsertLineaCompra(): Promise<{ compraId: number, componenteId: number, cantidad: number,} | undefined> {
     return Swal.fire({
       title: "Crea una linea de compra",
@@ -430,7 +456,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const compraId = (document.getElementById('swal-input-compraId') as HTMLInputElement).value;
         const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
         const cantidad = (document.getElementById('swal-input-cantidad') as HTMLInputElement).value;
-        
+
         if (!compraId) {
           Swal.showValidationMessage('Por favor, ingresa una compra valida');
           return false;
@@ -459,7 +485,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     });
   }
 
-updateCompra(compra:any): Promise<{ 
+updateCompra(compra:any): Promise<{
   userId: number,
   fechaCompra: Date,
   fechaCancel: Date|undefined,
@@ -499,7 +525,7 @@ updateCompra(compra:any): Promise<{
         const fechaCancel = (document.getElementById('swal-input-fechaCancel') as HTMLInputElement).value;
         const total = (document.getElementById('swal-input-total') as HTMLInputElement).value;
         const userId = (document.getElementById('swal-input-userId') as HTMLInputElement).value;
-        
+
         if (!userId) {
           Swal.showValidationMessage('Por favor, ingresa un id de usuario valido');
           return false;
@@ -512,7 +538,7 @@ updateCompra(compra:any): Promise<{
           Swal.showValidationMessage('Por favor, ingresa un total valido');
           return false;
         }
-       
+
          else {
           return {
             userId: userId,
@@ -563,7 +589,7 @@ updateCompra(compra:any): Promise<{
         const name = (document.getElementById('swal-input-nameComponente') as HTMLInputElement).value;
         const description = (document.getElementById('swal-input-descComponent') as HTMLInputElement).value;
         const categoriaId = (document.getElementById('swal-input-categoriaId') as HTMLInputElement).value;
-        
+
         if (!name) {
           Swal.showValidationMessage('Por favor, ingresa un name componente valido');
           return false;
@@ -595,12 +621,12 @@ updateCompra(compra:any): Promise<{
   }
 
 
-  
+
  updateCategoria(categoria:any): Promise<{description: string} | undefined> {
     return Swal.fire({
       title: "Modificar un categoira",
       html: `
-        
+
         <div style="display: flex; flex-direction: column; gap: 15px;">
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <label for="swal-input-descCategoria" style="flex: 1;">Descripción de la Categoría:</label>
@@ -608,7 +634,7 @@ updateCompra(compra:any): Promise<{
   </div>
 </div>
 
-        
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -616,7 +642,7 @@ updateCompra(compra:any): Promise<{
       cancelButtonText: "Cancelar",
       preConfirm: () => {
         const description = (document.getElementById('swal-input-descCategoria') as HTMLInputElement).value;
-        
+
         if (!description) {
           Swal.showValidationMessage('Por favor, ingresa una descripcion valida');
           return false;
@@ -668,7 +694,7 @@ updateCompra(compra:any): Promise<{
         const fechaDesde = (document.getElementById('swal-input-fechaDesde') as HTMLInputElement).value;
         const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
         const valor = (document.getElementById('swal-input-valor') as HTMLInputElement).value;
-        
+
         if (!fechaDesde) {
           Swal.showValidationMessage('Por favor, ingresa una fecha desde valido');
           return false;
@@ -699,7 +725,7 @@ updateCompra(compra:any): Promise<{
 
 
 
-  
+
   updateLineaCompra(linea:any): Promise<{ compraId: number, componenteId: number, cantidad: number, subTotal:number} | undefined> {
     return Swal.fire({
       title: "Crea un Linea de Compra",
@@ -736,7 +762,7 @@ updateCompra(compra:any): Promise<{
         const componenteId = (document.getElementById('swal-input-componenteId') as HTMLInputElement).value;
         const cantidad = (document.getElementById('swal-input-cantidad') as HTMLInputElement).value;
         const subTotal = (document.getElementById('swal-input-subTotal') as HTMLInputElement).value;
-        
+
         if (!compraId) {
           Swal.showValidationMessage('Por favor, ingresa una compra valida');
           return false;
@@ -777,6 +803,6 @@ updateCompra(compra:any): Promise<{
 
 
 
-  
+
 
 }

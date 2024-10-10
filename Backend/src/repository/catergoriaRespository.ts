@@ -1,4 +1,4 @@
-import { Categoria } from '../Model/categoria.entity.js';
+import { Categoria } from '../model/categoria.entity.js';
 import { orm } from '../shared/db/orm.js';
 
 const em = orm.em;

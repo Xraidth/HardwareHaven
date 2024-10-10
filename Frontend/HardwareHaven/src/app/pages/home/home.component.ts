@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../core/services/entities/user.service.js';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service.js';
 import { ToastService } from '../../core/services/notifications/toast.service.js';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ShareService } from '../../core/services/share/share.service.js';
 import { directed } from '../../shared/functions/functions.js';
 
-declare var bootstrap: any; 
+declare var bootstrap: any;
 
 @Component({
   selector: 'home',
@@ -21,7 +21,7 @@ declare var bootstrap: any;
   providers: [UserService, ShareService]
 })
 export class HomeComponent implements OnInit {
-  
+
   private user: any;
   public username: string = '';
   public password: string = '';
@@ -29,40 +29,40 @@ export class HomeComponent implements OnInit {
   private intervalId: any;
   public errorServer: boolean = false;
   constructor(
-    private serverUser: UserService, 
-    private router: Router, 
+    private serverUser: UserService,
+    private router: Router,
     private sweetAlertService: SweetAlertService,
     private toastService: ToastService,
     private shareServer:ShareService
   ) {}
 
- 
+
 
   ngOnInit(): void {
     //this.sweetAlertService.recibirOfertas();
     this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
-      
+
      directed(usuariarioAnterior.tipoUsuario, this.router);
     }
-   
 
-     
+
+
     this.iniciarCarousel(5000);
   }
 
   iniciarCarousel(time:number){
     const myCarousel = document.querySelector('#carouselExample') as HTMLElement;
     const carousel = new bootstrap.Carousel(myCarousel, {
-      interval: time, 
+      interval: time,
       ride: 'carousel'
     });
 
-  
+
     this.intervalId = setInterval(() => {
       carousel.next();
-    }, time); 
+    }, time);
   }
 
   ngOnDestroy(): void {
@@ -76,10 +76,10 @@ export class HomeComponent implements OnInit {
     this.serverUser.login({name:this.username, password:this.password}).subscribe({
       next: (r: any) => {
         try {
-          
+
           if (r && r.data) {
-            
-            this.user = r.data; 
+
+            this.user = r.data;
             SessionService.usuario = this.user;
             if(this.recordarClave){SessionService.guardarSession();}
             this.errorServer=false;
@@ -94,10 +94,14 @@ export class HomeComponent implements OnInit {
         }
       },
       error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+        if (mensajeErrores.length === 0) {
         this.toastService.showToast('Acceso denegado');
       }
-    });
+    }
+  });
   }
 
 
@@ -108,33 +112,36 @@ async registrarUsuario() {
         next: (r: any) => {
           try {
             if (r && r.data) {
-              const user: any = r.data; 
+              const user: any = r.data;
               this.user = user;
               SessionService.usuario = this.user
               directed(user.tipoUsuario, this.router);
             } else {
-              
+
             }
           } catch (error) {
             console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r); 
+            console.log('Objeto recibido:', r);
           }
         },
         error: (e) => {
           console.error('Error en la llamada HTTP:', e);
+          const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
         }
       });
-      
-    }    
+
+    }
   }
 
   checkServer() {
     this.shareServer.ComeOn().subscribe({
         next: (r: any) => {
-            this.errorServer = !(r && r.status); 
+            this.errorServer = !(r && r.status);
         },
         error: () => {
-            this.errorServer = true; 
+            this.errorServer = true;
         }
     });}
 
@@ -142,11 +149,11 @@ gotoAyuda(){
   this.router.navigate(['ayuda']);
 }
 
-    
+
   }
-  
-  
-  
+
+
+
 
 
 

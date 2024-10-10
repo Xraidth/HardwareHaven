@@ -6,10 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { catchError, map, share } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
-import { 
-  capitalizeFirstLetterOfEachWord, 
-  getErrorMessage, 
-  specialFiltro 
+import {
+  capitalizeFirstLetterOfEachWord,
+  getErrorMessage,
+  specialFiltro
 } from '../../../shared/functions/functions';
 
 
@@ -27,29 +27,29 @@ import {
 export class UsuarioComponent implements OnInit {
   @Input() searchQuery: string| undefined;
 
-  
+
 
   usuarios: any[] = [];
   usuario: any = {};
   inventarioVacio = false;
   columns: string[] = [];
   columnsLw: string[] = [];
-  isLoading = false; 
+  isLoading = false;
   originalusuarios: any[] = [];
-  
+
 
   constructor(
     private serverUser: UserService,
     private sweetAlertService: SweetAlertService,
-    
-    
+
+
   ) {}
 
   subscription: any;
 
   ngOnInit(): void {
     this.cargarEntidad();
- 
+
   }
 
 
@@ -57,20 +57,20 @@ export class UsuarioComponent implements OnInit {
     if (changes['searchQuery']) {
       const currentValue = changes['searchQuery'].currentValue;
       this.searchQuery = currentValue || '';
-  
+
       if (this.searchQuery === '') {
-        
-        this.usuarios = [...this.originalusuarios]; 
+
+        this.usuarios = [...this.originalusuarios];
       } else {
-        
-        this.usuarios = this.originalusuarios.filter(x => 
+
+        this.usuarios = this.originalusuarios.filter(x =>
           x.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
     }
   }
-  
-  
+
+
 
 
 
@@ -98,14 +98,14 @@ export class UsuarioComponent implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
         return of([]);
       })
     ).subscribe((usuarios: any[]) => {
       this.usuarios = usuarios;
       this.originalusuarios = [...usuarios];
       this.cargarColumnas();
-      this.isLoading = false; 
+      this.isLoading = false;
     });
   }
 
@@ -125,7 +125,7 @@ export class UsuarioComponent implements OnInit {
         this.serverUser.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
-              return response.data; 
+              return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
@@ -134,13 +134,13 @@ export class UsuarioComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);  
-            return of(null);  
+            this.sweetAlertService.mostrarError(errorMessage);
+            return of(null);
           })
         ).subscribe((usuario: any) => {
           if (usuario) {
             this.usuario = usuario;
-            this.cargarEntidad();  
+            this.cargarEntidad();
           }
         });
       } else if (result.isDismissed) {
@@ -161,14 +161,27 @@ export class UsuarioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
-        if (response?.data) {
-          this.usuarios.push(response.data);
-        }
-      });
+      ).subscribe(
+
+    {next:
+      (response: any) => {
+      if (response?.data) {
+        this.usuarios.push(response.data);
+      }
+    },
+
+  error: (e) => {
+        const errores = e.error?.errors || [];
+        const mensajeErrores = errores.join(', ');
+        this.sweetAlertService.mostrarError(mensajeErrores);
+    }
+
+    }
+
+    );
     }
   }
 
@@ -185,14 +198,26 @@ export class UsuarioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage); 
+        this.sweetAlertService.mostrarError(errorMessage);
           return of(null);
         })
-      ).subscribe((response: any) => {
-        if (response?.data) {
-          this.usuarios = this.usuarios.map(u => u.id === usuario.id ? response.data : u);
-        }
-      });
+      ).subscribe(
+    {
+    next:
+      (response: any) => {
+      if (response?.data) {
+        this.usuarios = this.usuarios.map(u => u.id === usuario.id ? response.data : u);
+      }
+    },
+    error: (e) => {
+      const errores = e.error?.errors || [];
+      const mensajeErrores = errores.join(', ');
+      this.sweetAlertService.mostrarError(mensajeErrores);
+  }
+
+    }
+
+    );
     }
   }
 

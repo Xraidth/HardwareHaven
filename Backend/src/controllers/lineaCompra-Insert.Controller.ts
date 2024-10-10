@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { CompraRepository } from '../repository/compraRepository.js';
-import { LineaCompra } from '../Model/lineaCompra.entity.js';
+import { LineaCompra } from '../model/lineaCompra.entity.js';
 import { LineaCompraRepository } from '../repository/lineaCompraRepository.js';
 import { ComponenteRepository } from '../repository/componenteRepository.js';
-import { Precio } from '../Model/precio.entity.js';
+import { Precio } from '../model/precio.entity.js';
 
 
 const compraRepo = new CompraRepository();
