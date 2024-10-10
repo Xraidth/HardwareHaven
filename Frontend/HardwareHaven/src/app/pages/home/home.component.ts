@@ -8,6 +8,7 @@ import { ToastService } from '../../core/services/notifications/toast.service.js
 import { SessionService } from '../../core/services/share/session.service.js';
 import { CommonModule } from '@angular/common';
 import { ShareService } from '../../core/services/share/share.service.js';
+import { directed } from '../../shared/functions/functions.js';
 
 declare var bootstrap: any; 
 
@@ -35,14 +36,7 @@ export class HomeComponent implements OnInit {
     private shareServer:ShareService
   ) {}
 
-  directed(tipoUsuario: string){
-    if(tipoUsuario =="Administrador"){
-      this.router.navigate(['inventario']); 
-    }
-    else{
-      this.router.navigate(['productList']);
-    }
-  }
+ 
 
   ngOnInit(): void {
     //this.sweetAlertService.recibirOfertas();
@@ -50,7 +44,7 @@ export class HomeComponent implements OnInit {
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
       
-     this.directed(usuariarioAnterior.tipoUsuario);
+     directed(usuariarioAnterior.tipoUsuario, this.router);
     }
    
 
@@ -90,7 +84,7 @@ export class HomeComponent implements OnInit {
             if(this.recordarClave){SessionService.guardarSession();}
             this.errorServer=false;
             SessionService.usuario.jwt = r.jwt;
-            this.directed(this.user.tipoUsuario)
+            directed(this.user.tipoUsuario, this.router)
           } else {
             this.sweetAlertService.mostrarError("La respuesta del servidor es inválida.");
           }
@@ -117,7 +111,7 @@ async registrarUsuario() {
               const user: any = r.data; 
               this.user = user;
               SessionService.usuario = this.user
-              this.directed(user.tipoUsuario);
+              directed(user.tipoUsuario, this.router);
             } else {
               
             }

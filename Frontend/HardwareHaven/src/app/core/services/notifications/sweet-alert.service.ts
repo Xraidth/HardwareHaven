@@ -118,7 +118,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
   mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string, newUserType: string} | undefined> {
     return Swal.fire({
-      title: "Configura tu cuenta",
+      title: "Configura la cuenta",
       html: `
     <div class="container mt-4">
   <div class="row justify-content-center">
@@ -467,10 +467,28 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Modificar una compra",
       html: `
-        <input id="swal-input-fechaCompra" class="swal2-input" type="date" placeholder="fechaCompra" value="${formatDateToYYYYMMDD(compra.fechaCompra)}">
-        <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="fechaCancel" value="${formatDateToYYYYMMDD(compra.fechaCancel)||'No posee'}">
-        <input id="swal-input-total" class="swal2-input" placeholder="total" value="${compra.total}">
-        <input id="swal-input-userId" class="swal2-input" placeholder="userId" value="${compra.user.id}">
+       <div style="display: flex; flex-direction: column; gap: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-fechaCompra" style="flex: 1;">Fecha de Compra:</label>
+    <input id="swal-input-fechaCompra" class="swal2-input" type="date" placeholder="Fecha de Compra" value="${formatDateToYYYYMMDD(compra.fechaCompra)}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-fechaCancel" style="flex: 1;">Fecha de Cancelación:</label>
+    <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="Fecha de Cancelación" value="${formatDateToYYYYMMDD(compra.fechaCancel) || 'No posee'}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-total" style="flex: 1;">Total:</label>
+    <input id="swal-input-total" class="swal2-input" placeholder="Total" value="${compra.total}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-userId" style="flex: 1;">ID de Usuario:</label>
+    <input id="swal-input-userId" class="swal2-input" placeholder="ID de Usuario" value="${compra.user.id}" style="flex: 2;">
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -519,9 +537,23 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Modificar un componente",
       html: `
-        <input id="swal-input-nameComponente" class="swal2-input" placeholder="nameComponente" value="${componente.name}">
-        <input id="swal-input-descComponent" class="swal2-input" placeholder="descComponent" value="${componente.description}">
-        <input id="swal-input-categoriaId" class="swal2-input" placeholder="categoriaId" value="${componente.categoria.id}">
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-nameComponente" style="flex: 1;">Nombre del Componente:</label>
+    <input id="swal-input-nameComponente" class="swal2-input" placeholder="Nombre del Componente" value="${componente.name}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-descComponent" style="flex: 1;">Descripción del Componente:</label>
+    <input id="swal-input-descComponent" class="swal2-input" placeholder="Descripción del Componente" value="${componente.description}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-categoriaId" style="flex: 1;">ID de Categoría:</label>
+    <input id="swal-input-categoriaId" class="swal2-input" placeholder="ID de Categoría" value="${componente.categoria.id}" style="flex: 2;">
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -569,7 +601,13 @@ updateCompra(compra:any): Promise<{
       title: "Modificar un categoira",
       html: `
         
-        <input id="swal-input-descCategoria" class="swal2-input" placeholder="Descripcion" value="${categoria.descripcion}">
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-descCategoria" style="flex: 1;">Descripción de la Categoría:</label>
+    <input id="swal-input-descCategoria" class="swal2-input" placeholder="Descripción" value="${categoria.descripcion}" style="flex: 2;">
+  </div>
+</div>
+
         
       `,
       focusConfirm: false,
@@ -604,9 +642,23 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Actualizar precio",
       html: `
-        <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="fechaDesde" value="${ formatDateToYYYYMMDD(precio.fechaDesde)}">
-        <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${precio.componente.id}">
-        <input id="swal-input-valor" class="swal2-input" placeholder="valor" value="${precio.valor}">
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-fechaDesde" style="flex: 1;">Fecha Desde:</label>
+    <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="Fecha Desde" value="${formatDateToYYYYMMDD(precio.fechaDesde)}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-componenteId" style="flex: 1;">ID del Componente:</label>
+    <input id="swal-input-componenteId" class="swal2-input" placeholder="ID del Componente" value="${precio.componente.id}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-valor" style="flex: 1;">Valor:</label>
+    <input id="swal-input-valor" class="swal2-input" placeholder="Valor" value="${precio.valor}" style="flex: 2;">
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -652,10 +704,28 @@ updateCompra(compra:any): Promise<{
     return Swal.fire({
       title: "Crea un Linea de Compra",
       html: `
-       <input id="swal-input-compraId" class="swal2-input" placeholder="compraId" value="${linea.compra.id}">
-       <input id="swal-input-cantidad" class="swal2-input" placeholder="cantidad" value="${linea.cantidad}">
-       <input id="swal-input-componenteId" class="swal2-input" placeholder="componenteId" value="${linea.componente.id}">
-       <input id="swal-input-subTotal" class="swal2-input" placeholder="subTotal" value="${linea.subTotal}">
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-compraId" style="flex: 1;">ID de la Compra:</label>
+    <input id="swal-input-compraId" class="swal2-input" placeholder="ID de la Compra" value="${linea.compra.id}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-cantidad" style="flex: 1;">Cantidad:</label>
+    <input id="swal-input-cantidad" class="swal2-input" placeholder="Cantidad" value="${linea.cantidad}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-componenteId" style="flex: 1;">ID del Componente:</label>
+    <input id="swal-input-componenteId" class="swal2-input" placeholder="ID del Componente" value="${linea.componente.id}" style="flex: 2;">
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-subTotal" style="flex: 1;">Subtotal:</label>
+    <input id="swal-input-subTotal" class="swal2-input" placeholder="Subtotal" value="${linea.subTotal}" style="flex: 2;">
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,

@@ -1,5 +1,6 @@
 import { HttpHeaders } from "@angular/common/http";
 import { SessionService } from "../../core/services/share/session.service";
+import { Router } from "@angular/router";
 
 export function specialFiltro(nombre: string, dato: any): string {
     if (nombre.includes("precios")) return `$${getMaxPrice(dato)}`;
@@ -75,4 +76,13 @@ export  function formatDateToYYYYMMDD(isoDate: string): string {
   }
 
   return { headers };
+}
+
+export function directed(tipoUsuario: string, router:Router){
+  if(tipoUsuario =="Administrador"){
+    router.navigate(['inventario']); 
+  }
+  else{
+    router.navigate(['productList']);
+  }
 }
