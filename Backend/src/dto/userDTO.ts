@@ -5,7 +5,7 @@ import addErrors from 'ajv-errors';
 
 import { NextFunction, Response } from "express";
 import { CustomRequest } from "../Interfaces/interfaces";
-import { UserDTOSchema } from "../../lib/user-typesSchema";
+import { UserDTOSchema } from "../lib/user-typesSchema";
 
 const ajv = new Ajv({ allErrors: true }).addKeyword('kind')
 

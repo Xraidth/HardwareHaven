@@ -1,4 +1,4 @@
-import { LineaCompraDTOSchema } from './../../lib/lineaCompra-typesSchema';
+import { LineaCompraDTOSchema } from '../lib/lineaCompra-typesSchema';
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";

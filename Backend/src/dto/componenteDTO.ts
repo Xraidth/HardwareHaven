@@ -3,7 +3,7 @@
 import Ajv from "ajv";
 import addErrors from "ajv-errors";
 import {  Response, NextFunction } from "express";
-import { ComponenteDTOSchema } from "../../lib/componente-typesSchema";
+import { ComponenteDTOSchema } from "../lib/componente-typesSchema";
 import { CustomRequest } from "../Interfaces/interfaces";
 
 const ajv = new Ajv({ allErrors: true });
