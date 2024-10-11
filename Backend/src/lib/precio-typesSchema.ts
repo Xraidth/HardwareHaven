@@ -5,7 +5,7 @@ export const PrecioDTOSchema = Type.Object({
     fechaDesde: 
     Type.Optional( 
     Type.String({
-        format: 'date-time',
+        
         errorMessage: {
             type: 'El tipo de fecha desde no es válido, debe ser una cadena en formato de fecha',
             format: 'El formato de fecha desde no es válido',

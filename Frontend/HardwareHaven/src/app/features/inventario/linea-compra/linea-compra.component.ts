@@ -145,9 +145,9 @@ export class LineaCompraComponent  implements OnInit {
     const credenciales = await this.sweetAlertService.InsertLineaCompra();
     if (credenciales) {
       this.serverLineaCompra.create({
-        compraId: credenciales.compraId,
-        cantidad: credenciales.cantidad,
-        componenteId: credenciales.componenteId
+        compraId: Number(credenciales.compraId),
+        cantidad: Number(credenciales.cantidad),
+        componenteId: Number(credenciales.componenteId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -186,10 +186,10 @@ export class LineaCompraComponent  implements OnInit {
     const credenciales = await this.sweetAlertService.updateLineaCompra(lineaCompra);
     if (credenciales) {
       this.serverLineaCompra.update(lineaCompra.id, {
-        compraId: credenciales.compraId,
-        cantidad: credenciales.cantidad,
-        subTotal: credenciales.subTotal,
-        componenteId: credenciales.componenteId
+        compraId: Number(credenciales.compraId),
+        cantidad: Number(credenciales.cantidad),
+        subTotal: Number(credenciales.subTotal),
+        componenteId: Number(credenciales.componenteId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -201,8 +201,9 @@ export class LineaCompraComponent  implements OnInit {
         }),
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe({

@@ -137,8 +137,8 @@ export class PrecioComponent implements OnInit {
     if (credenciales) {
       this.serverPrecio.create({
         fechaDesde: credenciales.fechaDesde,
-        componenteId: credenciales.componenteId,
-        valor: credenciales.valor
+        componenteId: Number(credenciales.componenteId),
+        valor: Number(credenciales.valor)
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
@@ -168,13 +168,14 @@ export class PrecioComponent implements OnInit {
     if (credenciales) {
       this.serverPrecio.update(precio.id, {
         fechaDesde: credenciales.fechaDesde,
-        componenteId: credenciales.componenteId,
-        valor: credenciales.valor
+        componenteId: Number(credenciales.componenteId),
+        valor: Number(credenciales.valor)
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe(

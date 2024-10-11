@@ -92,14 +92,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         } else if (!email) {
         Swal.showValidationMessage('Por favor, ingresa un email');
         return false;
-        }else if (email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-              Swal.showValidationMessage("Ingrese un email válido");
-              return false;
-          }
-          return true;
-      }
+        }
 
          else {
           return {
@@ -126,7 +119,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
   mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string, newUserType: string} | undefined> {
     return Swal.fire({
-      title: "Configura la cuenta",
+      title: "Configuración de cuenta",
       html: `
     <div class="container mt-4">
   <div class="row justify-content-center">
@@ -173,15 +166,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         } else if (!email) {
           Swal.showValidationMessage('Por favor, ingresa un email');
           return false;
-          } else if (email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el email
-            if (!emailRegex.test(email)) {
-                Swal.showValidationMessage("Ingrese un email válido");
-                return false; // Retorna false si el email no es válido
-            }
-
-            return true; // Retorna true si el email es válido
-        }
+          }
         else {
           return {
             newUserName: username,
@@ -243,15 +228,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         if (!email) {
           Swal.showValidationMessage('Por favor, ingrese un email válido');
           return false;
-        }else if (email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el email
-          if (!emailRegex.test(email)) {
-              Swal.showValidationMessage("Ingrese un email válido");
-              return false; // Retorna false si el email no es válido
-          }
-
-          return true; // Retorna true si el email es válido
-      }
+        }
 
         return email;
       }
@@ -501,7 +478,9 @@ updateCompra(compra:any): Promise<{
 
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <label for="swal-input-fechaCancel" style="flex: 1;">Fecha de Cancelación:</label>
-    <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="Fecha de Cancelación" value="${formatDateToYYYYMMDD(compra.fechaCancel) || 'No posee'}" style="flex: 2;">
+    <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="Fecha de Cancelación"
+    value="${compra.fechaCancel ? formatDateToYYYYMMDD(compra.fechaCancel) : ''}"
+    }" style="flex: 2;">
   </div>
 
   <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -550,7 +529,7 @@ updateCompra(compra:any): Promise<{
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.alertWithSuccess('¡Compra creada!',"Listo")
+        this.alertWithSuccess('¡Compra Actualizada!',"Listo")
         return result.value;
       } else {
         return undefined;
@@ -612,7 +591,7 @@ updateCompra(compra:any): Promise<{
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.alertWithSuccess('¡Componente creado!',"Listo")
+        this.alertWithSuccess('¡Componente Actualizado!',"Listo")
         return result.value;
       } else {
         return undefined;
@@ -655,7 +634,7 @@ updateCompra(compra:any): Promise<{
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.alertWithSuccess('¡Categoria creada!',"Listo")
+        this.alertWithSuccess('¡Categoria Actualizada!',"Listo")
         return result.value;
       } else {
         return undefined;
@@ -715,7 +694,7 @@ updateCompra(compra:any): Promise<{
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.alertWithSuccess('¡Precio creado!',"Listo")
+        this.alertWithSuccess('¡Precio Actualizado!',"Listo")
         return result.value;
       } else {
         return undefined;
@@ -788,7 +767,7 @@ updateCompra(compra:any): Promise<{
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.alertWithSuccess('¡Precio creado!',"Listo")
+        this.alertWithSuccess('Linea de Compra Actualizada!',"Listo")
         return result.value;
       } else {
         return undefined;
