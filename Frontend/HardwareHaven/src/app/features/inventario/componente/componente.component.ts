@@ -138,7 +138,7 @@ export class ComponenteComponent implements OnInit{
       this.serverComponente.create({
         name: credenciales.name,
         description: credenciales.description,
-        categoriaId: credenciales.categoriaId
+        categoriaId: Number(credenciales.categoriaId)
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
@@ -177,7 +177,7 @@ export class ComponenteComponent implements OnInit{
       this.serverComponente.update(componente.id, {
         newCompName: credenciales.name,
         newDescription: credenciales.description,
-        categoriaId: credenciales.categoriaId
+        categoriaId: Number(credenciales.categoriaId)
       }).pipe(
         map((response: any) => {
           if (response && response.data) {

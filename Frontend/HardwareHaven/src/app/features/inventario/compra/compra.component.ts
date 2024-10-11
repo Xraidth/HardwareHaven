@@ -149,7 +149,7 @@ export class CompraComponent implements OnInit {
     const credenciales = await this.sweetAlertService.InsertCompra();
     if (credenciales) {
       this.serverCompra.create({
-        userId: credenciales.userId
+        userId: Number(credenciales.userId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -189,11 +189,14 @@ export class CompraComponent implements OnInit {
       this.serverCompra.update(compra.id, {
         fechaCompra: credenciales.fechaCompra,
         fechaCancel: credenciales.fechaCancel,
-        total: credenciales.total
-      }).pipe(
+        total: Number(credenciales.total)
+      }
+
+
+    ).pipe(
         map((r: any) => {
           if (r && r.data) {
-            return r.data;  // Return the updated compra
+            return r.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -201,15 +204,17 @@ export class CompraComponent implements OnInit {
         }),
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
-          return of(null);  // Return null in case of error
+        const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
+
+          return of(null);
         })
       ).subscribe({
         next: (compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();  // Reload entity after update
+            this.cargarEntidad();
           }
         },
         error: (e) => {

@@ -14,7 +14,7 @@ export const CompraDTOSchema = Type.Object({
     fechaCompra: 
     Type.Optional( 
     Type.String({
-        format: 'date-time',
+        
         errorMessage: {
             type: 'La fecha de compra debe ser una cadena',
             format: 'El formato de la fecha de compra no es válido',
@@ -23,7 +23,7 @@ export const CompraDTOSchema = Type.Object({
     fechaCancel: 
     Type.Optional( 
     Type.String({
-        format: 'date-time',
+        
         errorMessage: {
             type: 'La fecha de cancelación debe ser una cadena',
             format: 'El formato de la fecha de cancelación no es válido',

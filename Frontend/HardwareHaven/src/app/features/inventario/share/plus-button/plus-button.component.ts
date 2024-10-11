@@ -79,8 +79,9 @@ export class PlusButtonComponent {
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe(
@@ -107,13 +108,14 @@ export class PlusButtonComponent {
     if (credenciales) {
       this.serverPrecio.create({
         fechaDesde: credenciales.fechaDesde,
-        componenteId: credenciales.componenteId,
-        valor: credenciales.valor
+        componenteId: Number(credenciales.componenteId),
+        valor: Number(credenciales.valor)
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe(
@@ -139,9 +141,9 @@ export class PlusButtonComponent {
     const credenciales = await this.sweetAlertService.InsertLineaCompra();
     if (credenciales) {
       this.serverLineaCompra.create({
-        compraId: credenciales.compraId,
-        cantidad: credenciales.cantidad,
-        componenteId: credenciales.componenteId
+        compraId: Number(credenciales.compraId),
+        cantidad: Number(credenciales.cantidad),
+        componenteId: Number(credenciales.componenteId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -153,8 +155,9 @@ export class PlusButtonComponent {
         }),
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe({
@@ -178,7 +181,7 @@ export class PlusButtonComponent {
     const credenciales = await this.sweetAlertService.InsertCompra();
     if (credenciales) {
       this.serverCompra.create({
-        userId: credenciales.userId
+        userId: Number(credenciales.userId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -216,7 +219,7 @@ export class PlusButtonComponent {
       this.serverComponente.create({
         name: credenciales.name,
         description: credenciales.description,
-        categoriaId: credenciales.categoriaId
+        categoriaId: Number(credenciales.categoriaId)
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
@@ -228,8 +231,9 @@ export class PlusButtonComponent {
         }),
         catchError((error) => {
           this.isLoading = false;
-        const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe(
@@ -269,8 +273,9 @@ export class PlusButtonComponent {
         }),
         catchError((error) => {
           this.isLoading = false;
-          const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage);
+          const errores = error.error?.errors || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.mostrarError(mensajeErrores);
           return of(null);
         })
       ).subscribe(

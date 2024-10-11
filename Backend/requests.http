@@ -2,7 +2,7 @@
 //------------------Usuario-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/user/getAll
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTEsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODU5ODIyMywiZXhwIjoxNzI5MjAzMDIzfQ.BvqHIDwMLMm0RiQrkn1ClsuO1bUxQ5lODi-lGNI--_c
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTMsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODY2NjMxMywiZXhwIjoxNzI5MjcxMTEzfQ.uxSCLFP-6xrBo8r12yfGWAucxoIKnPixFsx1Idqho5E
 
 
 ###GetAll 
@@ -87,14 +87,16 @@ Content-Type: application/json
 DELETE  http://localhost:3000/api/compra/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/compra/update/2
+PUT http://localhost:3000/api/compra/update/37
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6MTMsInRpcG9Vc3VhcmlvIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTcyODY2NzAyMSwiZXhwIjoxNzI5MjcxODIxfQ.ESSk6SeXsdhJ1XQ3uhv-pMuorSpH_JYXnVKruKI8evs
 Content-Type: application/json
 
 {
-"fechaCompra": "2024-04-04",
-"fechaCancel": "2024-04-29",
-"total": "200"
+  "fechaCompra": "2024-04-04",
+  "fechaCancel": "",
+  "total": 200
 }
+
 
 ###PATCH
 PATCH  http://localhost:3000/api/compra/facturate/:id
