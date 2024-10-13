@@ -1,0 +1,75 @@
+.no-access-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000;
+}
+
+.no-access-content {
+  text-align: center;
+  padding: 20px;
+  background-color: #01060F;
+  border: 1px solid #ff0019;
+  border-radius: 8px;
+}
+
+.no-access-content button {
+  border-radius: 8px;
+}
+
+.no-access-content h1 {
+  color: #ff0019;
+  margin-bottom: 10px;
+}
+
+.no-access-content p {
+  color: #ff0019;
+  font-size: 18px;
+}
+
+
+
+.animated-button {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: 2px solid transparent;
+  color: white;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.animated-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+  z-index: -1;
+}
+
+.animated-button:hover {
+  color: blue;
+  border-color: blue;
+}
+
+.animated-button:hover::before {
+  border-color: blue;
+}
+
+.animated-button-animation {
+  animation: buttonColorChange 20s infinite;
+}
+
+@keyframes buttonColorChange {
+  0% { color:  rgb(61, 1, 85); border-color:  rgb(61, 1, 85);  }
+  25% { color: yellow; border-color: yellow; }
+  50% { color: green; border-color: green; }
+  75% { color: rgb(0, 195, 255); border-color: rgb(0, 195, 255); }
+  100% { color: red; border-color: red; }
+}
+
