@@ -1,0 +1,65 @@
+/* ayuda.component.css */
+body {
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  font-family: Arial, sans-serif; /* Fuente general */
+}
+
+.ayuda-div {
+  background-color: #111; /* Fondo más claro que el negro */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+  margin-bottom: 20px;
+}
+
+h1{
+  color: #007bff; /* Azul oscuro */
+}
+
+h2{
+  color: white;
+}
+
+
+.custom-button {
+  display: inline-block;
+  background-color: #d3d3d3;
+  color: #000;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 5px;
+}
+
+.custom-button:hover {
+  background-color: #b0b0b0;
+}
+
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+p {
+  color: white;
+  margin: 0; /* Eliminar margen en párrafos */
+  line-height: 1.5; /* Mejorar el espaciado de línea */
+}

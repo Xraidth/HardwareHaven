@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'envio', component: EnvioComponent, canActivate: [authGuard]},
   { path: 'inventario', component: InventarioComponent, canActivate: [authGuard]},
   { path: 'inventario/usuario', component: UsuarioComponent, canActivate: [authGuard]},
-  { path: 'ayuda', component: AyudaComponent, canActivate: [authGuard]},{
+  { path: 'ayuda', component: AyudaComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 
