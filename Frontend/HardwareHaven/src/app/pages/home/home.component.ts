@@ -149,7 +149,6 @@ gotoAyuda(){
   this.router.navigate(['ayuda']);
 }
 
-
   }
 
 
