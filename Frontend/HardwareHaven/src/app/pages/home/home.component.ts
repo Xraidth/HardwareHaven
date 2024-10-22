@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     //this.sweetAlertService.recibirOfertas();
+
     this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
@@ -109,13 +110,15 @@ async registrarUsuario() {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
     if (credenciales) {
       this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario: credenciales.userType}).subscribe({
-        next: (r: any) => {
+        next: async(r: any) => {
           try {
             if (r && r.data) {
               const user: any = r.data;
               this.user = user;
               SessionService.usuario = this.user
-              directed(user.tipoUsuario, this.router);
+              this.username = this.user.name
+              this.password =this.user.password
+              await this.login();
             } else {
 
             }
@@ -132,8 +135,14 @@ async registrarUsuario() {
         }
       });
 
+
     }
+
   }
+
+
+
+
 
   checkServer() {
     this.shareServer.ComeOn().subscribe({
