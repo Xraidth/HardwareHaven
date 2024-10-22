@@ -115,6 +115,7 @@ async registrarUsuario() {
               const user: any = r.data;
               this.user = user;
               SessionService.usuario = this.user
+              SessionService.usuario.jwt = r.jwt;
               directed(user.tipoUsuario, this.router);
             } else {
 
