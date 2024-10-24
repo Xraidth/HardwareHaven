@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   public recordarClave: boolean = false;
   private intervalId: any;
   public errorServer: boolean = false;
+  public emailofertas:string = '';
   constructor(
     private serverUser: UserService,
     private router: Router,
@@ -39,8 +40,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.sweetAlertService.recibirOfertas();
-
+    this.someFunction();
     this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
@@ -52,6 +52,13 @@ export class HomeComponent implements OnInit {
 
     this.iniciarCarousel(5000);
   }
+
+  async someFunction() {
+    if (!this.emailofertas) {
+      this.emailofertas = await this.sweetAlertService.recibirOfertas();
+    }
+  }
+
 
   iniciarCarousel(time:number){
     const myCarousel = document.querySelector('#carouselExample') as HTMLElement;

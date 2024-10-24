@@ -235,7 +235,10 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     }).then((result) => {
       if (result.isConfirmed) {
         const email = result.value;
-        console.log('Email ingresado:', email); //luego hacer algo con el email
+        console.log('Email ingresado:', email);
+        return email;
+      } else {
+        return undefined;
       }
     });
   }
