@@ -145,7 +145,7 @@ export class CategoriaComponent implements OnInit {
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
-            return response.data;  // Return the newly created categoria
+            return response.data;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;

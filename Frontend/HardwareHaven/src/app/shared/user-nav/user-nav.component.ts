@@ -1,5 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service';
 import { SessionService } from '../../core/services/share/session.service';
 import { UserService } from '../../core/services/entities/user.service';
@@ -20,7 +20,8 @@ export class UserNavComponent implements OnInit {
   public userName:string= "Usuario";
   isDropdownOpen = false;
   constructor(private swa:SweetAlertService,
-    private serverUser: UserService
+    private serverUser: UserService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
@@ -46,12 +47,13 @@ export class UserNavComponent implements OnInit {
           newEmail: credenciales.newEmail,
           newUserType: credenciales.newUserType
         }).subscribe({
-        next: (r: any) => {
+        next: async (r: any) => {
           try {
             if (r && r.data) {
               const user: any = r.data;
               this.usuario = user;
-              SessionService.usuario = this.usuario;
+              SessionService.usuario = await this.usuario;
+              this.router.navigate(['home']);
             } else {
 
             }

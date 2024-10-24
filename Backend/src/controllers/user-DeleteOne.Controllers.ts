@@ -10,6 +10,14 @@ const userDeleteOneController = async (req: Request, res: Response): Promise<voi
     try{
         const user = await userRepo.findOne({id: id});
         if (user) {
+                if(user.compras.length>0){
+                    res.status(404).json({
+                    data: undefined,
+                    message: 'No puede borrar un usuario con compras realizadas'
+                });
+                return
+                }
+
                 const user_deleted = await userRepo.delete({id:id});
                 res.status(200).json({
                     data: user_deleted,

@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.sweetAlertService.recibirOfertas();
+    this.sweetAlertService.recibirOfertas();
 
     this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
