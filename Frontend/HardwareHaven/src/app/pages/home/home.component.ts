@@ -9,7 +9,6 @@ import { SessionService } from '../../core/services/share/session.service.js';
 import { CommonModule } from '@angular/common';
 import { ShareService } from '../../core/services/share/share.service.js';
 import { directed } from '../../shared/functions/functions.js';
-
 declare var bootstrap: any;
 
 @Component({
@@ -80,7 +79,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  login(){
+  async login(){
     this.serverUser.login({name:this.username, password:this.password}).subscribe({
       next: (r: any) => {
         try {
@@ -104,16 +103,18 @@ export class HomeComponent implements OnInit {
       error: (e) => {
         const errores = e.error?.errors || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+
         if (mensajeErrores.length === 0) {
         this.toastService.showToast('Acceso denegado');
       }
+      else{this.sweetAlertService.mostrarError(mensajeErrores);}
     }
   });
   }
 
 
-async registrarUsuario() {
+
+  async registrarUsuario() {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
     if (credenciales) {
       this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario: credenciales.userType}).subscribe({
@@ -146,6 +147,8 @@ async registrarUsuario() {
     }
 
   }
+
+
 
 
 
