@@ -9,7 +9,6 @@ import { SessionService } from '../../core/services/share/session.service.js';
 import { CommonModule } from '@angular/common';
 import { ShareService } from '../../core/services/share/share.service.js';
 import { directed } from '../../shared/functions/functions.js';
-
 declare var bootstrap: any;
 
 @Component({
@@ -28,6 +27,7 @@ export class HomeComponent implements OnInit {
   public recordarClave: boolean = false;
   private intervalId: any;
   public errorServer: boolean = false;
+  public emailofertas:string = '';
   constructor(
     private serverUser: UserService,
     private router: Router,
@@ -39,8 +39,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.sweetAlertService.recibirOfertas();
-
+    this.someFunction();
     this.checkServer();
     const usuariarioAnterior =SessionService.recordarSession()
     if(usuariarioAnterior){
@@ -52,6 +51,13 @@ export class HomeComponent implements OnInit {
 
     this.iniciarCarousel(5000);
   }
+
+  async someFunction() {
+    if (!this.emailofertas) {
+      this.emailofertas = await this.sweetAlertService.recibirOfertas();
+    }
+  }
+
 
   iniciarCarousel(time:number){
     const myCarousel = document.querySelector('#carouselExample') as HTMLElement;
@@ -73,7 +79,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  login(){
+  async login(){
     this.serverUser.login({name:this.username, password:this.password}).subscribe({
       next: (r: any) => {
         try {
@@ -97,16 +103,18 @@ export class HomeComponent implements OnInit {
       error: (e) => {
         const errores = e.error?.errors || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+
         if (mensajeErrores.length === 0) {
         this.toastService.showToast('Acceso denegado');
       }
+      else{this.sweetAlertService.mostrarError(mensajeErrores);}
     }
   });
   }
 
 
-async registrarUsuario() {
+
+  async registrarUsuario() {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
     if (credenciales) {
       this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario: credenciales.userType}).subscribe({
@@ -118,7 +126,11 @@ async registrarUsuario() {
               SessionService.usuario = this.user
               this.username = this.user.name
               this.password =this.user.password
-              await this.login();
+              setTimeout(() => {
+                this.login();
+            }, 2000);
+
+
             } else {
 
             }
@@ -134,11 +146,10 @@ async registrarUsuario() {
         this.sweetAlertService.mostrarError(mensajeErrores);
         }
       });
-
-
     }
-
   }
+
+
 
 
 

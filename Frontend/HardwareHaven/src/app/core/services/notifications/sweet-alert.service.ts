@@ -137,7 +137,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar nueva contraseña (opcional)">
       </div>
       <div class="mb-3">
-        <select id="swal-input-user-type" class="form-select">
+        <select id="swal-input-user-type" class="form-select" ${usuario.tipoUsuario !== 'cliente' ? 'disabled' : ''}>
           <option value="cliente" ${usuario.tipoUsuario === 'cliente' ? 'selected' : ''}>Cliente</option>
           <option value="administrador" ${usuario.tipoUsuario === 'administrador' ? 'selected' : ''}>Administrador</option>
         </select>
@@ -235,7 +235,10 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     }).then((result) => {
       if (result.isConfirmed) {
         const email = result.value;
-        console.log('Email ingresado:', email); //luego hacer algo con el email
+        console.log('Email ingresado:', email);
+        return email;
+      } else {
+        return undefined;
       }
     });
   }
