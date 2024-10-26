@@ -126,7 +126,11 @@ export class HomeComponent implements OnInit {
               SessionService.usuario = this.user
               this.username = this.user.name
               this.password =this.user.password
-              await this.login();
+              setTimeout(() => {
+                this.login();
+            }, 2000);
+
+
             } else {
 
             }
@@ -142,10 +146,7 @@ export class HomeComponent implements OnInit {
         this.sweetAlertService.mostrarError(mensajeErrores);
         }
       });
-
-
     }
-
   }
 
 
