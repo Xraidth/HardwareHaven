@@ -17,14 +17,29 @@ export class SessionService {
     const item = localStorage.getItem('Usuario');
     if (item) {
       this.usuario = JSON.parse(item);
-      return this.usuario; 
+      return this.usuario;
     }
-    return undefined; 
+    return undefined;
   }
 
   public static borrarSession(): void {
     localStorage.removeItem('Usuario');
     this.usuario = null;
-    
+
   }
+
+
+  public static guardarAvisoDeOferta(): void {
+    sessionStorage.setItem('avisoOferta', JSON.stringify("OfertaMostrada"));
+  }
+
+  public static recordarOferta(): any {
+    const item = sessionStorage.getItem('avisoOferta');
+    if (item) {
+
+      return JSON.parse(item);
+    }
+    return undefined;
+  }
+
 }

@@ -53,8 +53,9 @@ export class HomeComponent implements OnInit {
   }
 
   async someFunction() {
-    if (!this.emailofertas) {
+    if (!SessionService.recordarOferta()) {
       this.emailofertas = await this.sweetAlertService.recibirOfertas();
+      SessionService.guardarAvisoDeOferta();
     }
   }
 
