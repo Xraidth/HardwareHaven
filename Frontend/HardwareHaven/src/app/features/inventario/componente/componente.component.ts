@@ -163,8 +163,9 @@ export class ComponenteComponent implements OnInit{
       },
       error: (e) => {
         const errores = e.error?.errors || [];
+const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }
       });
     }
@@ -203,8 +204,9 @@ export class ComponenteComponent implements OnInit{
         },
         error: (e) => {
           const errores = e.error?.errors || [];
+const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
       }
       });
     }
