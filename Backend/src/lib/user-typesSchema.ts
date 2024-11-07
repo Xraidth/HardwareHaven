@@ -62,11 +62,19 @@ export const UserDTOSchema = Type.Object(
       }
     })),
     tipoUsuario: 
-    Type.Optional( 
-    Type.String()),
+    Type.Optional(
+      Type.Union([
+        Type.Literal("Administrador"),
+        Type.Literal("Cliente")
+      ])
+    ),
     newUserType: 
-    Type.Optional( 
-      Type.String()),
+    Type.Optional(
+      Type.Union([
+        Type.Literal("Administrador"),
+        Type.Literal("Cliente")
+      ])
+    ),
   },
   { additionalProperties: true }
 );

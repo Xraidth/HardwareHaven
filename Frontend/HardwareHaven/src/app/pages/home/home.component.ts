@@ -143,8 +143,9 @@ export class HomeComponent implements OnInit {
         error: (e) => {
           console.error('Error en la llamada HTTP:', e);
           const errores = e.error?.errors || [];
+          const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
         }
       });
     }

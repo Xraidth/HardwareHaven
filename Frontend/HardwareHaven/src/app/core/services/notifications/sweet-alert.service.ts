@@ -137,9 +137,9 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar nueva contraseña (opcional)">
       </div>
       <div class="mb-3">
-        <select id="swal-input-user-type" class="form-select" ${usuario.tipoUsuario !== 'cliente' ? 'disabled' : ''}>
-          <option value="cliente" ${usuario.tipoUsuario === 'cliente' ? 'selected' : ''}>Cliente</option>
-          <option value="administrador" ${usuario.tipoUsuario === 'administrador' ? 'selected' : ''}>Administrador</option>
+        <select id="swal-input-user-type" class="form-select" ${usuario.tipoUsuario == 'Cliente' ? 'disabled' : ''}>
+          <option value="Cliente" ${usuario.tipoUsuario === 'Cliente' ? 'selected' : ''}>Cliente</option>
+          <option value="Administrador" ${usuario.tipoUsuario === 'Administrador' ? 'selected' : ''}>Administrador</option>
         </select>
       </div>
     </div>
@@ -180,7 +180,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
     }).then((result) => {
       if (result.isConfirmed) {
         this.alertWithSuccess('¡Cuenta actualizada!',
-          `Nombre de usuario: ${result.value.username} actualizado`);
+          `Nombre de usuario: ${usuario.name} actualizado`);
 
         return result.value;
       } else {
