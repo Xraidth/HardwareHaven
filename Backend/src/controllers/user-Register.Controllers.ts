@@ -20,7 +20,7 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
         } else {
             res.status(404).json({
                 data: undefined,
-                message: 'User incorrect credentials'
+                message: 'Credenciales incorrectas de usuario'
             });
         }
 

@@ -11,6 +11,7 @@ import {
   getErrorMessage,
   specialFiltro
 } from '../../../shared/functions/functions';
+import { SessionService } from '../../../core/services/share/session.service';
 
 
 
@@ -207,6 +208,7 @@ export class UsuarioComponent implements OnInit {
       (response: any) => {
       if (response?.data) {
         this.usuarios = this.usuarios.map(u => u.id === usuario.id ? response.data : u);
+
       }
     },
     error: (e) => {

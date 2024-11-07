@@ -43,26 +43,26 @@ export function specialFiltro(nombre: string, dato: any): string {
   }
   export function getErrorMessage(error: any): string {
     if (error.error && error.error.message) {
-      return error.error.message;  
+      return error.error.message;
     } else if (error.status) {
-      return `Error ${error.status}: ${error.statusText}`;  
+      return `Error ${error.status}: ${error.statusText}`;
     } else {
-      return 'Error desconocido. Inténtalo más tarde.';  
+      return 'Error desconocido. Inténtalo más tarde.';
     }
   }
-  
+
 
 export  function formatDateToYYYYMMDD(isoDate: string): string {
     const date = new Date(isoDate);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`; 
+    return `${year}-${month}-${day}`;
 
 
 }
 
- 
+
  export function getHeaders(includeToken: boolean = true) {
   let headers = new HttpHeaders({
     'Content-Type': 'application/json; charset=UTF-8',
@@ -80,9 +80,9 @@ export  function formatDateToYYYYMMDD(isoDate: string): string {
 
 export function directed(tipoUsuario: string, router:Router){
   if(tipoUsuario =="Administrador"){
-    router.navigate(['inventario']); 
+    router.navigate(['inventario']);
   }
-  else{
+  else if (tipoUsuario =="Cliente"){
     router.navigate(['productList']);
   }
 }
