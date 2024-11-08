@@ -78,6 +78,22 @@ export  function formatDateToYYYYMMDD(isoDate: string): string {
   return { headers };
 }
 
+export function getHeadersFetch(includeToken: boolean = true): Record<string, string> {
+  let headers: Record<string, string> = {
+    'Content-Type': 'application/json; charset=UTF-8',
+  };
+
+  if (includeToken) {
+    const token = SessionService.usuario.jwt || null;
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+
+  return headers;
+}
+
+
 export function directed(tipoUsuario: string, router:Router){
   if(tipoUsuario =="Administrador"){
     router.navigate(['inventario']);
