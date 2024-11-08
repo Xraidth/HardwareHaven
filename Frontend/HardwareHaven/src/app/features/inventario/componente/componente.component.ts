@@ -163,7 +163,7 @@ export class ComponenteComponent implements OnInit{
       },
       error: (e) => {
         const errores = e.error?.errors || [];
-const message = e.error?.message || [];
+        const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
         this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }
@@ -203,8 +203,8 @@ const message = e.error?.message || [];
           this.cargarEntidad(); }
         },
         error: (e) => {
-          const errores = e.error?.errors || [];
-const message = e.error?.message || [];
+            const errores = e.error?.errors || [];
+            const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
           this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
       }

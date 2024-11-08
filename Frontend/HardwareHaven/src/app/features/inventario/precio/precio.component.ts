@@ -156,7 +156,7 @@ export class PrecioComponent implements OnInit {
         },
         error: (e) => {
           const errores = e.error?.errors || [];
-const message = e.error?.message || [];
+          const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
           this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
       }
@@ -175,7 +175,7 @@ const message = e.error?.message || [];
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
-          const message = error?.message || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
           this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
@@ -189,7 +189,7 @@ const message = e.error?.message || [];
       },
       error: (e) => {
         const errores = e.error?.errors || [];
-const message = e.error?.message || [];
+        const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
         this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }

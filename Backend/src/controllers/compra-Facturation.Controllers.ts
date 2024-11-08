@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CompraRepository } from '../repository/compraRepository.js';
-import { generateInvoicePDF} from '../services/invoiceService.js'
+import { copiarFactura, generateInvoicePDF} from '../services/invoiceService.js'
 import { sendInvoiceEmail } from '../services/emailService.js';
 
 const compraRepo = new CompraRepository();
@@ -12,7 +12,8 @@ const compraFacturationController = async (req: Request, res: Response): Promise
         const compra = await compraRepo.findOne({id: id});
 
         if (compra) {
-            const filePath = generateInvoicePDF(compra);
+            const filePath = await generateInvoicePDF(compra);
+            compra.id &&  copiarFactura(compra.id);
            // await sendInvoiceEmail(compra.user.email, filePath);
 
             //Falta actualizar el estado de la compra a facturada si es que se quiere facturar una sola vez

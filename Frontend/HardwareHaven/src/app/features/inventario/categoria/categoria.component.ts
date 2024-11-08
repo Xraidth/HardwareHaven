@@ -206,7 +206,7 @@ export class CategoriaComponent implements OnInit {
       },
       error: (e) => {
         const errores = e.error?.errors || [];
-const message = e.error?.message || [];
+        const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
         this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }

@@ -1,8 +1,11 @@
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import { ComponenteRepository } from '../repository/componenteRepository.js'; 
-import { Compra } from '../model/compra.entity.js';
-import { CompraRepository } from '../repository/compraRepository.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const componenteRepo = new ComponenteRepository();
 
@@ -57,6 +60,7 @@ export const generateInvoicePDF = async (compra: any): Promise<string> => {
 
     doc.end();
 
+    
     return filePath;
 };
 
@@ -64,4 +68,38 @@ export const generateInvoicePDF = async (compra: any): Promise<string> => {
 function truncateName(name?: string, maxLength: number = 20): string {
     if (!name) return 'Componente no definido';
     return name.length > maxLength ? name.slice(0, maxLength) + '...' : name;
+}
+
+
+
+
+export function copiarFactura(compraId:Number) {
+  const rutaOrigen = `./facturas/factura_${compraId}.pdf`;
+  const rutaDestino = path.join(__dirname, '../../../Frontend/HardwareHaven/src/assets/facturas', `factura_${compraId}.pdf`);
+
+  // Verificar si el archivo de origen existe
+  fs.access(rutaOrigen, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(`El archivo de origen no existe: ${rutaOrigen}`);
+      return;
+    }
+
+    // Verificar si el directorio de destino existe, si no, crearlo
+    const dirDestino = path.dirname(rutaDestino);
+    fs.access(dirDestino, fs.constants.F_OK, (err) => {
+      if (err) {
+        console.log(`El directorio de destino no existe, creando: ${dirDestino}`);
+        fs.mkdirSync(dirDestino, { recursive: true });
+      }
+
+      // Copiar el archivo
+      fs.copyFile(rutaOrigen, rutaDestino, (err) => {
+        if (err) {
+          console.error('Error al copiar el archivo:', err);
+        } else {
+          console.log(`Factura ${compraId} facturada`);
+        }
+      });
+    });
+  });
 }
