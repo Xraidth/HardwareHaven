@@ -35,7 +35,7 @@ export class ResumenCompraComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.usuario = SessionService.usuario; 
+    this.usuario = SessionService.usuario;
     if (this.usuario && this.usuario.carrito) {
       this.carrito = this.usuario.carrito;
       this.generarCompra();}
@@ -43,27 +43,27 @@ export class ResumenCompraComponent implements OnInit {
       this.sweetAlertService.mostrarError('No se encontró información del usuario o del carrito');
       return;
     }
-    
-    
-    
+
+
+
   }
 
   async generarCompra() {
     this.estado = "cargando";
     try {
       const r: any = await this.serverCompra.create({ userId: this.usuario.id }).toPromise();
-  
+
       if (r && r.data) {
         const compraRealizada: any = r.data;
         this.compraRealizada = compraRealizada;
-  
+
         if (this.carrito && this.carrito.length) {
-          
+
           const promises = this.carrito.map((p: any) => this.generarLineaCompra(p));
-  
-          
+
+
           await Promise.all(promises);
-  
+
           this.total = SessionService.usuario.carrito.total;
           this.compraRealizada.total = this.total;
           this.estado = "compraRealizada";
@@ -80,14 +80,14 @@ export class ResumenCompraComponent implements OnInit {
       this.sweetAlertService.mostrarError('Error al generar la compra');
     }
   }
-  
+
 
   generarLineaCompra(p: any) {
     if (!this.compraRealizada || !this.compraRealizada.id) {
       this.sweetAlertService.mostrarError('No se ha generado una linea de compra válida.');
       return;
     }
-    
+
     this.serverLineaCompra.create({
       compraId: this.compraRealizada.id,
       cantidad: p.quantity,
@@ -114,41 +114,26 @@ export class ResumenCompraComponent implements OnInit {
   }
 
 
- 
-facturatePromi(id: number): Promise<void> {
-  return new Promise((resolve, reject) => {
-    this.serverCompra.facturate(id).subscribe({
-      next: (r: any) => {
-        if (r && r.data && r.message) {
-          this.sweetAlertService.alertWithSuccess("Facturación realizada", r.message);
-          resolve(); 
-        } else {
-          this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
-          reject('Estructura inesperada en la respuesta');
-        }
-      },
-      error: (e) => {
-        this.estado = "";
-        console.error('Error en la creación de línea de compra:', e);
-        this.sweetAlertService.mostrarError('Error al crear la línea de compra');
-        reject(e); 
-      }
-    });
-  });
-}
 
 
 async facturate(id: number) {
   try {
-    await this.facturatePromi(id); 
-    this.abrirFactura(id);         
+    await this.serverCompra.facturatePromise(id);
+    this.abrirFactura(id);
   } catch (error) {
     console.error('Error en facturate:', error);
+    this.sweetAlertService.mostrarError('Error al facturar la compra');
   }
 }
+
+
+
 abrirFactura(id: number) {
-    //window.open(`/assets/facturas/factura_${id}.pdf`, '_blank');
+
+  window.open(`/assets/facturas/factura_${id}.pdf`, '_blank');
+
 }
+
 
 
 facturaBoton(){
