@@ -101,56 +101,69 @@ export class HomeComponent implements OnInit {
           this.sweetAlertService.mostrarError(mensajeError);
         }
       },
-      error: (e) => {
-        const errores = e.error?.errors || [];
+      error: (error:any) => {
+        const errores = error.error.errors || [];
+        const message = error.error.message || [];
         const mensajeErrores = errores.join(', ');
 
         if (mensajeErrores.length === 0) {
         this.toastService.showToast('Acceso denegado');
       }
-      else{this.sweetAlertService.mostrarError(mensajeErrores);}
+      else{this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);}
     }
   });
   }
 
+async registrarUsuario() {
+  const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
 
-
-  async registrarUsuario() {
-    const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
-    if (credenciales) {
-      this.serverUser.create({name:credenciales.username, password:credenciales.password, email:credenciales.email, tipoUsuario: credenciales.userType}).subscribe({
-        next: async(r: any) => {
-          try {
-            if (r && r.data) {
-              const user: any = r.data;
-              this.user = user;
-              SessionService.usuario = this.user
-              this.username = this.user.name
-              this.password =this.user.password
-              setTimeout(() => {
-                this.login();
-            }, 2000);
-
-
-            } else {
-
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r);
-          }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
-          const errores = e.error?.errors || [];
-          const message = e.error?.message || [];
-        const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
-        }
+  if (credenciales) {
+    try {
+      const r: any = await this.createPromise({
+        name: credenciales.username,
+        password: credenciales.password,
+        email: credenciales.email,
+        tipoUsuario: credenciales.userType
       });
+
+      if (r && r.data) {
+        const user: any = r.data;
+        this.user = user;
+        SessionService.usuario = this.user;
+        this.username = this.user.name;
+        this.password = this.user.password;
+
+
+          this.login();
+
+      }
+    } catch (error:any) {
+      console.error('Error en la llamada HTTP:', error);
+      const errores = error.error.errors || [];
+      const mensajeErrores = errores.join(', ');
+      const message = error.error.message || [];
+      this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
     }
   }
+}
 
+
+createPromise(data: any): Promise<any> {
+  return new Promise((resolve, reject) => {
+    this.serverUser.create(data).subscribe({
+      next: (r: any) => {
+        if (r) {
+          resolve(r);
+        } else {
+          reject('No data returned');
+        }
+      },
+      error: (e) => {
+        reject(e);
+      }
+    });
+  });
+}
 
 
 

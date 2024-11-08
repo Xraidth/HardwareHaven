@@ -114,23 +114,42 @@ export class ResumenCompraComponent implements OnInit {
   }
 
 
-  facturate(id:number){
+ 
+facturatePromi(id: number): Promise<void> {
+  return new Promise((resolve, reject) => {
     this.serverCompra.facturate(id).subscribe({
       next: (r: any) => {
         if (r && r.data && r.message) {
-          this.sweetAlertService.alertWithSuccess("Facturación realizada", r.message);  
-          
+          this.sweetAlertService.alertWithSuccess("Facturación realizada", r.message);
+          resolve(); 
         } else {
           this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
+          reject('Estructura inesperada en la respuesta');
         }
       },
       error: (e) => {
-        this.estado= "";
+        this.estado = "";
         console.error('Error en la creación de línea de compra:', e);
         this.sweetAlertService.mostrarError('Error al crear la línea de compra');
+        reject(e); 
       }
     });
+  });
+}
+
+
+async facturate(id: number) {
+  try {
+    await this.facturatePromi(id); 
+    this.abrirFactura(id);         
+  } catch (error) {
+    console.error('Error en facturate:', error);
   }
+}
+abrirFactura(id: number) {
+    //window.open(`/assets/facturas/factura_${id}.pdf`, '_blank');
+}
+
 
 facturaBoton(){
   this.facturate(this.compraRealizada.id);

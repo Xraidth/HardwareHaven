@@ -80,8 +80,9 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe(
@@ -94,8 +95,9 @@ export class PlusButtonComponent {
       },
       error: (e) => {
         const errores = e.error?.errors || [];
+        const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }
     }
 
@@ -114,8 +116,9 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe(
@@ -129,8 +132,9 @@ export class PlusButtonComponent {
       },
       error: (e) => {
         const errores = e.error?.errors || [];
+const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }
     }
     );
@@ -156,8 +160,9 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe({
@@ -170,8 +175,9 @@ export class PlusButtonComponent {
         },
         error: (e) => {
           const errores = e.error?.errors || [];
+const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
       }
       });
     }
@@ -206,8 +212,9 @@ export class PlusButtonComponent {
         },
         error: (e) => {
           const errores = e.error?.errors || [];
+const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
       }
       });
     }
@@ -232,8 +239,9 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe(
@@ -247,8 +255,9 @@ export class PlusButtonComponent {
           },
           error: (e) => {
             const errores = e.error?.errors || [];
+const message = e.error?.message || [];
             const mensajeErrores = errores.join(', ');
-            this.sweetAlertService.mostrarError(mensajeErrores);
+            this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
         }
 
         }
@@ -274,8 +283,9 @@ export class PlusButtonComponent {
         catchError((error) => {
           this.isLoading = false;
           const errores = error.error?.errors || [];
+          const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores);
+          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe(
@@ -290,8 +300,9 @@ export class PlusButtonComponent {
       },
       error: (e) => {
         const errores = e.error?.errors || [];
+        const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores);
+        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
     }
     }
 
