@@ -14,7 +14,7 @@ header {
 }
 
 .bg-body-tertiary {
-    background-color: transparent !important; 
+    background-color: transparent !important;
 }
 
 .title_home{
@@ -31,12 +31,12 @@ header {
     text-decoration: underline;
     transition: color 0.3s;
   }
-  
+
   .link-button:hover {
     color: white;
     text-decoration: none;
   }
-  
+
 
   .navbar-line {
     border-bottom: 1px solid;
@@ -50,17 +50,6 @@ header {
     75% { border-color: rgb(0, 195, 255); }
     100% { border-color: red; }
   }
-
-
-
-
-
-  
-
-
-
-
-
 
   .animated-button {
     position: relative;
@@ -116,9 +105,9 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+    z-index: 1000;
   }
-  
+
   .error-message {
     background-color: white;
     padding: 20px;
@@ -153,7 +142,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 

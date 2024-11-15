@@ -86,13 +86,7 @@ export class HomeComponent implements OnInit {
         try {
 
           if (r) {
-
-
-
-
-
-            SessionService.guardarSession(r.jwt,this.recordarClave);
-
+            this.user = SessionService.guardarSession(r.jwt,this.recordarClave);
             this.errorServer=false;
             directed(this.user.tipoUsuario, this.router)
           } else {
