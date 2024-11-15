@@ -85,13 +85,15 @@ export class HomeComponent implements OnInit {
       next: (r: any) => {
         try {
 
-          if (r && r.data) {
+          if (r) {
 
-            this.user = r.data;
-            SessionService.usuario = this.user;
-            if(this.recordarClave){SessionService.guardarSession();}
+
+
+
+
+            SessionService.guardarSession(r.jwt,this.recordarClave);
+
             this.errorServer=false;
-            SessionService.usuario.jwt = r.jwt;
             directed(this.user.tipoUsuario, this.router)
           } else {
             this.sweetAlertService.mostrarError("La respuesta del servidor es inválida.");

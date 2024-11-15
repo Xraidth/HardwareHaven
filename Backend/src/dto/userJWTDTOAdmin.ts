@@ -19,13 +19,13 @@ const userJWTDTOAdmin = async (req: CustomRequest, res: Response, next: NextFunc
       encoder.encode(process.env.JWT_PRIVATE_KEY as string)
     ) as { payload: Payload }; 
 
-    if(!payload.tipoUsuario) return res.status(500).send('Erro interno "Erro al momento de crear o leer el tipo de usuario"');
-    if (!['Administrador'].includes(payload.tipoUsuario)) {
+    if(!payload.user.tipoUsuario) return res.status(500).send('Erro interno "Erro al momento de crear o leer el tipo de usuario"');
+    if (!['Administrador'].includes(payload.user.tipoUsuario)) {
         return res.status(403).send('Acceso denegado por tipo de usuario'); 
     }
     
-    req.id = Number(payload.id);
-    req.tipoUsuario = payload.tipoUsuario; 
+    req.id = Number(payload.user.id);
+    req.tipoUsuario = payload.user.tipoUsuario; 
 
     next();
   } catch (error) {
