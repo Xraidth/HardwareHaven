@@ -1,8 +1,8 @@
 import Ajv from "ajv";
 import addErrors from "ajv-errors";
 import { Response, NextFunction } from "express";
-import { CategoriaDTOSchema } from "../lib/categoria-typesSchema";
-import { CustomRequest } from "../Interfaces/interfaces";
+import { CategoriaDTOSchema } from "../lib/categoria-typesSchema.js";
+import { CustomRequest } from "../Interfaces/interfaces.js";
 
 const ajv = new Ajv({ allErrors: true });
 addErrors(ajv);

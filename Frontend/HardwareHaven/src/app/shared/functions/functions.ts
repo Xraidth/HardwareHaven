@@ -69,7 +69,7 @@ export  function formatDateToYYYYMMDD(isoDate: string): string {
   });
 
   if (includeToken) {
-    const token = SessionService.usuario.jwt || null;
+    const token = SessionService.jwt || null;
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
@@ -84,7 +84,7 @@ export function getHeadersFetch(includeToken: boolean = true): Record<string, st
   };
 
   if (includeToken) {
-    const token = SessionService.usuario.jwt || null;
+    const token = SessionService.jwt || null;
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
