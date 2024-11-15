@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { UserRepository } from "../repository/userRepository.js";
 //import { compare } from "bcrypt"; //Para encriptar la clave en la base de datos
 import { SignJWT } from 'jose';
+import { User } from '../model/user.entity.js';
 
 const userRepo = new UserRepository();
 
@@ -12,12 +13,19 @@ const userLoginController = async (req: Request, res: Response) => {
         const user = await userRepo.findName(name);
         
         if (user) {
-            const checkPassword = (password == user.password)//await compare(password, user.password);
+            const checkPassword = (password == user.password)
             if (!checkPassword) {
                 return res.status(401).send('Credenciales incorrectas');
             }
+            
+            const userTosend = {
+                name: user.name,
+                email: user.email,
+                tipoUsuario: user.tipoUsuario,
+                id: user.id
+            }
 
-            const jwtConstructor = new SignJWT({ id: user.id, tipoUsuario: user.tipoUsuario  });
+            const jwtConstructor = new SignJWT({ user: userTosend });
             const encoder = new TextEncoder();
             const jwt = await jwtConstructor.setProtectedHeader({
                 alg: 'HS256',
@@ -29,7 +37,7 @@ const userLoginController = async (req: Request, res: Response) => {
 
             return res.status(200).json({
                 jwt,
-                data: user,
+                data: undefined,
                 message: "User logged in successfully"
             });
         } else {

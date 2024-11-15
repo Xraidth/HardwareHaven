@@ -20,15 +20,13 @@ import { directed, getErrorMessage } from '../../../shared/functions/functions';
 export class PerfilComponent implements OnInit {
 public usuario:any;
 public username: string = 'Usuario123';
-public password: string = 'miContraseñaSecreta';
-public passwordFieldType: string = 'password';
+
+
   constructor(private router: Router, private sweetAlertService: SweetAlertService, private serverUser: UserService){}
   ngOnInit(): void {
   this.usuario = SessionService.usuario;
 }
-togglePassword() {
-  this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-}
+
 goBack() {
   directed(this.usuario.tipoUsuario, this.router)
 }
@@ -41,7 +39,7 @@ borrarCuenta(){
         map((response: any) => {
           if (response) {
             this.sweetAlertService.simpleAlert("Su cuenta fue eliminada, gracias por comprar en Hardware Haven");
-            return response; 
+            return response;
           } else {
             console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
@@ -49,13 +47,13 @@ borrarCuenta(){
         }),
         catchError((error) => {
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage);  
-          return of(null);  
+          this.sweetAlertService.mostrarError(errorMessage);
+          return of(null);
         })
       ).subscribe((usuario: any) => {
         if (usuario) {
           this.usuario = usuario;
-          this.router.navigate(['/home']); 
+          this.router.navigate(['/home']);
         }
       });
     } else if (result.isDismissed) {
