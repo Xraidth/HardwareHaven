@@ -13,24 +13,24 @@ header {
 }
 
 .bg-body-tertiary {
-    background-color: transparent !important; 
+    background-color: transparent !important;
 }
 
 
-  
+
   .title_home{
     width: 200px;
 }
 
 .carrito-cant {
     background-color: rgb(2, 6, 66);
-    width: 26px; 
-    height: 26px; 
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; 
+    color: white;
 }
 
 
@@ -55,8 +55,8 @@ main{
     color: #bbb9b9;
   }
 
-  
-  
+
+
 .profile-item {
     margin-bottom: 15px;
     font-size: 20px;
@@ -67,22 +67,22 @@ main{
     align-items: center;
     font-weight: bold;
     margin-bottom: 5px;
-    
+
 }
 .profile-item span {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 .profile-item input.custom-password-pf {
-    
+
     width: calc(100% - 42px);
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     color: black;
-    
+
 }
 .toggle-password {
     width: 30px;
@@ -92,15 +92,69 @@ main{
     cursor: pointer;
 }
 .custom-password-pf {
-    text-align: center; 
+    text-align: center;
 }
 
 .fixed-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1; 
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 1;
 }
 .custom-contenedor {
     position: relative;
 }
+
+
+
+
+
+
+@media (max-width: 768px){
+  .custom-menu{
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
+    gap:5px;
+  }
+
+  .navbar-collapse {
+    display: flex !important;  /* Asegura que el contenido se mantenga visible */
+    flex-direction: column-reverse !important; /* Alinea los elementos horizontalmente */
+    justify-content: center !important;
+  }
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+  }
+
+  header{
+    width: 100%;
+
+  }
+
+  .custom-contenedor {
+    background-color: rgb(4, 0, 24);
+    width: 80%;
+    height: auto;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+}
+
+}
+
+
+
+
+@media (max-width: 768px){
+.fixed-button {
+  position: relative;
+
+}}

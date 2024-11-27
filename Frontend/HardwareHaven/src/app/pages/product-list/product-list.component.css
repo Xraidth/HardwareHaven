@@ -16,35 +16,65 @@ header {
 }
 
 .bg-body-tertiary {
-    background-color: transparent !important; 
+    background-color: transparent !important;
 }
 
 
-  
+
   .title_home{
     width: 200px;
 }
 
 .carrito-cant {
     background-color: rgb(2, 6, 66);
-    width: 26px; 
-    height: 26px; 
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; 
+    color: white;
 }
 
 
 .custom-menu{
    display: flex;
    justify-content: space-between;
-   align-items: center; 
+   align-items: center;
    width: 75%;
    margin-right: 50px;
-   
-   
+
+
+}
+
+@media (max-width: 768px){
+  .custom-menu{
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
+    gap:5px;
+  }
+
+  .navbar-collapse {
+    display: flex !important;  /* Asegura que el contenido se mantenga visible */
+    flex-direction: column-reverse !important; /* Alinea los elementos horizontalmente */
+    justify-content: center !important;
+  }
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+  }
+
+  header{
+    width: 100%;
+    position:fixed;
+    z-index: 40000;
+  }
+
 }
 
 
@@ -54,4 +84,6 @@ header {
 
 
 
-  
+
+
+
