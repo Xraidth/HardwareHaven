@@ -72,7 +72,7 @@ header {
   header{
     width: 100%;
     position:fixed;
-    z-index: 40000;
+    z-index: 10;
   }
 
 }

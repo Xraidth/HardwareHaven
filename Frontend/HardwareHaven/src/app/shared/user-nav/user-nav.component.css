@@ -7,21 +7,12 @@
     font-size: 22px;
     color: white;
   }
-  
-
-  
-
-
-
-
-
-
 
   .dropdown {
     position: relative;
     display: inline-block;
   }
-  
+
   .user-nav {
     padding: 10px 15px;
     margin: 5px;
@@ -34,12 +25,12 @@
     text-align: center;
 }
 
-  
-  
+
+
   .user-nav:hover {
     background-color: #0056b3; /* Color al pasar el ratón */
   }
-  
+
   .dropdown-menu {
     position: absolute;
     top: 100%; /* Alinea el menú con el botón */
@@ -51,11 +42,11 @@
     display: none; /* Oculto por defecto */
     z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
   }
-  
+
   .dropdown-menu.show {
     display: block; /* Muestra el menú cuando está activo */
   }
-  
+
   .dropdown-item {
     padding: 10px 15px; /* Espaciado del ítem */
     color: #333; /* Color del texto */
@@ -63,9 +54,38 @@
     display: block; /* Asegúrate de que ocupe todo el ancho */
     transition: background-color 0.3s; /* Transición suave */
   }
-  
+
   .dropdown-item:hover {
     background-color: #f1f1f1; /* Color al pasar el ratón sobre los ítems */
   }
-  
-  
+
+
+
+  @media (max-width: 768px){
+
+
+
+
+     .dropdown-menu {
+      font-size: 22px;
+      position: absolute;
+      width: 120%;
+    }
+
+    .dropdown-menu.show {
+      display: block; /* Muestra el menú cuando está activo */
+    }
+
+    .dropdown-item {
+      padding: 10px 15px; /* Espaciado del ítem */
+      color: #333; /* Color del texto */
+      text-decoration: none; /* Sin subrayado */
+      display: block; /* Asegúrate de que ocupe todo el ancho */
+      transition: background-color 0.3s; /* Transición suave */
+    }
+
+    .dropdown-item:hover {
+      background-color: #f1f1f1; /* Color al pasar el ratón sobre los ítems */
+    }
+
+  }

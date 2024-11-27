@@ -14,3 +14,21 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 768px){
+
+  .carrito {
+
+    width: auto;
+    height: auto;
+    margin: 20px auto;
+    overflow-x: auto
+}
+.custom-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+}
