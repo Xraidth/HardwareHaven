@@ -145,5 +145,43 @@ header {
 
 }
 
+.form-login{
+  margin-left:auto!important;
+}
+
+@media (max-width: 768px){
+  .custom-menu{
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
+    gap:5px;
+  }
+
+  .navbar-collapse {
+    display: flex !important;  /* Asegura que el contenido se mantenga visible */
+    flex-direction: column-reverse !important; /* Alinea los elementos horizontalmente */
+    justify-content: center !important;
+  }
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+  }
+
+  header{
+    width: 100%;
 
 
+  }
+
+  .form-login {
+    margin-top: 5px;
+    margin-left: 0 !important;
+    gap:2px;
+    width: 80%;
+}
+
+}
