@@ -1,6 +1,6 @@
 <div class="bg-black">
     <header>
-        
+
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand font-Montserrat text-light" href="productList">
@@ -18,23 +18,21 @@
               </form>
                </div>
               </div>
-              <div class="d-flex justify-content-center align-items-center" (click)="pasarAcompra()">
+              <div class="d-flex justify-content-center align-items-center carrito-div" (click)="pasarAcompra()">
               <img src="assets\images\Carrito.png" width="25" height="25" alt="" title="" class="img-small">
               <span class="ms-1 text-light">
               <p class="carrito-cant">{{carrito.length}}</p>
               </span>
               </div>
-                <div class="ms-auto ">
+                <div>
                     <app-user-nav [usuario]="usuario"></app-user-nav>
                 </div>
-                <div>
-                  
-                </div>
+
 
             </div>
         </div>
     </nav>
-    
+
     </header>
     <main>
       <div class="d-flex justify-content-center align-items-center text-center">
@@ -43,14 +41,14 @@
 
       <div class="d-flex justify-content-center align-items-center text-center">
       <div class="custom-menu" >
-        <div>
+        <div class="w-sm-auto">
           <select class="form-select" aria-label="Default select example" (change)="onSortChangeMenu($event)">
             <option value="Or" selected>Menu:</option>
             <option *ngFor="let categoria of categorias" [value]="categoria.descripcion">{{categoria.descripcion}}</option>
           </select>
         </div>
-        
-      <div>
+
+      <div class="w-sm-auto">
         <select class="form-select" aria-label="Default select example" (change)="onSortChangeOrden($event)">
           <option value="Or" selected>Ordenar Por:</option>
           <option value="az">Ordenar A/Z</option>
@@ -60,17 +58,17 @@
         </select>
       </div>
 
-      <div >
+      <div class="w-sm-auto">
         <button (click)="vaciarCarro()" class="btn btn-light">
           Vaciar carrito
         </button>
       </div>
-    
+
     </div></div>
 
-    
+
       <div class="row mt-5 justify-content-center">
-        
+
         <div *ngIf="products.length > 0; else noProducts" class="row">
           <div class="col-md-4 mb-4" *ngFor="let product of products">
              <app-card [product]="product" (productSelected)="onProductSelected($event)" (productUnSelected)="onProductUnSelected($event)"></app-card>
@@ -80,6 +78,6 @@
           <p class="text-center">No hay productos disponibles.</p>
         </ng-template>
       </div>
-      
+
     </main>
 </div>
