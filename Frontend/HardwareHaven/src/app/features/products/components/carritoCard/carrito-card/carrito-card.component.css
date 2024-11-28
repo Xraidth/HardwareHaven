@@ -2,7 +2,7 @@
 .table-list {
     display: flex;
     justify-content: space-evenly;
-    align-items: center; 
+    align-items: center;
     padding: 0;
     margin-left: 25px;
     list-style: none;
@@ -10,13 +10,13 @@
 }
 
 .truncate {
-    white-space: nowrap; 
-    overflow: hidden;    
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
-    width: 120px;    
-    max-width: 120px;  
+    width: 120px;
+    max-width: 120px;
     text-align: start;
-    
+
 }
 
 .quantity-selector {
@@ -32,4 +32,49 @@
 .quantity-selector .form-control {
     width: 60px;
     text-align: center;
+}
+
+
+
+@media (max-width: 768px){
+
+  .table-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    padding: 0;
+    margin-left: 0px;
+    list-style: none;
+    width: 100%;
+    position: relative;
+
+}
+
+.truncate {
+
+  margin: 10px;
+}
+
+.carrito-line{
+border-radius: 10px;
+}
+.btn-x {
+  position: absolute;
+  top: 10px; /* Ajusta la distancia desde la parte superior */
+  right: 10px; /* Ajusta la distancia desde la parte derecha */
+  cursor: pointer; /* Aparece el cursor de mano */
+}
+.amount-mobile{
+  margin: 10px;
+}
+
+.card-mov-titulo{
+  font-size: 22px;
+  font-weight: bold;
+}
+.precio-mov{
+  margin: 10px;
+}
+
 }

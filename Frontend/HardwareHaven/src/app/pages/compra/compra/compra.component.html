@@ -43,7 +43,7 @@
           {{ mostrarResumen ? 'Resumen de Compra' : 'Carrito de Compra' }}
       </h1>
 
-      <div class="d-flex justify-content-center align-items-center">
+      <div class="carrito-flex">
           <app-carrito *ngIf="!mostrarResumen"></app-carrito>
           <app-resumen-compra *ngIf="mostrarResumen"></app-resumen-compra>
       </div>

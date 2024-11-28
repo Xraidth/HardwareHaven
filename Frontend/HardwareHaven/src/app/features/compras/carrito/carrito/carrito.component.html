@@ -1,6 +1,6 @@
 
 <div class="carrito container">
-    <div class="row" *ngIf="mostrarBoton && carrito.length > 0 ">
+    <div class="row columnas-carrito" *ngIf="mostrarBoton && carrito.length > 0 ">
         <ul class="list-unstyled d-flex justify-content-evenly align-items-center col-12">
             <li class="fw-bold">Nombre</li>
             <li class="fw-bold">Descripción</li>
@@ -8,8 +8,8 @@
             <li class="fw-bold ">Precio</li>
             <li class="fw-bold">Cantidad</li>
             <li class="fw-bold">Eliminar</li>
-            
-        </ul>    
+
+        </ul>
     </div>
 
     <div *ngIf="carrito.length > 0; else noProductsInCarrito" class="row mb-3">
@@ -17,15 +17,15 @@
             <app-carrito-card [product]="product" (quantityChange)="onQuantityChange()"></app-carrito-card>
         </div>
     </div>
-    
+
     <ng-template #noProductsInCarrito>
         <p class="text-center bg-success">El "Carrito" está vacío.</p>
     </ng-template>
-    
+
     <hr>
-    
+
     <div *ngIf="mostrarBoton && carrito.length > 0 " class="row">
-        <div class="col-12 d-flex justify-content-end me-3">
+        <div class="col-12 d-flex justify-content-center justify-content-md-end me-3">
             <p>Total: <span class="fw-bold">{{ total | currency }}</span></p>
         </div>
     </div>

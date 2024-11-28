@@ -19,16 +19,20 @@
 
   .carrito {
 
-    width: auto;
+    width: 100% !important;
     height: auto;
     margin: 20px auto;
-    overflow-x: auto
+
 }
 .custom-main{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.columnas-carrito{
+  display:none;
 }
 
 }
