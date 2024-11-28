@@ -49,7 +49,11 @@ header {
     align-items: center;
 }
 
-
+.carrito-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 @media (max-width: 768px){
@@ -77,4 +81,23 @@ header {
   header{
     width: 100%;
 
-  }}
+  }
+
+  .carrito-flex {
+    display:block;
+  }
+
+  .btn-custom-compra{
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+.custom-botom-banner{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+}
