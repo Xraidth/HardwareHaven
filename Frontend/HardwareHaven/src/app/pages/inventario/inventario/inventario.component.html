@@ -17,7 +17,7 @@
               </form>
             </div>
           </div>
-          <div class="ms-auto">
+          <div class="">
             <app-user-nav [usuario]="usuario"></app-user-nav>
           </div>
         </div>
@@ -27,7 +27,8 @@
   <main>
     <h1 class="text-center title-inventario mb-4 mt-3">Inventario</h1>
 
-    <div class="button-container">
+    <div class="mov-mobile">
+    <div class="button-container overflow-auto">
       <div class="button-list">
         <button class="button-item" (click)="loadItems('Usuario') "  [ngClass]="{'selected': nowType === 'Usuario'}">Usuarios</button>
         <button class="button-item" (click)="loadItems('Compra')"[ngClass]="{'selected': nowType === 'Compra'}">Compras</button>
@@ -38,11 +39,12 @@
       </div>
     </div>
 
+
     <div class="float-button">
       <app-plus-button [nowType] = "nowType" (changeEntityEvent)="getplusbuttonChange($event)"></app-plus-button>
     </div>
-    
-    
+
+
     <ng-container [ngSwitch]="nowType">
       <app-usuario *ngSwitchCase="'Usuario'" [searchQuery]="searchQuery"></app-usuario>
       <app-precio *ngSwitchCase="'Precio'" [searchQuery]="searchQuery"></app-precio>
@@ -55,7 +57,7 @@
       </div>
       <p *ngSwitchDefault>Por favor, selecciona un tipo válido.</p>
     </ng-container>
-    
-    
+  </div>
+
   </main>
 </div>
