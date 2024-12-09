@@ -131,6 +131,9 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         <input id="swal-input-email" class="form-control" placeholder="Email" value="${usuario.email || 'email'}">
       </div>
       <div class="mb-3">
+        <input id="swal-input-password-act" type="password" class="form-control" placeholder="Contraseña actual">
+      </div>
+      <div class="mb-3">
         <input id="swal-input-password" type="password" class="form-control" placeholder="Nueva contraseña (opcional)">
       </div>
       <div class="mb-3">
@@ -156,14 +159,19 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
         const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
-
+        const actPassword = (document.getElementById('swal-input-password-act')as HTMLSelectElement).value;
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
           return false;
-        } else if (password && password !== confirmPassword) {
+        } else if (password !== confirmPassword) {
           Swal.showValidationMessage('Las contraseñas no coinciden');
           return false;
-        } else if (!email) {
+        }
+        else if (!actPassword) {
+          Swal.showValidationMessage('Introduce tu contraseña para modificar');
+          return false;
+        }
+         else if (!email) {
           Swal.showValidationMessage('Por favor, ingresa un email');
           return false;
           }
@@ -171,7 +179,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           return {
             newUserName: username,
             newPassword: password,
-            oldPassword: usuario.password,
+            oldPassword: actPassword,
             newEmail: email,
             newUserType: userType
           };

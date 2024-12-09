@@ -4,7 +4,9 @@ import { SweetAlertService } from '../../core/services/notifications/sweet-alert
 import { SessionService } from '../../core/services/share/session.service';
 import { UserService } from '../../core/services/entities/user.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { getErrorMessage } from '../functions/functions';
 @Component({
   selector: 'app-user-nav',
   standalone: true,
@@ -35,40 +37,46 @@ export class UserNavComponent implements OnInit {
       return str;
     }
   }
-  async configurarCuenta(){
-    let credenciales = await this.swa.mostrarConfigurarCuenta(this.usuario);
-    if (credenciales) {
-      this.serverUser.update(
-        SessionService.usuario.id,
-        {
-          newPassword: credenciales.newPassword,
-          newUserName: credenciales.newUserName,
-          oldPassword: credenciales.oldPassword,
-          newEmail: credenciales.newEmail,
-          newUserType: credenciales.newUserType
-        }).subscribe({
-        next: async (r: any) => {
-          try {
-            if (r && r.data) {
-              const user: any = r.data;
-              this.usuario = user;
-              SessionService.usuario = await this.usuario;
-              this.router.navigate(['home']);
-            } else {
 
-            }
-          } catch (error) {
-            console.error('Error al procesar los datos:', error);
-            console.log('Objeto recibido:', r);
-          }
-        },
-        error: (e) => {
-          console.error('Error en la llamada HTTP:', e);
-        }
-      });
+
+  async configurarCuenta(): Promise<void> {
+    const credenciales = await this.swa.mostrarConfigurarCuenta(this.usuario);
+    if (credenciales) {
+      this.serverUser.update(this.usuario.id, {
+        newPassword: credenciales.newPassword,
+        oldPassword: credenciales.oldPassword,
+        newUserName: credenciales.newUserName,
+        newEmail: credenciales.newEmail,
+        newUserType: credenciales.newUserType
+      }).pipe(
+        catchError((error) => {
+
+        const errorMessage = getErrorMessage(error);
+        this.swa.mostrarError(errorMessage);
+          return of(null);
+        })
+      ).subscribe(
+    {
+    next:
+      (response: any) => {
+      if (response?.data) {
+        this.usuario =  response.data
+
+      }
+    },
+    error: (e) => {
+      const errores = e.error?.errors || [];
+const message = e.error?.message || [];
+      const mensajeErrores = errores.join(', ');
+      this.swa.mostrarError(mensajeErrores +", "+ message);
+  }
 
     }
+
+    );
+    }
   }
+
 
 
   toggleDropdown() {
