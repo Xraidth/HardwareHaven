@@ -33,6 +33,16 @@ Figura 3: Carrito de compras
 ![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot4.png)
 Figura 4: Gestion de inventario
 
+![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot5.png)
+Figura 5: Home Mobile
+
+![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot6.png)
+Figura 6: Listado de productos mobile
+
+![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot7.png)
+Figura 7: Gestion de inventario Mobile
+
+
 ### Videos y tutoriales
 🎥✨ En esta seccion se presentan los videos 💻 que se fueron haciendo durante todo el año✨🎥
 
