@@ -34,7 +34,10 @@ Figura 3: Carrito de compras
 Figura 4: Gestion de inventario
 
 ### Videos y tutoriales
+🎥✨ En esta seccion se presentan los videos 💻 que se fueron haciendo durante todo el año✨🎥
+[Pagina Web - HardwareHaven](https://youtu.be/PCefMZShqMk)
 [Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
+
 
 ### Alcance Funcional
 |Req|Detalle|
