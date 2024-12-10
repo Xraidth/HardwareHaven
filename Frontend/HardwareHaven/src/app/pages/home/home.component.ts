@@ -110,6 +110,47 @@ export class HomeComponent implements OnInit {
   });
   }
 
+
+  async loginFetch() {
+    try {
+      const response = await this.serverUser.loginFetch({
+        name: this.username,
+        password: this.password,
+      });
+
+      if (!response.ok) {
+        // Manejo de errores en caso de que el servidor devuelva un estado no exitoso
+        const errorBody = await response.json();
+        const errores = errorBody.errors || [];
+        const message = errorBody.message || 'Error desconocido.';
+        const mensajeErrores = errores.join(', ');
+
+        if (mensajeErrores.length === 0) {
+          this.toastService.showToast('Acceso denegado');
+        } else {
+          this.sweetAlertService.mostrarError(mensajeErrores + ', ' + message);
+        }
+        return;
+      }
+
+      const r = await response.json();
+
+      if (r) {
+        this.user = SessionService.guardarSession(r.jwt, this.recordarClave);
+        this.errorServer = false;
+        directed(this.user.tipoUsuario, this.router);
+      } else {
+        this.sweetAlertService.mostrarError('La respuesta del servidor es inválida.');
+      }
+    } catch (error) {
+      const mensajeError = String(error);
+          this.sweetAlertService.mostrarError(mensajeError);
+    }
+  }
+
+
+
+
 async registrarUsuario() {
   const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
 
@@ -130,7 +171,7 @@ async registrarUsuario() {
         this.password = this.user.password;
 
 
-          this.login();
+          this.loginFetch();
 
       }
     } catch (error:any) {

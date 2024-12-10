@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getHeaders } from '../../../shared/functions/functions';
+import { getHeaders, getHeadersFetch } from '../../../shared/functions/functions';
 
 
 
@@ -11,7 +11,7 @@ export class UserService {
 
   private baseUrl = 'http://localhost:3000/api/user/';
 
-  constructor(    
+  constructor(
     private http: HttpClient
   ) { }
 
@@ -20,7 +20,7 @@ export class UserService {
     return this.http.get(`${this.baseUrl}getAll`,getHeaders(true));
   }
 
-  
+
   getOne(id: number) {
     return this.http.get(`${this.baseUrl}getOne/${id}`, getHeaders(true));
   }
@@ -52,6 +52,21 @@ export class UserService {
     const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
     return this.http.post(`${this.baseUrl}login/`, body, getHeaders(false));
   }
+
+  loginFetch(body: { name: string; password: string }) {
+    const url = `${this.baseUrl}login/`;
+    const headers = getHeadersFetch(false);
+
+    return fetch(url, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+
+  }
+
+
+
 
 
 }

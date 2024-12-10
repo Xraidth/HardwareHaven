@@ -194,12 +194,17 @@ main{
 }
 .button-container {
   margin-bottom: 0px;
+
 }
 
 .button-list {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.button-item{
+  padding:0px 10px;
 }
 
 }
