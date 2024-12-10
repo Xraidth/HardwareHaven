@@ -41,10 +41,14 @@ Figura 5: Home Mobile
 
 Figura 6: Listado de productos mobile
 
+
 ![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot7.png)
 
 Figura 7: Gestion de inventario Mobile
 
+![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot8.png)
+
+Figura 8: Carrito de compras Mobile
 
 ### Videos y tutoriales
 🎥✨ En esta seccion se presentan los videos 💻 que se fueron haciendo durante todo el año✨🎥
