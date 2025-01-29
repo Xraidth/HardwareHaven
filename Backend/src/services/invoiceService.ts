@@ -17,7 +17,8 @@ export const generateInvoicePDF = async (compra: any): Promise<string> => {
   
     const doc = new PDFDocument();
     const filePath = `./facturas/factura_${compra.id}.pdf`;
-    doc.pipe(fs.createWriteStream(filePath));
+    const stream = fs.createWriteStream(filePath);
+    doc.pipe(stream);
 
     doc.fontSize(20).text(`Factura de Compra: N°${compra.id}`, 100, 80);
     doc.fontSize(12).text(`Cliente: ${compra.user.name}`, 100, 130);
@@ -61,7 +62,10 @@ export const generateInvoicePDF = async (compra: any): Promise<string> => {
     doc.end();
 
     
-    return filePath;
+    return new Promise((resolve, reject) => {
+      stream.on('finish', () => resolve(filePath));  
+      stream.on('error', reject);
+  });
 };
 
 

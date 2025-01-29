@@ -9,6 +9,7 @@ import compraFacturationController from "../controllers/compra-Facturation.Contr
 import userJWTDTOAdmin from "../dto/userJWTDTOAdmin.js";
 import userJWTDTO from "../dto/userJWTDTO.js";
 import { compraDTO } from "../dto/compraDTO.js";
+import compraFacturationWebController from "../controllers/compra-Facturation-web.Controllers.js";
 
 
 const compraRouter = Router();
@@ -20,7 +21,8 @@ compraRouter .get('/getAll', userJWTDTOAdmin, compraGetAllController)
 compraRouter .get('/getOne/:id', userJWTDTOAdmin, compraGetOneController)
 compraRouter .post('/insert', userJWTDTO, sanitizeCompraInput,  compraDTO, compraInsertController);
 compraRouter .delete('/deleteOne/:id',userJWTDTOAdmin,compraDeleteOneController);
-compraRouter .put('/update/:id', userJWTDTO, sanitizeCompraInput,  compraDTO, compraUpdateController)
-compraRouter .patch('/facturate/:id',userJWTDTO, compraFacturationController) 
+compraRouter .put('/update/:id', userJWTDTO, sanitizeCompraInput,  compraDTO, compraUpdateController);
+compraRouter .patch('/facturate/:id',userJWTDTO, compraFacturationController); 
+compraRouter .get('/facturateWeb/:id',userJWTDTO, compraFacturationWebController);
 
 export default compraRouter ;
