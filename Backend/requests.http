@@ -100,7 +100,10 @@ Content-Type: application/json
 
 ###PATCH
 PATCH  http://localhost:3000/api/compra/facturate/:id
-
+Authorization: token
+###PATCH
+GET   http://localhost:3000/api/compra/facturateWeb/72
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7Im5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJjbGllbnRlQGdtYWlsLmNvbSIsInRpcG9Vc3VhcmlvIjoiQ2xpZW50ZSIsImlkIjo0Nn0sImlhdCI6MTczODEwNjc3OSwiZXhwIjoxNzM4NzExNTc5fQ.ghYqMDogw7dm-qEjI2Oa_D9Yc8v_zDDdqOq8gKf9Xm8
 //------------------Componente-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/componente/getAll

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { getHeaders, getHeadersFetch } from '../../../shared/functions/functions';
+import { getHeaders, getHeadersFetch, getHeadersFetchWeb } from '../../../shared/functions/functions';
 
 
 @Injectable({
@@ -43,10 +43,23 @@ export class CompraService {
     return this.http.patch(`${this.baseUrl}facturate/${id}`, {}, getHeaders(true));
 }
 
+facturateWeb(id: number) {
+  //return this.http.get(`${this.baseUrl}facturateWeb/${id}`, {}, getHeaders(true));
+}
+
+
+
 facturatePromise(id: number) {
   return fetch(`${this.baseUrl}facturate/${id}`, {
     method: 'PATCH',
     headers: getHeadersFetch(true),
+  });
+}
+
+facturateWebPromise(id: number) {
+  return fetch(`${this.baseUrl}facturateWeb/${id}`, {
+    method: 'GET',
+    headers: getHeadersFetchWeb(true),
   });
 }
 

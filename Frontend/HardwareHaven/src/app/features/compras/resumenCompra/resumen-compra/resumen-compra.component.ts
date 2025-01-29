@@ -115,12 +115,22 @@ export class ResumenCompraComponent implements OnInit {
 
 
 
-
 async facturate(id: number) {
   try {
-    await this.serverCompra.facturatePromise(id);
-    this.abrirFactura(id);
-  } catch (error) {
+
+    const response = await this.serverCompra.facturateWebPromise(id);
+    console.log(response);
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, '_blank');
+  } else {
+      console.error('Error al obtener el PDF');
+  }
+  }
+
+
+  catch (error) {
     console.error('Error en facturate:', error);
     this.sweetAlertService.mostrarError('Error al facturar la compra');
   }
@@ -128,11 +138,7 @@ async facturate(id: number) {
 
 
 
-abrirFactura(id: number) {
 
-  window.open(`/assets/facturas/factura_${id}.pdf`, '_blank');
-
-}
 
 
 
