@@ -156,35 +156,40 @@ async registrarUsuario() {
 
   if (credenciales) {
     try {
-      const response: any = await this.serverUser.createFetch({
+      this.serverUser.createFetch({
         name: credenciales.username,
         password: credenciales.password,
         email: credenciales.email,
         tipoUsuario: credenciales.userType
+      }).then((response) => {
+        return response.json();
+      }).then((r) => {
+        if (r && r.data) {
+          const user: any = r.data;
+          this.user = user;
+          SessionService.usuario = this.user;
+          this.username = this.user.name;
+          this.password = this.user.password;
+          setTimeout(()=>{this.loginFetch()},200);
+        } else {
+          console.error('No se encontraron datos en la respuesta');
+        }
+      }).catch((error) => {
+        console.error('Error al crear el usuario:', error);
       });
-
-      if (response.ok) {
-        const r = await response.json();
-      if (r) {
-        console.log(r);
-        const user: any = r.data;
-        this.user = user;
-        SessionService.usuario = this.user;
-        this.username = this.user.name;
-        this.password =this.user.password;
-       setTimeout(async() => { await this.loginFetch();}, 200);
-      }
       }
 
-    } catch (error:any) {
+     catch (error:any) {
       console.error('Error en la llamada HTTP:', error);
       const errores = error.error.errors || [];
       const mensajeErrores = errores.join(', ');
       const message = error.error.message || [];
       this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
     }
+
+    }
   }
-}
+
 
 
 
