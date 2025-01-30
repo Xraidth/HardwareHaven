@@ -162,17 +162,18 @@ async registrarUsuario() {
         email: credenciales.email,
         tipoUsuario: credenciales.userType
       });
-      const r = await response.json();
+
+      if (response.ok) {
+        const r = await response.json();
       if (r) {
         console.log(r);
         const user: any = r.data;
         this.user = user;
         SessionService.usuario = this.user;
         this.username = this.user.name;
-        this.password = this.user.password;
-
-        await this.loginFetch();
-
+        this.password =this.user.password;
+       setTimeout(async() => { await this.loginFetch();}, 200);
+      }
       }
 
     } catch (error:any) {
