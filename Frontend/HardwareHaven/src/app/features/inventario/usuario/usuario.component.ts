@@ -12,6 +12,7 @@ import {
   specialFiltro
 } from '../../../shared/functions/functions';
 import { SessionService } from '../../../core/services/share/session.service';
+import { Router } from '@angular/router';
 
 
 
@@ -42,7 +43,7 @@ export class UsuarioComponent implements OnInit {
   constructor(
     private serverUser: UserService,
     private sweetAlertService: SweetAlertService,
-
+    private router: Router
 
   ) {}
 
@@ -111,7 +112,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   eliminarItem(usuario: any): void {
-    this.delete(usuario.id);
+    this.deleteFetch(usuario.id);
     this.cargarEntidad();
   }
 
@@ -126,6 +127,12 @@ export class UsuarioComponent implements OnInit {
         this.serverUser.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
+
+              if(response.data.id == SessionService.usuario.id){
+                SessionService.borrarSession();
+                this.router.navigate(['home']);
+              }
+
               return response.data;
             } else {
               console.log('El objeto recibido no tiene la estructura esperada.');
@@ -149,6 +156,31 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
+
+  async deleteFetch(id: number) {
+    const result = await this.sweetAlertService.confirmBox(
+      '¿Estás seguro?',
+      'No podrás revertir esta acción.'
+    );
+
+    if (result.isConfirmed) {
+      try {
+        const response = await this.serverUser.deleteFetch(id);
+        const r = await response.json();
+        if(r){
+        if(r.data.id == SessionService.usuario.id){
+          SessionService.borrarSession();
+          this.router.navigate(['home']);
+        }}
+
+      } catch (error) {
+        console.error('Error eliminando usuario:', error);
+      }
+    } else if (result.isDismissed) {
+      console.log('El usuario canceló la eliminación.');
+    }
+  }
+
 
   async insert(): Promise<void> {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
