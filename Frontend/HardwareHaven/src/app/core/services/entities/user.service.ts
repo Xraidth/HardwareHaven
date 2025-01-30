@@ -64,7 +64,24 @@ export class UserService {
     });
 
   }
+  createFetch(body:{name:string, password:string, email:string, tipoUsuario:string}){
+    const url = `${this.baseUrl}register/`;
+    const headers = getHeadersFetch(false);
+    return fetch(url, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+  }
 
+  deleteFetch(id: number){
+    const url = `${this.baseUrl}deleteOne/${id}`;
+    const headers = getHeadersFetch(true);
+    return fetch(url, {
+      method: 'DELETE',
+      headers: headers
+    });
+  }
 
 
 

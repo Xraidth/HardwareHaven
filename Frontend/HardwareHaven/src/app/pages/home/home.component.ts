@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
       });
 
       if (!response.ok) {
-        // Manejo de errores en caso de que el servidor devuelva un estado no exitoso
+
         const errorBody = await response.json();
         const errores = errorBody.errors || [];
         const message = errorBody.message || 'Error desconocido.';
@@ -156,51 +156,40 @@ async registrarUsuario() {
 
   if (credenciales) {
     try {
-      const r: any = await this.createPromise({
+      this.serverUser.createFetch({
         name: credenciales.username,
         password: credenciales.password,
         email: credenciales.email,
         tipoUsuario: credenciales.userType
+      }).then((response) => {
+        return response.json();
+      }).then((r) => {
+        if (r && r.data) {
+          const user: any = r.data;
+          this.user = user;
+          SessionService.usuario = this.user;
+          this.username = this.user.name;
+          this.password = this.user.password;
+          setTimeout(()=>{this.loginFetch()},200);
+        } else {
+          console.error('No se encontraron datos en la respuesta');
+        }
+      }).catch((error) => {
+        console.error('Error al crear el usuario:', error);
       });
-
-      if (r && r.data) {
-        const user: any = r.data;
-        this.user = user;
-        SessionService.usuario = this.user;
-        this.username = this.user.name;
-        this.password = this.user.password;
-
-
-          this.loginFetch();
-
       }
-    } catch (error:any) {
+
+     catch (error:any) {
       console.error('Error en la llamada HTTP:', error);
       const errores = error.error.errors || [];
       const mensajeErrores = errores.join(', ');
       const message = error.error.message || [];
       this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
     }
+
+    }
   }
-}
 
-
-createPromise(data: any): Promise<any> {
-  return new Promise((resolve, reject) => {
-    this.serverUser.create(data).subscribe({
-      next: (r: any) => {
-        if (r) {
-          resolve(r);
-        } else {
-          reject('No data returned');
-        }
-      },
-      error: (e) => {
-        reject(e);
-      }
-    });
-  });
-}
 
 
 
