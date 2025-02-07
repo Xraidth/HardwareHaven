@@ -31,3 +31,6 @@ export class CategoriaService {
     return this.http.put(`${this.baseUrl}update/${id}`, body, getHeaders(true));
   }
 }
+
+
+
