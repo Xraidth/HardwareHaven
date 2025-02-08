@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {getHeadersFetch, getHeadersFetchWeb } from '../../../shared/functions/functions';
+import {getHeadersFetch} from '../../../shared/functions/functions';
 
 
 @Injectable({
@@ -53,7 +53,7 @@ facturatePromise(id: number) {
 facturateWebPromise(id: number) {
   return fetch(`${this.baseUrl}facturateWeb/${id}`, {
     method: 'GET',
-    headers: getHeadersFetchWeb(true),
+    headers: getHeadersFetch(true),
   });
 }
 

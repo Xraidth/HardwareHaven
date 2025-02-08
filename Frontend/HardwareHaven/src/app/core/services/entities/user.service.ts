@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getHeadersFetch } from '../../../shared/functions/functions';
+import { firstValueFrom, map } from 'rxjs';
 
 
 
@@ -53,7 +54,7 @@ export class UserService {
     return this.http.post(`${this.baseUrl}login/`, body);
   }
 
-  loginFetch(body: { name: string; password: string }) {
+ loginFetch(body: { name: string; password: string }) {
     const url = `${this.baseUrl}login/`;
     const headers = getHeadersFetch(false);
 
@@ -64,6 +65,7 @@ export class UserService {
     });
 
   }
+
   createFetch(body:{name:string, password:string, email:string, tipoUsuario:string}){
     const url = `${this.baseUrl}register/`;
     const headers = getHeadersFetch(false);
