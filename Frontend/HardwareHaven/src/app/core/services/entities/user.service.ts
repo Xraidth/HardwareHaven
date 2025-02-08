@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getHeaders, getHeadersFetch } from '../../../shared/functions/functions';
+import { getHeadersFetch } from '../../../shared/functions/functions';
 
 
 
@@ -17,40 +17,40 @@ export class UserService {
 
 
   getAll(){
-    return this.http.get(`${this.baseUrl}getAll`,getHeaders(true));
+    return this.http.get(`${this.baseUrl}getAll`);
   }
 
 
   getOne(id: number) {
-    return this.http.get(`${this.baseUrl}getOne/${id}`, getHeaders(true));
+    return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
   create(body:{name:string, password:string, email:string, tipoUsuario:string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.post(`${this.baseUrl}register`, body, getHeaders(false));
+
+    return this.http.post(`${this.baseUrl}register`, body);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.baseUrl}deleteOne/${id}`, getHeaders(true));
+    return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
   update( id: number, body:{ newPassword: string, oldPassword:string,newUserName:string, newEmail: string, newUserType:string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, getHeaders(true));
+
+    return this.http.put(`${this.baseUrl}update/${id}`, body);
   }
 
   updateUserName( id: number, body:{ newUserName:string, password: string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}updateUserName/${id}`, body, getHeaders(true));
+
+    return this.http.put(`${this.baseUrl}updateUserName/${id}`, body);
   }
   updateUserPassword( id: number, body:{ newPassword: string, oldPassword:string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}updatePassword/${id}`, body, getHeaders(true));
+
+    return this.http.put(`${this.baseUrl}updatePassword/${id}`, body);
   }
 
   login(body:{name: string, password:string}){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.post(`${this.baseUrl}login/`, body, getHeaders(false));
+
+    return this.http.post(`${this.baseUrl}login/`, body);
   }
 
   loginFetch(body: { name: string; password: string }) {

@@ -2,38 +2,32 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { getHeaders } from '../../../shared/functions/functions';
 
 
-export const mainInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
-
-const BASE_URL = 'http://localhost:3000';
-
-
-  let op: boolean = false;
-
-  switch (req.url) {
-    case `${BASE_URL}/api/user/register`:
-      op = true;
-      break;
-
-    case `${BASE_URL}/api/user/login`:
-      op = true;
-      break;
-
-    default:
-      op = false;
-      break;
-  }
-
-  let headers = getHeaders(op);
-
-
-  const headersObject: { [key: string]: string } = {};
-  headers.headers.keys().forEach((key: string) => {
-    headersObject[key] = headers.headers.get(key) || '';
-  });
 
 
 
-  const clonedReq = req.clone({ setHeaders: headersObject });
-  return next(clonedReq);
+import { Injectable } from '@angular/core';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-};
+@Injectable()
+export class SampleInterceptor implements HttpInterceptor {
+    constructor() { }
+    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+        const BASE_URL = 'http://localhost:3000';
+
+        const isPublicRoute =
+        [`${BASE_URL}health`,
+            `${BASE_URL}/api/user/register`,
+          `${BASE_URL}/api/user/login`
+        ].includes(request.url);
+
+        const headers = getHeaders(!isPublicRoute);
+          const headersObject: { [key: string]: string } = {};
+          headers.headers.keys().forEach((key: string) => {
+            headersObject[key] = headers.headers.get(key) || '';
+          });
+          const clonedReq = request.clone({ setHeaders: headersObject });
+        return next.handle(clonedReq);
+    }
+}
+

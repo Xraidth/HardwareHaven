@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { getHeaders, getHeadersFetch, getHeadersFetchWeb } from '../../../shared/functions/functions';
+import {getHeadersFetch, getHeadersFetchWeb } from '../../../shared/functions/functions';
 
 
 @Injectable({
@@ -15,20 +15,20 @@ export class CompraService {
     private http: HttpClient
   ) { }
   getAll(){
-    return this.http.get(`${this.baseUrl}getAll`, getHeaders(true));
+    return this.http.get(`${this.baseUrl}getAll`);
   }
 
 
   getOne(id: number) {
-    return this.http.get(`${this.baseUrl}getOne/${id}`, getHeaders(true));
+    return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
   create(body:{ userId: number}){
-    return this.http.post(`${this.baseUrl}insert`, body, getHeaders(true));
+    return this.http.post(`${this.baseUrl}insert`, body);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.baseUrl}deleteOne/${id}`, getHeaders(true));
+    return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
   update(id: number, body: { fechaCompra: Date, fechaCancel?: Date | null, total: number }) {
@@ -36,18 +36,12 @@ export class CompraService {
     if (!bodyCopy.fechaCancel) {
       delete bodyCopy.fechaCancel;
     }
-    return this.http.put(`${this.baseUrl}update/${id}`, body, getHeaders(true));
+    return this.http.put(`${this.baseUrl}update/${id}`, body);
   }
 
   facturate(id: number) {
-    return this.http.patch(`${this.baseUrl}facturate/${id}`, {}, getHeaders(true));
+    return this.http.patch(`${this.baseUrl}facturate/${id}`, {});
 }
-
-facturateWeb(id: number) {
-  //return this.http.get(`${this.baseUrl}facturateWeb/${id}`, {}, getHeaders(true));
-}
-
-
 
 facturatePromise(id: number) {
   return fetch(`${this.baseUrl}facturate/${id}`, {
