@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { getHeaders } from '../../../shared/functions/functions';
+import { HttpClient} from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +9,28 @@ export class LineaCompraService {
 
   private baseUrl = 'http://localhost:3000/api/lineaCompra/';
 
-  constructor(    
+  constructor(
     private http: HttpClient
   ) { }
   getAll(){
-    return this.http.get(`${this.baseUrl}getAll`, getHeaders(true));
+    return this.http.get(`${this.baseUrl}getAll`);
   }
 
   getOne(id: number) {
-    return this.http.get(`${this.baseUrl}getOne/${id}`, getHeaders(true));
+    return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
   create(body:{ compraId: number, cantidad: number, componenteId: number }){
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.post(`${this.baseUrl}insert`, body, getHeaders(true));
+
+    return this.http.post(`${this.baseUrl}insert`, body);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.baseUrl}deleteOne/${id}`, getHeaders(true));
+    return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{ compraId: number, cantidad: number, subTotal: number, componenteId: number }){ 
-    const headers= new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
-    return this.http.put(`${this.baseUrl}update/${id}`, body, getHeaders(true));
+  update( id: number, body:{ compraId: number, cantidad: number, subTotal: number, componenteId: number }){
+
+    return this.http.put(`${this.baseUrl}update/${id}`, body);
   }
 }
