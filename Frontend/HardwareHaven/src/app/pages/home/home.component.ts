@@ -122,12 +122,9 @@ export class HomeComponent implements OnInit {
           email: credenciales.email,
           tipoUsuario: credenciales.userType
         }).subscribe({
-          next: (response: any) => {
-            if (response && response.data) {
-              const user: any = response.data;
-              this.user = user;
-              SessionService.usuario = this.user;
-              this.user = SessionService.guardarSession(response.jwt, true);
+          next: (r: any) => {
+            if (r) {
+              this.user = SessionService.guardarSession(r.jwt, true);
               directed(this.user.tipoUsuario, this.router);
             } else {
               this.sweetAlertService.mostrarError('No se encontraron datos en la respuesta');
