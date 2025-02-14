@@ -3,6 +3,7 @@ import { UserRepository } from "../repository/userRepository.js";
 //import { compare } from "bcrypt"; //Para encriptar la clave en la base de datos
 import { SignJWT } from 'jose';
 import { User } from '../model/user.entity.js';
+import { jwtConstructor } from '../shared/db/jwt.js';
 
 const userRepo = new UserRepository();
 
@@ -18,22 +19,9 @@ const userLoginController = async (req: Request, res: Response) => {
                 return res.status(401).send('Credenciales incorrectas');
             }
             
-            const userTosend = {
-                name: user.name,
-                email: user.email,
-                tipoUsuario: user.tipoUsuario,
-                id: user.id
-            }
+            
 
-            const jwtConstructor = new SignJWT({ user: userTosend });
-            const encoder = new TextEncoder();
-            const jwt = await jwtConstructor.setProtectedHeader({
-                alg: 'HS256',
-                type: 'JWT'
-            })
-            .setIssuedAt()
-            .setExpirationTime('7d')
-            .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
+            const jwt = await jwtConstructor(user);
 
             return res.status(200).json({
                 jwt,
