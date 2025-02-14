@@ -128,33 +128,36 @@ export class UsuarioComponent implements OnInit {
           this.isLoading = true;
 
           this.serverUser.delete(id).pipe(
-            map((response: any) => {
-              if (response && response.data) {
-
-                if (response.data.id === SessionService.usuario.id) {
-
-                  SessionService.borrarSession();
-                  this.router.navigate(['home']);
-                }
-
-                return response.data;
-              } else {
-                console.log('El objeto recibido no tiene la estructura esperada.');
-                return null;
-              }
-            }),
             catchError((error) => {
               this.isLoading = false;
               const errorMessage = getErrorMessage(error);
               this.sweetAlertService.mostrarError(errorMessage);
               return of(null);
             })
-          ).subscribe((usuario: any) => {
-            this.isLoading = false;
+          ).subscribe({
+            next: (response: any) => {
+              try {
+                if (response && response.data) {
+                  if (response.data.id === SessionService.usuario.id) {
+                    SessionService.borrarSession();
+                    this.router.navigate(['home']);
+                    return;
+                  }
 
-            if (usuario) {
-              this.usuario = usuario;
-              this.cargarEntidad();
+                  this.usuario = response.data;
+                  this.cargarEntidad();
+                } else {
+                  console.log('El objeto recibido no tiene la estructura esperada.');
+                }
+              } catch (error) {
+                console.error('Error en la ejecución:', error);
+              } finally {
+                this.isLoading = false;
+              }
+            },
+            error: (error) => {
+              console.error('Error inesperado:', error);
+              this.isLoading = false;
             }
           });
         } else if (result.isDismissed) {
@@ -162,32 +165,6 @@ export class UsuarioComponent implements OnInit {
         }
       });
   }
-
-
- /* async deleteFetch(id: number) {
-    const result = await this.sweetAlertService.confirmBox(
-      '¿Estás seguro?',
-      'No podrás revertir esta acción.'
-    );
-
-    if (result.isConfirmed) {
-      try {
-        const response = await this.serverUser.deleteFetch(id);
-        const r = await response.json();
-        if(r){
-        if(r.data.id == SessionService.usuario.id){
-          SessionService.borrarSession();
-          this.router.navigate(['home']);
-        }}
-
-      } catch (error) {
-        console.error('Error eliminando usuario:', error);
-      }
-    } else if (result.isDismissed) {
-      console.log('El usuario canceló la eliminación.');
-    }
-  }*/
-
 
   async insert(): Promise<void> {
     const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
