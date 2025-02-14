@@ -131,7 +131,7 @@ export class UsuarioComponent implements OnInit {
             map((response: any) => {
               if (response && response.data) {
 
-                if (response.data.id === SessionService.usuario.id) {//Ver porque no se guarda el Id
+                if (response.data.id === SessionService.usuario.id) {
 
                   SessionService.borrarSession();
                   this.router.navigate(['home']);
