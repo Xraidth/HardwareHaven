@@ -112,7 +112,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   eliminarItem(usuario: any): void {
-    this.deleteFetch(usuario.id);
+    this.delete(usuario.id);
     this.cargarEntidad();
   }
 
@@ -122,42 +122,49 @@ export class UsuarioComponent implements OnInit {
   }
 
   public delete(id: number) {
-    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
-      if (result.isConfirmed) {
-        this.serverUser.delete(id).pipe(
-          map((response: any) => {
-            if (response && response.data) {
+    this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.')
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.isLoading = true;
 
-              if(response.data.id == SessionService.usuario.id){
-                SessionService.borrarSession();
-                this.router.navigate(['home']);
+          this.serverUser.delete(id).pipe(
+            map((response: any) => {
+              if (response && response.data) {
+
+                if (response.data.id === SessionService.usuario.id) {//Ver porque no se guarda el Id
+
+                  SessionService.borrarSession();
+                  this.router.navigate(['home']);
+                }
+
+                return response.data;
+              } else {
+                console.log('El objeto recibido no tiene la estructura esperada.');
+                return null;
               }
-
-              return response.data;
-            } else {
-              console.log('El objeto recibido no tiene la estructura esperada.');
-              return null;
-            }
-          }),
-          catchError((error) => {
+            }),
+            catchError((error) => {
+              this.isLoading = false;
+              const errorMessage = getErrorMessage(error);
+              this.sweetAlertService.mostrarError(errorMessage);
+              return of(null);
+            })
+          ).subscribe((usuario: any) => {
             this.isLoading = false;
-            const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);
-            return of(null);
-          })
-        ).subscribe((usuario: any) => {
-          if (usuario) {
-            this.usuario = usuario;
-            this.cargarEntidad();
-          }
-        });
-      } else if (result.isDismissed) {
-        console.log('El usuario canceló la eliminación.');
-      }
-    });
+
+            if (usuario) {
+              this.usuario = usuario;
+              this.cargarEntidad();
+            }
+          });
+        } else if (result.isDismissed) {
+          console.log('El usuario canceló la eliminación.');
+        }
+      });
   }
 
-  async deleteFetch(id: number) {
+
+ /* async deleteFetch(id: number) {
     const result = await this.sweetAlertService.confirmBox(
       '¿Estás seguro?',
       'No podrás revertir esta acción.'
@@ -179,7 +186,7 @@ export class UsuarioComponent implements OnInit {
     } else if (result.isDismissed) {
       console.log('El usuario canceló la eliminación.');
     }
-  }
+  }*/
 
 
   async insert(): Promise<void> {

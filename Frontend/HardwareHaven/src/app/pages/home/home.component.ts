@@ -92,9 +92,11 @@ export class HomeComponent implements OnInit {
           } else {
             this.sweetAlertService.mostrarError("La respuesta del servidor es inválida.");
           }
-        } catch (error) {
-          const mensajeError = String(error);
-          this.sweetAlertService.mostrarError(mensajeError);
+        } catch (error:any) {
+          const errores = error.error.errors || [];
+          const mensajeErrores = errores.join(', ');
+          const message = error.error.message || [];
+          this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
         }
       },
       error: (error:any) => {
@@ -110,84 +112,43 @@ export class HomeComponent implements OnInit {
   });
   }
 
-/*
-  async loginFetch() {
-    try {
-      const response = await this.serverUser.loginFetch({
-        name: this.username,
-        password: this.password,
-      });
 
-      if (!response.ok) {
-
-        const errorBody = await response.json();
-        const errores = errorBody.errors || [];
-        const message = errorBody.message || 'Error desconocido.';
-        const mensajeErrores = errores.join(', ');
-
-        if (mensajeErrores.length === 0) {
-          this.toastService.showToast('Acceso denegado');
-        } else {
-          this.sweetAlertService.mostrarError(mensajeErrores + ', ' + message);
-        }
-        return;
+  registrarUsuario() {
+    this.sweetAlertService.mostrarFormularioRegistro().then(credenciales => {
+      if (credenciales) {
+        this.serverUser.create({
+          name: credenciales.username,
+          password: credenciales.password,
+          email: credenciales.email,
+          tipoUsuario: credenciales.userType
+        }).subscribe({
+          next: (response: any) => {
+            if (response && response.data) {
+              const user: any = response.data;
+              this.user = user;
+              SessionService.usuario = this.user;
+              this.user = SessionService.guardarSession(response.jwt, true);
+              directed(this.user.tipoUsuario, this.router);
+            } else {
+              this.sweetAlertService.mostrarError('No se encontraron datos en la respuesta');
+            }
+          },
+          error: (error: any) => {
+            const errores = error.error.errors || [];
+            const message = error.error.message || 'Ocurrió un error desconocido';
+            const mensajeErrores = errores.join(', ');
+            this.sweetAlertService.mostrarError(mensajeErrores ? mensajeErrores : message);
+          }
+        });
       }
-
-      const r = await response.json();
-
-      if (r) {
-        this.user = SessionService.guardarSession(r.jwt, this.recordarClave);
-        this.errorServer = false;
-        directed(this.user.tipoUsuario, this.router);
-      } else {
-        this.sweetAlertService.mostrarError('La respuesta del servidor es inválida.');
-      }
-    } catch (error) {
-      const mensajeError = String(error);
-          this.sweetAlertService.mostrarError(mensajeError);
-    }
-  }
-*/
-
-
-
-async registrarUsuario() {
-  const credenciales = await this.sweetAlertService.mostrarFormularioRegistro();
-
-  if (credenciales) {
-    try {
-      this.serverUser.createFetch({
-        name: credenciales.username,
-        password: credenciales.password,
-        email: credenciales.email,
-        tipoUsuario: credenciales.userType
-      }).then((response) => {
-        return response.json();
-      }).then((r) => {
-        if (r && r.data) {
-          const user: any = r.data;
-          this.user = user;
-          SessionService.usuario = this.user;
-          this.user = SessionService.guardarSession(r.jwt, true);
-          directed(this.user.tipoUsuario, this.router);
-        } else {
-          console.error('No se encontraron datos en la respuesta');
-        }
-      }).catch((error) => {
-        console.error('Error al crear el usuario:', error);
-      });
-      }
-
-     catch (error:any) {
-      console.error('Error en la llamada HTTP:', error);
+    }).catch((error: any) => {
       const errores = error.error.errors || [];
+      const message = error.error.message || 'Ocurrió un error al mostrar el formulario de registro';
       const mensajeErrores = errores.join(', ');
-      const message = error.error.message || [];
-      this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
-    }
-
-    }
+      this.sweetAlertService.mostrarError(mensajeErrores ? mensajeErrores : message);
+    });
   }
+
 
 
 
