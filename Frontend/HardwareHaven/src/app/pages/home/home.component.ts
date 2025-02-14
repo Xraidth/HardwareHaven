@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
   });
   }
 
-
+/*
   async loginFetch() {
     try {
       const response = await this.serverUser.loginFetch({
@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
           this.sweetAlertService.mostrarError(mensajeError);
     }
   }
-
+*/
 
 
 
@@ -168,9 +168,8 @@ async registrarUsuario() {
           const user: any = r.data;
           this.user = user;
           SessionService.usuario = this.user;
-          this.username = this.user.name;
-          this.password = this.user.password;
-          setTimeout(()=>{this.loginFetch()},200);
+          this.user = SessionService.guardarSession(r.jwt, true);
+          directed(this.user.tipoUsuario, this.router);
         } else {
           console.error('No se encontraron datos en la respuesta');
         }

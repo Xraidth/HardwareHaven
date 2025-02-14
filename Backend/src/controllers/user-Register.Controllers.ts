@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { UserRepository } from "../repository/userRepository.js";
 import { User } from '../model/user.entity.js';
+import { jwtConstructor } from '../shared/db/jwt.js';
 
 const userRepo = new UserRepository();
 
@@ -13,7 +14,9 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
         if (!user) {
             const new_user = new User(name, password, email, tipoUsuario);
            userRepo.add(new_user);
+           const jwt = await jwtConstructor(new_user);
            res.status(201).json({
+                jwt,
                 data: new_user,
                 message: "The user was added"
             });
