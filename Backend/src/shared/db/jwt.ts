@@ -3,10 +3,11 @@ import { SignJWT } from "jose";
 export async function jwtConstructor(user: any): Promise<any> {
 
     const userTosend = {
-        name: user.name,
+      id: user.id,
+      name: user.name,
         email: user.email,
-        tipoUsuario: user.tipoUsuario,
-        id: user.id
+        tipoUsuario: user.tipoUsuario
+        
     }
 
   const jwtConstructor = new SignJWT({ user: userTosend });
