@@ -40,23 +40,8 @@ export class CompraService {
   }
 
   facturate(id: number) {
-    return this.http.patch(`${this.baseUrl}facturate/${id}`, {});
-}
-
-facturatePromise(id: number) {
-  return fetch(`${this.baseUrl}facturate/${id}`, {
-    method: 'PATCH',
-    headers: getHeadersFetch(true),
-  });
-}
-
-facturateWebPromise(id: number) {
-  return fetch(`${this.baseUrl}facturateWeb/${id}`, {
-    method: 'GET',
-    headers: getHeadersFetch(true),
-  });
-}
-
-
-
+    return this.http.get<Blob>(`${this.baseUrl}facturateWeb/${id}`, {
+      responseType: 'blob' as 'json',  // Esto indica que la respuesta será un blob, no un JSON
+    });
+  }
 }

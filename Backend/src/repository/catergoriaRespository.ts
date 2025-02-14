@@ -124,7 +124,7 @@ export class CategoriaRepository  {
                 );
                 return categoria || undefined;
             } catch (error: any) {
-                console.error("Error fetching category by description:", error);
+                
                 return undefined;
             }
         }
