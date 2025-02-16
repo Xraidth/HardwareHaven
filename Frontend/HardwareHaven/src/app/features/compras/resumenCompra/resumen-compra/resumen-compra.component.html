@@ -8,7 +8,7 @@
             <table class="custom-table flex-grow-1">
                 <thead>
                     <tr>
-                        <th colspan="3" class="text-center">Fecha de Compra: {{formatDateToYYYYMMDD(compraRealizada.fechaCompra)}}</th>
+                        <th colspan="3" class="text-center">Fecha de Compra: {{ compraRealizada.fechaCompra | date:'yyyy-MM-dd' }}</th>
                     </tr>
                     <tr>
                         <th>Producto</th>

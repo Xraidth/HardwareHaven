@@ -2,14 +2,11 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CompraService } from '../../../../core/services/entities/compra.service';
 import { LineaCompraService } from '../../../../core/services/entities/linea-compra.service';
-
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
-import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule ,  NgIf} from '@angular/common';
-import { formatDateToYYYYMMDD } from '../../../../shared/functions/functions';
+
 
 @Component({
   selector: 'app-resumen-compra',
@@ -108,11 +105,6 @@ export class ResumenCompraComponent implements OnInit {
       }
     });
   }
-
-  formatDateToYYYYMMDD(d: Date){
-    return formatDateToYYYYMMDD(d.toString())
-  }
-
 
   facturate(id: number) {
     this.serverCompra.facturate(id).subscribe({
