@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getHeadersFetch } from '../../../shared/functions/functions';
-import { firstValueFrom, map } from 'rxjs';
 
 
 
