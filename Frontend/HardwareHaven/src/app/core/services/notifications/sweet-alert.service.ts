@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { formatDateToYYYYMMDD, getMaxPrice } from '../../../shared/functions/functions';
+import { getMaxPrice } from '../../../shared/functions/functions';
 
 
 
@@ -484,13 +484,13 @@ updateCompra(compra:any): Promise<{
        <div style="display: flex; flex-direction: column; gap: 15px;">
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <label for="swal-input-fechaCompra" style="flex: 1;">Fecha de Compra:</label>
-    <input id="swal-input-fechaCompra" class="swal2-input" type="date" placeholder="Fecha de Compra" value="${formatDateToYYYYMMDD(compra.fechaCompra)}" style="flex: 2;">
+    <input id="swal-input-fechaCompra" class="swal2-input" type="date" placeholder="Fecha de Compra" [value]="compra.fechaCompra | date:'yyyy-MM-dd'" style="flex: 2;">
   </div>
 
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <label for="swal-input-fechaCancel" style="flex: 1;">Fecha de Cancelación:</label>
     <input id="swal-input-fechaCancel" class="swal2-input" type="date" placeholder="Fecha de Cancelación"
-    value="${compra.fechaCancel ? formatDateToYYYYMMDD(compra.fechaCancel) : ''}"
+     [value]="compra.fechaCancel ? (compra.fechaCancel | date:'yyyy-MM-dd') : ''"
     }" style="flex: 2;">
   </div>
 
@@ -661,7 +661,7 @@ updateCompra(compra:any): Promise<{
         <div style="display: flex; flex-direction: column; gap: 15px;">
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <label for="swal-input-fechaDesde" style="flex: 1;">Fecha Desde:</label>
-    <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="Fecha Desde" value="${formatDateToYYYYMMDD(precio.fechaDesde)}" style="flex: 2;">
+    <input id="swal-input-fechaDesde" type="date" class="swal2-input" placeholder="Fecha Desde" [value]="precio.fechaDesde | date:'yyyy-MM-dd'" style="flex: 2;">
   </div>
 
   <div style="display: flex; justify-content: space-between; align-items: center;">
