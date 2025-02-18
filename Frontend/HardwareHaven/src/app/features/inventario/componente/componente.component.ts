@@ -108,7 +108,6 @@ export class ComponenteComponent implements OnInit{
             if (response && response.data) {
               return response.data;
             } else {
-              console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
             }
           }),
@@ -125,7 +124,6 @@ export class ComponenteComponent implements OnInit{
           }
         });
       } else if (result.isDismissed) {
-        console.log('El usuario canceló la eliminación.');
       }
     });
   }
@@ -144,7 +142,6 @@ export class ComponenteComponent implements OnInit{
           if (response && response.data) {
             return response.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
           }
         }),
@@ -184,7 +181,7 @@ export class ComponenteComponent implements OnInit{
           if (response && response.data) {
             return response.data;  // Return the updated componente
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),

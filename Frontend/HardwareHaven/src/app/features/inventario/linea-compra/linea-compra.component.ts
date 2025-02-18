@@ -76,9 +76,9 @@ export class LineaCompraComponent  implements OnInit {
     this.serverLineaCompra.getAll().pipe(
       map((r: any) => {
         if (r && r.data && Array.isArray(r.data)) {
-          return r.data;  // Returning the lineas array
+          return r.data;
         } else {
-          console.log('El objeto recibido no tiene la estructura esperada.');
+
           return [];
         }
       }),
@@ -86,7 +86,7 @@ export class LineaCompraComponent  implements OnInit {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
         this.sweetAlertService.mostrarError(errorMessage);
-        return of([]);  // Return an empty array if there's an error
+        return of([]);
       })
     ).subscribe({
       next: (lineas: any[]) => {
@@ -118,7 +118,7 @@ export class LineaCompraComponent  implements OnInit {
             if (response && response.data) {
               return response.data;
             } else {
-              console.log('El objeto recibido no tiene la estructura esperada.');
+
               return null;
             }
           }),
@@ -135,7 +135,7 @@ export class LineaCompraComponent  implements OnInit {
           }
         });
       } else if (result.isDismissed) {
-        console.log('El usuario canceló la eliminación.');
+
       }
     });
   }
@@ -153,7 +153,7 @@ export class LineaCompraComponent  implements OnInit {
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),
@@ -196,7 +196,7 @@ export class LineaCompraComponent  implements OnInit {
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),

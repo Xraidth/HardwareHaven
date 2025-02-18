@@ -63,7 +63,7 @@ export class PlusButtonComponent {
     if (this.nowType) {
   this.changeEntityEvent.emit(this.nowType);
     } else {
-      console.log("Error: nowType no está definido");
+
     }
   }
 
@@ -153,7 +153,7 @@ const message = e.error?.message || [];
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),
@@ -193,7 +193,6 @@ const message = e.error?.message || [];
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
           }
         }),
@@ -232,7 +231,7 @@ const message = e.error?.message || [];
           if (response && response.data) {
             return response.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),
@@ -276,7 +275,7 @@ const message = e.error?.message || [];
           if (response && response.data) {
             return response.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),

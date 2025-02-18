@@ -78,7 +78,6 @@ export class CompraComponent implements OnInit {
         if (r && r.data && Array.isArray(r.data)) {
           return r.data;
         } else {
-          console.log('El objeto recibido no tiene la estructura esperada.');
           return [];
         }
       }),
@@ -118,7 +117,6 @@ export class CompraComponent implements OnInit {
             if (response && response.data) {
               return response.data;
             } else {
-              console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
             }
           }),
@@ -135,7 +133,7 @@ export class CompraComponent implements OnInit {
           }
         });
       } else if (result.isDismissed) {
-        console.log('El usuario canceló la eliminación.');
+
       }
     });
   }
@@ -155,7 +153,7 @@ export class CompraComponent implements OnInit {
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),
@@ -199,7 +197,7 @@ export class CompraComponent implements OnInit {
           if (r && r.data) {
             return r.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),

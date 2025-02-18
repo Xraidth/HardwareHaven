@@ -147,21 +147,21 @@ export class UsuarioComponent implements OnInit {
                   this.usuario = response.data;
                   this.cargarEntidad();
                 } else {
-                  console.log('El objeto recibido no tiene la estructura esperada.');
+
                 }
               } catch (error) {
-                console.error('Error en la ejecución:', error);
+
               } finally {
                 this.isLoading = false;
               }
             },
             error: (error) => {
-              console.error('Error inesperado:', error);
+
               this.isLoading = false;
             }
           });
         } else if (result.isDismissed) {
-          console.log('El usuario canceló la eliminación.');
+
         }
       });
   }

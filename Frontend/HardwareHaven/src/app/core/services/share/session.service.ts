@@ -25,7 +25,7 @@ export class SessionService {
         const decoded = jwtDecode(this.jwt);
         return decoded;
       } catch (error) {
-        console.error("Error al decodificar el JWT:", error);
+
         return undefined;
       }
     }

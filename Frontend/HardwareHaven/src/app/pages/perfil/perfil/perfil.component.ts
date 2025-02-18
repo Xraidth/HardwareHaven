@@ -41,7 +41,7 @@ borrarCuenta(){
             this.sweetAlertService.simpleAlert("Su cuenta fue eliminada, gracias por comprar en Hardware Haven");
             return response;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
             return null;
           }
         }),
@@ -57,7 +57,7 @@ borrarCuenta(){
         }
       });
     } else if (result.isDismissed) {
-      console.log('El usuario canceló la eliminación.');
+
     }
   });
 }
