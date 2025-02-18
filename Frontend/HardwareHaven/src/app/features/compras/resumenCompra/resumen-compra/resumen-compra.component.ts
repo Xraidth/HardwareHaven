@@ -23,9 +23,8 @@ export class ResumenCompraComponent implements OnInit {
   public compraRealizada: any;
   public lineasCompra: any[] = [];
   public total: any;
-  public estado: string = "";
-
-
+  public cargando: boolean = false;
+  public compraFinalizada: boolean = false;
 
 
   constructor(
@@ -49,36 +48,39 @@ export class ResumenCompraComponent implements OnInit {
 
   }
 
-  async generarCompra() {
-    this.estado = "cargando";
-    try {
-      const r: any = await this.serverCompra.create({ userId: this.usuario.id }).toPromise();
+  generarCompra() {
+    this.cargando = true;
+    this.compraFinalizada = false;
 
-      if (r && r.data) {
-        const compraRealizada: any = r.data;
-        this.compraRealizada = compraRealizada;
+    this.serverCompra.create({ userId: this.usuario.id }).pipe(
+    ).subscribe({
+      next: (r: any) => {
+        if (r && r.data) {
+          this.compraRealizada = r.data;
 
-        if (this.carrito && this.carrito.length) {
-
-          for (const p of this.carrito) {
-            this.generarLineaCompra(p);
-        }
-          this.total = SessionService.usuario.carrito.total;
-          this.compraRealizada.total = this.total;
-          this.estado = "compraRealizada";
+          if (this.carrito && this.carrito.length) {
+            for (const p of this.carrito) {
+              this.generarLineaCompra(p);
+            }
+            this.total = SessionService.usuario.carrito.total;
+            this.compraRealizada.total = this.total;
+            this.compraFinalizada = true;
+          } else {
+            this.sweetAlertService.mostrarError('El carrito está vacío');
+          }
         } else {
-          this.sweetAlertService.mostrarError('El carrito está vacío');
-          this.estado = "";
+          this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
         }
-      } else {
-        this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
+        this.cargando = false;
+      },
+      error: (e) => {
+        console.error('Error en la llamada HTTP:', e);
+        this.sweetAlertService.mostrarError('Error al generar la compra');
+        this.cargando = false;
       }
-    } catch (e) {
-      this.estado = "";
-      console.error('Error en la llamada HTTP:', e);
-      this.sweetAlertService.mostrarError('Error al generar la compra');
-    }
+    });
   }
+
 
 
   generarLineaCompra(p: any) {
@@ -101,7 +103,6 @@ export class ResumenCompraComponent implements OnInit {
         }
       },
       error: (e) => {
-        this.estado= "";
         console.error('Error en la creación de línea de compra:', e);
         this.sweetAlertService.mostrarError('Error al crear la línea de compra');
       }
