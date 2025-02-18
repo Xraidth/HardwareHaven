@@ -24,6 +24,10 @@ export class ResumenCompraComponent implements OnInit {
   public lineasCompra: any[] = [];
   public total: any;
   public estado: string = "";
+
+
+
+
   constructor(
     private serverCompra: CompraService,
     private serverLineaCompra: LineaCompraService,
@@ -56,11 +60,9 @@ export class ResumenCompraComponent implements OnInit {
 
         if (this.carrito && this.carrito.length) {
 
-          const promises = this.carrito.map((p: any) => this.generarLineaCompra(p));
-
-
-          await Promise.all(promises);
-
+          for (const p of this.carrito) {
+            this.generarLineaCompra(p);
+        }
           this.total = SessionService.usuario.carrito.total;
           this.compraRealizada.total = this.total;
           this.estado = "compraRealizada";
