@@ -9,7 +9,7 @@ import { getMaxPrice } from '../../../shared/functions/functions';
 })
 export class SweetAlertService {
 
-  constructor() { }
+
 
   simpleAlert(message: string) {
     Swal.fire(message);

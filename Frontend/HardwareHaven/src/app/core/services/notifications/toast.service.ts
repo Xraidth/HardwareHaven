@@ -6,7 +6,6 @@ import Toastify from 'toastify-js';
 })
 export class ToastService {
 
-  constructor() { }
 
   showToast(message: string, duration: number = 3000) {
     Toastify({
@@ -15,7 +14,7 @@ export class ToastService {
       gravity: 'bottom',
       position: 'center',
       backgroundColor: 'rgba(255, 0, 0, 0.8)',
-      stopOnFocus: true 
+      stopOnFocus: true
     }).showToast();
   }
 
