@@ -9,10 +9,10 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, CommonModule, ProductListComponent, RouterOutlet],
+  imports: [ CommonModule,  RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  
+
+
 })
 export class AppComponent implements OnInit {
   public errorServer:boolean = false;
@@ -21,14 +21,14 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-  
+
   }
 
- 
 
 
-  
 
-  
+
+
+
 }
 

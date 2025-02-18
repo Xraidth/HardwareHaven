@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class SampleInterceptor implements HttpInterceptor {
-    constructor() { }
+
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const BASE_URL = 'http://localhost:3000';
 

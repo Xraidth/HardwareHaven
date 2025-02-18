@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 })
 export class SessionService {
 
-  constructor() { }
+
 
   public static usuario:any;
   public static jwt:any;
