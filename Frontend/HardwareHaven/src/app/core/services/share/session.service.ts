@@ -25,7 +25,6 @@ export class SessionService {
         const decoded = jwtDecode(this.jwt);
         return decoded;
       } catch (error) {
-
         return undefined;
       }
     }

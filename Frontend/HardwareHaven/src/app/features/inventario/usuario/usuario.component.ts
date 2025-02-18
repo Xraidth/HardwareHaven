@@ -150,7 +150,7 @@ export class UsuarioComponent implements OnInit {
 
                 }
               } catch (error) {
-
+                this.sweetAlertService.mostrarError("Error to try to delete this user")
               } finally {
                 this.isLoading = false;
               }

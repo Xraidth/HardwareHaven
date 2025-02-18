@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
 import { CategoriaService } from '../../core/services/entities/categoria.service.js';
 import { getMaxPrice } from '../../shared/functions/functions.js';
+import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service.js';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private serverProduct: ComponenteService,
     private serverCategori: CategoriaService,
-    private router: Router
+    private router: Router,
+    private sw: SweetAlertService
   ) {}
 
   ngOnInit(): void {
@@ -55,11 +57,11 @@ export class ProductListComponent implements OnInit {
           }
         } catch (error) {
 
-
+          this.sw.mostrarError("Error to found products");
         }
       },
       error: (e) => {
-
+        this.sw.mostrarError("Error to found products");
       }
     });
   }
@@ -75,12 +77,12 @@ export class ProductListComponent implements OnInit {
 
           }
         } catch (error) {
-
+          this.sw.mostrarError("Error to found cateries");
 
         }
       },
       error: (e) => {
-
+        this.sw.mostrarError("Error to found cateries");
       }
     });
   }
