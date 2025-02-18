@@ -22,7 +22,7 @@ import { getMaxPrice } from '../../shared/functions/functions.js';
 export class ProductListComponent implements OnInit {
 
   public products: any[] = [];
-  public allProducts: any[] = [];  
+  public allProducts: any[] = [];
   public categorias: any[] = [];
   searchQuery: string = '';
   public carrito: any[] = [];
@@ -49,17 +49,17 @@ export class ProductListComponent implements OnInit {
           if (r && r.data && Array.isArray(r.data)) {
             const products: any[] = r.data;
             this.products = products;
-            this.allProducts = [...products];  
+            this.allProducts = [...products];
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
           }
         } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
+
+
         }
       },
       error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+
       }
     });
   }
@@ -72,15 +72,15 @@ export class ProductListComponent implements OnInit {
             const categorias: any[] = r.data;
             this.categorias = categorias;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
+
           }
         } catch (error) {
-          console.error('Error al procesar los datos:', error);
-          console.log('Objeto recibido:', r);
+
+
         }
       },
       error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
+
       }
     });
   }
@@ -110,7 +110,7 @@ export class ProductListComponent implements OnInit {
 
   sortProducts() {
     if (this.sortCriteria === 'Or') {
-      this.products = [...this.allProducts]; 
+      this.products = [...this.allProducts];
     } else if (this.sortCriteria === 'az') {
       this.products.sort((a, b) => a.name.localeCompare(b.name));
     } else if (this.sortCriteria === 'za') {
@@ -136,7 +136,7 @@ export class ProductListComponent implements OnInit {
 
   sortByCategoria() {
     if (this.sortCriteriaMenu === 'Or') {
-      this.products = [...this.allProducts];  
+      this.products = [...this.allProducts];
     } else {
       this.products = this.allProducts.filter(p => p.categoria.descripcion === this.sortCriteriaMenu);
     }

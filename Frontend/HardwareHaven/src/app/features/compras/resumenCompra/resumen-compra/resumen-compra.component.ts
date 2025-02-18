@@ -74,7 +74,6 @@ export class ResumenCompraComponent implements OnInit {
         this.cargando = false;
       },
       error: (e) => {
-        console.error('Error en la llamada HTTP:', e);
         this.sweetAlertService.mostrarError('Error al generar la compra');
         this.cargando = false;
       }
@@ -103,7 +102,6 @@ export class ResumenCompraComponent implements OnInit {
         }
       },
       error: (e) => {
-        console.error('Error en la creación de línea de compra:', e);
         this.sweetAlertService.mostrarError('Error al crear la línea de compra');
       }
     });

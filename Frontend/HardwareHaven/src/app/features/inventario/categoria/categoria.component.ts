@@ -81,7 +81,7 @@ export class CategoriaComponent implements OnInit {
     this.serverCategoria.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        console.error('Error en la llamada HTTP:', error);
+        this.sweetAlertService.mostrarError("Error to obtein categories")
         return of([]);
       })
     ).subscribe((categorias: any[]) => {
@@ -113,7 +113,6 @@ export class CategoriaComponent implements OnInit {
             if (response && response.data) {
               return response.data;
             } else {
-              console.log('El objeto recibido no tiene la estructura esperada.');
               return null;
             }
           }),
@@ -130,7 +129,6 @@ export class CategoriaComponent implements OnInit {
           }
         });
       } else if (result.isDismissed) {
-        console.log('El usuario canceló la eliminación.');
       }
     });
   }
@@ -147,7 +145,6 @@ export class CategoriaComponent implements OnInit {
           if (response && response.data) {
             return response.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
           }
         }),
@@ -184,9 +181,8 @@ export class CategoriaComponent implements OnInit {
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
-            return response.data;  // Return the updated categoria
+            return response.data;
           } else {
-            console.log('El objeto recibido no tiene la estructura esperada.');
             return null;
           }
         }),
