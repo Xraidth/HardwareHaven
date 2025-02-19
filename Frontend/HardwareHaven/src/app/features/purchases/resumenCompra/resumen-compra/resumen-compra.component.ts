@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { SessionService } from '../../../../core/services/share/session.service';
-import { CompraService } from '../../../../core/services/entities/compra.service';
-import { LineaCompraService } from '../../../../core/services/entities/linea-compra.service';
+import { PurchaseService } from '../../../../core/services/entities/compra.service';
+import { PurchaseLineService } from '../../../../core/services/entities/linea-compra.service';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -14,9 +14,9 @@ import { CommonModule ,  NgIf} from '@angular/common';
   imports: [CommonModule,HttpClientModule, FormsModule],
   templateUrl: './resumen-compra.component.html',
   styleUrls: ['./resumen-compra.component.css'],
-  providers: [CompraService, LineaCompraService]
+  providers: [PurchaseService, PurchaseLineService]
 })
-export class ResumenCompraComponent implements OnInit {
+export class SummaryPurchaseComponent implements OnInit {
   public user: any;
   public shopcar: any;
   public sale: any;
@@ -28,8 +28,8 @@ export class ResumenCompraComponent implements OnInit {
 
 
   constructor(
-    private serverCompra: CompraService,
-    private serverLineaCompra: LineaCompraService,
+    private serverCompra: PurchaseService,
+    private serverLineaCompra: PurchaseLineService,
     private sweetAlertService: SweetAlertService
   ) {}
 

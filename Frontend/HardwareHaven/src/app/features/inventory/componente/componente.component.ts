@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ComponenteService } from '../../../core/services/entities/componente.service';
+import { ComponentService  } from '../../../core/services/entities/componente.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { of } from 'rxjs';
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './componente.component.html',
   styleUrl: './componente.component.css',
-  providers: [ComponenteService, SweetAlertService]
+  providers: [ComponentService , SweetAlertService]
 })
 export class ComponentComponent implements OnInit{
   @Input() searchQuery: string| undefined;
@@ -27,7 +27,7 @@ export class ComponentComponent implements OnInit{
 
   isLoading = false;
   constructor(
-    private serverComponente: ComponenteService ,
+    private serverComponente: ComponentService  ,
     private sweetAlertService: SweetAlertService
   ) {}
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CategoriaService } from '../../../core/services/entities/categoria.service';
+import { CategoryService } from '../../../core/services/entities/categoria.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { of, Subscription } from 'rxjs';
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.css',
-  providers: [CategoriaService, SweetAlertService]
+  providers: [CategoryService, SweetAlertService]
 })
 export class CategoryComponent implements OnInit {
   @Input() searchQuery: string| undefined;
@@ -29,7 +29,7 @@ export class CategoryComponent implements OnInit {
 
 
   constructor(
-    private serverCategoria: CategoriaService ,
+    private serverCategoria: CategoryService ,
     private sweetAlertService: SweetAlertService,
 
   ) {}

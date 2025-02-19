@@ -5,7 +5,7 @@ import { HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class LineaCompraService {
+export class PurchaseLineService {
 
   private baseUrl = 'http://localhost:3000/api/lineaCompra/';
 

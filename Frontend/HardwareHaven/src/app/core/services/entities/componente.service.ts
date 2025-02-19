@@ -5,7 +5,7 @@ import { getHeaders } from '../../../shared/functions/functions';
 @Injectable({
   providedIn: 'root'
 })
-export class ComponenteService {
+export class ComponentService  {
 
   private baseUrl = 'http://localhost:3000/api/componente/';
 

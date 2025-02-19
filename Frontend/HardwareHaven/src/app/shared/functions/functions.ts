@@ -2,19 +2,19 @@ import { HttpHeaders } from "@angular/common/http";
 import { SessionService } from "../../core/services/share/session.service";
 import { Router } from "@angular/router";
 
-export function specialFiltro(nombre: string, dato: any): string {
-    if (nombre.includes("precios")) return `$${getMaxPrice(dato)}`;
-    if (nombre.includes("categoria")) return dato.descripcion;
-    if (nombre.includes("componente")) return dato.name;
-    if (nombre.includes("componentes")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee componentes" : "No posee componentes") : "-";
-    if(nombre.includes("subTotal"))return `$${dato}`;
-    if (nombre.includes("valor")) return `$${dato}`;
-    if (nombre.includes("fechaDesde") || nombre.includes("fechaCompra")) return formatDateTime(dato);
-    if(nombre.includes("fechaCancel")) return (dato) ? formatDateTime(dato): "-";
-    if (nombre.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
-    if (nombre === "compra") return dato.id.toString();
-    if (nombre === "user") return dato.name;
-    if (nombre.includes("compras")) return Array.isArray(dato) ? (dato.length > 0 ? "Realizo compras" : "No compro") : "-";
+export function specialFiltro(name: string, dato: any): string {
+    if (name.includes("precios")) return `$${getMaxPrice(dato)}`;
+    if (name.includes("categoria")) return dato.descripcion;
+    if (name.includes("componente")) return dato.name;
+    if (name.includes("componentes")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee componentes" : "No posee componentes") : "-";
+    if(name.includes("subTotal"))return `$${dato}`;
+    if (name.includes("valor")) return `$${dato}`;
+    if (name.includes("fechaDesde") || name.includes("fechaCompra")) return formatDateTime(dato);
+    if(name.includes("fechaCancel")) return (dato) ? formatDateTime(dato): "-";
+    if (name.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
+    if (name === "compra") return dato.id.toString();
+    if (name === "user") return dato.name;
+    if (name.includes("compras")) return Array.isArray(dato) ? (dato.length > 0 ? "Realizo compras" : "No compro") : "-";
     return dato;
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { LineaCompraService } from '../../../core/services/entities/linea-compra.service';
+import { PurchaseLineService } from '../../../core/services/entities/linea-compra.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { of } from 'rxjs';
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './linea-compra.component.html',
   styleUrl: './linea-compra.component.css',
-  providers: [LineaCompraService, SweetAlertService]
+  providers: [PurchaseLineService, SweetAlertService]
 })
 export class PurchaseLineComponent  implements OnInit {
   @Input() searchQuery: string| undefined;
@@ -28,7 +28,7 @@ export class PurchaseLineComponent  implements OnInit {
 
 
   constructor(
-    private serverLineaCompra: LineaCompraService,
+    private serverLineaCompra: PurchaseLineService,
     private sweetAlertService: SweetAlertService
   ) {}
 

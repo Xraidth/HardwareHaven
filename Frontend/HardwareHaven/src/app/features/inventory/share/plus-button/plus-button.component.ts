@@ -3,11 +3,11 @@ import { UserService } from '../../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { getErrorMessage } from '../../../../shared/functions/functions';
 import { catchError, map, of } from 'rxjs';
-import { PrecioService } from '../../../../core/services/entities/precio.service';
-import { LineaCompraService } from '../../../../core/services/entities/linea-compra.service';
-import { CompraService } from '../../../../core/services/entities/compra.service';
-import { ComponenteService } from '../../../../core/services/entities/componente.service';
-import { CategoriaService } from '../../../../core/services/entities/categoria.service';
+import { PriceService } from '../../../../core/services/entities/precio.service';
+import { PurchaseLineService } from '../../../../core/services/entities/linea-compra.service';
+import { PurchaseService } from '../../../../core/services/entities/compra.service';
+import { ComponentService  } from '../../../../core/services/entities/componente.service';
+import { CategoryService } from '../../../../core/services/entities/categoria.service';
 import { ShareService } from '../../../../core/services/share/share.service';
 
 
@@ -18,7 +18,7 @@ import { ShareService } from '../../../../core/services/share/share.service';
   imports: [],
   templateUrl: './plus-button.component.html',
   styleUrl: './plus-button.component.css',
-  providers: [UserService, SweetAlertService, PrecioService,LineaCompraService,CompraService,ComponenteService, CategoriaService]
+  providers: [UserService, SweetAlertService, PriceService,PurchaseLineService,PurchaseService,ComponentService , CategoryService]
 })
 export class PlusButtonComponent {
   @Input() nowType: string | undefined;
@@ -38,13 +38,13 @@ export class PlusButtonComponent {
   }
 
   constructor(
-    private serverLineaCompra: LineaCompraService,
-    private serverPrecio: PrecioService,
+    private serverLineaCompra: PurchaseLineService,
+    private serverPrecio: PriceService,
     private serverUser: UserService,
     private sweetAlertService: SweetAlertService,
-    private serverCompra: CompraService,
-    private serverComponente: ComponenteService,
-    private serverCategoria: CategoriaService ,
+    private serverCompra: PurchaseService,
+    private serverComponente: ComponentService ,
+    private serverCategoria: CategoryService ,
 
   ) {}
 

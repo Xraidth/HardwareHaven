@@ -5,7 +5,7 @@ import { HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class PrecioService {
+export class PriceService {
 
   private baseUrl = 'http://localhost:3000/api/precio/';
   constructor(

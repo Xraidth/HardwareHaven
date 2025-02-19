@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CompraService {
+export class PurchaseService {
 
 
   private baseUrl = 'http://localhost:3000/api/compra/';

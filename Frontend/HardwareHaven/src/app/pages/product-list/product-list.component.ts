@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponenteService } from '../../core/services/entities/componente.service.js';
+import { ComponentService  } from '../../core/services/entities/componente.service.js';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CardComponent } from '../../features/products/components/card/card.comp
 import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
-import { CategoriaService } from '../../core/services/entities/categoria.service.js';
+import { CategoryService } from '../../core/services/entities/categoria.service.js';
 import { getMaxPrice } from '../../shared/functions/functions.js';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service.js';
 
@@ -18,7 +18,7 @@ import { SweetAlertService } from '../../core/services/notifications/sweet-alert
   imports: [HttpClientModule, CommonModule, CardComponent, UserNavComponent, FormsModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ComponenteService, CategoriaService]
+  providers: [ComponentService , CategoryService]
 })
 export class ProductListComponent implements OnInit {
 
@@ -32,8 +32,8 @@ export class ProductListComponent implements OnInit {
   public usuario: any;
 
   constructor(
-    private serverProduct: ComponenteService,
-    private serverCategori: CategoriaService,
+    private serverProduct: ComponentService ,
+    private serverCategori: CategoryService,
     private router: Router,
     private sw: SweetAlertService
   ) {}
