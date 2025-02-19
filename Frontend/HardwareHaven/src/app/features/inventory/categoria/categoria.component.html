@@ -7,7 +7,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of categorias">
-          <td *ngFor="let column of columnsLw">{{ specialFiltro(column, item[column]) || '-' }}</td>
+          <td *ngFor="let column of columnsLw">{{ specialFilter(column, item[column]) || '-' }}</td>
           <td>
             <button class="btn btn-light" (click)="editarItem(item)">Editar</button>
           </td>
@@ -17,7 +17,7 @@
         </tr>
       </tbody>
     </table>
-  
+
     <ng-template #noDataTemplate>
       <div class="inventarioVacio">
         <p>Inventario vacío</p>

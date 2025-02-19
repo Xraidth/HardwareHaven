@@ -2,7 +2,7 @@ import { HttpHeaders } from "@angular/common/http";
 import { SessionService } from "../../core/services/share/session.service";
 import { Router } from "@angular/router";
 
-export function specialFiltro(name: string, dato: any): string {
+export function specialFilter(name: string, dato: any): string {
     if (name.includes("precios")) return `$${getMaxPrice(dato)}`;
     if (name.includes("categoria")) return dato.descripcion;
     if (name.includes("componente")) return dato.name;

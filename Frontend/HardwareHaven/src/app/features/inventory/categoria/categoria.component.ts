@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CategoryService } from '../../../core/services/entities/categoria.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFilter } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -212,7 +212,7 @@ export class CategoryComponent implements OnInit {
 
 
 
-  specialFiltro(nombre: string, dato: any): string {
-    return specialFiltro(nombre,dato);
+  specialFilter(nombre: string, dato: any): string {
+    return specialFilter(nombre,dato);
   }
 }
