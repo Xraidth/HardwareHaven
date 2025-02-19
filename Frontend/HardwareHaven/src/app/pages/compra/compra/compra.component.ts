@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../../core/services/share/session.service';
 import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
 import { Router } from '@angular/router';
-import { CarritoComponent } from '../../../features/compras/carrito/carrito/carrito.component';
+import { CarritoComponent } from '../../../features/purchases/carrito/carrito/carrito.component';
 import { CommonModule } from '@angular/common';
-import { ResumenCompraComponent } from '../../../features/compras/resumenCompra/resumen-compra/resumen-compra.component';
+import { ResumenCompraComponent } from '../../../features/purchases/resumenCompra/resumen-compra/resumen-compra.component';
 
 @Component({
   selector: 'app-compra',
