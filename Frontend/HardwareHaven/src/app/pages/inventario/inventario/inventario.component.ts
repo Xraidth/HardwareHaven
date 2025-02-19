@@ -33,17 +33,12 @@ import { CategoryComponent } from '../../../features/inventory/categoria/categor
   providers: [
   ]
 })
-export class InventarioComponent implements OnInit {
+export class InventoryComponent implements OnInit {
   searchQuery: string = '';
   auxsearchQuery: string = '';
   nowType: string = '';
   carga:string = ""
   usuario: any;
-
-  constructor(
-
-  ) {}
-
 
   ngOnInit(): void {
     this.usuario = SessionService.user;

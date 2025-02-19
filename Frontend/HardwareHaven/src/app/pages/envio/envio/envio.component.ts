@@ -9,7 +9,7 @@ import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
   templateUrl: './envio.component.html',
   styleUrl: './envio.component.css'
 })
-export class EnvioComponent {
+export class SendComponent  {
 public usuario:any;
 ngOnInit(): void {
   this.usuario = SessionService.user;

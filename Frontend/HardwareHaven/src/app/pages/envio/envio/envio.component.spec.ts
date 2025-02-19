@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnvioComponent } from './envio.component';
+import { SendComponent  } from './envio.component';
 
-describe('EnvioComponent', () => {
-  let component: EnvioComponent;
-  let fixture: ComponentFixture<EnvioComponent>;
+describe('SendComponent ', () => {
+  let component: SendComponent ;
+  let fixture: ComponentFixture<SendComponent >;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EnvioComponent]
+      imports: [SendComponent ]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(EnvioComponent);
+
+    fixture = TestBed.createComponent(SendComponent );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

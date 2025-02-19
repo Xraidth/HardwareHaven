@@ -17,7 +17,7 @@ import { directed, getErrorMessage } from '../../../shared/functions/functions';
   styleUrl: './perfil.component.css',
   providers:[SweetAlertService, UserService]
 })
-export class PerfilComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 public usuario:any;
 public username: string = 'Usuario123';
 

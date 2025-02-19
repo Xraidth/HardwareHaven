@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './ayuda.component.html',
   styleUrl: './ayuda.component.css'
 })
-export class AyudaComponent {
+export class HelpComponent {
 
   constructor(private router: Router){
-    
+
   }
 
   gotoHome(){
