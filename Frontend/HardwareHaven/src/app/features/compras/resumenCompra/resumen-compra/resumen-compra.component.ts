@@ -17,14 +17,14 @@ import { CommonModule ,  NgIf} from '@angular/common';
   providers: [CompraService, LineaCompraService]
 })
 export class ResumenCompraComponent implements OnInit {
-  public usuario: any;
+  public user: any;
   public carrito: any;
-  public compra: any;
-  public compraRealizada: any;
-  public lineasCompra: any[] = [];
+  public sale: any;
+  public purchaseMade: any;
+  public purchasesLine: any[] = [];
   public total: any;
-  public cargando: boolean = false;
-  public compraFinalizada: boolean = false;
+  public loading: boolean = false;
+  public purchaseFinished: boolean = false;
 
 
   constructor(
@@ -35,12 +35,12 @@ export class ResumenCompraComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.usuario = SessionService.usuario;
-    if (this.usuario && this.usuario.carrito) {
-      this.carrito = this.usuario.carrito;
-      this.generarCompra();}
+    this.user = SessionService.usuario;
+    if (this.user && this.user.carrito) {
+      this.carrito = this.user.carrito;
+      this.generatePurchase();}
     else{
-      this.sweetAlertService.mostrarError('No se encontró información del usuario o del carrito');
+      this.sweetAlertService.mostrarError('Cart shop or user information was not founded');
       return;
     }
 
@@ -48,34 +48,34 @@ export class ResumenCompraComponent implements OnInit {
 
   }
 
-  generarCompra() {
-    this.cargando = true;
-    this.compraFinalizada = false;
+  generatePurchase() {
+    this.loading = true;
+    this.purchaseFinished = false;
 
-    this.serverCompra.create({ userId: this.usuario.id }).pipe(
+    this.serverCompra.create({ userId: this.user.id }).pipe(
     ).subscribe({
       next: (r: any) => {
         if (r && r.data) {
-          this.compraRealizada = r.data;
+          this.purchaseMade = r.data;
 
           if (this.carrito && this.carrito.length) {
             for (const p of this.carrito) {
               this.generarLineaCompra(p);
             }
             this.total = SessionService.usuario.carrito.total;
-            this.compraRealizada.total = this.total;
-            this.compraFinalizada = true;
+            this.purchaseMade.total = this.total;
+            this.purchaseFinished = true;
           } else {
-            this.sweetAlertService.mostrarError('El carrito está vacío');
+            this.sweetAlertService.mostrarError('The shop car is empty');
           }
         } else {
-          this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
+          this.sweetAlertService.mostrarError('There was an error.');
         }
-        this.cargando = false;
+        this.loading = false;
       },
       error: (e) => {
-        this.sweetAlertService.mostrarError('Error al generar la compra');
-        this.cargando = false;
+        this.sweetAlertService.mostrarError('Error to generate purchase');
+        this.loading = false;
       }
     });
   }
@@ -83,20 +83,20 @@ export class ResumenCompraComponent implements OnInit {
 
 
   generarLineaCompra(p: any) {
-    if (!this.compraRealizada || !this.compraRealizada.id) {
+    if (!this.purchaseMade || !this.purchaseMade.id) {
       this.sweetAlertService.mostrarError('No se ha generado una linea de compra válida.');
       return;
     }
 
     this.serverLineaCompra.create({
-      compraId: this.compraRealizada.id,
+      compraId: this.purchaseMade.id,
       cantidad: p.quantity,
       componenteId: p.id
     }).subscribe({
       next: (r: any) => {
         if (r && r.data) {
           const lineacompraRealizada: any = r.data;
-          this.lineasCompra.push(lineacompraRealizada);
+          this.purchasesLine.push(lineacompraRealizada);
         } else {
           this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
         }
@@ -124,8 +124,8 @@ export class ResumenCompraComponent implements OnInit {
 
 
 
-facturaBoton(){
-  this.facturate(this.compraRealizada.id);
+  invoiceButton(){
+  this.facturate(this.purchaseMade.id);
 }
 
 }
