@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CarritoCardComponent } from '../../../products/components/carritoCard/carrito-card/carrito-card.component';
+import { ShopCarCardComponent } from '../../../products/components/carritoCard/carrito-card/carrito-card.component';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
 import { getMaxPrice } from '../../../../shared/functions/functions';
@@ -7,11 +7,11 @@ import { getMaxPrice } from '../../../../shared/functions/functions';
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CarritoCardComponent, CommonModule],
+  imports: [ShopCarCardComponent, CommonModule],
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
-export class CarritoComponent implements OnInit{
+export class ShopCarComponent implements OnInit{
   public carrito: any[] = [];
   public total: number = 0;
   mostrarBoton: boolean = false;

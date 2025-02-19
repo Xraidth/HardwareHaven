@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PrecioService } from '../../../core/services/entities/precio.service';
+import { PriceService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -14,7 +14,7 @@ import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from 
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './precio.component.html',
   styleUrl: './precio.component.css',
-  providers: [PrecioService, SweetAlertService]
+  providers: [PriceService, SweetAlertService]
 })
 export class PriceComponent implements OnInit {
   @Input() searchQuery: string| undefined;
@@ -27,7 +27,7 @@ export class PriceComponent implements OnInit {
   originalprecios: any[] = [];
 
   constructor(
-    private serverPrecio: PrecioService,
+    private serverPrecio: PriceService,
     private sweetAlertService: SweetAlertService
   ) {}
 

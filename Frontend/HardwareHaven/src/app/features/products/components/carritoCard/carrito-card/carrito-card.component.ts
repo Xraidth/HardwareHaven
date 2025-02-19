@@ -10,12 +10,12 @@ import { getMaxPrice } from '../../../../../shared/functions/functions';
   templateUrl: './carrito-card.component.html',
   styleUrls: ['./carrito-card.component.css']
 })
-export class CarritoCardComponent implements OnInit {
+export class ShopCarCardComponent implements OnInit {
   public quantity: number = 1;
   public carrito: any;
   productoDelCarro: any;
   @Input() product: any;
-  @Output() quantityChange = new EventEmitter<void>();  // Nuevo Output para emitir cambios
+  @Output() quantityChange = new EventEmitter<void>();
 
   ngOnInit() {
 
