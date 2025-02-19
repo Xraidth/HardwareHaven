@@ -6,7 +6,7 @@ import { PriceService } from '../../../core/services/entities/precio.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from '../../../shared/functions/functions';
+import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFilter } from '../../../shared/functions/functions';
 
 @Component({
   selector: 'app-precio',
@@ -210,7 +210,7 @@ export class PriceComponent implements OnInit {
     });
   }
 
-  specialFiltro(nombre: string, dato: any): string {
-    return specialFiltro(nombre,dato);
+  specialFilter(nombre: string, dato: any): string {
+    return specialFilter(nombre,dato);
   }
 }

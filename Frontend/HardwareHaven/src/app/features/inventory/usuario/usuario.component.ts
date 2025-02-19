@@ -9,7 +9,7 @@ import { of, Subscription } from 'rxjs';
 import {
   capitalizeFirstLetterOfEachWord,
   getErrorMessage,
-  specialFiltro
+  specialFilter
 } from '../../../shared/functions/functions';
 import { SessionService } from '../../../core/services/share/session.service';
 import { Router } from '@angular/router';
@@ -241,7 +241,7 @@ const message = e.error?.message || [];
     }
   }
 
-  specialFiltro(nombre: string, dato: any): string {
-    return specialFiltro(nombre, dato);
+  specialFilter(nombre: string, dato: any): string {
+    return specialFilter(nombre, dato);
   }
 }
