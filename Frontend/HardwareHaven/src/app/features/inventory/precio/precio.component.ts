@@ -16,7 +16,7 @@ import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFiltro } from 
   styleUrl: './precio.component.css',
   providers: [PrecioService, SweetAlertService]
 })
-export class PrecioComponent implements OnInit {
+export class PriceComponent implements OnInit {
   @Input() searchQuery: string| undefined;
   precios: any[] = [];
   precio: any = {};
@@ -49,17 +49,17 @@ export class PrecioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
 
 
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.precios.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.precios[0]);
@@ -87,19 +87,19 @@ export class PrecioComponent implements OnInit {
     ).subscribe((precios: any[]) => {
       this.precios = precios;
       this.originalprecios = [...precios];
-      this.cargarColumnas();
+      this.loadColumns();
       this.isLoading = false;
     });
   }
 
   eliminarItem(precio: any): void {
     this.delete(precio.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(precio: any): void {
     this.update(precio);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   public delete(id: number) {
@@ -123,7 +123,7 @@ export class PrecioComponent implements OnInit {
         ).subscribe((precio: any) => {
           if (precio) {
             this.precio = precio;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         });
       } else if (result.isDismissed) {

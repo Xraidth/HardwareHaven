@@ -16,7 +16,7 @@ import { of } from 'rxjs';
   styleUrl: './componente.component.css',
   providers: [ComponenteService, SweetAlertService]
 })
-export class ComponenteComponent implements OnInit{
+export class ComponentComponent implements OnInit{
   @Input() searchQuery: string| undefined;
   componentes: any[] = [];
   componente: any = {};
@@ -49,15 +49,15 @@ export class ComponenteComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.componentes.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.componentes[0]);
@@ -83,7 +83,7 @@ export class ComponenteComponent implements OnInit{
       (componentes: any[]) => {
       this.componentes = componentes;
       this.originalcomponentes = [...componentes];
-      this.cargarColumnas();  // Load columns after fetching data
+      this.loadColumns();  // Load columns after fetching data
       this.isLoading = false;
     });
   }
@@ -91,12 +91,12 @@ export class ComponenteComponent implements OnInit{
 
   eliminarItem(componente: any): void {
     this.delete(componente.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(componente: any): void {
     this.update(componente);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
 
@@ -120,7 +120,7 @@ export class ComponenteComponent implements OnInit{
         ).subscribe((componente: any) => {
           if (componente) {
             this.componente = componente;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         });
       } else if (result.isDismissed) {
@@ -155,7 +155,7 @@ export class ComponenteComponent implements OnInit{
        { next: (componente: any) => {
         if (componente) {
           this.componente = componente;
-          this.cargarEntidad();
+          this.loadEntity();
         }
       },
       error: (e) => {
@@ -197,7 +197,7 @@ export class ComponenteComponent implements OnInit{
           (componente: any) => {
         if (componente) {
           this.componente = componente;
-          this.cargarEntidad(); }
+          this.loadEntity(); }
         },
         error: (e) => {
             const errores = e.error?.errors || [];

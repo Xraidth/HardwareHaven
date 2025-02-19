@@ -17,7 +17,7 @@ import { of, Subscription } from 'rxjs';
   styleUrl: './categoria.component.css',
   providers: [CategoriaService, SweetAlertService]
 })
-export class CategoriaComponent implements OnInit {
+export class CategoryComponent implements OnInit {
   @Input() searchQuery: string| undefined;
   categorias: any[] = [];
   categoria: any = {};
@@ -54,15 +54,15 @@ export class CategoriaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.categorias.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.categorias[0]);
@@ -89,7 +89,7 @@ export class CategoriaComponent implements OnInit {
 
       this.originalCategorias = [...categorias];
 
-      this.cargarColumnas();
+      this.loadColumns();
       this.isLoading = false;
     });
   }
@@ -97,12 +97,12 @@ export class CategoriaComponent implements OnInit {
 
   eliminarItem(categoria: any): void {
     this.delete(categoria.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(categoria: any): void {
     this.update(categoria);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   public delete(id: number) {
@@ -125,7 +125,7 @@ export class CategoriaComponent implements OnInit {
         ).subscribe((categoria: any) => {
           if (categoria) {
             this.categoria = categoria;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         });
       } else if (result.isDismissed) {
@@ -158,7 +158,7 @@ export class CategoriaComponent implements OnInit {
         next: (categoria: any) => {
             if (categoria) {
                 this.categoria = categoria;
-                this.cargarEntidad();
+                this.loadEntity();
             }
         },
         error: (e) => {
@@ -197,7 +197,7 @@ export class CategoriaComponent implements OnInit {
         next:(categoria: any) => {
         if (categoria) {
           this.categoria = categoria;
-          this.cargarEntidad();
+          this.loadEntity();
         }
       },
       error: (e) => {

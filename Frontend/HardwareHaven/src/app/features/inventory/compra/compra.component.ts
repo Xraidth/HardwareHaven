@@ -16,7 +16,7 @@ import { of } from 'rxjs';
   styleUrl: './compra.component.css',
   providers: [CompraService, SweetAlertService]
 })
-export class CompraComponent implements OnInit {
+export class PurchaseComponent implements OnInit {
   @Input() searchQuery: string| undefined;
   compras: any[] = [];
   compra: any = {};
@@ -50,14 +50,14 @@ export class CompraComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.compras.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.compras[0]);
@@ -91,7 +91,7 @@ export class CompraComponent implements OnInit {
       next: (compras: any[]) => {
         this.compras = compras;
         this.originalcompras = [...compras];
-        this.cargarColumnas();
+        this.loadColumns();
       }
     });
   }
@@ -100,12 +100,12 @@ export class CompraComponent implements OnInit {
 
   eliminarItem(linea: any): void {
     this.delete(linea.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(linea: any): void {
     this.update(linea);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
 
@@ -129,7 +129,7 @@ export class CompraComponent implements OnInit {
         ).subscribe((compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         });
       } else if (result.isDismissed) {
@@ -167,7 +167,7 @@ export class CompraComponent implements OnInit {
         next: (compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         },
         error: (e) => {
@@ -214,7 +214,7 @@ export class CompraComponent implements OnInit {
         next: (compra: any) => {
           if (compra) {
             this.compra = compra;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         },
         error: (e) => {

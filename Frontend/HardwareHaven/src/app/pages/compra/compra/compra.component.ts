@@ -13,7 +13,7 @@ import { ResumenCompraComponent } from '../../../features/purchases/resumenCompr
   templateUrl: './compra.component.html',
   styleUrl: './compra.component.css'
 })
-export class CompraComponent implements OnInit {
+export class PurchaseComponent implements OnInit {
   public usuario:any;
   public carrito:any;
   mostrarBoton: boolean = false;

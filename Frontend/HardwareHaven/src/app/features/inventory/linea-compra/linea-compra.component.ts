@@ -16,7 +16,7 @@ import { of } from 'rxjs';
   styleUrl: './linea-compra.component.css',
   providers: [LineaCompraService, SweetAlertService]
 })
-export class LineaCompraComponent  implements OnInit {
+export class PurchaseLineComponent  implements OnInit {
   @Input() searchQuery: string| undefined;
   lineas: any[]=[];
   linea: any;
@@ -51,15 +51,15 @@ export class LineaCompraComponent  implements OnInit {
 
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.lineas.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.lineas[0]);
@@ -92,7 +92,7 @@ export class LineaCompraComponent  implements OnInit {
       next: (lineas: any[]) => {
         this.lineas = lineas;
         this.originallineas = [...lineas];
-        this.cargarColumnas();
+        this.loadColumns();
         this.isLoading = false;
       }
     });
@@ -102,12 +102,12 @@ export class LineaCompraComponent  implements OnInit {
 
   eliminarItem(linea: any): void {
     this.delete(linea.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(precio: any): void {
     this.update(precio);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   public delete(id: number) {
@@ -131,7 +131,7 @@ export class LineaCompraComponent  implements OnInit {
         ).subscribe((linea: any) => {
           if (linea) {
             this.linea = linea;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         });
       } else if (result.isDismissed) {
@@ -167,7 +167,7 @@ export class LineaCompraComponent  implements OnInit {
         next: (lineaCompra: any) => {
           if (lineaCompra) {
             this.linea = lineaCompra;
-            this.cargarEntidad();  // Reload entity after insertion
+            this.loadEntity();  // Reload entity after insertion
           }
         },
         error: (e) => {
@@ -212,7 +212,7 @@ export class LineaCompraComponent  implements OnInit {
         next: (lineaCompra: any) => {
           if (lineaCompra) {
             this.linea = lineaCompra;
-            this.cargarEntidad();
+            this.loadEntity();
           }
         },
         error: (e) => {

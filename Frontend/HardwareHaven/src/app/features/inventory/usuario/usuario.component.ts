@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./usuario.component.css'],
   providers: [UserService, SweetAlertService]
 })
-export class UsuarioComponent implements OnInit {
+export class UserComponent implements OnInit {
   @Input() searchQuery: string| undefined;
 
 
@@ -50,7 +50,7 @@ export class UsuarioComponent implements OnInit {
   subscription: any;
 
   ngOnInit(): void {
-    this.cargarEntidad();
+    this.loadEntity();
 
   }
 
@@ -76,11 +76,11 @@ export class UsuarioComponent implements OnInit {
 
 
 
-  cargarEntidad(): void {
+  loadEntity(): void {
     this.getAll();
   }
 
-  cargarColumnas(): void {
+  loadColumns(): void {
     if (this.usuarios.length > 0) {
       this.inventarioVacio = false;
       this.columnsLw = Object.keys(this.usuarios[0]);
@@ -106,19 +106,19 @@ export class UsuarioComponent implements OnInit {
     ).subscribe((usuarios: any[]) => {
       this.usuarios = usuarios;
       this.originalusuarios = [...usuarios];
-      this.cargarColumnas();
+      this.loadColumns();
       this.isLoading = false;
     });
   }
 
   eliminarItem(usuario: any): void {
     this.delete(usuario.id);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   editarItem(usuario: any): void {
     this.update(usuario);
-    this.cargarEntidad();
+    this.loadEntity();
   }
 
   public delete(id: number) {
@@ -145,7 +145,7 @@ export class UsuarioComponent implements OnInit {
                   }
 
                   this.usuario = response.data;
-                  this.cargarEntidad();
+                  this.loadEntity();
                 } else {
 
                 }
