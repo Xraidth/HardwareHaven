@@ -39,7 +39,7 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usuario = SessionService.usuario||SessionService.recordarSession()||undefined
+    this.usuario = SessionService.user||SessionService.rememberSession()||undefined
     this.getAllProducts();
     this.getAllCategori();
   }
@@ -127,7 +127,7 @@ export class ProductListComponent implements OnInit {
 
 
   pasarAcompra() {
-    SessionService.usuario.carrito = this.carrito;
+    SessionService.user.carrito = this.carrito;
     this.router.navigate(['compra']);
   }
 
@@ -148,7 +148,7 @@ export class ProductListComponent implements OnInit {
 
   vaciarCarro(){
     this.carrito=[]
-    SessionService.usuario.carrito= this.carrito;
+    SessionService.user.carrito= this.carrito;
     this.getAllProducts();
   }
 }

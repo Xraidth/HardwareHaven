@@ -84,6 +84,6 @@ const message = e.error?.message || [];
   }
 
   cerrarSesion(){
-    SessionService.borrarSession();
+    SessionService.deleteSession();
   }
 }

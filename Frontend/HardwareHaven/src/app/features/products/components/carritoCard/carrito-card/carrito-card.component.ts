@@ -19,7 +19,7 @@ export class CarritoCardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.carrito = SessionService.usuario.carrito;
+    this.carrito = SessionService.user.carrito;
     this.productoDelCarro = this.carrito.find((item: any) => item.id == this.product.id);
     this.productoDelCarro.quantity = 1;
   }
@@ -59,7 +59,7 @@ removeProduct() {
       const index = this.carrito.indexOf(this.productoDelCarro);
       if (index !== -1) {
           this.carrito.splice(index, 1);
-          SessionService.usuario.carrito = this.carrito;
+          SessionService.user.carrito = this.carrito;
           this.quantityChange.emit();
       }
   }

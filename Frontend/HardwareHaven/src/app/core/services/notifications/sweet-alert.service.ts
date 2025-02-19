@@ -217,7 +217,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   }
 
 
-  recibirOfertas() {
+  receiveOffers() {
     return Swal.fire({
       title: "¿Deseas recibir ofertas?",
       html: `

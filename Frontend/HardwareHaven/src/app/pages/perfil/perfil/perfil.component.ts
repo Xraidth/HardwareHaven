@@ -24,7 +24,7 @@ public username: string = 'Usuario123';
 
   constructor(private router: Router, private sweetAlertService: SweetAlertService, private serverUser: UserService){}
   ngOnInit(): void {
-  this.usuario = SessionService.usuario;
+  this.usuario = SessionService.user;
 }
 
 goBack() {

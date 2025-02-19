@@ -15,8 +15,8 @@ import { getMaxPrice } from '../../../../shared/functions/functions';
 export class CardComponent implements OnInit {
 
   @Input() product: any;
-  @Output() productSelected = new EventEmitter<any>(); 
-  @Output() productUnSelected = new EventEmitter<any>(); 
+  @Output() productSelected = new EventEmitter<any>();
+  @Output() productUnSelected = new EventEmitter<any>();
 
   public isSelected: boolean= false;
   products: { name: string, imageUrl: string }[] = [];
@@ -28,59 +28,59 @@ export class CardComponent implements OnInit {
     this.verificateSelection();
   }
   verificateSelection(): void {
-    const carrito = SessionService.usuario?.carrito || [];
+    const carrito = SessionService.user?.carrito || [];
     const productInCart = carrito.find((item: any) => item.id == this.product.id);
     if (productInCart) {
       this.selectProduct();
     }
   }
-  
+
 
   getMaxPrice(precios: any[]): number {
     return getMaxPrice(precios);
   }
-  
+
 
   selectProduct() {
     if(!this.isSelected){
-    this.productSelected.emit(this.product);  
+    this.productSelected.emit(this.product);
     this.isSelected = true;
-    
+
   }
   }
   unSelectProduct(){
     if(this.isSelected){
-      this.productUnSelected.emit(this.product);  
+      this.productUnSelected.emit(this.product);
       this.isSelected = false;
     }
   }
- 
+
   loadProducts() {
     this.http.get<{ name: string, imageUrl: string }[]>('assets/products.json')
       .subscribe(data => {
         this.products = data;
         this.searchProduct();
       });
-  
+
   }
   searchProduct() {
-    
+
     const foundProduct = this.products.find(x => this.product.name.toLowerCase().includes(x.name.toLowerCase()));
 
-    
+
     if (foundProduct) {
       this.product.imageUrl = foundProduct.imageUrl;
     } else {
       this.product.imageUrl = "https://www.smarttools.com.mx/wp-content/uploads/2019/05/imagen-no-disponible.png";
-      
+
     }
   }
 
   infoProduct(){
     this.sweetAlertService.mostrarDetalleProducto(this.product);
   }
- 
-  
-  
+
+
+
 
 }
