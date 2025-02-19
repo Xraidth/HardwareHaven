@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { SessionService } from '../../../../core/services/share/session.service';
-import { PurchaseService } from '../../../../core/services/entities/compra.service';
-import { PurchaseLineService } from '../../../../core/services/entities/linea-compra.service';
+import { PurchaseService } from '../../../../core/services/entities/purchase.service';
+import { PurchaseLineService } from '../../../../core/services/entities/purchase-line.service';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -9,11 +9,11 @@ import { CommonModule ,  NgIf} from '@angular/common';
 
 
 @Component({
-  selector: 'app-resumen-compra',
+  selector: 'app-summary-purchase',
   standalone: true,
   imports: [CommonModule,HttpClientModule, FormsModule],
-  templateUrl: './resumen-compra.component.html',
-  styleUrls: ['./resumen-compra.component.css'],
+  templateUrl: './summary-purchase.component.html',
+  styleUrls: ['./summary-purchase.component.css'],
   providers: [PurchaseService, PurchaseLineService]
 })
 export class SummaryPurchaseComponent implements OnInit {

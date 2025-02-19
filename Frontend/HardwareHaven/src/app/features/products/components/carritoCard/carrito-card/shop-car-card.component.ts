@@ -4,11 +4,11 @@ import { SessionService } from '../../../../../core/services/share/session.servi
 import { getMaxPrice } from '../../../../../shared/functions/functions';
 
 @Component({
-  selector: 'app-carrito-card',
+  selector: 'app-shop-car-card',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './carrito-card.component.html',
-  styleUrls: ['./carrito-card.component.css']
+  templateUrl: './shop-car-card.component.html',
+  styleUrls: ['./shop-car-card.component.css']
 })
 export class ShopCarCardComponent implements OnInit {
   public quantity: number = 1;

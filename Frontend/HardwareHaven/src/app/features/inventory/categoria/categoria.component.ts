@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CategoryService } from '../../../core/services/entities/categoria.service';
+import { CategoryService } from '../../../core/services/entities/category.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFilter } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';

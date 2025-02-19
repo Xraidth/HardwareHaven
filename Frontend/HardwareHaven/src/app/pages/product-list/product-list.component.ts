@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentService  } from '../../core/services/entities/componente.service.js';
+import { ComponentService  } from '../../core/services/entities/component.service.js';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CardComponent } from '../../features/products/components/card/card.comp
 import { UserNavComponent } from '../../shared/user-nav/user-nav.component.js';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../../core/services/share/session.service.js';
-import { CategoryService } from '../../core/services/entities/categoria.service.js';
+import { CategoryService } from '../../core/services/entities/category.service.js';
 import { getMaxPrice } from '../../shared/functions/functions.js';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service.js';
 

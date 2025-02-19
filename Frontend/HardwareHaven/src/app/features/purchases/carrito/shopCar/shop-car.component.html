@@ -14,7 +14,7 @@
 
     <div *ngIf="carrito.length > 0; else noProductsInCarrito" class="row mb-3">
         <div class="row" *ngFor="let product of carrito">
-            <app-carrito-card [product]="product" (quantityChange)="onQuantityChange()"></app-carrito-card>
+            <app-shop-car-card [product]="product" (quantityChange)="onQuantityChange()"></app-shop-car-card>
         </div>
     </div>
 

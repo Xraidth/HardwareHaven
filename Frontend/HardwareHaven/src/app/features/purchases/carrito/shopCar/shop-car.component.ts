@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopCarCardComponent } from '../../../products/components/carritoCard/carrito-card/carrito-card.component';
+import { ShopCarCardComponent } from '../../../products/components/carritoCard/carrito-card/shop-car-card.component';
 import { SessionService } from '../../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
 import { getMaxPrice } from '../../../../shared/functions/functions';
 
 @Component({
-  selector: 'app-carrito',
+  selector: 'app-shop-car',
   standalone: true,
   imports: [ShopCarCardComponent, CommonModule],
-  templateUrl: './carrito.component.html',
-  styleUrls: ['./carrito.component.css']
+  templateUrl: './shop-car.component.html',
+  styleUrls: ['./shop-car.component.css']
 })
 export class ShopCarComponent implements OnInit{
   public carrito: any[] = [];

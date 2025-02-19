@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PriceService } from '../../../core/services/entities/precio.service';
+import { PriceService } from '../../../core/services/entities/price.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';

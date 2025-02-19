@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SummaryPurchaseComponent } from './resumen-compra.component';
+import { SummaryPurchaseComponent } from './summary-purchase.component';
 
 describe('SummaryPurchaseComponent', () => {
   let component: SummaryPurchaseComponent;
@@ -12,7 +12,7 @@ describe('SummaryPurchaseComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SummaryPurchase Component);
+    fixture = TestBed.createComponent(SummaryPurchaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

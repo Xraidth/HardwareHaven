@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { PurchaseLineService } from '../../../core/services/entities/linea-compra.service';
+import { PurchaseLineService } from '../../../core/services/entities/purchase-line.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFilter } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

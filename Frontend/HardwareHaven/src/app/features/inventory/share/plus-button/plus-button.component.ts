@@ -3,11 +3,11 @@ import { UserService } from '../../../../core/services/entities/user.service';
 import { SweetAlertService } from '../../../../core/services/notifications/sweet-alert.service';
 import { getErrorMessage } from '../../../../shared/functions/functions';
 import { catchError, map, of } from 'rxjs';
-import { PriceService } from '../../../../core/services/entities/precio.service';
-import { PurchaseLineService } from '../../../../core/services/entities/linea-compra.service';
-import { PurchaseService } from '../../../../core/services/entities/compra.service';
-import { ComponentService  } from '../../../../core/services/entities/componente.service';
-import { CategoryService } from '../../../../core/services/entities/categoria.service';
+import { PriceService } from '../../../../core/services/entities/price.service';
+import { PurchaseLineService } from '../../../../core/services/entities/purchase-line.service';
+import { PurchaseService } from '../../../../core/services/entities/purchase.service';
+import { ComponentService  } from '../../../../core/services/entities/component.service';
+import { CategoryService } from '../../../../core/services/entities/category.service';
 import { ShareService } from '../../../../core/services/share/share.service';
 
 
