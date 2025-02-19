@@ -1,12 +1,12 @@
 <div class="custom-contenedor d-flex flex-column justify-content-center align-items-center">
-    <table class="styled-table" *ngIf="precios.length > 0; else noDataTemplate">
+    <table class="styled-table" *ngIf="compras.length > 0; else noDataTemplate">
       <thead>
         <tr>
           <th *ngFor="let column of columns">{{ column }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of precios">
+        <tr *ngFor="let item of compras">
           <td *ngFor="let column of columnsLw">{{ specialFilter(column, item[column]) || '-' }}</td>
           <td>
             <button class="btn btn-light" (click)="editarItem(item)">Editar</button>
@@ -17,11 +17,10 @@
         </tr>
       </tbody>
     </table>
-  
+
     <ng-template #noDataTemplate>
       <div class="inventarioVacio">
         <p>Inventario vacío</p>
       </div>
     </ng-template>
   </div>
-  

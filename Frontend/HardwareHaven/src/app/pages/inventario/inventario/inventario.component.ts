@@ -3,13 +3,13 @@ import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
 import { SessionService } from '../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserComponent } from '../../../features/inventory/usuario/usuario.component';
-import { PriceComponent } from '../../../features/inventory/precio/precio.component';
+import { UserComponent } from '../../../features/inventory/user/user.component';
+import { PriceComponent } from '../../../features/inventory/price/price.component';
 import { PlusButtonComponent } from '../../../features/inventory/share/plus-button/plus-button.component';
-import { PurchaseLineComponent } from '../../../features/inventory/linea-compra/linea-compra.component';
-import { PurchaseComponent } from '../../../features/inventory/compra/compra.component';
-import { ComponentComponent } from '../../../features/inventory/componente/componente.component';
-import { CategoryComponent } from '../../../features/inventory/categoria/categoria.component';
+import { PurchaseLineComponent } from '../../../features/inventory/purchaseLine/purchase-line.component';
+import { PurchaseComponent } from '../../../features/inventory/purchase/purchase.component';
+import { ComponentComponent } from '../../../features/inventory/component/component.component';
+import { CategoryComponent } from '../../../features/inventory/category/category.component';
 
 
 @Component({

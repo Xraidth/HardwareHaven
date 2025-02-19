@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { PurchaseService } from '../../../core/services/entities/purchase.service';
 import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
+import { PurchaseLineService } from '../../../core/services/entities/purchase-line.service';
 import { capitalizeFirstLetterOfEachWord, getErrorMessage, specialFilter } from '../../../shared/functions/functions';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,28 +9,28 @@ import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-compra',
+  selector: 'app-purchase-line',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './compra.component.html',
-  styleUrl: './compra.component.css',
-  providers: [PurchaseService, SweetAlertService]
+  templateUrl: './purchase-line.component.html',
+  styleUrl: './purchase-line.component.css',
+  providers: [PurchaseLineService, SweetAlertService]
 })
-export class PurchaseComponent implements OnInit {
+export class PurchaseLineComponent  implements OnInit {
   @Input() searchQuery: string| undefined;
-  compras: any[] = [];
-  compra: any = {};
-  inventarioVacio = false;
+  lineas: any[]=[];
+  linea: any;
   columns: string[] = [];
   columnsLw: string[] = [];
+  inventarioVacio = false;
   isLoading = false;
-  originalcompras: any[] = [];
+  originallineas: any[] = [];
+
 
   constructor(
-    private serverCompra: PurchaseService,
+    private serverLineaCompra: PurchaseLineService,
     private sweetAlertService: SweetAlertService
   ) {}
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['searchQuery']) {
@@ -39,15 +39,16 @@ export class PurchaseComponent implements OnInit {
 
       if (this.searchQuery === '') {
 
-        this.compras = [...this.originalcompras];
+        this.lineas = [...this.originallineas];
       } else {
 
-        this.compras = this.originalcompras.filter(x =>
-          x.user.name.toLowerCase().includes(this.searchQuery?.toLowerCase())
+        this.lineas = this.originallineas.filter(x =>
+          x.descripcion.toLowerCase().includes(this.searchQuery?.toLowerCase())
         );
       }
     }
   }
+
 
   ngOnInit(): void {
     this.loadEntity();
@@ -57,10 +58,11 @@ export class PurchaseComponent implements OnInit {
     this.getAll();
   }
 
+
   loadColumns(): void {
-    if (this.compras.length > 0) {
+    if (this.lineas.length > 0) {
       this.inventarioVacio = false;
-      this.columnsLw = Object.keys(this.compras[0]);
+      this.columnsLw = Object.keys(this.lineas[0]);
       this.columns = this.columnsLw.map(capitalizeFirstLetterOfEachWord);
       this.columns.push("Editar", "Eliminar");
     } else {
@@ -69,15 +71,14 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-
-
-
-  public getAll() {
-    this.serverCompra.getAll().pipe(
+  getAll() {
+    this.isLoading = true;
+    this.serverLineaCompra.getAll().pipe(
       map((r: any) => {
         if (r && r.data && Array.isArray(r.data)) {
           return r.data;
         } else {
+
           return [];
         }
       }),
@@ -88,10 +89,11 @@ export class PurchaseComponent implements OnInit {
         return of([]);
       })
     ).subscribe({
-      next: (compras: any[]) => {
-        this.compras = compras;
-        this.originalcompras = [...compras];
+      next: (lineas: any[]) => {
+        this.lineas = lineas;
+        this.originallineas = [...lineas];
         this.loadColumns();
+        this.isLoading = false;
       }
     });
   }
@@ -103,20 +105,20 @@ export class PurchaseComponent implements OnInit {
     this.loadEntity();
   }
 
-  editarItem(linea: any): void {
-    this.update(linea);
+  editarItem(precio: any): void {
+    this.update(precio);
     this.loadEntity();
   }
-
 
   public delete(id: number) {
     this.sweetAlertService.confirmBox('¿Estás seguro?', 'No podrás revertir esta acción.').then((result) => {
       if (result.isConfirmed) {
-        this.serverCompra.delete(id).pipe(
+        this.serverLineaCompra.delete(id).pipe(
           map((response: any) => {
             if (response && response.data) {
               return response.data;
             } else {
+
               return null;
             }
           }),
@@ -126,9 +128,9 @@ export class PurchaseComponent implements OnInit {
             this.sweetAlertService.showError(errorMessage);
             return of(null);
           })
-        ).subscribe((compra: any) => {
-          if (compra) {
-            this.compra = compra;
+        ).subscribe((linea: any) => {
+          if (linea) {
+            this.linea = linea;
             this.loadEntity();
           }
         });
@@ -139,15 +141,13 @@ export class PurchaseComponent implements OnInit {
   }
 
 
-
-
-
-
-  async InsertarCompra() {
-    const credenciales = await this.sweetAlertService.InsertCompra();
+  async InsertarLineaCompra() {
+    const credenciales = await this.sweetAlertService.InsertLineaCompra();
     if (credenciales) {
-      this.serverCompra.create({
-        userId: Number(credenciales.userId)
+      this.serverLineaCompra.create({
+        compraId: Number(credenciales.compraId),
+        cantidad: Number(credenciales.cantidad),
+        componenteId: Number(credenciales.componenteId)
       }).pipe(
         map((r: any) => {
           if (r && r.data) {
@@ -164,9 +164,54 @@ export class PurchaseComponent implements OnInit {
           return of(null);
         })
       ).subscribe({
-        next: (compra: any) => {
-          if (compra) {
-            this.compra = compra;
+        next: (lineaCompra: any) => {
+          if (lineaCompra) {
+            this.linea = lineaCompra;
+            this.loadEntity();  // Reload entity after insertion
+          }
+        },
+        error: (e) => {
+          const errores = e.error?.errors || [];
+        const message = e.error?.message || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.showError(mensajeErrores +", "+ message);
+      }
+
+      });
+    }
+  }
+
+
+
+  async update(lineaCompra: any) {
+    const credenciales = await this.sweetAlertService.updateLineaCompra(lineaCompra);
+    if (credenciales) {
+      this.serverLineaCompra.update(lineaCompra.id, {
+        compraId: Number(credenciales.compraId),
+        cantidad: Number(credenciales.cantidad),
+        subTotal: Number(credenciales.subTotal),
+        componenteId: Number(credenciales.componenteId)
+      }).pipe(
+        map((r: any) => {
+          if (r && r.data) {
+            return r.data;
+          } else {
+
+            return null;
+          }
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+          const errores = error.error?.errors || [];
+          const message = error.error.message || [];
+          const mensajeErrores = errores.join(', ');
+          this.sweetAlertService.showError(mensajeErrores +", "+ message);
+          return of(null);
+        })
+      ).subscribe({
+        next: (lineaCompra: any) => {
+          if (lineaCompra) {
+            this.linea = lineaCompra;
             this.loadEntity();
           }
         },
@@ -181,55 +226,10 @@ export class PurchaseComponent implements OnInit {
   }
 
 
-
-  async update(compra: any) {
-    const credenciales = await this.sweetAlertService.updateCompra(compra);
-    if (credenciales) {
-      this.serverCompra.update(compra.id, {
-        fechaCompra: credenciales.fechaCompra,
-        fechaCancel: credenciales.fechaCancel,
-        total: Number(credenciales.total)
-      }
-
-
-    ).pipe(
-        map((r: any) => {
-          if (r && r.data) {
-            return r.data;
-          } else {
-
-            return null;
-          }
-        }),
-        catchError((error) => {
-          this.isLoading = false;
-        const errores = error.error?.errors || [];
-        const message = error?.error.message || [];
-          const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.showError(mensajeErrores +", "+ message);
-
-          return of(null);
-        })
-      ).subscribe({
-        next: (compra: any) => {
-          if (compra) {
-            this.compra = compra;
-            this.loadEntity();
-          }
-        },
-        error: (e) => {
-          const errores = e.error?.errors || [];
-        const message = e.error?.message || [];
-          const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.showError(mensajeErrores +", "+ message);
-      }
-      });
-    }
-  }
-
-
   specialFilter(nombre: string, dato: any): string {
     return specialFilter(nombre,dato);
   }
+
+
 
 }
