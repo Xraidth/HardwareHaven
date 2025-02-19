@@ -80,7 +80,7 @@ export class PrecioComponent implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+        this.sweetAlertService.showError(errorMessage);
         this.isLoading = false;
         return of([]);
       })
@@ -117,7 +117,7 @@ export class PrecioComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);
+            this.sweetAlertService.showError(errorMessage);
             return of(null);
           })
         ).subscribe((precio: any) => {
@@ -143,7 +143,7 @@ export class PrecioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+        this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe(
@@ -158,7 +158,7 @@ export class PrecioComponent implements OnInit {
           const errores = e.error?.errors || [];
           const message = e.error?.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+          this.sweetAlertService.showError(mensajeErrores +", "+ message);
       }
       });
     }
@@ -177,7 +177,7 @@ export class PrecioComponent implements OnInit {
           const errores = error.error?.errors || [];
           const message = error?.error.message || [];
           const mensajeErrores = errores.join(', ');
-          this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+          this.sweetAlertService.showError(mensajeErrores +", "+ message);
           return of(null);
         })
       ).subscribe(
@@ -191,7 +191,7 @@ export class PrecioComponent implements OnInit {
         const errores = e.error?.errors || [];
         const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+        this.sweetAlertService.showError(mensajeErrores +", "+ message);
     }
 
       });

@@ -52,7 +52,7 @@ export class UserNavComponent implements OnInit {
         catchError((error) => {
 
         const errorMessage = getErrorMessage(error);
-        this.swa.mostrarError(errorMessage);
+        this.swa.showError(errorMessage);
           return of(null);
         })
       ).subscribe(
@@ -68,7 +68,7 @@ export class UserNavComponent implements OnInit {
       const errores = e.error?.errors || [];
 const message = e.error?.message || [];
       const mensajeErrores = errores.join(', ');
-      this.swa.mostrarError(mensajeErrores +", "+ message);
+      this.swa.showError(mensajeErrores +", "+ message);
   }
 
     }

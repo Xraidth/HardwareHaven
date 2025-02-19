@@ -57,11 +57,11 @@ export class ProductListComponent implements OnInit {
           }
         } catch (error) {
 
-          this.sw.mostrarError("Error to found products");
+          this.sw.showError("Error to found products");
         }
       },
       error: (e) => {
-        this.sw.mostrarError("Error to found products");
+        this.sw.showError("Error to found products");
       }
     });
   }
@@ -77,12 +77,12 @@ export class ProductListComponent implements OnInit {
 
           }
         } catch (error) {
-          this.sw.mostrarError("Error to found cateries");
+          this.sw.showError("Error to found cateries");
 
         }
       },
       error: (e) => {
-        this.sw.mostrarError("Error to found cateries");
+        this.sw.showError("Error to found cateries");
       }
     });
   }

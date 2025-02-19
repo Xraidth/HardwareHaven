@@ -15,7 +15,7 @@ export class SweetAlertService {
     Swal.fire(message);
   }
 
-  mostrarError(message: string): void {
+  showError(message: string): void {
     Swal.fire({
       title: 'Error',
       text: message,

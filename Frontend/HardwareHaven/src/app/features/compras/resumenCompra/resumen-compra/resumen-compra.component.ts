@@ -40,7 +40,7 @@ export class ResumenCompraComponent implements OnInit {
       this.carrito = this.user.carrito;
       this.generatePurchase();}
     else{
-      this.sweetAlertService.mostrarError('Cart shop or user information was not founded');
+      this.sweetAlertService.showError('Cart shop or user information was not founded');
       return;
     }
 
@@ -66,15 +66,15 @@ export class ResumenCompraComponent implements OnInit {
             this.purchaseMade.total = this.total;
             this.purchaseFinished = true;
           } else {
-            this.sweetAlertService.mostrarError('The shop car is empty');
+            this.sweetAlertService.showError('The shop car is empty');
           }
         } else {
-          this.sweetAlertService.mostrarError('There was an error.');
+          this.sweetAlertService.showError('There was an error.');
         }
         this.loading = false;
       },
       error: (e) => {
-        this.sweetAlertService.mostrarError('Error to generate purchase');
+        this.sweetAlertService.showError('Error to generate purchase');
         this.loading = false;
       }
     });
@@ -84,7 +84,7 @@ export class ResumenCompraComponent implements OnInit {
 
   generarLineaCompra(p: any) {
     if (!this.purchaseMade || !this.purchaseMade.id) {
-      this.sweetAlertService.mostrarError('No se ha generado una linea de compra válida.');
+      this.sweetAlertService.showError('No se ha generado una linea de compra válida.');
       return;
     }
 
@@ -98,11 +98,11 @@ export class ResumenCompraComponent implements OnInit {
           const lineacompraRealizada: any = r.data;
           this.purchasesLine.push(lineacompraRealizada);
         } else {
-          this.sweetAlertService.mostrarError('El objeto recibido no tiene la estructura esperada.');
+          this.sweetAlertService.showError('El objeto recibido no tiene la estructura esperada.');
         }
       },
       error: (e) => {
-        this.sweetAlertService.mostrarError('Error al crear la línea de compra');
+        this.sweetAlertService.showError('Error al crear la línea de compra');
       }
     });
   }
@@ -117,7 +117,7 @@ export class ResumenCompraComponent implements OnInit {
       },
       error: (error) => {
 
-        this.sweetAlertService.mostrarError('Error al facturar la compra');
+        this.sweetAlertService.showError('Error al facturar la compra');
       },
     });
   }
