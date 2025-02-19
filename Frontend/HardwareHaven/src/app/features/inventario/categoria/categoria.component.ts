@@ -81,7 +81,7 @@ export class CategoriaComponent implements OnInit {
     this.serverCategoria.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        this.sweetAlertService.mostrarError("Error to obtein categories")
+        this.sweetAlertService.showError("Error to obtein categories")
         return of([]);
       })
     ).subscribe((categorias: any[]) => {
@@ -119,7 +119,7 @@ export class CategoriaComponent implements OnInit {
           catchError((error) => {
             this.isLoading = false;
             const errorMessage = getErrorMessage(error);
-            this.sweetAlertService.mostrarError(errorMessage);
+            this.sweetAlertService.showError(errorMessage);
             return of(null);
           })
         ).subscribe((categoria: any) => {
@@ -151,7 +151,7 @@ export class CategoriaComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage);
+          this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe({
@@ -165,7 +165,7 @@ export class CategoriaComponent implements OnInit {
             const errores = e.error?.errors || [];
             const message = e.error?.message || [];
             const mensajeErrores = errores.join(', ');
-            this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+            this.sweetAlertService.showError(mensajeErrores +", "+ message);
         }
     });
 
@@ -189,7 +189,7 @@ export class CategoriaComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage);
+          this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe(
@@ -204,7 +204,7 @@ export class CategoriaComponent implements OnInit {
         const errores = e.error?.errors || [];
         const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+        this.sweetAlertService.showError(mensajeErrores +", "+ message);
     }
       });
     }

@@ -100,7 +100,7 @@ export class UsuarioComponent implements OnInit {
       catchError((error) => {
         this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+        this.sweetAlertService.showError(errorMessage);
         return of([]);
       })
     ).subscribe((usuarios: any[]) => {
@@ -131,7 +131,7 @@ export class UsuarioComponent implements OnInit {
             catchError((error) => {
               this.isLoading = false;
               const errorMessage = getErrorMessage(error);
-              this.sweetAlertService.mostrarError(errorMessage);
+              this.sweetAlertService.showError(errorMessage);
               return of(null);
             })
           ).subscribe({
@@ -150,7 +150,7 @@ export class UsuarioComponent implements OnInit {
 
                 }
               } catch (error) {
-                this.sweetAlertService.mostrarError("Error to try to delete this user")
+                this.sweetAlertService.showError("Error to try to delete this user")
               } finally {
                 this.isLoading = false;
               }
@@ -178,7 +178,7 @@ export class UsuarioComponent implements OnInit {
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+        this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe(
@@ -194,7 +194,7 @@ export class UsuarioComponent implements OnInit {
         const errores = e.error?.errors || [];
 const message = e.error?.message || [];
         const mensajeErrores = errores.join(', ');
-        this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+        this.sweetAlertService.showError(mensajeErrores +", "+ message);
     }
 
     }
@@ -216,7 +216,7 @@ const message = e.error?.message || [];
         catchError((error) => {
           this.isLoading = false;
         const errorMessage = getErrorMessage(error);
-        this.sweetAlertService.mostrarError(errorMessage);
+        this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe(
@@ -232,7 +232,7 @@ const message = e.error?.message || [];
       const errores = e.error?.errors || [];
 const message = e.error?.message || [];
       const mensajeErrores = errores.join(', ');
-      this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);
+      this.sweetAlertService.showError(mensajeErrores +", "+ message);
   }
 
     }

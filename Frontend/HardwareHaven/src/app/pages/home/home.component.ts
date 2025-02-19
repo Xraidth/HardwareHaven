@@ -90,13 +90,13 @@ export class HomeComponent implements OnInit {
             this.errorServer=false;
             directed(this.user.tipoUsuario, this.router)
           } else {
-            this.sweetAlertService.mostrarError("La respuesta del servidor es inválida.");
+            this.sweetAlertService.showError("La respuesta del servidor es inválida.");
           }
         } catch (error:any) {
           const errores = error.error.errors || [];
           const mensajeErrores = errores.join(', ');
           const message = error.error.message || [];
-          this.sweetAlertService.mostrarError(mensajeErrores + ", " + message);
+          this.sweetAlertService.showError(mensajeErrores + ", " + message);
         }
       },
       error: (error:any) => {
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
         if (mensajeErrores.length === 0) {
         this.toastService.showToast('Acceso denegado');
       }
-      else{this.sweetAlertService.mostrarError(mensajeErrores +", "+ message);}
+      else{this.sweetAlertService.showError(mensajeErrores +", "+ message);}
     }
   });
   }
@@ -127,14 +127,14 @@ export class HomeComponent implements OnInit {
               this.user = SessionService.guardarSession(r.jwt, true);
               directed(this.user.tipoUsuario, this.router);
             } else {
-              this.sweetAlertService.mostrarError('No se encontraron datos en la respuesta');
+              this.sweetAlertService.showError('No se encontraron datos en la respuesta');
             }
           },
           error: (error: any) => {
             const errores = error.error.errors || [];
             const message = error.error.message || 'Ocurrió un error desconocido';
             const mensajeErrores = errores.join(', ');
-            this.sweetAlertService.mostrarError(mensajeErrores ? mensajeErrores : message);
+            this.sweetAlertService.showError(mensajeErrores ? mensajeErrores : message);
           }
         });
       }
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
       const errores = error.error.errors || [];
       const message = error.error.message || 'Ocurrió un error al mostrar el formulario de registro';
       const mensajeErrores = errores.join(', ');
-      this.sweetAlertService.mostrarError(mensajeErrores ? mensajeErrores : message);
+      this.sweetAlertService.showError(mensajeErrores ? mensajeErrores : message);
     });
   }
 

@@ -47,7 +47,7 @@ borrarCuenta(){
         }),
         catchError((error) => {
           const errorMessage = getErrorMessage(error);
-          this.sweetAlertService.mostrarError(errorMessage);
+          this.sweetAlertService.showError(errorMessage);
           return of(null);
         })
       ).subscribe((usuario: any) => {
