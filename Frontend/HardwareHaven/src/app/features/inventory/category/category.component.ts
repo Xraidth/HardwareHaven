@@ -10,11 +10,11 @@ import { of, Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-categoria',
+  selector: 'app-category',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './categoria.component.html',
-  styleUrl: './categoria.component.css',
+  templateUrl: './category.component.html',
+  styleUrl: './category.component.css',
   providers: [CategoryService, SweetAlertService]
 })
 export class CategoryComponent implements OnInit {
@@ -81,7 +81,7 @@ export class CategoryComponent implements OnInit {
     this.serverCategoria.getAll().pipe(
       map((response: any) => response?.data || []),
       catchError((error) => {
-        this.sweetAlertService.showError("Error to obtein categories")
+        this.sweetAlertService.showError("Error to obtain categories")
         return of([]);
       })
     ).subscribe((categorias: any[]) => {

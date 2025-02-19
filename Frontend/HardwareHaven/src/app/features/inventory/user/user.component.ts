@@ -19,11 +19,11 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-usuario',
+  selector: 'app-user',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'],
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css'],
   providers: [UserService, SweetAlertService]
 })
 export class UserComponent implements OnInit {

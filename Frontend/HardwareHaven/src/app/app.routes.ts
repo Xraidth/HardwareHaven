@@ -7,7 +7,7 @@ import { PurchaseComponent } from './pages/compra/compra/compra.component.js';
 import { ProfileComponent } from './pages/perfil/perfil/perfil.component.js';
 import {SendComponent } from './pages/envio/envio/envio.component.js';
 import {InventoryComponent} from './pages/inventario/inventario/inventario.component.js';
-import { UserComponent } from './features/inventory/usuario/usuario.component.js';
+import { UserComponent } from './features/inventory/user/user.component.js';
 import { HelpComponent } from './pages/ayuda/ayuda.component.js';
 import { authGuard } from './guards/auth.guard.js';
 import { NoAccessComponentComponent } from './pages/no-access-component/no-access-component.component.js';

@@ -9,11 +9,11 @@ import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-componente',
+  selector: 'app-component',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './componente.component.html',
-  styleUrl: './componente.component.css',
+  templateUrl: './component.component.html',
+  styleUrl: './component.component.css',
   providers: [ComponentService , SweetAlertService]
 })
 export class ComponentComponent implements OnInit{
