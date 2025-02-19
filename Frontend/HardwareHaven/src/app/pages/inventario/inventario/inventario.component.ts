@@ -2,29 +2,14 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
 import { SessionService } from '../../../core/services/share/session.service';
 import { CommonModule } from '@angular/common';
-
-import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../../../core/services/entities/user.service';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { CompraService } from '../../../core/services/entities/compra.service';
-
-import { LineaCompraService } from '../../../core/services/entities/linea-compra.service';
-import { PrecioService } from '../../../core/services/entities/precio.service';
-
-
-import { ComponenteService } from '../../../core/services/entities/componente.service';
-
-import { CategoriaService } from '../../../core/services/entities/categoria.service';
 import { FormsModule } from '@angular/forms';
-import { SweetAlertService } from '../../../core/services/notifications/sweet-alert.service';
-import { UsuarioComponent } from '../../../features/inventario/usuario/usuario.component';
-import { PrecioComponent } from '../../../features/inventario/precio/precio.component';
-import { PlusButtonComponent } from '../../../features/inventario/share/plus-button/plus-button.component';
-import { LineaCompraComponent } from '../../../features/inventario/linea-compra/linea-compra.component';
-import { CompraComponent } from '../../../features/inventario/compra/compra.component';
-import { ComponenteComponent } from '../../../features/inventario/componente/componente.component';
-import { CategoriaComponent } from '../../../features/inventario/categoria/categoria.component';
+import { UsuarioComponent } from '../../../features/inventory/usuario/usuario.component';
+import { PrecioComponent } from '../../../features/inventory/precio/precio.component';
+import { PlusButtonComponent } from '../../../features/inventory/share/plus-button/plus-button.component';
+import { LineaCompraComponent } from '../../../features/inventory/linea-compra/linea-compra.component';
+import { CompraComponent } from '../../../features/inventory/compra/compra.component';
+import { ComponenteComponent } from '../../../features/inventory/componente/componente.component';
+import { CategoriaComponent } from '../../../features/inventory/categoria/categoria.component';
 
 
 @Component({
