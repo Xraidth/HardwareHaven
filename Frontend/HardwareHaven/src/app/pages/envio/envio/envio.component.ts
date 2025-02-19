@@ -12,6 +12,6 @@ import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
 export class EnvioComponent {
 public usuario:any;
 ngOnInit(): void {
-  this.usuario = SessionService.usuario;
+  this.usuario = SessionService.user;
 }
 }

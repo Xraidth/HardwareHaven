@@ -8,17 +8,17 @@ export class SessionService {
 
 
 
-  public static usuario:any;
+  public static user:any;
   public static jwt:any;
 
   private static setUser():any
   {
-    const decodificacion = this.decodificarJWT();
-    this.usuario = decodificacion && decodificacion.user ? decodificacion.user : undefined;
-    return this.usuario;
+    const decoding = this.decodingJWT();
+    this.user = decoding && decoding.user ? decoding.user : undefined;
+    return this.user;
   }
 
-  public static decodificarJWT(): any {
+  public static decodingJWT(): any {
 
     if (this.jwt) {
       try {
@@ -34,38 +34,38 @@ export class SessionService {
 
 
 
-  public static guardarSession(jwt:any,recordarClave:boolean): any{
+  public static saveSession(jwt:any,rememberKey:boolean): any{
     this.jwt = jwt;
-    const storage = recordarClave ? localStorage : sessionStorage;
+    const storage = rememberKey ? localStorage : sessionStorage;
     storage.setItem('jwt', JSON.stringify(jwt));
     return this.setUser();
   }
 
 
 
-  public static recordarSession(): any {
+  public static rememberSession(): any {
     const token = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
     this.jwt = token ? JSON.parse(token) : null;
     return this.setUser();
   }
 
-  public static borrarSession(): void {
+  public static deleteSession(): void {
       localStorage.removeItem('jwt');
       sessionStorage.removeItem('jwt');
-      this.usuario = null;
+      this.user = null;
       this.jwt = null;
   }
-  public static guardarAvisoDeOferta(): void {
-    sessionStorage.setItem('avisoOferta', JSON.stringify("OfertaMostrada"));
-  }
+  public static saveOfferNotice(): void {
+    sessionStorage.setItem('offerNotice', JSON.stringify("OfferShown"));
+}
 
-  public static recordarOferta(): any {
-    const item = sessionStorage.getItem('avisoOferta');
+public static rememberOffer(): any {
+    const item = sessionStorage.getItem('offerNotice');
     if (item) {
-
-      return JSON.parse(item);
+        return JSON.parse(item);
     }
     return undefined;
-  }
+}
+
 
 }

@@ -138,8 +138,8 @@ export class UsuarioComponent implements OnInit {
             next: (response: any) => {
               try {
                 if (response && response.data) {
-                  if (response.data.id === SessionService.usuario.id) {
-                    SessionService.borrarSession();
+                  if (response.data.id === SessionService.user.id) {
+                    SessionService.deleteSession();
                     this.router.navigate(['home']);
                     return;
                   }

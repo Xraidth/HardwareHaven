@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
   private user: any;
   public username: string = '';
   public password: string = '';
-  public recordarClave: boolean = false;
+  public rememberKey: boolean = false;
   private intervalId: any;
   public errorServer: boolean = false;
-  public emailofertas:string = '';
+  public emailOffers:string = '';
   constructor(
     private serverUser: UserService,
     private router: Router,
@@ -41,26 +41,26 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.someFunction();
     this.checkServer();
-    const usuariarioAnterior =SessionService.recordarSession()
-    if(usuariarioAnterior){
+    const previousUser =SessionService.rememberSession()
+    if(previousUser){
 
-     directed(usuariarioAnterior.tipoUsuario, this.router);
+     directed(previousUser.tipoUsuario, this.router);
     }
 
 
 
-    this.iniciarCarousel(5000);
+    this.startCarousel(5000);
   }
 
   async someFunction() {
-    if (!SessionService.recordarOferta()) {
-      this.emailofertas = await this.sweetAlertService.recibirOfertas();
-      SessionService.guardarAvisoDeOferta();
+    if (!SessionService.rememberOffer) {
+      this.emailOffers = await this.sweetAlertService.receiveOffers();
+      SessionService.saveOfferNotice();
     }
   }
 
 
-  iniciarCarousel(time:number){
+  startCarousel(time:number){
     const myCarousel = document.querySelector('#carouselExample') as HTMLElement;
     const carousel = new bootstrap.Carousel(myCarousel, {
       interval: time,
@@ -86,34 +86,34 @@ export class HomeComponent implements OnInit {
         try {
 
           if (r) {
-            this.user = SessionService.guardarSession(r.jwt,this.recordarClave);
+            this.user = SessionService.saveSession(r.jwt,this.rememberKey);
             this.errorServer=false;
             directed(this.user.tipoUsuario, this.router)
           } else {
-            this.sweetAlertService.showError("La respuesta del servidor es inválida.");
+            this.sweetAlertService.showError("The server response is invalid.");
           }
         } catch (error:any) {
           const errores = error.error.errors || [];
-          const mensajeErrores = errores.join(', ');
+          const messageErrors = errores.join(', ');
           const message = error.error.message || [];
-          this.sweetAlertService.showError(mensajeErrores + ", " + message);
+          this.sweetAlertService.showError(messageErrors + ", " + message);
         }
       },
       error: (error:any) => {
         const errores = error.error.errors || [];
         const message = error.error.message || [];
-        const mensajeErrores = errores.join(', ');
+        const messageErrors = errores.join(', ');
 
-        if (mensajeErrores.length === 0) {
-        this.toastService.showToast('Acceso denegado');
+        if (messageErrors.length === 0) {
+        this.toastService.showToast('Access denied');
       }
-      else{this.sweetAlertService.showError(mensajeErrores +", "+ message);}
+      else{this.sweetAlertService.showError(messageErrors +", "+ message);}
     }
   });
   }
 
 
-  registrarUsuario() {
+  registerUser() {
     this.sweetAlertService.mostrarFormularioRegistro().then(credenciales => {
       if (credenciales) {
         this.serverUser.create({
@@ -124,25 +124,25 @@ export class HomeComponent implements OnInit {
         }).subscribe({
           next: (r: any) => {
             if (r) {
-              this.user = SessionService.guardarSession(r.jwt, true);
+              this.user = SessionService.saveSession(r.jwt, true);
               directed(this.user.tipoUsuario, this.router);
             } else {
-              this.sweetAlertService.showError('No se encontraron datos en la respuesta');
+              this.sweetAlertService.showError('Data response not found');
             }
           },
           error: (error: any) => {
             const errores = error.error.errors || [];
-            const message = error.error.message || 'Ocurrió un error desconocido';
-            const mensajeErrores = errores.join(', ');
-            this.sweetAlertService.showError(mensajeErrores ? mensajeErrores : message);
+            const message = error.error.message || 'An unknown error occurred';
+            const messageErrors = errores.join(', ');
+            this.sweetAlertService.showError(messageErrors ? messageErrors : message);
           }
         });
       }
     }).catch((error: any) => {
       const errores = error.error.errors || [];
-      const message = error.error.message || 'Ocurrió un error al mostrar el formulario de registro';
-      const mensajeErrores = errores.join(', ');
-      this.sweetAlertService.showError(mensajeErrores ? mensajeErrores : message);
+      const message = error.error.message || 'An error occurred while displaying the registration form';
+      const messageErrors = errores.join(', ');
+      this.sweetAlertService.showError(messageErrors ? messageErrors : message);
     });
   }
 
@@ -163,7 +163,7 @@ export class HomeComponent implements OnInit {
         }
     });}
 
-gotoAyuda(){
+gotoHelp(){
   this.router.navigate(['ayuda']);
 }
 

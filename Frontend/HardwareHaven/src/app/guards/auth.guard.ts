@@ -4,7 +4,7 @@ import { SessionService } from '../core/services/share/session.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
 
-  const isAuthenticated = SessionService.usuario ? true : false;
+  const isAuthenticated = SessionService.user ? true : false;
   const router = inject(Router);
 
   if (!isAuthenticated) {

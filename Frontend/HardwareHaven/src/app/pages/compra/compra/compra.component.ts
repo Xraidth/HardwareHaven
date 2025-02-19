@@ -20,20 +20,20 @@ export class CompraComponent implements OnInit {
   mostrarResumen: boolean = false;
 constructor(private router: Router){}
 ngOnInit(): void {
-  this.usuario = SessionService.usuario;
-  this.carrito = SessionService.usuario.carrito;  
+  this.usuario = SessionService.user;
+  this.carrito = SessionService.user.carrito;
   if(this.carrito.length == 0){this.mostrarBoton = false} else {this.mostrarBoton = true}
 }
 
 
 pasarAListaProductos(){
-  SessionService.usuario.carrito = this.carrito;
+  SessionService.user.carrito = this.carrito;
   this.router.navigate(['productList']);
 }
 
 realizarCompra(){
   this.mostrarResumen = true;
-    this.mostrarBoton = false; 
+    this.mostrarBoton = false;
 }
 }
 

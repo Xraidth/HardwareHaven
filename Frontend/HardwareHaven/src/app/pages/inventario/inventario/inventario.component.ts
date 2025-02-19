@@ -31,17 +31,17 @@ import { CategoriaComponent } from '../../../features/inventario/categoria/categ
   selector: 'app-inventario',
   standalone: true,
   imports: [
-    UserNavComponent, 
-    CommonModule, 
-    FormsModule, 
-    UsuarioComponent, 
+    UserNavComponent,
+    CommonModule,
+    FormsModule,
+    UsuarioComponent,
     PrecioComponent,
     LineaCompraComponent,
     CompraComponent,
     ComponenteComponent,
     CategoriaComponent,
     PlusButtonComponent,
-    
+
   ],
   templateUrl: './inventario.component.html',
   styleUrls: ['./inventario.component.css'],
@@ -56,12 +56,12 @@ export class InventarioComponent implements OnInit {
   usuario: any;
 
   constructor(
-    
+
   ) {}
 
 
   ngOnInit(): void {
-    this.usuario = SessionService.usuario;
+    this.usuario = SessionService.user;
     this.getplusbuttonChange("Usuario");
   }
   loadItems(type:string){
@@ -74,7 +74,7 @@ export class InventarioComponent implements OnInit {
   getSearchText(item: any): string {
     switch (this.nowType) {
       case 'Usuario': return item.name;
-      case 'Compra': return item.user.name; 
+      case 'Compra': return item.user.name;
       case 'LineaCompra': return item.componente.name;
       case 'Precio': return item.componente.name;
       case 'Componente': return item.name;
@@ -84,14 +84,14 @@ export class InventarioComponent implements OnInit {
   }
 
   getplusbuttonChange(e: string): void {
-    
+
     this.carga = "Cargando...";
     this.loadItems("Cargando");
-    
+
     setTimeout(() => {
       this.carga = '';
       this.loadItems(e);
-    }, 2000); 
+    }, 2000);
   }
-  
+
 }
