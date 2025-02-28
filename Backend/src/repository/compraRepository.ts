@@ -168,7 +168,10 @@ export class CompraRepository  {
         try {
             const compras = await em.find(
                 Compra,
-                { user: idUser}
+                { 
+                  user: idUser,
+                  fechaCancel: null
+                }
                 ,{ populate: ['user', 'lineasCompras'] }
             );
             return compras;

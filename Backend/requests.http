@@ -111,7 +111,7 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjox
 
 ###GET
 GET   http://localhost:3000/api/compra/getMyPurchases/
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjoxODQsIm5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ0aXBvVXN1YXJpbyI6IkNsaWVudGUifSwiaWF0IjoxNzQwNzE1ODc5LCJleHAiOjE3NDEzMjA2Nzl9.F2cxLMC3gWETyjHFFmkFeeh6LWHSVolGU8xMnPUxtwc
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjoxODQsIm5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ0aXBvVXN1YXJpbyI6IkNsaWVudGUifSwiaWF0IjoxNzQwNzQ0NTM4LCJleHAiOjE3NDEzNDkzMzh9.oqwkSeAeYY1dY0IaV_LWd4KconccHHyFCCs9kRmNUAQ
 
 //------------------Componente-------------------------------
 ###GetAll 
