@@ -41,7 +41,16 @@ export class PurchaseService {
 
   facturate(id: number) {
     return this.http.get<Blob>(`${this.baseUrl}facturateWeb/${id}`, {
-      responseType: 'blob' as 'json',  // Esto indica que la respuesta será un blob, no un JSON
+      responseType: 'blob' as 'json',
     });
   }
+
+  getMyPurchases(){
+    return this.http.get(`${this.baseUrl}getMyPurchases`);
+  }
+
+  cancel(id:number){
+    return this.http.patch(`${this.baseUrl}cancelPurchase/${id}`, {});
+  }
+
 }

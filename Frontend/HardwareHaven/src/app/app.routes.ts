@@ -11,6 +11,7 @@ import { UserComponent } from './features/inventory/user/user.component.js';
 import { HelpComponent } from './pages/ayuda/ayuda.component.js';
 import { authGuard } from './guards/auth.guard.js';
 import { NoAccessComponentComponent } from './pages/no-access-component/no-access-component.component.js';
+import { CancelPurchaseComponent } from './pages/cancel-purchase/cancel-purchase.component.js';
 
 
 export const routes: Routes = [
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'envio', component: SendComponent , canActivate: [authGuard]},
   { path: 'inventario', component: InventoryComponent, canActivate: [authGuard]},
   { path: 'inventario/usuario', component: UserComponent, canActivate: [authGuard]},
+  { path: 'cancelPurchases', component: CancelPurchaseComponent, canActivate: [authGuard] },
   { path: 'ayuda', component: HelpComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
