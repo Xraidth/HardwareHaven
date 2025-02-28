@@ -1,0 +1,46 @@
+<div class="bg-black">
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand font-Montserrat text-light" href="#">
+          <img src="assets/images/title_home.png" class="img-fluid title_home" alt="...">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="d-flex justify-content-center w-100">
+            <div class="w-50">
+              <form class="d-flex me-auto" role="search" (submit)="onSearch($event)">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" [(ngModel)]="auxsearchQuery" name="auxsearchQuery">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+              </form>
+            </div>
+          </div>
+          <div >
+            <Button (click)="pasarAListaProductos()" class="btn btn-primary"> Volver </Button>
+          </div>
+
+          <div class="">
+            <app-user-nav [usuario]="user"></app-user-nav>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <h1 class="text-center title-inventario mb-4 mt-3">Compras</h1>
+
+    <div class="mov-mobile">
+
+    <ng-container [ngSwitch]="nowType">
+      <app-purchases-made *ngSwitchCase="'compra-cancel'" [searchQuery]="searchQuery"></app-purchases-made>
+      <div  *ngSwitchCase="'Cargando'">
+        <p>{{carga}}</p>
+      </div>
+      <p *ngSwitchDefault>Por favor, selecciona un tipo válido.</p>
+    </ng-container>
+  </div>
+
+  </main>
+</div>

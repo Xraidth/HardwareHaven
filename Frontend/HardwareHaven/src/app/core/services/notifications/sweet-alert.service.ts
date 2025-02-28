@@ -36,7 +36,7 @@ export class SweetAlertService {
       text: text,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, eliminarlo',
+      confirmButtonText: 'Sí, confirmo',
       cancelButtonText: 'No, conservarlo'
     });
   }
