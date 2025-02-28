@@ -101,9 +101,18 @@ Content-Type: application/json
 ###PATCH
 PATCH  http://localhost:3000/api/compra/facturate/:id
 Authorization: token
-###PATCH
+###GET
 GET   http://localhost:3000/api/compra/facturateWeb/72
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7Im5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJjbGllbnRlQGdtYWlsLmNvbSIsInRpcG9Vc3VhcmlvIjoiQ2xpZW50ZSIsImlkIjo0Nn0sImlhdCI6MTczODEwNjc3OSwiZXhwIjoxNzM4NzExNTc5fQ.ghYqMDogw7dm-qEjI2Oa_D9Yc8v_zDDdqOq8gKf9Xm8
+
+###PATCH
+PATCH   http://localhost:3000/api/compra/cancelPurchase/86
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjoxODQsIm5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ0aXBvVXN1YXJpbyI6IkNsaWVudGUifSwiaWF0IjoxNzQwNzE1ODc5LCJleHAiOjE3NDEzMjA2Nzl9.F2cxLMC3gWETyjHFFmkFeeh6LWHSVolGU8xMnPUxtwc
+
+###GET
+GET   http://localhost:3000/api/compra/getMyPurchases/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjoxODQsIm5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ0aXBvVXN1YXJpbyI6IkNsaWVudGUifSwiaWF0IjoxNzQwNzE1ODc5LCJleHAiOjE3NDEzMjA2Nzl9.F2cxLMC3gWETyjHFFmkFeeh6LWHSVolGU8xMnPUxtwc
+
 //------------------Componente-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/componente/getAll

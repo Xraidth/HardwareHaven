@@ -163,4 +163,18 @@ export class CompraRepository  {
                 return undefined;
         }
     }
+
+    async getPurchasesOfUser(idUser:number): Promise<Compra[] | undefined> { 
+        try {
+            const compras = await em.find(
+                Compra,
+                { user: idUser}
+                ,{ populate: ['user', 'lineasCompras'] }
+            );
+            return compras;
+        } catch (error: any) {
+            return undefined;
+        }
+    }
+
 }
