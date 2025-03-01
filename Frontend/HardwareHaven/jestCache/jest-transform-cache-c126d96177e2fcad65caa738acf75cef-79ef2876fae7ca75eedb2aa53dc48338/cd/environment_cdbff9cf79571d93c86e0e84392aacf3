@@ -1,0 +1,91 @@
+508079ab1052a823d7e3917108563597
+"use strict";
+
+/* istanbul ignore next */
+function cov_2g8tn5k3e5() {
+  var path = "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\environments\\environment.ts";
+  var hash = "be42146313db9793bfe8a9133e45039f77004079";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\environments\\environment.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 7,
+          column: 2
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\environments\\environment.ts",
+      mappings: ";;;AAAa,QAAA,WAAW,GAAG;IACzB,UAAU,EAAE,IAAI;IAChB,OAAO,EAAE,0BAA0B;CACpC,CAAC",
+      names: [],
+      sources: ["C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\environments\\environment.ts"],
+      sourcesContent: ["export const environment = {\r\n  production: true,\r\n  baseUrl: 'https://tu-servidor.com/'\r\n};\r\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "be42146313db9793bfe8a9133e45039f77004079"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2g8tn5k3e5 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2g8tn5k3e5();
+cov_2g8tn5k3e5().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2g8tn5k3e5().s[1]++;
+exports.environment = void 0;
+/* istanbul ignore next */
+cov_2g8tn5k3e5().s[2]++;
+exports.environment = {
+  production: true,
+  baseUrl: 'https://tu-servidor.com/'
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiZW52aXJvbm1lbnQiLCJwcm9kdWN0aW9uIiwiYmFzZVVybCJdLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcU2Ftc3VuZ1xcRGVza3RvcFxcSGFyZHdhcmVIYXZlblxcRnJvbnRlbmRcXEhhcmR3YXJlSGF2ZW5cXHNyY1xcZW52aXJvbm1lbnRzXFxlbnZpcm9ubWVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgZW52aXJvbm1lbnQgPSB7XHJcbiAgcHJvZHVjdGlvbjogdHJ1ZSxcclxuICBiYXNlVXJsOiAnaHR0cHM6Ly90dS1zZXJ2aWRvci5jb20vJ1xyXG59O1xyXG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBYUEsT0FBQSxDQUFBQyxXQUFXLEdBQUc7RUFDekJDLFVBQVUsRUFBRSxJQUFJO0VBQ2hCQyxPQUFPLEVBQUU7Q0FDViIsImlnbm9yZUxpc3QiOltdfQ==

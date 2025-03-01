@@ -1,0 +1,47 @@
+1908743ea19cc29123d7da3edb10485d
+/* istanbul ignore next */
+function cov_h6nqpoc0h() {
+  var path = "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\products\\components\\card\\card.component.html";
+  var hash = "652c80b451cf3965764954b453f0a8958a5a9cca";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\products\\components\\card\\card.component.html",
+    statementMap: {
+      "0": {
+        start: {
+          line: 1,
+          column: 0
+        },
+        end: {
+          line: 1,
+          column: 1499
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "652c80b451cf3965764954b453f0a8958a5a9cca"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_h6nqpoc0h = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_h6nqpoc0h();
+cov_h6nqpoc0h().s[0]++;
+module.exports = "\r\n<div class=\"card mb-4 shadow-sm\" [class.selected]=\"isSelected\">\r\n  <div class=\"position-absolute top-0 end-0 m-3\" [ngClass]=\"{'d-none': !isSelected, 'selected': isSelected}\" (click)=\"unSelectProduct()\">\r\n  <img src=\"   https://cdn-icons-png.flaticon.com/512/1828/1828666.png \" width=\"20\" height=\"20\" alt=\"\" title=\"\" class=\"img-small\">\r\n  </div>\r\n  <div class=\"card-img-container d-flex justify-content-center \" (click)=\"infoProduct()\">\r\n  <img [src]=\"product.imageUrl\" class=\"card-img-top\" alt=\"Producto 1\" alt=\"\" >\r\n  </div>\r\n      <div class=\"card-body\">\r\n\r\n        <h5 class=\"card-title \" (click)=\"infoProduct()\">{{ product.name }}</h5>\r\n        <div class=\"d-flex justify-content-between align-items-center\">\r\n        \r\n      <div class=\"d-flex flex-column justify-content-between\">\r\n        <p class=\"card-text\" (click)=\"infoProduct()\">{{ product.description}}.</p>\r\n        <p class=\"card-text\">{{product.categoria.descripcion}}.</p>\r\n      </div>\r\n          <div class=\"d-flex flex-column justify-content-between align-items-center\">\r\n          <span class=\"text-muted precio\">${{ getMaxPrice(product.precios)}}</span>\r\n          <button class=\"btn btn-sm btn-outline-secondary mt-3\" (click)=\"selectProduct()\">Comprar</button>\r\n        </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"hover-effect shine-effect\"></div>\r\n</div>\r\n\r\n  \r\n  \r\n  \r\n  \r\n";

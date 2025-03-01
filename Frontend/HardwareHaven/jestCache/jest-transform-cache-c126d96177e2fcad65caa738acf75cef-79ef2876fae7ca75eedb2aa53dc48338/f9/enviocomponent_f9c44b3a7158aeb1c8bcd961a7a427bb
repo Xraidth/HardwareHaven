@@ -1,0 +1,222 @@
+ac0a3062db16a321325a8c741ca826d8
+"use strict";
+
+/* istanbul ignore next */
+function cov_krzyuh98n() {
+  var path = "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\pages\\envio\\envio\\envio.component.ts";
+  var hash = "bd7cb52c2bf37d56cf2dd7fdcd29adee1cd41893";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\pages\\envio\\envio\\envio.component.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 31
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 15
+        },
+        end: {
+          line: 5,
+          column: 39
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 26
+        },
+        end: {
+          line: 6,
+          column: 81
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 29
+        },
+        end: {
+          line: 7,
+          column: 83
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 20
+        },
+        end: {
+          line: 12,
+          column: 1
+        }
+      },
+      "7": {
+        start: {
+          line: 10,
+          column: 8
+        },
+        end: {
+          line: 10,
+          column: 61
+        }
+      },
+      "8": {
+        start: {
+          line: 13,
+          column: 0
+        },
+        end: {
+          line: 13,
+          column: 38
+        }
+      },
+      "9": {
+        start: {
+          line: 14,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 18
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 9,
+            column: 4
+          },
+          end: {
+            line: 9,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 15
+          },
+          end: {
+            line: 11,
+            column: 5
+          }
+        },
+        line: 9
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\pages\\envio\\envio\\envio.component.ts",
+      mappings: ";;;;AAAA,wCAA0C;AAC1C,kFAA8E;AAC9E,oFAA+E;AASxE,IAAM,aAAa,GAAnB,MAAM,aAAa;IAE1B,QAAQ;QACN,IAAI,CAAC,OAAO,GAAG,gCAAc,CAAC,IAAI,CAAC;IACrC,CAAC;CACA,CAAA;AALY,sCAAa;wBAAb,aAAa;IAPzB,IAAA,gBAAS,EAAC;QACT,QAAQ,EAAE,WAAW;QACrB,UAAU,EAAE,IAAI;QAChB,OAAO,EAAE,CAAC,qCAAgB,CAAC;QAC3B,2CAAqC;KAEtC,CAAC;GACW,aAAa,CAKzB",
+      names: [],
+      sources: ["C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\pages\\envio\\envio\\envio.component.ts"],
+      sourcesContent: ["import { Component } from '@angular/core';\r\nimport { SessionService } from '../../../core/services/share/session.service';\r\nimport { UserNavComponent } from '../../../shared/user-nav/user-nav.component';\r\n\r\n@Component({\r\n  selector: 'app-envio',\r\n  standalone: true,\r\n  imports: [UserNavComponent],\r\n  templateUrl: './envio.component.html',\r\n  styleUrl: './envio.component.css'\r\n})\r\nexport class SendComponent  {\r\npublic usuario:any;\r\nngOnInit(): void {\r\n  this.usuario = SessionService.user;\r\n}\r\n}\r\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "bd7cb52c2bf37d56cf2dd7fdcd29adee1cd41893"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_krzyuh98n = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_krzyuh98n();
+cov_krzyuh98n().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_krzyuh98n().s[1]++;
+exports.SendComponent = void 0;
+const tslib_1 =
+/* istanbul ignore next */
+(cov_krzyuh98n().s[2]++, require("tslib"));
+const core_1 =
+/* istanbul ignore next */
+(cov_krzyuh98n().s[3]++, require("@angular/core"));
+const session_service_1 =
+/* istanbul ignore next */
+(cov_krzyuh98n().s[4]++, require("../../../core/services/share/session.service"));
+const user_nav_component_1 =
+/* istanbul ignore next */
+(cov_krzyuh98n().s[5]++, require("../../../shared/user-nav/user-nav.component"));
+/* istanbul ignore next */
+cov_krzyuh98n().s[6]++;
+let SendComponent = class SendComponent {
+  ngOnInit() {
+    /* istanbul ignore next */
+    cov_krzyuh98n().f[0]++;
+    cov_krzyuh98n().s[7]++;
+    this.usuario = session_service_1.SessionService.user;
+  }
+};
+/* istanbul ignore next */
+cov_krzyuh98n().s[8]++;
+exports.SendComponent = SendComponent;
+/* istanbul ignore next */
+cov_krzyuh98n().s[9]++;
+exports.SendComponent = SendComponent = tslib_1.__decorate([(0, core_1.Component)({
+  selector: 'app-envio',
+  standalone: true,
+  imports: [user_nav_component_1.UserNavComponent],
+  template: require("./envio.component.html")
+})], SendComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfa3J6eXVoOThuIiwiYWN0dWFsQ292ZXJhZ2UiLCJzIiwiY29yZV8xIiwicmVxdWlyZSIsInNlc3Npb25fc2VydmljZV8xIiwidXNlcl9uYXZfY29tcG9uZW50XzEiLCJTZW5kQ29tcG9uZW50IiwibmdPbkluaXQiLCJmIiwidXN1YXJpbyIsIlNlc3Npb25TZXJ2aWNlIiwidXNlciIsImV4cG9ydHMiLCJ0c2xpYl8xIiwiX19kZWNvcmF0ZSIsIkNvbXBvbmVudCIsInNlbGVjdG9yIiwic3RhbmRhbG9uZSIsImltcG9ydHMiLCJVc2VyTmF2Q29tcG9uZW50IiwidGVtcGxhdGUiXSwic291cmNlcyI6WyJDOlxcVXNlcnNcXFNhbXN1bmdcXERlc2t0b3BcXEhhcmR3YXJlSGF2ZW5cXEZyb250ZW5kXFxIYXJkd2FyZUhhdmVuXFxzcmNcXGFwcFxccGFnZXNcXGVudmlvXFxlbnZpb1xcZW52aW8uY29tcG9uZW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xyXG5pbXBvcnQgeyBTZXNzaW9uU2VydmljZSB9IGZyb20gJy4uLy4uLy4uL2NvcmUvc2VydmljZXMvc2hhcmUvc2Vzc2lvbi5zZXJ2aWNlJztcclxuaW1wb3J0IHsgVXNlck5hdkNvbXBvbmVudCB9IGZyb20gJy4uLy4uLy4uL3NoYXJlZC91c2VyLW5hdi91c2VyLW5hdi5jb21wb25lbnQnO1xyXG5cclxuQENvbXBvbmVudCh7XHJcbiAgc2VsZWN0b3I6ICdhcHAtZW52aW8nLFxyXG4gIHN0YW5kYWxvbmU6IHRydWUsXHJcbiAgaW1wb3J0czogW1VzZXJOYXZDb21wb25lbnRdLFxyXG4gIHRlbXBsYXRlVXJsOiAnLi9lbnZpby5jb21wb25lbnQuaHRtbCcsXHJcbiAgc3R5bGVVcmw6ICcuL2VudmlvLmNvbXBvbmVudC5jc3MnXHJcbn0pXHJcbmV4cG9ydCBjbGFzcyBTZW5kQ29tcG9uZW50ICB7XHJcbnB1YmxpYyB1c3VhcmlvOmFueTtcclxubmdPbkluaXQoKTogdm9pZCB7XHJcbiAgdGhpcy51c3VhcmlvID0gU2Vzc2lvblNlcnZpY2UudXNlcjtcclxufVxyXG59XHJcbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUtFO0lBQUFBLGFBQUEsWUFBQUEsQ0FBQTtNQUFBLE9BQUFDLGNBQUE7SUFBQTtFQUFBO0VBQUEsT0FBQUEsY0FBQTtBQUFBO0FBQUFELGFBQUE7QUFBQUEsYUFBQSxHQUFBRSxDQUFBOzs7Ozs7Ozs7O0FBTEYsTUFBQUMsTUFBQTtBQUFBO0FBQUEsQ0FBQUgsYUFBQSxHQUFBRSxDQUFBLE9BQUFFLE9BQUE7QUFDQSxNQUFBQyxpQkFBQTtBQUFBO0FBQUEsQ0FBQUwsYUFBQSxHQUFBRSxDQUFBLE9BQUFFLE9BQUE7QUFDQSxNQUFBRSxvQkFBQTtBQUFBO0FBQUEsQ0FBQU4sYUFBQSxHQUFBRSxDQUFBLE9BQUFFLE9BQUE7QUFBK0U7QUFBQUosYUFBQSxHQUFBRSxDQUFBO0FBU3hFLElBQU1LLGFBQWEsR0FBbkIsTUFBTUEsYUFBYTtFQUUxQkMsUUFBUUEsQ0FBQTtJQUFBO0lBQUFSLGFBQUEsR0FBQVMsQ0FBQTtJQUFBVCxhQUFBLEdBQUFFLENBQUE7SUFDTixJQUFJLENBQUNRLE9BQU8sR0FBR0wsaUJBQUEsQ0FBQU0sY0FBYyxDQUFDQyxJQUFJO0VBQ3BDO0NBQ0M7QUFBQTtBQUFBWixhQUFBLEdBQUFFLENBQUE7QUFMWVcsT0FBQSxDQUFBTixhQUFBLEdBQUFBLGFBQUE7QUFBYTtBQUFBUCxhQUFBLEdBQUFFLENBQUE7d0JBQWJLLGFBQWEsR0FBQU8sT0FBQSxDQUFBQyxVQUFBLEVBUHpCLElBQUFaLE1BQUEsQ0FBQWEsU0FBUyxFQUFDO0VBQ1RDLFFBQVEsRUFBRSxXQUFXO0VBQ3JCQyxVQUFVLEVBQUUsSUFBSTtFQUNoQkMsT0FBTyxFQUFFLENBQUNiLG9CQUFBLENBQUFjLGdCQUFnQixDQUFDO0VBQzNCQyxRQUFBLEVBQUFqQixPQUFBO0NBRUQsQ0FBQyxDLEVBQ1dHLGFBQWEsQ0FLekIiLCJpZ25vcmVMaXN0IjpbXX0=

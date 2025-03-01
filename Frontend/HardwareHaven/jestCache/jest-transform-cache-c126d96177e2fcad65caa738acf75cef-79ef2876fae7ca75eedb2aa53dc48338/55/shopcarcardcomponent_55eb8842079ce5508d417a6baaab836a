@@ -1,0 +1,47 @@
+37d40dab894735bdf1e25f037a82d579
+/* istanbul ignore next */
+function cov_oingbg848() {
+  var path = "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\products\\components\\carritoCard\\carrito-card\\shop-car-card.component.html";
+  var hash = "db82e935a56e2cb07bddfe6d6ddf21ed7fe3af0d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\products\\components\\carritoCard\\carrito-card\\shop-car-card.component.html",
+    statementMap: {
+      "0": {
+        start: {
+          line: 1,
+          column: 0
+        },
+        end: {
+          line: 1,
+          column: 1180
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "db82e935a56e2cb07bddfe6d6ddf21ed7fe3af0d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_oingbg848 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_oingbg848();
+cov_oingbg848().s[0]++;
+module.exports = "<div class=\"bg-success mt-1 carrito-line\">\r\n    <ul class=\"list-unstyled table-list\">\r\n        <li class=\"truncate card-mov-titulo\">{{ product.name }}</li>\r\n        <li class=\"truncate\">{{ product.description }}</li>\r\n        <li class=\"truncate\">{{ product.categoria.descripcion }}</li>\r\n        <li class=\"precio-mov\">${{ calculateLineCarrito(product.precios) }}</li>\r\n        <li class=\"d-flex justify-content-end amount-mobile\">\r\n            <div class=\"quantity-selector\">\r\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"incrementQuantity()\">+</button>\r\n                <input type=\"number\" class=\"form-control d-inline-block text-center\" [(ngModel)]=\"quantity\" min=\"1\" max=\"100\" />\r\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"decrementQuantity()\">-</button>\r\n            </div>\r\n        </li>\r\n        <li class=\"me-3\">\r\n            <div>\r\n                <button class=\"btn btn-danger btn-x\" (click)=\"removeProduct()\">X</button>\r\n            </div>\r\n        </li>\r\n    </ul>\r\n\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n";

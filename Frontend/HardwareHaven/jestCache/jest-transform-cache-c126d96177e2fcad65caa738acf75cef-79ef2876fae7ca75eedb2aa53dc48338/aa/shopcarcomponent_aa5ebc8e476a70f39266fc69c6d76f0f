@@ -1,0 +1,47 @@
+7ee186e43966f2b5abad2f9157e8187a
+/* istanbul ignore next */
+function cov_28k055y3kq() {
+  var path = "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\purchases\\carrito\\shopCar\\shop-car.component.html";
+  var hash = "6157e3414edac06c658abd17588088ade46dc40f";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "C:\\Users\\Samsung\\Desktop\\HardwareHaven\\Frontend\\HardwareHaven\\src\\app\\features\\purchases\\carrito\\shopCar\\shop-car.component.html",
+    statementMap: {
+      "0": {
+        start: {
+          line: 1,
+          column: 0
+        },
+        end: {
+          line: 1,
+          column: 1347
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "6157e3414edac06c658abd17588088ade46dc40f"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_28k055y3kq = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_28k055y3kq();
+cov_28k055y3kq().s[0]++;
+module.exports = "\r\n<div class=\"carrito container\">\r\n    <div class=\"row columnas-carrito\" *ngIf=\"mostrarBoton && carrito.length > 0 \">\r\n        <ul class=\"list-unstyled d-flex justify-content-evenly align-items-center col-12\">\r\n            <li class=\"fw-bold\">Nombre</li>\r\n            <li class=\"fw-bold\">Descripción</li>\r\n            <li class=\"fw-bold\">Categoría</li>\r\n            <li class=\"fw-bold \">Precio</li>\r\n            <li class=\"fw-bold\">Cantidad</li>\r\n            <li class=\"fw-bold\">Eliminar</li>\r\n\r\n        </ul>\r\n    </div>\r\n\r\n    <div *ngIf=\"carrito.length > 0; else noProductsInCarrito\" class=\"row mb-3\">\r\n        <div class=\"row\" *ngFor=\"let product of carrito\">\r\n            <app-shop-car-card [product]=\"product\" (quantityChange)=\"onQuantityChange()\"></app-shop-car-card>\r\n        </div>\r\n    </div>\r\n\r\n    <ng-template #noProductsInCarrito>\r\n        <p class=\"text-center bg-success\">El \"Carrito\" está vacío.</p>\r\n    </ng-template>\r\n\r\n    <hr>\r\n\r\n    <div *ngIf=\"mostrarBoton && carrito.length > 0 \" class=\"row\">\r\n        <div class=\"col-12 d-flex justify-content-center justify-content-md-end me-3\">\r\n            <p>Total: <span class=\"fw-bold\">{{ total | currency }}</span></p>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
