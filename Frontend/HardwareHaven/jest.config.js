@@ -4,24 +4,24 @@ module.exports = {
   maxWorkers: 3,
   bail: true,
   roots: ['<rootDir>/src/'],
+  moduleFileExtensions: ["ts", "js", "json", "node"],
   testMatch: ['**/+(*.)+(spec).+(ts)'],
   setupFilesAfterEnv: ['<rootDir>/src/test.ts'],
   collectCoverage: true,
   coverageDirectory: 'coverage/mi-sitio-web',
   coverageReporters: ['text-summary', 'lcov'],
   transform: {
-    '^.+\\.ts$': [
-      'ts-jest',
+    '^.+\\.(ts|tsx)$': [
+      'jest-preset-angular',
       {
-        tsconfig: '<rootDir>/tsconfig.spec.json', // Archivo tsconfig para pruebas
-        stringifyContentPathRegex: '\\.(html|css)$', // Ignora archivos .html y .css
+        tsconfig: '<rootDir>/tsconfig.spec.json',
       },
     ],
   },
   moduleNameMapper: {
-    '^.+\\.html$': '<rootDir>/src/__mocks__/empty-mock.ts', // Mock para archivos .html
-    '^.+\\.css$': '<rootDir>/src/__mocks__/empty-mock.ts', // Mock para archivos .css
-    '^@app/(.*)$': '<rootDir>/src/app/$1', // Mapeo para rutas absolutas (si las usas)
-    '^@core/(.*)$': '<rootDir>/src/core/$1', // Mapeo para rutas absolutas (si las usas)
+    '^src/(.*)$': '<rootDir>/src/$1',
   },
 };
+
+
+
