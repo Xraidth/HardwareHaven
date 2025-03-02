@@ -17,7 +17,7 @@
                 <div class="me-2">
                   <input class="form-control" type="text" placeholder="Usuario" aria-label="Search" [(ngModel)]="username" name="username" tabindex="1">
                   <div>
-                    <button class="link-button" (click)="registerUser()">Registrarse</button>
+                    <button id="registerButton"  class="link-button" (click)="registerUser()">Registrarse</button>
                   </div>
                 </div>
                 <div class="me-2">
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div>
-              <button class="btn btn-outline-primary animated-button animated-button-animation" type="submit" (click)="login()" tabindex="3" #loginButton>Ingresar</button>
+              <button id="loginButton" class="btn btn-outline-primary animated-button animated-button-animation" type="submit" (click)="login()" tabindex="3" #loginButton>Ingresar</button>
             </div>
           </form>
         </div>

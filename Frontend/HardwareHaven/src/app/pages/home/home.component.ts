@@ -146,13 +146,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
-
   checkServer() {
     this.shareServer.ComeOn().subscribe({
         next: (r: any) => {
