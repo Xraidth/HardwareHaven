@@ -43,3 +43,17 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+
+# Ignorar la carpeta de cobertura de Jest
+coverage/
+
+# Ignorar los archivos de logs generados por Jest
+*.log
+
+# Ignorar los archivos temporales de Jest
+*.tsbuildinfo
+
+# Ignorar la carpeta de cache de Jest
+jestCache/*
