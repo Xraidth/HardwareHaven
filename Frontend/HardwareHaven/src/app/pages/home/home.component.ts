@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   async someFunction() {
-    if (!SessionService.rememberOffer) {
+    if (!SessionService.rememberOffer()) {
       this.emailOffers = await this.sweetAlertService.receiveOffers();
       SessionService.saveOfferNotice();
     }

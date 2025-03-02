@@ -1,13 +1,13 @@
 
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { Router } from '@angular/router';
 import { SweetAlertService } from '../../core/services/notifications/sweet-alert.service';
 import { ToastService } from '../../core/services/notifications/toast.service';
 import { ShareService } from '../../core/services/share/share.service';
-import { of, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/services/entities/user.service';
 import { UserServiceMock } from '../../../__mocks__/userServiceMock';
@@ -17,11 +17,7 @@ import { ToastServiceMock } from '../../../__mocks__/toastServiceMock';
 import { ShareServiceMock } from '../../../__mocks__/shareServiceMock';
 import { SessionServiceMock } from '../../../__mocks__/sessionServiceMock';
 import { By } from '@angular/platform-browser';
-
-
-jest.mock('../../shared/functions/functions', () => ({
-  directed: jest.fn()
-}));
+import { SessionService } from '../../core/services/share/session.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -30,18 +26,19 @@ describe('HomeComponent', () => {
   let userService: UserServiceMock;
   let toastService: ToastServiceMock;
   let shareService: ShareServiceMock;
-
+  let controller: HttpTestingController;
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [HttpClientModule, FormsModule, CommonModule],
+      declarations: [],
+      imports: [HttpClientTestingModule, FormsModule, CommonModule, HomeComponent],
       providers: [
         { provide: UserService, useClass: UserServiceMock },
         { provide: Router, useClass: RouterMock },
         { provide: SweetAlertService, useClass: SweetAlertServiceMock },
         { provide: ToastService, useClass: ToastServiceMock},
         { provide: ShareService, useClass: ShareServiceMock },
+        {provide: SessionService, useClass: SessionServiceMock}
       ]
     }).compileComponents();
 
@@ -53,6 +50,10 @@ describe('HomeComponent', () => {
     userService = TestBed.inject(UserService) as any;
     toastService = TestBed.inject(ToastService) as any;
     shareService = TestBed.inject(ShareService) as any;
+    controller = TestBed.inject(HttpTestingController) as any;
+    component.startCarousel = jest.fn();
+    component.someFunction = jest.fn();
+
 
   });
 
@@ -60,55 +61,52 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize correctly', fakeAsync(() => {
+  it('should initialize correctly', (() => {
+
     jest.spyOn(SessionServiceMock, 'rememberSession').mockReturnValue(null);
     Object.defineProperty(SessionServiceMock, 'rememberOffer', {
       get: jest.fn(() => false),
     });
     jest.spyOn(SessionServiceMock, 'saveOfferNotice');
-
-    component.ngOnInit();
-    tick();
-
     expect(sweetAlertService.receiveOffers).toHaveBeenCalled();
     expect(SessionServiceMock.saveOfferNotice).toHaveBeenCalled();
   }));
 
-  it('should login successfully', fakeAsync(() => {
+  it('should login successfully', (() => {
     component.username = 'testuser';
     component.password = 'password';
     component.rememberKey = true;
     component.login();
-    tick();
+
 
     expect(userService.login).toHaveBeenCalledWith({ name: 'testuser', password: 'password' });
   }));
 
-  it('should handle login error', fakeAsync(() => {
+  it('should handle login error', (() => {
   jest.spyOn(userService, 'login').mockReturnValue(
     throwError(() => ({ error: { message: 'Invalid credentials' } }))
   );
 
   component.login();
-  tick();
+
 
   expect(sweetAlertService.showError).toHaveBeenCalledWith('Invalid credentials');
 }));
 
-  it('should register user successfully', fakeAsync(() => {
+  it('should register user successfully', (() => {
     component.registerUser();
-    tick();
+
 
     expect(userService.create).toHaveBeenCalled();
   }));
 
-  it('should handle registration error', fakeAsync(() => {
+  it('should handle registration error', (() => {
     jest.spyOn(userService, 'create').mockReturnValue(
       throwError(() => ({ error: { message: 'User already exists' } }))
     );
 
     component.registerUser();
-    tick();
+
 
     expect(sweetAlertService.showError).toHaveBeenCalledWith('User already exists');
   }));

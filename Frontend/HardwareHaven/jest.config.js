@@ -10,16 +10,10 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage/mi-sitio-web',
   coverageReporters: ['text-summary', 'lcov'],
-  transform: {
-    '^.+\\.(ts|tsx)$': [
-      'jest-preset-angular',
-      {
-        tsconfig: '<rootDir>/tsconfig.spec.json',
-      },
-    ],
-  },
-  moduleNameMapper: {
-    '^src/(.*)$': '<rootDir>/src/$1',
+  globals:{
+    'ts-jest':{
+      tsconfig: '<rootDir>/tsconfig.spec.json'
+    }
   },
 };
 
