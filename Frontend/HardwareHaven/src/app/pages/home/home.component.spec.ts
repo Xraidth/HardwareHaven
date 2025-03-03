@@ -19,6 +19,11 @@ import { SessionServiceMock } from '../../../__mocks__/sessionServiceMock';
 import { By } from '@angular/platform-browser';
 import { SessionService } from '../../core/services/share/session.service';
 
+
+/*
+Siguen los errores dentro de los Mocks
+
+*/
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
