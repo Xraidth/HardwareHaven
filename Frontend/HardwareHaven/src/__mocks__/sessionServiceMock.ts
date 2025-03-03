@@ -19,7 +19,7 @@ export class SessionServiceMock {
 
   public static rememberOffer = jest.fn(() => {
 
-    return undefined;
+    return null;
   });
 
 
