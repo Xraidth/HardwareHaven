@@ -8,15 +8,15 @@ import { ShareService } from '../../core/services/share/share.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../core/services/entities/user.service';
 import { UserServiceMock } from '../../../__mocks__/userServiceMock';
 import { RouterMock } from '../../../__mocks__/routerMock';
 import { SweetAlertServiceMock } from '../../../__mocks__/sweetAlertServiceMock';
 import { ToastServiceMock } from '../../../__mocks__/toastServiceMock';
 import { ShareServiceMock } from '../../../__mocks__/shareServiceMock';
-import { SessionServiceMock } from '../../../__mocks__/sessionServiceMock';
+
 import { By } from '@angular/platform-browser';
 import { SessionService } from '../../core/services/share/session.service';
+import { UserService } from '../../core/services/entities/user.service';
 
 
 
@@ -42,7 +42,7 @@ describe('HomeComponent', () => {
         { provide: SweetAlertService, useClass: SweetAlertServiceMock },
         { provide: ToastService, useClass: ToastServiceMock},
         { provide: ShareService, useClass: ShareServiceMock },
-        {provide: SessionService, useClass: SessionServiceMock}
+
       ]
     }).overrideProvider(SweetAlertService, {
       useValue: {
@@ -83,7 +83,7 @@ describe('HomeComponent', () => {
         saveOfferNotice: jest.fn(() => {}),
         rememberOffer: jest.fn(() => null),
       },
-    })
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
@@ -134,10 +134,13 @@ it('should create shareService',()=>{
 
 
   it('should called offer funtions', (()=>{
-      component.someFunction();
+    const rememberOfferSpy = jest.spyOn(SessionService, 'rememberOffer').mockReturnValue(true);
+    const saveOfferNoticeSpy = jest.spyOn(SessionService, 'saveOfferNotice').mockImplementation(jest.fn());
 
-    expect(SessionServiceMock.rememberOffer).toHaveBeenCalled();
-    expect(SessionServiceMock.saveOfferNotice).toHaveBeenCalled();
+    component.someFunction();
+
+    expect(rememberOfferSpy).toHaveBeenCalled();
+    expect(saveOfferNoticeSpy).toHaveBeenCalled();
     expect(sweetAlertService.receiveOffers).toHaveBeenCalled();
   }));
 
@@ -199,3 +202,4 @@ it('should login successfully', fakeAsync(() => {
 
 
 });
+
