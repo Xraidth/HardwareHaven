@@ -1,4 +1,3 @@
-
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture,fakeAsync , TestBed, tick } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
@@ -9,28 +8,28 @@ import { ShareService } from '../../core/services/share/share.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../core/services/entities/user.service';
 import { UserServiceMock } from '../../../__mocks__/userServiceMock';
 import { RouterMock } from '../../../__mocks__/routerMock';
 import { SweetAlertServiceMock } from '../../../__mocks__/sweetAlertServiceMock';
 import { ToastServiceMock } from '../../../__mocks__/toastServiceMock';
 import { ShareServiceMock } from '../../../__mocks__/shareServiceMock';
-import { SessionServiceMock } from '../../../__mocks__/sessionServiceMock';
+
 import { By } from '@angular/platform-browser';
 import { SessionService } from '../../core/services/share/session.service';
+import { UserService } from '../../core/services/entities/user.service';
 
 
-/*
-Siguen los errores dentro de los Mocks
 
-*/
 describe('HomeComponent', () => {
+
+
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let sweetAlertService: SweetAlertServiceMock;
   let userService: UserServiceMock;
   let toastService: ToastServiceMock;
   let shareService: ShareServiceMock;
+
 
   beforeEach(async () => {
 
@@ -43,8 +42,47 @@ describe('HomeComponent', () => {
         { provide: SweetAlertService, useClass: SweetAlertServiceMock },
         { provide: ToastService, useClass: ToastServiceMock},
         { provide: ShareService, useClass: ShareServiceMock },
-        {provide: SessionService, useClass: SessionServiceMock}
+
       ]
+    }).overrideProvider(SweetAlertService, {
+      useValue: {
+        receiveOffers: jest.fn(() => Promise.resolve('test@example.com')),
+        showError: jest.fn(),
+        mostrarFormularioRegistro: jest.fn(() =>
+          Promise.resolve({
+            username: 'test',
+            password: '1234',
+            email: 'test@example.com',
+            userType: 'Admin',
+          })
+        ),
+      },
+    })
+    .overrideProvider(ShareService, {
+      useValue: {
+        ComeOn: jest.fn(() => of({ status: true })),
+      },
+    })
+    .overrideProvider(UserService, {
+      useValue: {
+        login: jest.fn((body: { name: string; password: string }) =>
+          of({ token: 'mock-token' })
+        ),
+        create: jest.fn((body: { name: string; password: string; email: string; tipoUsuario: string }) =>
+          of({ token: 'mock-token' })
+        ),
+      },
+    })
+    .overrideProvider(SessionService, {
+      useValue: {
+        rememberSession: jest.fn(() => null),
+        saveSession: jest.fn((jwt: any, rememberKey: boolean) => ({
+          jwt,
+          user: { tipoUsuario: 'admin' },
+        })),
+        saveOfferNotice: jest.fn(() => {}),
+        rememberOffer: jest.fn(() => null),
+      },
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -56,9 +94,6 @@ describe('HomeComponent', () => {
     toastService = TestBed.inject(ToastService) as any;
     shareService = TestBed.inject(ShareService) as any;
     component.startCarousel = jest.fn();
-
-
-
   });
 
   it('should create sweetAlertService',()=>{
@@ -83,65 +118,70 @@ it('should create shareService',()=>{
     expect(component).toBeTruthy();
   });
 
-  it('should check server', (() => {
+  it('should check server', fakeAsync(() => {
 
     component.checkServer();
-
+    tick();
     expect(shareService.ComeOn).toHaveBeenCalled();
   }));
 
-  it('should initialize correctly', () => {
+  it('should initialize correctly', fakeAsync(() => {
     const spy = jest.spyOn(component, 'someFunction');
     component.ngOnInit();
+    tick();
     expect(spy).toHaveBeenCalled();
-  });
+  }));
 
 
   it('should called offer funtions', (()=>{
-     component.someFunction();
+    const rememberOfferSpy = jest.spyOn(SessionService, 'rememberOffer').mockReturnValue(true);
+    const saveOfferNoticeSpy = jest.spyOn(SessionService, 'saveOfferNotice').mockImplementation(jest.fn());
 
-    expect(SessionServiceMock.rememberOffer).toHaveBeenCalled();
-    expect(SessionServiceMock.saveOfferNotice).toHaveBeenCalled();
+    component.someFunction();
+
+    expect(rememberOfferSpy).toHaveBeenCalled();
+    expect(saveOfferNoticeSpy).toHaveBeenCalled();
     expect(sweetAlertService.receiveOffers).toHaveBeenCalled();
   }));
 
 
 
-it('should login successfully', (() => {
+it('should login successfully', fakeAsync(() => {
 
 
   component.username = 'testuser';
   component.password = 'password';
   component.rememberKey = true;
   component.login();
-
+  tick();
 
   expect(userService.login).toHaveBeenCalled();
 }));
 
 
-  it('should handle login error', (() => {
+  it('should handle login error', fakeAsync(() => {
   jest.spyOn(userService, 'login').mockReturnValue(
     throwError(() => ({ error: { message: 'Invalid credentials' } }))
   );
   component.login();
+  tick();
 
   expect(sweetAlertService.showError).toHaveBeenCalled();
 }));
 
-  it('should register user successfully', (() => {
+  it('should register user successfully', fakeAsync(() => {
     component.registerUser();
-
+    tick();
     expect(userService.create).toHaveBeenCalled();
   }));
 
-  it('should handle registration error', (() => {
+  it('should handle registration error',fakeAsync(() => {
     jest.spyOn(userService, 'create').mockReturnValue(
       throwError(() => ({ error: { message: 'User already exists' } }))
     );
 
     component.registerUser();
-
+    tick();
 
     expect(sweetAlertService.showError).toHaveBeenCalled();
   }));
@@ -162,3 +202,4 @@ it('should login successfully', (() => {
 
 
 });
+

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
@@ -7,7 +8,7 @@ import { HttpClient} from '@angular/common/http';
 })
 export class PurchaseLineService {
 
-  private baseUrl = 'http://localhost:3000/api/lineaCompra/';
+  private baseUrl = environment.baseUrl + 'api/lineaCompra/';
 
   constructor(
     private http: HttpClient
