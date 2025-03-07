@@ -29,4 +29,4 @@ const getMyPurchasesController = async (req, res) => {
     }
 };
 export default getMyPurchasesController;
-//# sourceMappingURL=compra-GetMyPurchases.Controller.js.map
+//# sourceMappingURL=compraGetMyPurchases.Controller.js.map

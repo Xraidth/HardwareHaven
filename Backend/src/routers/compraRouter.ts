@@ -11,7 +11,7 @@ import userJWTDTO from "../dto/userJWTDTO.js";
 import { compraDTO } from "../dto/compraDTO.js";
 import compraFacturationWebController from "../controllers/compra-Facturation-web.Controllers.js";
 import cancelPurchaseController from "../controllers/compra-CancelPurchase.Controllers.js";
-import getMyPurchasesController from "../controllers/compra-GetMyPurchases.Controller.js";
+import getMyPurchasesController from "../controllers/compraGetMyPurchases.Controller.js";
 
 
 

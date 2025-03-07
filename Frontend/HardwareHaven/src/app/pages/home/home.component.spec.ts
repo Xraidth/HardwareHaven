@@ -13,7 +13,6 @@ import { RouterMock } from '../../../__mocks__/routerMock';
 import { SweetAlertServiceMock } from '../../../__mocks__/sweetAlertServiceMock';
 import { ToastServiceMock } from '../../../__mocks__/toastServiceMock';
 import { ShareServiceMock } from '../../../__mocks__/shareServiceMock';
-
 import { By } from '@angular/platform-browser';
 import { SessionService } from '../../core/services/share/session.service';
 import { UserService } from '../../core/services/entities/user.service';
