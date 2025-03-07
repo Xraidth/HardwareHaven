@@ -53,6 +53,7 @@ borrarCuenta(){
       ).subscribe((usuario: any) => {
         if (usuario) {
           this.usuario = usuario;
+          SessionService.deleteSession();
           this.router.navigate(['/home']);
         }
       });
