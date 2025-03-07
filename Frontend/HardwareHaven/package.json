@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.2",
     "jwt-decode": "^4.0.0",
