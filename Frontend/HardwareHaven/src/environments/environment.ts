@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: process.env['APIURL']
+  baseUrl: 'https://hardwarehaven.onrender.com/'
 };
