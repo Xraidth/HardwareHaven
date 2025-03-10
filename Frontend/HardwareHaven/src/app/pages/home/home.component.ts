@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
         const messageErrors = errores.join(', ');
 
         if (messageErrors.length === 0) {
-        this.toastService.showToast('Access denied');
+        this.toastService.showToast('Acceso denegado');
       }
       else{this.sweetAlertService.showError(messageErrors +", "+ message);}
     }
