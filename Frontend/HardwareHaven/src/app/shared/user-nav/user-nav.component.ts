@@ -61,15 +61,17 @@ export class UserNavComponent implements OnInit {
       (response: any) => {
       if (response?.data) {
         this.usuario =  response.data
+        SessionService.deleteSession();
+        this.router.navigate(['home']);
 
       }
     },
-    error: (e) => {
-      const errores = e.error?.errors || [];
-const message = e.error?.message || [];
-      const mensajeErrores = errores.join(', ');
-      this.swa.showError(mensajeErrores +", "+ message);
-  }
+    error: (error) => {
+      const errores = error.error.errors || [];
+      const message = error.error.message || 'An unknown error occurred';
+      const messageErrors = errores.join(', ');
+      this.swa.showError(messageErrors ? messageErrors : message);
+    }
 
     }
 

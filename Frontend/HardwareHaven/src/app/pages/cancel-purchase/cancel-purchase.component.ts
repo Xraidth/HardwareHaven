@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PurchasesMadeComponent } from '../../features/purchases/purchases-made/purchases-made.component';
 import { Router } from '@angular/router';
+import { directed } from '../../shared/functions/functions';
+
 
 @Component({
   selector: 'app-cancel-purchase',
@@ -48,7 +50,7 @@ export class CancelPurchaseComponent {
 
 
 pasarAListaProductos(){
-  this.router.navigate(['productList']);
+  directed(this.user.tipoUsuario, this.router)
 }
 
 }
