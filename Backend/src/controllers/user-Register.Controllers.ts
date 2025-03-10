@@ -18,7 +18,7 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
            const jwt = await jwtConstructor(usercreated);
            res.status(201).json({
                 jwt,
-                data: new_user,
+                data: undefined,
                 message: "The user was added"
             });
         } else {

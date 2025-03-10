@@ -59,11 +59,9 @@ export class UserNavComponent implements OnInit {
     {
     next:
       (response: any) => {
-      if (response?.data) {
-        this.usuario =  response.data
-        SessionService.deleteSession();
-        this.router.navigate(['home']);
-
+      if (response) {
+        this.usuario = SessionService.saveSession(response.jwt, false);
+        this.router.navigate(['profile']);
       }
     },
     error: (error) => {

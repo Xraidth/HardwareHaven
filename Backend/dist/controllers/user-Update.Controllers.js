@@ -1,4 +1,5 @@
 import { UserRepository } from "../repository/userRepository.js";
+import { jwtConstructor } from '../shared/db/jwt.js';
 const userRepo = new UserRepository();
 const userUpdateController = async (req, res) => {
     const { newPassword, oldPassword, newUserName, newEmail, newUserType } = req.body;
@@ -12,8 +13,10 @@ const userUpdateController = async (req, res) => {
                 user.email = newEmail;
                 user.tipoUsuario = newUserType;
                 const user_updated = await userRepo.update(user);
+                const jwt = await jwtConstructor(user_updated);
                 res.status(200).json({
-                    data: user_updated,
+                    jwt,
+                    data: undefined,
                     message: "The user was updated"
                 });
             }
