@@ -128,7 +128,7 @@ export class ProductListComponent implements OnInit {
 
   pasarAcompra() {
     SessionService.user.carrito = this.carrito;
-    this.router.navigate(['compra']);
+    this.router.navigate(['purchase']);
   }
 
   onSortChangeMenu(event: any) {

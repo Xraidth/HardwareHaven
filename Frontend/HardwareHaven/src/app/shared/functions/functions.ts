@@ -68,7 +68,7 @@ export function specialFilter(name: string, dato: any): string {
 
 export function directed(tipoUsuario: string, router:Router){
   if(tipoUsuario =="Administrador"){
-    router.navigate(['inventario']);
+    router.navigate(['inventory']);
   }
   else if (tipoUsuario =="Cliente"){
     router.navigate(['productList']);

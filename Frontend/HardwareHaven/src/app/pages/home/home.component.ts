@@ -157,7 +157,7 @@ export class HomeComponent implements OnInit {
     });}
 
 gotoHelp(){
-  this.router.navigate(['ayuda']);
+  this.router.navigate(['help']);
 }
 
   }

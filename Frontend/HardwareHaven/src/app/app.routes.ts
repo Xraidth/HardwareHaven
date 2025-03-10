@@ -17,13 +17,12 @@ import { CancelPurchaseComponent } from './pages/cancel-purchase/cancel-purchase
 export const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'productList', component: ProductListComponent, canActivate: [authGuard]},
-  { path: 'compra', component: PurchaseComponent, canActivate: [authGuard] },
-  { path: 'perfil', component: ProfileComponent, canActivate: [authGuard]},
-  { path: 'envio', component: SendComponent , canActivate: [authGuard]},
-  { path: 'inventario', component: InventoryComponent, canActivate: [authGuard]},
-  { path: 'inventario/usuario', component: UserComponent, canActivate: [authGuard]},
+  { path: 'purchase', component: PurchaseComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+  { path: 'delivery', component: SendComponent , canActivate: [authGuard]},
+  { path: 'inventory', component: InventoryComponent, canActivate: [authGuard]},
   { path: 'cancelPurchases', component: CancelPurchaseComponent, canActivate: [authGuard] },
-  { path: 'ayuda', component: HelpComponent},{
+  { path: 'help', component: HelpComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 
