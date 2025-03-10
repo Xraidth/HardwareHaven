@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { UserRepository } from "../repository/userRepository.js";
 import { User } from '../model/user.entity.js';
+import { jwtConstructor } from '../shared/db/jwt.js';
 
 const userRepo = new UserRepository();
 
@@ -20,8 +21,10 @@ const userUpdateController = async (req: Request, res: Response): Promise<void> 
                 user.email = newEmail;
                 user.tipoUsuario=newUserType;
                 const user_updated = await userRepo.update(user);
+                const jwt = await jwtConstructor(user_updated);
                 res.status(200).json({
-                    data: user_updated,
+                    jwt,
+                    data: undefined,
                     message: "The user was updated"
                 });
             }

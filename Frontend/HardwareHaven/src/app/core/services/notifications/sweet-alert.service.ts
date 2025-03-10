@@ -134,10 +134,10 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         <input id="swal-input-password-act" type="password" class="form-control" placeholder="Contraseña actual">
       </div>
       <div class="mb-3">
-        <input id="swal-input-password" type="password" class="form-control" placeholder="Nueva contraseña (opcional)">
+        <input id="swal-input-password" type="password" class="form-control" placeholder="Nueva contraseña ">
       </div>
       <div class="mb-3">
-        <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar nueva contraseña (opcional)">
+        <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar nueva contraseña ">
       </div>
       <div class="mb-3">
         <select id="swal-input-user-type" class="form-select" ${usuario.tipoUsuario == 'Cliente' ? 'disabled' : ''}>
