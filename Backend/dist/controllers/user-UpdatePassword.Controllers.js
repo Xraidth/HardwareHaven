@@ -9,30 +9,28 @@ const userUpdatePasswordController = async (req, res) => {
             res.status(400).send('Solicitud inválida: El ID del usuario es obligatorio.');
             return;
         }
-        const user = await userRepo.findOne({ id: id });
-        if (user) {
-            if (user.password === oldPassword) {
-                const user_updated = await userRepo.updatePassword(user, newPassword);
-                const jwt = await jwtConstructor(user_updated);
-                res.status(200).json({
-                    jwt,
-                    data: undefined,
-                    message: "The user was updated"
-                });
-            }
-            else {
-                res.status(404).json({
-                    data: undefined,
-                    message: 'User incorrect credentials'
-                });
-            }
-        }
-        else {
+        const user = await userRepo.findOne({ id });
+        if (!user) {
             res.status(404).json({
                 data: undefined,
                 message: 'User incorrect credentials'
             });
+            return;
         }
+        if (user.password !== oldPassword) {
+            res.status(404).json({
+                data: undefined,
+                message: 'User incorrect credentials'
+            });
+            return;
+        }
+        const user_updated = await userRepo.updatePassword(user, newPassword);
+        const jwt = await jwtConstructor(user_updated);
+        res.status(200).json({
+            jwt,
+            data: undefined,
+            message: "The user was updated"
+        });
     }
     catch (error) {
         console.error(error);
