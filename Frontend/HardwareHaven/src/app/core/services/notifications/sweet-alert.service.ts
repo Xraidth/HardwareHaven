@@ -786,7 +786,7 @@ updateCompra(compra:any): Promise<{
   }
 
 
-  ShowPasswordupdate(usuario: any): Promise<{oldPassword: string, newPassword: string} | undefined> {
+  showPasswordupdate(usuario: any): Promise<{oldPassword: string, newPassword: string} | undefined> {
     return Swal.fire({
       title: "Actualizar Contraseña",
       html: `
@@ -835,7 +835,46 @@ updateCompra(compra:any): Promise<{
       return undefined;
     });
 }
+showUserNameUpdate(usuario: any): Promise<{ newUserName: string, password: string } | undefined> {
+  return Swal.fire({
+    title: "Actualizar Nombre de Usuario",
+    html: `
+      <div class="container mt-4">
+        <div class="mb-3">
+          <label for="swal-input-username" class="form-label">Nuevo Nombre de Usuario</label>
+          <input id="swal-input-username" type="text" class="form-control" value="${usuario.name}">
+        </div>
+        <div class="mb-3">
+          <label for="swal-input-password" class="form-label">Contraseña</label>
+          <input id="swal-input-password" type="password" class="form-control">
+        </div>
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "Actualizar",
+    cancelButtonText: "Cancelar",
+    preConfirm: () => {
+      const newUserName = (document.getElementById('swal-input-username') as HTMLInputElement).value;
+      const password = (document.getElementById('swal-input-password') as HTMLInputElement).value;
 
+      if (!newUserName) {
+        Swal.showValidationMessage('Introduce un nuevo nombre de usuario');
+        return false;
+      } else if (!password) {
+        Swal.showValidationMessage('Introduce tu contraseña');
+        return false;
+      }
+      return { newUserName, password };
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.alertWithSuccess('¡Nombre de usuario actualizado!', 'Tu nombre de usuario ha sido cambiado con éxito.');
+      return result.value;
+    }
+    return undefined;
+  });
+}
 
 
 

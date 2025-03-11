@@ -78,11 +78,46 @@ export class UserNavComponent implements OnInit {
   }
 
   async passwordChange(): Promise<void> {
-    const credenciales = await this.swa.ShowPasswordupdate(this.usuario);
+    const credenciales = await this.swa.showPasswordupdate(this.usuario);
     if (credenciales) {
       this.serverUser.updateUserPassword(this.usuario.id, {
         newPassword: credenciales.newPassword,
         oldPassword: credenciales.oldPassword
+      }).pipe(
+        catchError((error) => {
+
+        const errorMessage = getErrorMessage(error);
+        this.swa.showError(errorMessage);
+          return of(null);
+        })
+      ).subscribe(
+    {
+    next:
+      (response: any) => {
+      if (response) {
+        this.usuario = SessionService.saveSession(response.jwt, false);
+        this.router.navigate(['profile']);
+      }
+    },
+    error: (error) => {
+      const errores = error.error.errors || [];
+      const message = error.error.message || 'An unknown error occurred';
+      const messageErrors = errores.join(', ');
+      this.swa.showError(messageErrors ? messageErrors : message);
+    }
+
+    }
+
+    );
+    }
+  }
+
+  async userNameChange(): Promise<void> {
+    const credenciales = await this.swa.showUserNameUpdate(this.usuario);
+    if (credenciales) {
+      this.serverUser.updateUserName(this.usuario.id, {
+        newUserName: credenciales.newUserName,
+        password: credenciales.password
       }).pipe(
         catchError((error) => {
 
