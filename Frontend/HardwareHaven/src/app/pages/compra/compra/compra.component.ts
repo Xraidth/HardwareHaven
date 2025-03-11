@@ -21,13 +21,13 @@ export class PurchaseComponent implements OnInit {
 constructor(private router: Router){}
 ngOnInit(): void {
   this.usuario = SessionService.user;
-  this.carrito = SessionService.user.carrito;
+  this.carrito = SessionService.shopcar;
   if(this.carrito.length == 0){this.mostrarBoton = false} else {this.mostrarBoton = true}
 }
 
 
 pasarAListaProductos(){
-  SessionService.user.carrito = this.carrito;
+  SessionService.shopcar = this.carrito;
   this.router.navigate(['productList']);
 }
 

@@ -10,6 +10,7 @@ export class SessionService {
 
   public static user:any;
   public static jwt:any;
+  public static shopcar:any;
 
   private static setUser():any
   {

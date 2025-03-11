@@ -127,7 +127,7 @@ export class ProductListComponent implements OnInit {
 
 
   pasarAcompra() {
-    SessionService.user.carrito = this.carrito;
+    SessionService.shopcar = this.carrito;
     this.router.navigate(['purchase']);
   }
 
@@ -148,7 +148,7 @@ export class ProductListComponent implements OnInit {
 
   vaciarCarro(){
     this.carrito=[]
-    SessionService.user.carrito= this.carrito;
+    SessionService.shopcar= this.carrito;
     this.getAllProducts();
   }
 }
