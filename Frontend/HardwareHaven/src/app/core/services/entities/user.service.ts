@@ -41,11 +41,11 @@ export class UserService {
 
   updateUserName( id: number, body:{ newUserName:string, password: string}){
 
-    return this.http.put(`${this.baseUrl}updateUserName/${id}`, body);
+    return this.http.patch(`${this.baseUrl}updateUserName/${id}`, body);
   }
   updateUserPassword( id: number, body:{ newPassword: string, oldPassword:string}){
 
-    return this.http.put(`${this.baseUrl}updatePassword/${id}`, body);
+    return this.http.patch(`${this.baseUrl}updatePassword/${id}`, body);
   }
 
   login(body:{name: string, password:string}){

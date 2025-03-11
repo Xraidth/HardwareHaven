@@ -6,7 +6,8 @@
     <div class="dropdown-menu" [class.show]="isDropdownOpen">
       <a class="dropdown-item" [routerLink]="['/profile']">Perfil</a>
       <a class="dropdown-item" [routerLink]="['/cancelPurchases']">Compras</a>
-      <a class="dropdown-item" (click)="configurarCuenta()">Configuraciones</a>
+      <a class="dropdown-item" (click)="passwordChange()">Actualizar clave</a>
+      <a class="dropdown-item" (click)="configurarCuenta()">Modificar cuenta</a>
       <a class="dropdown-item" href="#"  (click)="cerrarSesion()">Cerrar sesión</a>
     </div>
   </div>

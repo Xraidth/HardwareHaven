@@ -57,12 +57,13 @@ Content-Type: application/json
 }
 
 ###PATCH
-PATCH http://localhost:3000/api/user/updatePassword/:id
+PATCH http://localhost:3000/api/user/updatePassword/184
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJ1c2VyIjp7ImlkIjoxODQsIm5hbWUiOiJDbGllbnRlIiwiZW1haWwiOiJjbGllbnRlQGdtYWlsLmNvbSIsInRpcG9Vc3VhcmlvIjoiQ2xpZW50ZSJ9LCJpYXQiOjE3NDE3MDk0MzcsImV4cCI6MTc0MjMxNDIzN30.jDKivm7n9WP48fI0QeP4NPxujP4imCGIXWI8800X5tc
 Content-Type: application/json
 
 {
-"newPassword":"", 
-"oldPassword":""
+"newPassword":"nacho55123", 
+"oldPassword":"nacho12345"
 }
 
 
