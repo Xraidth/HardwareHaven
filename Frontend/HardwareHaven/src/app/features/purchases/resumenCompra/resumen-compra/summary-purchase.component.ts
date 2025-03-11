@@ -36,8 +36,9 @@ export class SummaryPurchaseComponent implements OnInit {
   ngOnInit(): void {
 
     this.user = SessionService.user;
-    if (this.user && this.user.carrito) {
-      this.shopcar = this.user.carrito;
+    this.shopcar=SessionService.shopcar;
+    if (this.user && this.shopcar) {
+
       this.generatePurchase();}
     else{
       this.sweetAlertService.showError('Cart shop or user information was not founded');
@@ -62,7 +63,7 @@ export class SummaryPurchaseComponent implements OnInit {
             for (const p of this.shopcar) {
               this.generatePurchaseLine(p);
             }
-            this.total = SessionService.user.carrito.total;
+            this.total = SessionService.shopcar.total;
             this.purchaseMade.total = this.total;
             this.purchaseFinished = true;
           } else {

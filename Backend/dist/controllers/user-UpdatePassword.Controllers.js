@@ -1,15 +1,22 @@
 import { UserRepository } from "../repository/userRepository.js";
+import { jwtConstructor } from '../shared/db/jwt.js';
 const userRepo = new UserRepository();
 const userUpdatePasswordController = async (req, res) => {
     const { newPassword, oldPassword } = req.body;
-    const id = parseInt(req.params.id);
+    const id = req.id;
     try {
+        if (!id) {
+            res.status(400).send('Solicitud inválida: El ID del usuario es obligatorio.');
+            return;
+        }
         const user = await userRepo.findOne({ id: id });
         if (user) {
             if (user.password === oldPassword) {
                 const user_updated = await userRepo.updatePassword(user, newPassword);
+                const jwt = await jwtConstructor(user_updated);
                 res.status(200).json({
-                    data: user_updated,
+                    jwt,
+                    data: undefined,
                     message: "The user was updated"
                 });
             }

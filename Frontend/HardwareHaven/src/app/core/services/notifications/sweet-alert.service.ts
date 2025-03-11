@@ -786,9 +786,55 @@ updateCompra(compra:any): Promise<{
   }
 
 
+  ShowPasswordupdate(usuario: any): Promise<{oldPassword: string, newPassword: string} | undefined> {
+    return Swal.fire({
+      title: "Actualizar Contraseña",
+      html: `
+    <div class="container mt-4">
+  <div class="mb-3">
+    <label for="swal-input-password-act" class="form-label">Contraseña actual</label>
+    <input id="swal-input-password-act" type="password" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="swal-input-password" class="form-label">Nueva contraseña</label>
+    <input id="swal-input-password" type="password" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="swal-input-confirm-password" class="form-label">Confirmar nueva contraseña</label>
+    <input id="swal-input-confirm-password" type="password" class="form-control">
+  </div>
+</div>
 
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Actualizar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const oldPassword = (document.getElementById('swal-input-password-act') as HTMLInputElement).value;
+        const newPassword = (document.getElementById('swal-input-password') as HTMLInputElement).value;
+        const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
 
-
+        if (!oldPassword) {
+          Swal.showValidationMessage('Introduce tu contraseña actual');
+          return false;
+        } else if (!newPassword) {
+          Swal.showValidationMessage('Introduce una nueva contraseña');
+          return false;
+        } else if (newPassword !== confirmPassword) {
+          Swal.showValidationMessage('Las contraseñas no coinciden');
+          return false;
+        }
+        return { oldPassword, newPassword };
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alertWithSuccess('¡Contraseña actualizada!', 'Tu contraseña ha sido cambiada con éxito.');
+        return result.value;
+      }
+      return undefined;
+    });
+}
 
 
 
