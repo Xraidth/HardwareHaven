@@ -57,6 +57,8 @@ Figura 8: Carrito de compras Mobile
 
 [Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
 
+[El sistema funcionando](https://www.youtube.com/watch?v=X7Iu7GyENdc)
+
 
 ### Alcance Funcional
 |Req|Detalle|
