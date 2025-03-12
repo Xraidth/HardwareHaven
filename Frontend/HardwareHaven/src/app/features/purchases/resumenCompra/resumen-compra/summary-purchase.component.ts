@@ -34,99 +34,85 @@ export class SummaryPurchaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.user = SessionService.user;
-    this.shopcar=SessionService.shopcar;
+    this.shopcar = SessionService.shopcar;
     if (this.user && this.shopcar) {
-
-      this.generatePurchase();}
-    else{
-      this.sweetAlertService.showError('Cart shop or user information was not founded');
+      this.generatePurchase();
+    } else {
+      this.sweetAlertService.showError('Cart shop or user information was not found');
       return;
     }
-
-
-
   }
 
-  generatePurchase() {
+
+  async generatePurchase() {
     this.loading = true;
     this.purchaseFinished = false;
 
-    this.serverCompra.create({ userId: this.user.id }).pipe(
-    ).subscribe({
-      next: (r: any) => {
-        if (r && r.data) {
-          this.purchaseMade = r.data;
+    try {
+      const r: any = await this.serverCompra.create({ userId: this.user.id }).toPromise();
+      if (r && r.data) {
+        this.purchaseMade = r.data;
 
-          if (this.shopcar && this.shopcar.length) {
-            for (const p of this.shopcar) {
-              this.generatePurchaseLine(p);
-            }
-            this.total = SessionService.shopcar.total;
-            this.purchaseMade.total = this.total;
-            this.purchaseFinished = true;
-          } else {
-            this.sweetAlertService.showError('The shop car is empty');
+        if (this.shopcar && this.shopcar.length) {
+
+          for (const p of this.shopcar) {
+            await this.generatePurchaseLine(p);
           }
+          this.total = SessionService.shopcar.total;
+          this.purchaseMade.total = this.total;
+          this.purchaseFinished = true;
         } else {
-          this.sweetAlertService.showError('There was an error.');
+          this.sweetAlertService.showError('The shop car is empty');
         }
-        this.loading = false;
-      },
-      error: (e) => {
-        this.sweetAlertService.showError('Error to generate purchase');
-        this.loading = false;
+      } else {
+        this.sweetAlertService.showError('There was an error.');
       }
-    });
+    } catch (e) {
+      this.sweetAlertService.showError('Error to generate purchase');
+    } finally {
+      this.loading = false;
+    }
   }
 
 
-
-  generatePurchaseLine(p: any) {
+  async generatePurchaseLine(p: any) {
     if (!this.purchaseMade || !this.purchaseMade.id) {
       this.sweetAlertService.showError('Invalid purchase line');
       return;
     }
 
-    this.serverLineaCompra.create({
-      compraId: this.purchaseMade.id,
-      cantidad: p.quantity,
-      componenteId: p.id
-    }).subscribe({
-      next: (r: any) => {
-        if (r && r.data) {
-          const purchaseLineMade: any = r.data;
-          this.purchasesLine.push(purchaseLineMade);
-        } else {
-          this.sweetAlertService.showError('Error in the creation of the purchase');
-        }
-      },
-      error: (e) => {
+    try {
+      const r: any = await this.serverLineaCompra.create({
+        compraId: this.purchaseMade.id,
+        cantidad: p.quantity,
+        componenteId: p.id
+      }).toPromise();
+
+      if (r && r.data) {
+        const purchaseLineMade: any = r.data;
+        this.purchasesLine.push(purchaseLineMade);
+      } else {
         this.sweetAlertService.showError('Error in the creation of the purchase');
       }
-    });
+    } catch (e) {
+      this.sweetAlertService.showError('Error in the creation of the purchase');
+    }
   }
 
   invoice(id: number) {
     this.serverCompra.facturate(id).subscribe({
       next: (response: Blob) => {
-
         const url = window.URL.createObjectURL(response);
-
         window.open(url, '_blank');
       },
       error: (error) => {
-
         this.sweetAlertService.showError('Purchase billing Error');
       },
     });
   }
 
-
-
-  invoiceButton(){
-  this.invoice(this.purchaseMade.id);
-}
-
+  invoiceButton() {
+    this.invoice(this.purchaseMade.id);
+  }
 }
