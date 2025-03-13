@@ -37,12 +37,17 @@ Herramienta para comprender y facilitar la representación de entidades de la ba
 [El sistema funcionando](https://www.youtube.com/watch?v=X7Iu7GyENdc)
 
 # Tecnologías utilizadas
-[![Angular](https://angular.io/assets/images/logos/angular/angular.svg)](https://angular.io)
-[![Express](https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg)](https://expressjs.com)
-[![MySQL](https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg)](https://www.mysql.com/)
-[![Node.js](https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg)](https://nodejs.org)
-
-
-
-
-
+<div style="display: flex; justify-content: center; align-items: center;">
+  <a href="https://angular.io">
+    <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" style="width: 40px; height: 40px; margin: 0 10px;">
+  </a>
+  <a href="https://expressjs.com">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="Express" style="width: 40px; height: 40px; margin: 0 10px;">
+  </a>
+  <a href="https://www.mysql.com/">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" style="width: 40px; height: 40px; margin: 0 10px;">
+  </a>
+  <a href="https://nodejs.org">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="Node.js" style="width: 40px; height: 40px; margin: 0 10px;">
+  </a>
+</div>
