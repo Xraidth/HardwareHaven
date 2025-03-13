@@ -16,39 +16,16 @@ Plataforma en línea con una amplia gama de componentes de hardware para armar t
 Información necesaria para comprender y utilizar el proyecto 
 [Documentación](https://github.com/jcaldani/DSW-2024-Hardware-Haven/blob/main/Documentation/Hardware%20Haven.pdf) 
 
+[Manual de instalacion](https://docs.google.com/document/d/1_eQn-Gqp4FpEjdMTiy8YjeLA0bVeW9VaLx_VXB20h90/edit?usp=sharing)
+
+[proposal](https://github.com/Xraidth/HardwareHaven/blob/main/proposal.md)
+
 ### Modelo
 Herramienta para comprender y facilitar la representación de entidades de la base de datos.​(Entidad-Relación)
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
 ### Vista Previa de la Plataforma
-![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot.png)
-Figura 1: Página principal inicio de la plataforma
-
-![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot2.png)
-Figura 2: Listado de productos
-
-![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot3.png)
-Figura 3: Carrito de compras
-
-![Vista previa de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot4.png)
-Figura 4: Gestion de inventario
-
-![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot5.png)
-
-Figura 5: Home Mobile
-
-![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot6.png)
-
-Figura 6: Listado de productos mobile
-
-
-![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot7.png)
-
-Figura 7: Gestion de inventario Mobile
-
-![Vista Mobile de Hardware Haven](https://github.com/Xraidth/HardwareHaven/blob/main/Frontend/HardwareHaven/src/assets/images/Screenshot8.png)
-
-Figura 8: Carrito de compras Mobile
+![Vista previa de Hardware Haven](./preview.md)
 
 ### Videos y tutoriales
 🎥✨ En esta seccion se presentan los videos 💻 que se fueron haciendo durante todo el año✨🎥
@@ -59,21 +36,13 @@ Figura 8: Carrito de compras Mobile
 
 [El sistema funcionando](https://www.youtube.com/watch?v=X7Iu7GyENdc)
 
-
-### Alcance Funcional
-|Req|Detalle|
-|:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Compra<br>3. CRUD LineaCompra<br>4. CRUD Componente<br>5. CRUD Precio<br>6. CRUD Categoria|
-|Listado |1. Listado de componentes filtrado por nombre, precio, categoria. (Con su detalle)|
-|CUU/Epic|1. Comprar un componente para el armado de la PC <br>2. Facturacion <br>3. Envio|
+# Tecnologías utilizadas
+[![Angular](https://angular.io/assets/images/logos/angular/angular.svg)](https://angular.io)
+[![Express](https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg)](https://expressjs.com)
+[![MySQL](https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg)](https://www.mysql.com/)
+[![Node.js](https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg)](https://nodejs.org)
 
 
-### Alcance Adicional Voluntario
 
-|Req|Detalle|
-|:-|:-|
-|Listados |1. Listado de compras filtrado por fecha, cliente <br>2. Listado de compras por cliente<br>3. Listado de totales|
-|CUU/Epic|1. Descuentos<br>2. Cancelación de la compra|
-|Otros|1. Envío de ofertas o nuevos productos por email al cliente|
 
 
