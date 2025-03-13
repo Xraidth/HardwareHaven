@@ -88,8 +88,7 @@ export class PlusButtonComponent {
       ).subscribe(
         {next:
         (response: any) => {
-        if (response?.data) {
-          this.usuario = response.data;
+        if (response) {
           this.setChangesToAdd();
         }
       },
