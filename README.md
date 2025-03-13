@@ -36,7 +36,7 @@ Herramienta para comprender y facilitar la representación de entidades de la ba
 
 [El sistema funcionando](https://www.youtube.com/watch?v=X7Iu7GyENdc)
 
-# Tecnologías utilizadas
+### Tecnologías utilizadas
 <div style="display: flex; justify-content: center; align-items: center;">
   <a href="https://angular.io">
     <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" style="width: 40px; height: 40px; margin: 0 10px;">
