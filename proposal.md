@@ -2,7 +2,7 @@
 
 ## Grupo
 ### Integrantes
-* legajo - Apellido(s), Nombre(s)
+* 45767 - Rodriguez, Ignacio
 
 ### Repositorios
 * [Fullstack app](https://github.com/Xraidth/HardwareHaven.git)

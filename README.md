@@ -18,14 +18,14 @@ Información necesaria para comprender y utilizar el proyecto
 
 [Manual de instalacion](https://docs.google.com/document/d/1_eQn-Gqp4FpEjdMTiy8YjeLA0bVeW9VaLx_VXB20h90/edit?usp=sharing)
 
-[proposal](https://github.com/Xraidth/HardwareHaven/blob/main/proposal.md)
+[Proposal](https://github.com/Xraidth/HardwareHaven/blob/main/proposal.md)
 
 ### Modelo
 Herramienta para comprender y facilitar la representación de entidades de la base de datos.​(Entidad-Relación)
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
 ### Vista Previa de la Plataforma
-![Vista previa de Hardware Haven](./preview.md)
+[Vista previa de Hardware Haven](./preview.md)
 
 ### Videos y tutoriales
 🎥✨ En esta seccion se presentan los videos 💻 que se fueron haciendo durante todo el año✨🎥
