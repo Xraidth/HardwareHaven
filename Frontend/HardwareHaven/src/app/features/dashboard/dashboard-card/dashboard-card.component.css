@@ -1,0 +1,26 @@
+.card-board {
+  margin: 10px;
+  width: 250px;
+  height: 120px;
+  border: 1px solid rgb(189, 188, 188);
+  border-radius: 10px;
+  color: black;
+  position: relative;
+}
+
+.small-image-card {
+  color: rgb(94, 94, 94);
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translateY(-50%);
+}
+
+.title{
+font-size: 16px;
+}
+.reference{
+  font-size: small;
+  color: rgb(94, 94, 94);
+}
+

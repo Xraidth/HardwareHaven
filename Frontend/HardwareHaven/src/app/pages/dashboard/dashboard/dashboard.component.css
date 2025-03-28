@@ -52,25 +52,18 @@
 .btn-pes-vista,
 .btn-pes-ana,
 .btn-pes-rep {
-  border: none; /* Elimina los bordes */
-  background-color: transparent; /* Hace que el fondo sea transparente */
-  padding: 10px 15px; /* Agrega algo de espacio para que se vea mejor */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  border: none;
+  background-color: transparent;
+  padding: 10px 15px;
+  cursor: pointer;
 }
 
 .btn-pes-vista:hover,
 .btn-pes-ana:hover,
 .btn-pes-rep:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Agrega un ligero efecto al pasar el mouse */
-  border-radius: 5px; /* Suaviza los bordes */
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
-.card-board {
-  margin: 10px;
-  width: 250px;
-  height: 150px;
-  border: 1px solid rgb(189, 188, 188);
-  border-radius: 10px;
-  color: black;
-}
+
 
