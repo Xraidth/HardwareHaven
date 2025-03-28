@@ -1,5 +1,7 @@
 .head-dashboard{
   height: 60px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid rgb(189, 188, 188);
 }
 .main-dashboard{
   display: flex;
@@ -65,5 +67,23 @@
   border-radius: 5px;
 }
 
+.custom-btn-dowload{
+  padding-right: 10px;
+  margin-right: 5px;
+  color:black;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
 
-
+.custom-btn-cal{
+  padding-right: 11px;
+  margin-right: 5px;
+  background-color: black;
+  color:rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
