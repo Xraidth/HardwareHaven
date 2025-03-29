@@ -9,7 +9,7 @@ import { Color, colorSets, NgxChartsModule, ScaleType } from '@swimlane/ngx-char
   styleUrl: './bar-chart.component.css'
 })
 export class BarChartComponent {
-  view: [number, number] = [600, 300]; // Tamaño del gráfico
+  view: [number, number] = [620, 300]; // Tamaño del gráfico
 
   data = [
     { name: 'Jan', value: 2000 },

@@ -1,8 +1,39 @@
 
 <div>
-<div class="head-dashboard">
+  <div class="head-dashboard">
+    <div class="d-flex align-items-center h-100">
+      <div class="d-flex align-items-center justify-content-between w-100 p-3">
+        <div class="logo-container d-flex align-items-center">
+          <!-- Icono SVG -->
+          <svg class="img-head-dash" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <!-- Nombre del dashboard -->
+          <p class=" fs-5 text-dark p-custom-dash">ShopDash</p>
+        </div>
 
-</div>
+        <div class="search-container d-flex align-items-center">
+          <input type="text" class="form-control search-input" placeholder="Search..." />
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="16.5" y1="16.5" x2="20" y2="20"></line>
+          </svg>
+        </div>
+
+        <div class="user-info d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bell-icon-btn">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+          </svg>
+          <span class="">John Doe</span>
+          <img src="path-to-user-avatar.png" alt="" class="ms-2 avatar rounded-circle bg-secondary" />
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="main-dashboard">
     <div class="sidebar">
         <ul>
@@ -61,7 +92,7 @@
       </div>
 
 
-      <div class="d-flex justify-content-evenly">
+      <div class="d-flex justify-content-evenly align-items-center">
       <app-dashboard-card  [title]="'Total Revenue'"  [reference]="'+20.1% from last month'" [value]="'$45,231.89'" [d]="1"></app-dashboard-card>
       <app-dashboard-card  [title]="'New Orders'"  [reference]="'+12.4% from last month'" [value]="'+573'" [d]="2"></app-dashboard-card>
       <app-dashboard-card  [title]="'New Customers'"  [reference]="'+18.7% from last month'" [value]="'+249'" [d]="3"></app-dashboard-card>
