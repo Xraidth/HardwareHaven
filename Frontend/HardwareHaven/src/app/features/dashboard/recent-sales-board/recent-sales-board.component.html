@@ -3,4 +3,7 @@
     <h4 class="title-barchart">Recent Sales</h4>
     <p>Latest customer purchases</p>
   </div>
+  <div *ngFor="let user of users">
+    <app-recent-sales-card  [user]="user"></app-recent-sales-card>
+  </div>
 </div>

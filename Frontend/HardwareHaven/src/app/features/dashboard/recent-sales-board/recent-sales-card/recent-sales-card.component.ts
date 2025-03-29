@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-recent-sales-card',
@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './recent-sales-card.component.html',
   styleUrl: './recent-sales-card.component.css'
 })
-export class RecentSalesCardComponent {
-
+export class RecentSalesCardComponent{
+@Input() user: any;
 }
