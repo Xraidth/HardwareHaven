@@ -10,7 +10,7 @@
             <path d="M3 6h18"></path>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          <!-- Nombre del dashboard -->
+
           <p class=" fs-5 text-dark p-custom-dash">ShopDash</p>
         </div>
 
@@ -91,28 +91,8 @@
         </ul>
       </div>
 
+        <app-start-dash-board></app-start-dash-board>
 
-      <div class="d-flex justify-content-evenly align-items-center">
-      <app-dashboard-card  [title]="'Total Revenue'"  [reference]="'+20.1% from last month'" [value]="'$45,231.89'" [d]="1"></app-dashboard-card>
-      <app-dashboard-card  [title]="'New Orders'"  [reference]="'+12.4% from last month'" [value]="'+573'" [d]="2"></app-dashboard-card>
-      <app-dashboard-card  [title]="'New Customers'"  [reference]="'+18.7% from last month'" [value]="'+249'" [d]="3"></app-dashboard-card>
-      <app-dashboard-card  [title]="'Active Products'"  [reference]="'+4.3% from last month'" [value]="'1,324'" [d]="4"></app-dashboard-card>
-    </div>
-
-
-<div class="d-flex justify-content-evenly align-items-center">
-  <div>
-    <app-bar-chart></app-bar-chart>
-  </div>
-
-  <div>
-    <app-recent-sales-board></app-recent-sales-board>
-  </div>
-</div>
-
-  <div>
-    <app-top-products></app-top-products>
-  </div>
 
     </div>
 </div>

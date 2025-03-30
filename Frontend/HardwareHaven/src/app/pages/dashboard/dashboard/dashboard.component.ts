@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import { DashboardCardComponent } from '../../../features/dashboard/dashboard-card/dashboard-card.component';
 import { BarChartComponent } from '../../../features/dashboard/charts/bar-chart/bar-chart/bar-chart.component';
 import { RecentSalesBoardComponent } from '../../../features/dashboard/recent-sales-board/recent-sales-board.component';
+import { StartDashBoardComponent } from '../../../features/dashboard/start-dash-board/start-dash-board.component';
 
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [DashboardCardComponent, BarChartComponent, RecentSalesBoardComponent, TopProductsComponent],
+  imports: [StartDashBoardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
