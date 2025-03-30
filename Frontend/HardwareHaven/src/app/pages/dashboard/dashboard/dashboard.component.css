@@ -113,22 +113,32 @@
   list-style-type: none;
   padding: 0;
   color: black;
+  margin: 0;
 }
 
 .sidebar ul li {
-  padding: 15px;
-  text-align: center;
+  /*padding: 15px;*/
+  background-color: none;
 }
 
-.sidebar ul li a {
-  color: black;
-  text-decoration: none;
-  display: block;
-}
 
 .sidebar ul li:hover {
   background-color: #bababd;
 }
+
+.custom-btn-sidebar{
+
+  display: block;
+  width: 100%;     /* Se ajusta al tamaño del <li> */
+  height: 100%;    /* Opcional: si quieres que ocupe toda la altura del <li> */
+  padding: 30px;   /* Añade el padding aquí en lugar del <li> */
+  color: black;
+  text-decoration: none;
+  border: none;
+  background:none;
+}
+
+
 
 .main-content {
   flex-grow: 1;
