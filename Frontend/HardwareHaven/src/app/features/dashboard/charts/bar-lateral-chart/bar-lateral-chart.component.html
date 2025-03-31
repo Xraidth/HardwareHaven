@@ -1,0 +1,17 @@
+<div style="display: flex; justify-content: center;" class="bar-lateral-chart">
+  <div class="m-3">
+    <h4 class="title-barchart">{{tittle}}</h4>
+    <p>{{detail}}</p>
+  </div>
+  <ngx-charts-bar-horizontal
+    [view]="[950, 350]"
+    [scheme]="colorScheme"
+    [results]="Data"
+    [gradient]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="true"
+    [showDataLabel]="true"
+    [animations]="true">
+  </ngx-charts-bar-horizontal>
+</div>

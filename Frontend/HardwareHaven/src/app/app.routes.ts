@@ -12,6 +12,7 @@ import { HelpComponent } from './pages/ayuda/ayuda.component.js';
 import { authGuard } from './guards/auth.guard.js';
 import { NoAccessComponentComponent } from './pages/no-access-component/no-access-component.component.js';
 import { CancelPurchaseComponent } from './pages/cancel-purchase/cancel-purchase.component.js';
+import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component.js';
 
 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'delivery', component: SendComponent , canActivate: [authGuard]},
   { path: 'inventory', component: InventoryComponent, canActivate: [authGuard]},
   { path: 'cancelPurchases', component: CancelPurchaseComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardComponent},
   { path: 'help', component: HelpComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }

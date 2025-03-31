@@ -1,0 +1,19 @@
+<div class="bar-chart-board">
+  <div class="m-3">
+    <h4 class="title-barchart">Overview</h4>
+    <p>Sales performance for the current month vs last month</p>
+  </div>
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="data"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel">
+</ngx-charts-bar-vertical>
+</div>

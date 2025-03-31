@@ -1,0 +1,18 @@
+
+
+<div class="charts-pie-chart d-flex justify-content-center aline-items-center">
+  <div class="m-3">
+    <h4 class="title-barchart">{{tittle}}</h4>
+    <p>{{detail}}</p>
+  </div>
+  <ngx-charts-pie-chart
+    [view]="view"
+    [results]="Data"
+    [scheme]="colorScheme"
+    [doughnut]="false"
+    [labels]="true"
+    [legend]="true"
+    [explodeSlices]="false"
+    [gradient]="false">
+  </ngx-charts-pie-chart>
+</div>

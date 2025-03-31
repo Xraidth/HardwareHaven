@@ -1,0 +1,18 @@
+.charts-pie-chart{
+  margin-top: 15px;
+  width: 100%;
+  display: inline-block;
+  border: 1px solid rgb(189, 188, 188);
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.title-barchart{
+  color: black;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+
+
+

@@ -1,0 +1,54 @@
+.top-products-board{
+
+    margin: 7px;
+    width: 98%;
+    height: 390px;
+    border: 1px solid rgb(189, 188, 188);
+    border-radius: 10px;
+    color: black;
+    position: relative;
+
+}
+
+.title-barchart{
+  color: black;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+
+.table-custom-container {
+  margin: 20px;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+  overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+  max-height: 400px; /* Ajusta la altura máxima antes de que aparezca el scroll vertical */
+  padding: 10px; /* Espaciado opcional alrededor */
+}
+
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  color: gray;
+  font-size: 14px;
+  background-color: #f4f4f4;
+}
+tr {
+  border-bottom: 1px solid #bbb;
+}
+
+.up {
+  color: green;
+  font-weight: bold;
+}
+
+.down {
+  color: red;
+  font-weight: bold;
+}

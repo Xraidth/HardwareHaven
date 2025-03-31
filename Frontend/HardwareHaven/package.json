@@ -22,6 +22,7 @@
     "@angular/router": "^17.3.12",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
+    "@swimlane/ngx-charts": "22.0.0-alpha.1",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",

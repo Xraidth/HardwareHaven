@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center">
+      <img class="m-3 avatar rounded-circle bg-secondary" src="..." width="40" height="40">
+      <div class="d-flex flex-column lh-sm">
+        <p class="mb-0 fw-bold">{{ user?.username || 'Usuario' }}</p>
+        <small class="text-muted">{{ user?.email || 'Correo no disponible' }}</small>
+    </div>
+  </div>
+  <div class="m-4">+${{user?.recentSalesValue||'N/A'}}</div>
+</div>

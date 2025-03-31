@@ -1,0 +1,193 @@
+.head-dashboard{
+
+  height: 60px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid rgb(189, 188, 188);
+}
+
+
+
+.head-dashboard .d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.head-dashboard .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.head-dashboard .logo-container svg {
+  margin-right: 10px;
+}
+
+.head-dashboard .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.head-dashboard .user-info .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.head-dashboard .user-info span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.head-dashboard p {
+  margin: 0;
+
+
+}
+.p-custom-dash{
+  color:black;
+  font-weight: 750;
+  font-size: 20px;
+}
+.img-head-dash{
+  color: black;
+}
+
+
+
+.bell-icon-btn {
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  width: 20px;
+  height: 20px;
+}
+
+.bell-icon-btn:hover {
+  background-color: #ECECEC;
+}
+
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 300px; /* Ajusta según el tamaño que prefieras */
+}
+
+.search-input {
+  width: 100%;
+  padding: 5px 30px 5px 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  color: #000000; /* Color de la lupa */
+}
+
+.search-input::placeholder {
+  color: #aaa; /* Color del texto en el placeholder */
+}
+
+
+.main-dashboard{
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.sidebar {
+
+  background-color: #f4f4f4;
+  color: white;
+  padding-top: 20px;
+  flex-shrink: 0; /* Evita que la barra lateral se reduzca */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  color: black;
+  margin: 0;
+}
+
+.sidebar ul li {
+  /*padding: 15px;*/
+  background-color: none;
+}
+
+
+.sidebar ul li:hover {
+  background-color: #bababd;
+}
+
+.custom-btn-sidebar{
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  color: black;
+  text-decoration: none;
+  border: none;
+  background:none;
+}
+
+
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+
+}
+
+.title-dashboard{
+  color: black;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -0.5px;
+}
+
+
+.btn-pes-vista,
+.btn-pes-ana,
+.btn-pes-rep {
+  border: none;
+  background-color: transparent;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.btn-pes-vista:hover,
+.btn-pes-ana:hover,
+.btn-pes-rep:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.custom-btn-dowload{
+  padding-right: 10px;
+  margin-right: 5px;
+  color:black;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.custom-btn-cal{
+  padding-right: 11px;
+  margin-right: 5px;
+  background-color: black;
+  color:rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
