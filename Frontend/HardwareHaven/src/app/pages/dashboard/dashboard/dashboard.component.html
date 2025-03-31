@@ -96,14 +96,17 @@
       </div>
 
       <div>
-
-        <app-start-dash-board *ngIf="currentView === 'start' && currentDetail === 'view'; else elseTemplate"></app-start-dash-board>
-
+        <app-start-dash-board *ngIf="currentView === 'start' && currentDetail === 'view'"></app-start-dash-board>
+        <app-time-chart *ngIf="currentView === 'start' && currentDetail === 'analysis'" [timelineData]="timelineData" [tittle]="'Sales'" [detail]="'Our Sales'"></app-time-chart>
+        <app-time-chart *ngIf="currentView === 'orders' && currentDetail === 'view'" [timelineData]="timelineData2" [tittle]="'Orders'" [detail]="'what they have asked us'"></app-time-chart>
+        <app-bar-lateral-chart *ngIf="currentView === 'products' && currentDetail === 'view'" [Data]="productData" [tittle]="'Products'" [detail]="'Best-selling products'" ></app-bar-lateral-chart>
+        <app-bar-lateral-chart *ngIf="currentView === 'customers' && currentDetail === 'view'" [Data]="clienteData" [tittle]="'Customers'" [detail]="'They always prefer us'"></app-bar-lateral-chart>
+        <app-bar-lateral-chart *ngIf="currentView === 'payments' && currentDetail === 'view'" [Data]="payData" [tittle]="'Payments'" [detail]="'Pay methods'"></app-bar-lateral-chart>
+        <app-bar-lateral-chart *ngIf="currentView === 'analysis' && currentDetail === 'view'" [Data]="analysisData" [tittle]="'Analysis'" [detail]="'About our business'"></app-bar-lateral-chart>
+        <app-pie-chart *ngIf="currentView === 'analysis' && currentDetail === 'view'"  [Data]="dataPieAnalysis " [tittle]="'Best user'" [detail]="'About our business'"></app-pie-chart>
       </div>
 
-      <ng-template #elseTemplate>
-        <p class="display-6 text-center text-dark">Selecciona una opción del menú</p>
-      </ng-template>
+
 
 
 

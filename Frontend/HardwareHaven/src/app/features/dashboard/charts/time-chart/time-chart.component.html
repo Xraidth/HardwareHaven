@@ -1,0 +1,21 @@
+<div class="chart-line-conteiner">
+  <div class="m-4">
+    <h4 class="title-barchart">{{tittle}}</h4>
+    <p>{{detail}}</p>
+  </div>
+  <ngx-charts-line-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="timelineData"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Fecha'"
+    [yAxisLabel]="'Valor'"
+    [timeline]="true"
+    >
+
+  </ngx-charts-line-chart>
+</div>

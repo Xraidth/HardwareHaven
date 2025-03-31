@@ -1,0 +1,21 @@
+.chart-line-conteiner{
+
+width: 1150x;
+
+
+border: 1px solid rgb(189, 188, 188);
+border-radius: 10px;
+background-color: none;
+  }
+
+ngx-charts-line-chart {
+  background-color: none;
+  margin: 10px;
+
+}
+.title-barchart{
+  color: black;
+  font-weight: 700;
+  font-size: 24px;
+}
+
