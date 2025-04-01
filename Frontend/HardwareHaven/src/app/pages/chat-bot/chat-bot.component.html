@@ -8,15 +8,19 @@
   </button>
 
   <div class="chat-box">
-      <div class="message-bot">Hola, ¿cómo puedo ayudarte hoy?</div>
-      <div class="message-box" *ngFor="let m of chat; let i = index">
-        <p class="mt-3" [ngClass]="{ 'message-user': i % 2 === 0, 'message-bot': i % 2 !== 0 }">
-          <span class="message-text">{{ m }}</span>
-          <span class="message-hour">{{ currentTime | date:'shortTime' }}</span>
-        </p>
-
-      </div>
+    <div class="message-box" *ngFor="let m of chat; let i = index">
+      <p class="mt-3"
+         [ngClass]="{
+           'message-user': i % 2 !== 0,
+           'message-bot': (i % 2 === 0) && !m.startsWith('Escribiendo.'),
+           'txt-dark':  m.startsWith('Escribiendo.')
+         }">
+        <span class="message-text">{{ m }}</span>
+        <span class="message-hour" *ngIf="!(m.startsWith('Escribiendo.'))">{{ currentTime | date:'shortTime' }}</span>
+      </p>
+    </div>
   </div>
+
   <div class="input-container">
       <input type="text" id="userInput" (keydown.enter)="sendMessage()" [(ngModel)]="userInput" placeholder="Escribe un mensaje..." />
       <button (click)="sendMessage()" >Enviar</button>
