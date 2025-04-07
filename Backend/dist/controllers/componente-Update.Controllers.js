@@ -3,7 +3,7 @@ import { CategoriaRepository } from '../repository/catergoriaRespository.js';
 const compRepo = new ComponenteRepository();
 const categoriaRepo = new CategoriaRepository();
 const compUpdateController = async (req, res) => {
-    const { newCompName, newDescription, categoriaId } = req.body;
+    const { newCompName, newDescription, categoriaId, newImgURL } = req.body;
     const id = parseInt(req.params.id);
     try {
         const comp = await compRepo.findOne({ id: id });
@@ -13,6 +13,7 @@ const compUpdateController = async (req, res) => {
                 comp.name = newCompName;
                 comp.description = newDescription;
                 comp.categoria = categoria;
+                comp.imgURL = newImgURL;
                 const comp_updated = await compRepo.update(comp);
                 res.status(200).json({
                     data: comp_updated,

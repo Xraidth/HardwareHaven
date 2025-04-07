@@ -20,18 +20,21 @@ export class Componente extends BaseEntity {
     @Property({nullable:false})
     description!: string;
 
+    @Property({nullable:true})
+    imgURL!: string;
+
     @ManyToOne(() => Categoria,{nullable:false})
     categoria!: Rel<Categoria>;
 
     @OneToMany(() => Precio, (precio) => precio.componente, { cascade: [Cascade.ALL], nullable: true })
     precios = new Collection<Precio>(this);
 
-    constructor(name:string,description:string, categoria:Rel<Categoria>) {
+    constructor(name:string,description:string, categoria:Rel<Categoria>, imgURL:string) {
       super(); 
       this.name = name;
       this.description=description;
       this.categoria = categoria;
-      
+      this.imgURL = imgURL;
   }
   
 }

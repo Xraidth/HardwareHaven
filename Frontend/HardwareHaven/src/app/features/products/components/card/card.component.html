@@ -4,13 +4,13 @@
   <img src="   https://cdn-icons-png.flaticon.com/512/1828/1828666.png " width="20" height="20" alt="" title="" class="img-small">
   </div>
   <div class="card-img-container d-flex justify-content-center " (click)="infoProduct()">
-  <img [src]="product.imageUrl" class="card-img-top" alt="Producto 1" alt="" >
+  <img [src]="product.imgURL" class="card-img-top" [alt]="product.name" >
   </div>
       <div class="card-body">
 
         <h5 class="card-title " (click)="infoProduct()">{{ product.name }}</h5>
         <div class="d-flex justify-content-between align-items-center">
-        
+
       <div class="d-flex flex-column justify-content-between">
         <p class="card-text" (click)="infoProduct()">{{ product.description}}.</p>
         <p class="card-text">{{product.categoria.descripcion}}.</p>
@@ -24,7 +24,7 @@
       <div class="hover-effect shine-effect"></div>
 </div>
 
-  
-  
-  
-  
+
+
+
+

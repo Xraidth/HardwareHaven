@@ -12,12 +12,13 @@ import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 import { Categoria } from './categoria.entity.js';
 import { Precio } from './precio.entity.js';
 let Componente = class Componente extends BaseEntity {
-    constructor(name, description, categoria) {
+    constructor(name, description, categoria, imgURL) {
         super();
         this.precios = new Collection(this);
         this.name = name;
         this.description = description;
         this.categoria = categoria;
+        this.imgURL = imgURL;
     }
 };
 __decorate([
@@ -29,6 +30,10 @@ __decorate([
     __metadata("design:type", String)
 ], Componente.prototype, "description", void 0);
 __decorate([
+    Property({ nullable: true }),
+    __metadata("design:type", String)
+], Componente.prototype, "imgURL", void 0);
+__decorate([
     ManyToOne(() => Categoria, { nullable: false }),
     __metadata("design:type", Object)
 ], Componente.prototype, "categoria", void 0);
@@ -38,7 +43,7 @@ __decorate([
 ], Componente.prototype, "precios", void 0);
 Componente = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [String, String, Object])
+    __metadata("design:paramtypes", [String, String, Object, String])
 ], Componente);
 export { Componente };
 //# sourceMappingURL=componente.entity.js.map
