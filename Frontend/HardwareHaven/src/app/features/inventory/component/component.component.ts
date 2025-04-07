@@ -136,7 +136,8 @@ export class ComponentComponent implements OnInit{
       this.serverComponente.create({
         name: credenciales.name,
         description: credenciales.description,
-        categoriaId: Number(credenciales.categoriaId)
+        categoriaId: Number(credenciales.categoriaId),
+        imgURL:credenciales.imgURL
       }).pipe(
         map((response: any) => {
           if (response && response.data) {
@@ -175,7 +176,8 @@ export class ComponentComponent implements OnInit{
       this.serverComponente.update(componente.id, {
         newCompName: credenciales.name,
         newDescription: credenciales.description,
-        categoriaId: Number(credenciales.categoriaId)
+        categoriaId: Number(credenciales.categoriaId),
+        newImgURL:credenciales.newImgURL
       }).pipe(
         map((response: any) => {
           if (response && response.data) {

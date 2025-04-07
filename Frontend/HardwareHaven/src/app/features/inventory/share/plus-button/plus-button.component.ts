@@ -224,7 +224,8 @@ const message = e.error?.message || [];
       this.serverComponente.create({
         name: credenciales.name,
         description: credenciales.description,
-        categoriaId: Number(credenciales.categoriaId)
+        categoriaId: Number(credenciales.categoriaId),
+        imgURL:credenciales.imgURL
       }).pipe(
         map((response: any) => {
           if (response && response.data) {

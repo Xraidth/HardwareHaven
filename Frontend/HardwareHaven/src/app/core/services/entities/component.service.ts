@@ -20,7 +20,7 @@ export class ComponentService  {
     return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
-  create(body:{ name: string, description: string, categoriaId: number}){
+  create(body:{ name: string, description: string, categoriaId: number, imgURL:string|null}){
 
     return this.http.post(`${this.baseUrl}insert`, body);
   }
@@ -29,7 +29,7 @@ export class ComponentService  {
     return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{ newCompName:string, newDescription:string, categoriaId:number}){
+  update( id: number, body:{ newCompName:string, newDescription:string, categoriaId:number, newImgURL:string|null}){
 
     return this.http.put(`${this.baseUrl}update/${id}`, body);
   }

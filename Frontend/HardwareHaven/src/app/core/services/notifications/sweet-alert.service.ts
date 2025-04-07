@@ -202,7 +202,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
       title: producto.name,
       html: `
         <div class="text-center">
-          <img src="${producto.imageUrl}" class="img-fluid rounded-top mb-3" style="max-width: 150px;" alt="Imagen del producto">
+          <img src="${producto.imgURL}" class="img-fluid rounded-top mb-3" style="max-width: 150px;" alt="Imagen del producto">
           <div class="d-flex flex-column justify-content-center align-items-center bg-light p-3 rounded-bottom shadow-sm">
             <p class="mb-1 fw-bold text-dark">${producto.description}</p>
             <p class="mb-2 text-muted">${producto.categoria.descripcion}</p>
@@ -294,13 +294,35 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
 
 
 
-  InsertComponente(): Promise<{name: string, description: string, categoriaId: number} | undefined> {
+  InsertComponente(): Promise<{name: string, description: string, categoriaId: number, imgURL:string|null} | undefined> {
     return Swal.fire({
       title: "Crea un componente",
       html: `
-        <input id="swal-input-nameComponente" class="swal2-input" placeholder="name">
-        <input id="swal-input-descComponent" class="swal2-input" placeholder="description">
-        <input id="swal-input-categoriaId" class="swal2-input" placeholder="categoriaId">
+
+
+<div class="mb-2 d-flex justify-content-between align-items-center">
+  <label for="swal-input-nameComponente" class="me-2 flex-grow-1">Nombre:</label>
+  <input id="swal-input-nameComponente" class="swal2-input flex-grow-2" placeholder="name">
+</div>
+
+<div class="mb-2 d-flex justify-content-between align-items-center">
+  <label for="swal-input-descComponent" class="me-2 flex-grow-1">Descripción:</label>
+  <input id="swal-input-descComponent" class="swal2-input flex-grow-2" placeholder="description">
+</div>
+
+<div class="mb-2 d-flex justify-content-between align-items-center">
+  <label for="swal-input-categoriaId" class="me-2 flex-grow-1">Categoría ID:</label>
+  <input id="swal-input-categoriaId" class="swal2-input flex-grow-2" placeholder="categoriaId">
+</div>
+
+<div class="mb-2 d-flex justify-content-between align-items-center">
+  <label for="swal-input-imgURL" class="me-2 flex-grow-1">Imagen URL:</label>
+  <input id="swal-input-imgURL" class="swal2-input flex-grow-2" placeholder="imgURL">
+</div>
+
+
+
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -310,6 +332,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const name = (document.getElementById('swal-input-nameComponente') as HTMLInputElement).value;
         const description = (document.getElementById('swal-input-descComponent') as HTMLInputElement).value;
         const categoriaId = (document.getElementById('swal-input-categoriaId') as HTMLInputElement).value;
+        const imgURL = (document.getElementById('swal-input-imgURL') as HTMLInputElement).value;
 
         if (!name) {
           Swal.showValidationMessage('Por favor, ingresa un name componente valido');
@@ -327,7 +350,8 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           return {
             name: name,
             description: description,
-            categoriaId: categoriaId
+            categoriaId: categoriaId,
+            imgURL:imgURL
           };
         }
       }
@@ -548,7 +572,7 @@ updateCompra(compra:any): Promise<{
   }
 
 
-  updateComponente(componente:any): Promise<{name: string, description: string, categoriaId: number} | undefined> {
+  updateComponente(componente:any): Promise<{name: string, description: string, categoriaId: number, newImgURL:string|null} | undefined> {
     return Swal.fire({
       title: "Modificar un componente",
       html: `
@@ -569,6 +593,12 @@ updateCompra(compra:any): Promise<{
   </div>
 </div>
 
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="swal-input-newImgURL" style="flex: 1;">URL de imagen:</label>
+    <input id="swal-input-newImgURL" class="swal2-input" placeholder="newImgURL" value="${componente.imgURL}" style="flex: 2;">
+  </div>
+</div>
+
       `,
       focusConfirm: false,
       showCancelButton: true,
@@ -578,6 +608,7 @@ updateCompra(compra:any): Promise<{
         const name = (document.getElementById('swal-input-nameComponente') as HTMLInputElement).value;
         const description = (document.getElementById('swal-input-descComponent') as HTMLInputElement).value;
         const categoriaId = (document.getElementById('swal-input-categoriaId') as HTMLInputElement).value;
+        const newImgURL = (document.getElementById('swal-input-newImgURL') as HTMLInputElement).value;
 
         if (!name) {
           Swal.showValidationMessage('Por favor, ingresa un name componente valido');
@@ -595,7 +626,8 @@ updateCompra(compra:any): Promise<{
           return {
             name: name,
             description: description,
-            categoriaId: categoriaId
+            categoriaId: categoriaId,
+            newImgURL:newImgURL
           };
         }
       }
