@@ -28,7 +28,7 @@ export class CardComponent implements OnInit {
     this.verificateSelection();
   }
   verificateSelection(): void {
-    const carrito = SessionService.user?.carrito || [];
+    const carrito = SessionService.shopcar || [];
     const productInCart = carrito.find((item: any) => item.id == this.product.id);
     if (productInCart) {
       this.selectProduct();
