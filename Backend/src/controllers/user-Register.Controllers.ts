@@ -12,7 +12,8 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
         const user = await userRepo.findName(name);
 
         if (!user) {
-            const new_user = new User(name, password, email, tipoUsuario);
+            const fechaReg = new Date();
+            const new_user = new User(name, password, email, tipoUsuario, fechaReg);
            userRepo.add(new_user);
            const usercreated = await userRepo.findName(name);
            const jwt = await jwtConstructor(usercreated);
