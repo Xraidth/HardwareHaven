@@ -30,7 +30,9 @@ export class UserService {
     password:string,
     email:string,
     tipoUsuario:string,
-    fechaNac:Date
+    fechaNac:Date,
+    sexo:string,
+    direccion:string
   }){
 
     return this.http.post(`${this.baseUrl}register`, body);
@@ -46,7 +48,9 @@ export class UserService {
     newUserName:string,
     newEmail: string,
     newUserType:string,
-    newBirthDate:Date
+    newBirthDate:Date,
+    newSex:string
+    newAddress:string
   }){
 
     return this.http.put(`${this.baseUrl}update/${id}`, body);

@@ -6,7 +6,7 @@ import { jwtConstructor } from '../shared/db/jwt.js';
 const userRepo = new UserRepository();
 
 const userRegisterController = async (req: Request, res: Response): Promise<void> => {       
-    const {name, password, email, tipoUsuario, fechaNac} = req.body; 
+    const {name, password, email, tipoUsuario, fechaNac, sexo, direccion} = req.body; 
 
     try{
         const user = await userRepo.findName(name);
@@ -19,7 +19,9 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
                 email, 
                 tipoUsuario, 
                 fechaReg,
-                fechaNac
+                fechaNac,
+                sexo,
+                direccion
             );
            userRepo.add(new_user);
            const usercreated = await userRepo.findName(name);

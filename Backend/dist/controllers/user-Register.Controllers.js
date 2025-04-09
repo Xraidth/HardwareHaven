@@ -3,12 +3,12 @@ import { User } from '../model/user.entity.js';
 import { jwtConstructor } from '../shared/db/jwt.js';
 const userRepo = new UserRepository();
 const userRegisterController = async (req, res) => {
-    const { name, password, email, tipoUsuario, fechaNac } = req.body;
+    const { name, password, email, tipoUsuario, fechaNac, sexo, direccion } = req.body;
     try {
         const user = await userRepo.findName(name);
         if (!user) {
             const fechaReg = new Date();
-            const new_user = new User(name, password, email, tipoUsuario, fechaReg, fechaNac);
+            const new_user = new User(name, password, email, tipoUsuario, fechaReg, fechaNac, sexo, direccion);
             userRepo.add(new_user);
             const usercreated = await userRepo.findName(name);
             const jwt = await jwtConstructor(usercreated);

@@ -121,7 +121,9 @@ export class HomeComponent implements OnInit {
           password: credenciales.password,
           email: credenciales.email,
           tipoUsuario: credenciales.userType,
-          fechaNac: credenciales.fechaNac
+          fechaNac: credenciales.fechaNac,
+          sexo:credenciales.sexo,
+          direccion:credenciales.direccion
         }).subscribe({
           next: (r: any) => {
             if (r) {

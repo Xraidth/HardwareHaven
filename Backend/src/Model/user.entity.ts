@@ -25,13 +25,19 @@ export class User extends BaseEntity {
     @Property({nullable:false})
     fechaReg!: Date;
 
-    @Property({nullable:true})
+    @Property({nullable:false})
+    sexo!: string;
+
+    @Property({nullable:false})
     fechaNac!: Date;
+
+    @Property({nullable:false})
+    direccion!: string;
 
     @OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] })
     compras = new Collection<Compra>(this);
 
-    constructor(name:string, password: string, email: string, tipoUsuario:string, fechaReg:Date, fechaNac: Date) {
+    constructor(name:string, password: string, email: string, tipoUsuario:string, fechaReg:Date, fechaNac: Date, sexo:string, direccion:string) {
       super(); 
       this.name = name;
       this.password = password;
@@ -39,6 +45,8 @@ export class User extends BaseEntity {
       this.tipoUsuario = tipoUsuario;
       this.fechaReg = fechaReg;
       this.fechaNac = fechaNac;
+      this.sexo = sexo;
+      this.direccion = direccion;
   }
 }
 

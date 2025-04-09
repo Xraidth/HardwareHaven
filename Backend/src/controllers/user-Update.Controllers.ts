@@ -12,7 +12,9 @@ const userUpdateController = async (req: Request, res: Response): Promise<void> 
         newUserName, 
         newEmail, 
         newUserType,
-        newBirthDate
+        newBirthDate,
+        newSex,
+        newAddress
         
     } = req.body; 
     const id =  parseInt(req.params.id);
@@ -29,6 +31,8 @@ const userUpdateController = async (req: Request, res: Response): Promise<void> 
                 user.email = newEmail;
                 user.tipoUsuario=newUserType;
                 user.fechaNac = newBirthDate;
+                user.sexo = newSex;
+                user.direccion = newAddress;
                 const user_updated = await userRepo.update(user);
                 const jwt = await jwtConstructor(user_updated);
                 res.status(200).json({
