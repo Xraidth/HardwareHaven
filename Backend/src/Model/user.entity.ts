@@ -25,16 +25,20 @@ export class User extends BaseEntity {
     @Property({nullable:false})
     fechaReg!: Date;
 
+    @Property({nullable:true})
+    fechaNac!: Date;
+
     @OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] })
     compras = new Collection<Compra>(this);
 
-    constructor(name:string, password: string, email: string, tipoUsuario:string, fechaReg:Date) {
+    constructor(name:string, password: string, email: string, tipoUsuario:string, fechaReg:Date, fechaNac: Date) {
       super(); 
       this.name = name;
       this.password = password;
       this.email = email;
       this.tipoUsuario = tipoUsuario;
       this.fechaReg = fechaReg;
+      this.fechaNac = fechaNac;
   }
 }
 

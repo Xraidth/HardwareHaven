@@ -10,7 +10,7 @@ export function specialFilter(name: string, dato: any): string {
     if(name.includes("subTotal"))return `$${dato}`;
     if (name.includes("valor")) return `$${dato}`;
     if (name.includes("fechaDesde") || name.includes("fechaCompra")) return formatDateTime(dato);
-    if(name.includes("fechaCancel")||name.includes("fechaReg")) return (dato) ? formatDateTime(dato): "-";
+    if(name.includes("fechaCancel")||name.includes("fechaReg")||name.includes("fechaNac")) return (dato) ? formatDateTime(dato): "-";
     if (name.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
     if (name === "compra") return dato.id.toString();
     if (name === "user") return dato.name;
@@ -24,9 +24,9 @@ export function specialFilter(name: string, dato: any): string {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
-      hour: '2-digit',
+    /*  hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
+      second: '2-digit'*/
     });
   }
 

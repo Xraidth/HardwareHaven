@@ -47,7 +47,8 @@ export class UserNavComponent implements OnInit {
         oldPassword: credenciales.oldPassword,
         newUserName: credenciales.newUserName,
         newEmail: credenciales.newEmail,
-        newUserType: credenciales.newUserType
+        newUserType: credenciales.newUserType,
+        newBirthDate: credenciales.newBirthDate
       }).pipe(
         catchError((error) => {
 
