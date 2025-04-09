@@ -11,13 +11,14 @@ import { Entity, OneToMany, Property, Cascade, Collection, } from '@mikro-orm/co
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 import { Compra } from './compra.entity.js';
 let User = class User extends BaseEntity {
-    constructor(name, password, email, tipoUsuario) {
+    constructor(name, password, email, tipoUsuario, fechaReg) {
         super();
         this.compras = new Collection(this);
         this.name = name;
         this.password = password;
         this.email = email;
         this.tipoUsuario = tipoUsuario;
+        this.fechaReg = fechaReg;
     }
 };
 __decorate([
@@ -37,12 +38,16 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "tipoUsuario", void 0);
 __decorate([
+    Property({ nullable: true }),
+    __metadata("design:type", Date)
+], User.prototype, "fechaReg", void 0);
+__decorate([
     OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] }),
     __metadata("design:type", Object)
 ], User.prototype, "compras", void 0);
 User = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [String, String, String, String])
+    __metadata("design:paramtypes", [String, String, String, String, Date])
 ], User);
 export { User };
 //# sourceMappingURL=user.entity.js.map

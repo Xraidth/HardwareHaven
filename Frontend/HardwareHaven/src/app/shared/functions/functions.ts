@@ -10,7 +10,7 @@ export function specialFilter(name: string, dato: any): string {
     if(name.includes("subTotal"))return `$${dato}`;
     if (name.includes("valor")) return `$${dato}`;
     if (name.includes("fechaDesde") || name.includes("fechaCompra")) return formatDateTime(dato);
-    if(name.includes("fechaCancel")) return (dato) ? formatDateTime(dato): "-";
+    if(name.includes("fechaCancel")||name.includes("fechaReg")) return (dato) ? formatDateTime(dato): "-";
     if (name.includes("lineasCompras")) return Array.isArray(dato) ? (dato.length > 0 ? "Posee lineas" : "Vacia") : "-";
     if (name === "compra") return dato.id.toString();
     if (name === "user") return dato.name;
