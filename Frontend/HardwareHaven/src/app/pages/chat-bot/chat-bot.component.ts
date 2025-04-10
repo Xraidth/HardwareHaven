@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-bot',
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './chat-bot.component.css'
 })
 export class ChatBotComponent implements OnInit {
-
+ constructor(private router: Router){}
   ngOnInit(): void {
  this.initialChat();
   }
@@ -51,6 +52,10 @@ closeChat() {
 }
 initialChat(){
   this.chat.push("Hola, ¿cómo puedo ayudarte hoy?");
+}
+
+gotoHome(){
+  this.router.navigate(['home']);
 }
 
 }

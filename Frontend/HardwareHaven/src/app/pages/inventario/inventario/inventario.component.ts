@@ -10,6 +10,7 @@ import { PurchaseLineComponent } from '../../../features/inventory/purchaseLine/
 import { PurchaseComponent } from '../../../features/inventory/purchase/purchase.component';
 import { ComponentComponent } from '../../../features/inventory/component/component.component';
 import { CategoryComponent } from '../../../features/inventory/category/category.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -34,6 +35,7 @@ import { CategoryComponent } from '../../../features/inventory/category/category
   ]
 })
 export class InventoryComponent implements OnInit {
+  constructor(private router: Router){}
   searchQuery: string = '';
   auxsearchQuery: string = '';
   nowType: string = '';
@@ -73,5 +75,8 @@ export class InventoryComponent implements OnInit {
       this.loadItems(e);
     }, 2000);
   }
+
+
+gotodashboard(){this.router.navigate(['dashboard']);}
 
 }

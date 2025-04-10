@@ -1,0 +1,32 @@
+@keyframes buttonColorChange {
+  0% { color:  rgb(61, 1, 85); border-color:  rgb(61, 1, 85);  }
+  25% { color: yellow; border-color: yellow; }
+  50% { color: green; border-color: green; }
+  75% { color: rgb(0, 195, 255); border-color: rgb(0, 195, 255); }
+  100% { color: red; border-color: red; }
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 5px; /* Alineado más cerca del fondo */
+  z-index: 1050;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgb(13, 110, 253); /* Borde visible, sin fondo */
+  background-color: transparent; /* Fondo transparente */
+  color: rgb(13, 110, 253); /* Color del texto e ícono (mismo que el borde) */
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  animation: buttonColorChange 20s infinite; /* Aplica la animación */
+}
+
+.floating-button:hover {
+  transform: scale(1.05);
+}
+

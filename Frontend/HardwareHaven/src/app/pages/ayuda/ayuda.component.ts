@@ -18,4 +18,8 @@ export class HelpComponent {
   gotoHome(){
     this.router.navigate(['home']);
   }
+
+
+
+
 }

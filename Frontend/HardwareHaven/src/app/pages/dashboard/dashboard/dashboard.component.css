@@ -1,3 +1,21 @@
+.volver-btn {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 8px;
+  right: 180px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .head-dashboard{
 
   height: 60px;

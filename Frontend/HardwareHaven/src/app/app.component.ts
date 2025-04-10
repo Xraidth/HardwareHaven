@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HomeComponent } from './pages/home/home.component.js';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from './pages/product-list/product-list.component.js';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 
 
@@ -11,19 +9,26 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [ CommonModule,  RouterOutlet],
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 
 
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public errorServer:boolean = false;
   title = 'HardwareHaven';
-  constructor(){
-
-  }
-  ngOnInit(): void {
+  constructor(private router:Router){
 
   }
 
+
+  goToChatBot(){
+    this.router.navigate(['chatbot']);
+  }
+
+
+  gotoHelp(){
+    this.router.navigate(['help']);
+  }
 
 
 

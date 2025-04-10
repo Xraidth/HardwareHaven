@@ -121,30 +121,6 @@ header {
 
 
 
-
-
-  .ayuda-div {
-    position: fixed;
-    bottom: -5px;
-    right: 5px;
-    padding: 3px;
-    z-index: 9999;
-    margin: 5px;
-}
-
-.btn-ayuda {
-    font-size: 25px;
-    border-radius: 50%; /* Hace el botón redondo */
-    padding: 10px;
-    width: 30px;  /* Igual ancho y alto para forma redonda */
-    height: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
 .form-login{
   margin-left:auto!important;
 }

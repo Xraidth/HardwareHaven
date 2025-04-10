@@ -26,7 +26,7 @@ export const routes: Routes = [
   { path: 'inventory', component: InventoryComponent, canActivate: [authGuard, adminGuard]},
   { path: 'cancelPurchases', component: CancelPurchaseComponent, canActivate: [authGuard] },
   { path: 'dashboard', component: DashboardComponent},
-  { path: 'chatBot', component: ChatBotComponent},
+  { path: 'chatbot', component: ChatBotComponent},
   { path: 'help', component: HelpComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
