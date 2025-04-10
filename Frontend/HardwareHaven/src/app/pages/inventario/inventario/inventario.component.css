@@ -129,20 +129,12 @@ main{
     border-color: #007bff; /* Border color for the selected button */
   }
 
-
-
-
   .float-button {
     position: fixed;
-    bottom: 20px; /* Ajusta según necesites */right: 20px;  /* Ajusta según necesites */z-index: 1;
+    bottom: 40px;
+    right: 5px;
+    z-index: 1;
   }
-
-
-
-
-
-
-
 
 @media (max-width: 768px){
   .custom-menu{

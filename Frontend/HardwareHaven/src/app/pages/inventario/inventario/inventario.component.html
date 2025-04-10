@@ -27,15 +27,79 @@
   <main>
     <h1 class="text-center title-inventario mb-4 mt-3">Inventario</h1>
 
+    <button class="btn btn-primary d-flex justify-content-evenly align-items-center mb-4" (click)="gotodashboard()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+        <rect x="3" y="10" width="4" height="11"></rect>
+        <rect x="10" y="6" width="4" height="15"></rect>
+        <rect x="17" y="2" width="4" height="19"></rect>
+      </svg>
+      Estadísticas
+    </button>
+
     <div class="mov-mobile">
     <div class="button-container overflow-auto">
       <div class="button-list">
-        <button class="button-item" (click)="loadItems('Usuario') "  [ngClass]="{'selected': nowType === 'Usuario'}">Usuarios</button>
-        <button class="button-item" (click)="loadItems('Compra')"[ngClass]="{'selected': nowType === 'Compra'}">Compras</button>
-        <button class="button-item" (click)="loadItems('LineaCompra')"[ngClass]="{'selected': nowType === 'LineaCompra'}">Líneas de Compra</button>
-        <button class="button-item" (click)="loadItems('Componente')"[ngClass]="{'selected': nowType === 'Componente'}">Componentes</button>
-        <button class="button-item" (click)="loadItems('Precio')"[ngClass]="{'selected': nowType === 'Precio'}">Precios</button>
-        <button class="button-item" (click)="loadItems('Categoria')"[ngClass]="{'selected': nowType === 'Categoria'}">Categorías</button>
+        <button class="button-item" (click)="loadItems('Usuario')" [ngClass]="{'selected': nowType === 'Usuario'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+            <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M4 21v-2a4 4 0 0 1 3-3.87"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Usuarios
+        </button>
+
+        <button class="button-item" (click)="loadItems('Compra')" [ngClass]="{'selected': nowType === 'Compra'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+            <path d="M6 6h15l-1.5 9h-13.5z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="18" cy="20" r="1"/>
+            <path d="M6 6l-1-2H2"/>
+          </svg>
+          Compras
+        </button>
+
+        <button class="button-item" (click)="loadItems('LineaCompra')" [ngClass]="{'selected': nowType === 'LineaCompra'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+          Líneas de Compra
+        </button>
+
+        <button class="button-item" (click)="loadItems('Componente')" [ngClass]="{'selected': nowType === 'Componente'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Componentes
+        </button>
+
+        <button class="button-item" (click)="loadItems('Precio')" [ngClass]="{'selected': nowType === 'Precio'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+            <path d="M12 1v22"/>
+            <path d="M17 5H9a4 4 0 0 0 0 8h6a4 4 0 0 1 0 8H6"/>
+          </svg>
+          Precios
+        </button>
+
+        <button class="button-item" (click)="loadItems('Categoria')" [ngClass]="{'selected': nowType === 'Categoria'}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               style="vertical-align: middle; margin-right: 6px;">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+          Categorías
+        </button>
+
       </div>
     </div>
 

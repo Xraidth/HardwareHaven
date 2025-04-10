@@ -14,6 +14,7 @@ import { NoAccessComponentComponent } from './pages/no-access-component/no-acces
 import { CancelPurchaseComponent } from './pages/cancel-purchase/cancel-purchase.component.js';
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component.js';
 import { ChatBotComponent } from './pages/chat-bot/chat-bot.component.js';
+import { adminGuard } from './guards/role.admin.guard.js';
 
 
 export const routes: Routes = [
@@ -22,10 +23,10 @@ export const routes: Routes = [
   { path: 'purchase', component: PurchaseComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
   { path: 'delivery', component: SendComponent , canActivate: [authGuard]},
-  { path: 'inventory', component: InventoryComponent, canActivate: [authGuard]},
+  { path: 'inventory', component: InventoryComponent, canActivate: [authGuard, adminGuard]},
   { path: 'cancelPurchases', component: CancelPurchaseComponent, canActivate: [authGuard] },
   { path: 'dashboard', component: DashboardComponent},
-  { path: 'chatBot', component: ChatBotComponent},
+  { path: 'chatbot', component: ChatBotComponent},
   { path: 'help', component: HelpComponent},{
     path: 'no-access', component: NoAccessComponentComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }

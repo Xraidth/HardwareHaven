@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TimeChartComponent } from '../../../features/dashboard/charts/time-chart/time-chart.component';
 import { BarLateralChartComponent } from '../../../features/dashboard/charts/bar-lateral-chart/bar-lateral-chart.component';
 import { PieChartComponent } from '../../../features/dashboard/charts/pie-chart/pie-chart.component';
+import { Router } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ export class DashboardComponent {
   public currentView:string = 'start';
   public currentDetail:string = 'view';
 
+  constructor(private router:Router){}
 
   setView(view: string) {
     this.currentView = view;
@@ -27,6 +29,10 @@ export class DashboardComponent {
 
   setDetail(view:string){
     this.currentDetail=view;
+  }
+
+  gotoHome(){
+    this.router.navigate(['home']);
   }
 
   timelineData = [
