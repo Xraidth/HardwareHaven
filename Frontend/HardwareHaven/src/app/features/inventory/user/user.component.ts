@@ -173,7 +173,10 @@ export class UserComponent implements OnInit {
         name: credenciales.username,
         password: credenciales.password,
         email: credenciales.email,
-        tipoUsuario: credenciales.userType
+        tipoUsuario: credenciales.userType,
+        fechaNac: credenciales.fechaNac,
+        sexo: credenciales.sexo,
+        direccion:credenciales.direccion
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
@@ -211,7 +214,10 @@ const message = e.error?.message || [];
         oldPassword: credenciales.oldPassword,
         newUserName: credenciales.newUserName,
         newEmail: credenciales.newEmail,
-        newUserType: credenciales.newUserType
+        newUserType: credenciales.newUserType,
+        newBirthDate: credenciales.newBirthDate,
+        newSex: credenciales.newSex,
+        newAddress: credenciales.newAddress
       }).pipe(
         catchError((error) => {
           this.isLoading = false;

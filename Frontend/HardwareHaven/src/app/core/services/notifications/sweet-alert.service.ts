@@ -40,34 +40,56 @@ export class SweetAlertService {
       cancelButtonText: 'No, conservarlo'
     });
   }
-mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string, userType:string} | undefined> {
+mostrarFormularioRegistro(): Promise<{username: string, password: string, email:string, userType:string, fechaNac:Date, sexo:string, direccion:string} | undefined> {
     return Swal.fire({
       title: "Crea una cuenta",
       html: `
-       <div class="container mt-4">
+    <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="mb-3">
         <input id="swal-input-username" class="form-control" placeholder="Nombre de usuario">
       </div>
       <div class="mb-3">
+
         <input id="swal-input-email" class="form-control" type="email" placeholder="Email">
       </div>
       <div class="mb-3">
+
         <input id="swal-input-password" type="password" class="form-control" placeholder="Contraseña">
       </div>
       <div class="mb-3">
+
         <input id="swal-input-confirm-password" type="password" class="form-control" placeholder="Confirmar contraseña">
       </div>
       <div class="mb-3">
+        <label for="swal-input-user-type" class="form-label">Tipo de usuario</label>
         <select id="swal-input-user-type" class="form-select">
           <option value="Cliente">Cliente</option>
           <option value="Administrador">Administrador</option>
         </select>
       </div>
+      <div class="mb-3">
+        <label for="swal-input-fechaNac" class="form-label">Fecha de nacimiento</label>
+        <input id="swal-input-fechaNac" type="date" class="form-control" placeholder="fechaNac">
+      </div>
+
+       <div class="mb-3">
+        <label for="swal-input-sexo" class="form-label">Genero</label>
+        <select id="swal-input-sexo" class="form-select">
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <input id="swal-input-direccion" class="form-control" placeholder="Direccion">
+      </div>
+
     </div>
   </div>
 </div>
+
 
       `,
       focusConfirm: false,
@@ -80,6 +102,9 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const email = (document.getElementById('swal-input-email') as HTMLInputElement).value;
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
         const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
+        const fechaNac = (document.getElementById('swal-input-fechaNac') as HTMLSelectElement).value;
+        const sexo = (document.getElementById('swal-input-sexo') as HTMLSelectElement).value;
+        const direccion = (document.getElementById('swal-input-direccion') as HTMLSelectElement).value;
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
           return false;
@@ -92,6 +117,15 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         } else if (!email) {
         Swal.showValidationMessage('Por favor, ingresa un email');
         return false;
+      } else if (!fechaNac) {
+        Swal.showValidationMessage('Por favor, ingresa un fechaNac');
+        return false;
+      } else if (!sexo) {
+        Swal.showValidationMessage('Por favor, ingresa un genero');
+        return false;
+      } else if (!direccion) {
+        Swal.showValidationMessage('Por favor, ingresa una direccion');
+        return false;
         }
 
          else {
@@ -99,7 +133,10 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
             username: username,
             password: password,
             email:email,
-            userType: userType
+            userType: userType,
+            fechaNac: fechaNac,
+            sexo:sexo,
+            direccion:direccion
           };
         }
       }
@@ -117,7 +154,7 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
   }
 
 
-  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string, newUserType: string} | undefined> {
+  mostrarConfigurarCuenta(usuario: any): Promise<{newUserName: string, oldPassword: string, newPassword: string, newEmail:string, newUserType: string, newBirthDate:Date, newSex:string, newAddress:string} | undefined> {
     return Swal.fire({
       title: "Configuración de cuenta",
       html: `
@@ -145,6 +182,21 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           <option value="Administrador" ${usuario.tipoUsuario === 'Administrador' ? 'selected' : ''}>Administrador</option>
         </select>
       </div>
+        <div class="mb-3">
+        <input id="swal-input-newBirthDate" type="date" class="form-control" placeholder="Fecha de nacimiento">
+      </div>
+
+      <div class="mb-3">
+        <select id="swal-input-newSex" class="form-select">
+          <option value="M" ${usuario.sexo === 'M' ? 'selected' : ''}>Masculino</option>
+          <option value="F" ${usuario.sexo === 'F' ? 'selected' : ''}>Femenino</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <input id="swal-input-newAddress" class="form-control" placeholder="Direccion" value="${usuario.direccion || 'direccion'}">
+      </div>
+
     </div>
   </div>
 </div>
@@ -160,6 +212,10 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
         const confirmPassword = (document.getElementById('swal-input-confirm-password') as HTMLInputElement).value;
         const userType = (document.getElementById('swal-input-user-type') as HTMLSelectElement).value;
         const actPassword = (document.getElementById('swal-input-password-act')as HTMLSelectElement).value;
+        const newBirthDate = (document.getElementById('swal-input-newBirthDate')as HTMLSelectElement).value;
+        const newSex = (document.getElementById('swal-input-newSex')as HTMLSelectElement).value;
+        const newAddress = (document.getElementById('swal-input-newAddress')as HTMLSelectElement).value;
+
         if (!username) {
           Swal.showValidationMessage('Por favor, ingresa un nombre de usuario');
           return false;
@@ -175,13 +231,29 @@ mostrarFormularioRegistro(): Promise<{username: string, password: string, email:
           Swal.showValidationMessage('Por favor, ingresa un email');
           return false;
           }
+          else if (!newBirthDate) {
+            Swal.showValidationMessage('Por favor, ingresa una fecha de nacimiento');
+            return false;
+            }
+          else if (!newSex) {
+            Swal.showValidationMessage('Por favor, ingresa un genero');
+            return false;
+            }
+            else if (!newAddress) {
+              Swal.showValidationMessage('Por favor, ingresa una direccion');
+              return false;
+              }
+
         else {
           return {
             newUserName: username,
             newPassword: password,
             oldPassword: actPassword,
             newEmail: email,
-            newUserType: userType
+            newUserType: userType,
+            newBirthDate: newBirthDate,
+            newSex: newSex,
+            newAddress:newAddress
           };
         }
       }

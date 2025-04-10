@@ -31,6 +31,37 @@ export const UserDTOSchema = Type.Object(
         format: 'El email debe tener un formato válido',
       }
     })),
+    tipoUsuario: 
+    Type.Optional(
+      Type.Union([
+        Type.Literal("Administrador"),
+        Type.Literal("Cliente")
+    ])),
+    fechaNac: 
+    Type.Optional( 
+    Type.String({
+        
+        errorMessage: {
+            type: 'El tipo de fecha desde no es válido, debe ser una cadena en formato de fecha',
+            format: 'El formato de fecha desde no es válido',
+        }
+    })),
+    sexo: 
+    Type.Optional(
+      Type.Union([
+        Type.Literal("M"),
+        Type.Literal("F")
+    ])),
+    direccion: 
+    Type.Optional( 
+      Type.String({
+      minLength: 2,
+      maxLength: 20,
+      errorMessage: {
+        minLength: 'La direccion debe tener al menos 2 caracteres de longitud',
+        maxLength: 'La direccion debe tener como máximo 20 caracteres de longitud',
+      }
+    })),
     newPassword: 
     Type.Optional( 
     Type.String({
@@ -61,20 +92,39 @@ export const UserDTOSchema = Type.Object(
         maxLength: 'El nuevo nombre debe tener como máximo 20 caracteres de longitud',
       }
     })),
-    tipoUsuario: 
-    Type.Optional(
-      Type.Union([
-        Type.Literal("Administrador"),
-        Type.Literal("Cliente")
-      ])
-    ),
     newUserType: 
     Type.Optional(
       Type.Union([
         Type.Literal("Administrador"),
         Type.Literal("Cliente")
-      ])
-    ),
+      ])),
+
+      newBirthDate: 
+      Type.Optional( 
+      Type.String({
+          
+          errorMessage: {
+              type: 'El tipo de fecha desde no es válido, debe ser una cadena en formato de fecha',
+              format: 'El formato de fecha desde no es válido',
+          }
+      })),
+      newSex: 
+      Type.Optional(
+        Type.Union([
+          Type.Literal("M"),
+          Type.Literal("F")
+      ])),
+      newAddress: 
+      Type.Optional( 
+        Type.String({
+        minLength: 2,
+        maxLength: 20,
+        errorMessage: {
+          minLength: 'La direccion debe tener al menos 2 caracteres de longitud',
+          maxLength: 'La direccion debe tener como máximo 20 caracteres de longitud',
+        }
+      })),
+
   },
   { additionalProperties: true }
 );

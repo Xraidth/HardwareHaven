@@ -11,7 +11,7 @@ import { Entity, OneToMany, Property, Cascade, Collection, } from '@mikro-orm/co
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 import { Compra } from './compra.entity.js';
 let User = class User extends BaseEntity {
-    constructor(name, password, email, tipoUsuario, fechaReg) {
+    constructor(name, password, email, tipoUsuario, fechaReg, fechaNac, sexo, direccion) {
         super();
         this.compras = new Collection(this);
         this.name = name;
@@ -19,6 +19,9 @@ let User = class User extends BaseEntity {
         this.email = email;
         this.tipoUsuario = tipoUsuario;
         this.fechaReg = fechaReg;
+        this.fechaNac = fechaNac;
+        this.sexo = sexo;
+        this.direccion = direccion;
     }
 };
 __decorate([
@@ -38,16 +41,28 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "tipoUsuario", void 0);
 __decorate([
-    Property({ nullable: true }),
+    Property({ nullable: false }),
     __metadata("design:type", Date)
 ], User.prototype, "fechaReg", void 0);
+__decorate([
+    Property({ nullable: false }),
+    __metadata("design:type", String)
+], User.prototype, "sexo", void 0);
+__decorate([
+    Property({ nullable: false }),
+    __metadata("design:type", Date)
+], User.prototype, "fechaNac", void 0);
+__decorate([
+    Property({ nullable: false }),
+    __metadata("design:type", String)
+], User.prototype, "direccion", void 0);
 __decorate([
     OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] }),
     __metadata("design:type", Object)
 ], User.prototype, "compras", void 0);
 User = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [String, String, String, String, Date])
+    __metadata("design:paramtypes", [String, String, String, String, Date, Date, String, String])
 ], User);
 export { User };
 //# sourceMappingURL=user.entity.js.map

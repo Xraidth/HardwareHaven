@@ -6,7 +6,17 @@ import { jwtConstructor } from '../shared/db/jwt.js';
 const userRepo = new UserRepository();
 
 const userUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {newPassword, oldPassword, newUserName, newEmail, newUserType} = req.body; 
+    const {
+        newPassword, 
+        oldPassword, 
+        newUserName, 
+        newEmail, 
+        newUserType,
+        newBirthDate,
+        newSex,
+        newAddress
+        
+    } = req.body; 
     const id =  parseInt(req.params.id);
 
     try{
@@ -20,6 +30,9 @@ const userUpdateController = async (req: Request, res: Response): Promise<void> 
                 user.password = newPassword;
                 user.email = newEmail;
                 user.tipoUsuario=newUserType;
+                user.fechaNac = newBirthDate;
+                user.sexo = newSex;
+                user.direccion = newAddress;
                 const user_updated = await userRepo.update(user);
                 const jwt = await jwtConstructor(user_updated);
                 res.status(200).json({

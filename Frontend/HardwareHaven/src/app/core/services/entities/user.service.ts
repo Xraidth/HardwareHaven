@@ -25,7 +25,15 @@ export class UserService {
     return this.http.get(`${this.baseUrl}getOne/${id}`);
   }
 
-  create(body:{name:string, password:string, email:string, tipoUsuario:string}){
+  create(body:{
+    name:string,
+    password:string,
+    email:string,
+    tipoUsuario:string,
+    fechaNac:Date,
+    sexo:string,
+    direccion:string
+  }){
 
     return this.http.post(`${this.baseUrl}register`, body);
   }
@@ -34,7 +42,16 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}deleteOne/${id}`);
   }
 
-  update( id: number, body:{ newPassword: string, oldPassword:string,newUserName:string, newEmail: string, newUserType:string}){
+  update( id: number, body:{
+    newPassword: string,
+    oldPassword:string,
+    newUserName:string,
+    newEmail: string,
+    newUserType:string,
+    newBirthDate:Date,
+    newSex:string
+    newAddress:string
+  }){
 
     return this.http.put(`${this.baseUrl}update/${id}`, body);
   }

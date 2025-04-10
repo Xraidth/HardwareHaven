@@ -75,7 +75,10 @@ export class PlusButtonComponent {
         name: credenciales.username,
         password: credenciales.password,
         email: credenciales.email,
-        tipoUsuario: credenciales.userType
+        tipoUsuario: credenciales.userType,
+        fechaNac: credenciales.fechaNac,
+        sexo:credenciales.sexo,
+        direccion:credenciales.direccion
       }).pipe(
         catchError((error) => {
           this.isLoading = false;
