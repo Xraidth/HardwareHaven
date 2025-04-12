@@ -30,3 +30,51 @@
   transform: scale(1.05);
 }
 
+
+.chat-floating-button{
+  right: 38px;
+}
+.ask-floating-button{
+  right: 7px;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .floating-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    bottom: 4vh; /* Más espacio en la parte inferior */
+    right: 4vw; /* Más espacio en la parte derecha */
+  }
+  .chat-floating-button{
+    right: 35px;
+    bottom: 205px;
+  }
+  .ask-floating-button{
+    right: 35px;
+    bottom: 140px;
+  }
+
+}
+
+/* Media Queries para pantallas muy pequeñas (móviles) */
+@media (max-width: 480px) {
+  .floating-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    bottom: 4vh; /* Más espacio en la parte inferior */
+    right: 4vw; /* Más espacio en la parte derecha */
+  }
+  .chat-floating-button{
+    right: 35px;
+    bottom: 205px;
+  }
+  .ask-floating-button{
+    right: 35px;
+    bottom: 140px;
+  }
+}
+
+

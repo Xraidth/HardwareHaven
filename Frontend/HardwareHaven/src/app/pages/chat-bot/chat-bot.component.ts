@@ -42,7 +42,7 @@ respondBot(){
   setTimeout(() => {
     clearInterval(this.typingInterval);
     this.chat.pop();
-    this.chat.push(" Por el momento tenemos nuestro servidores caidos, no podemos ayudarte, contate a su provedor ");
+    this.chat.push("Por el momento, nuestros servidores están fuera de servicio. No podemos ayudarte en este momento. Por favor, contactá a tu proveedor");
 
   }, 1500);
 }
