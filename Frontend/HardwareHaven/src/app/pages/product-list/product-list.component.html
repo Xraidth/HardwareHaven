@@ -40,31 +40,52 @@
       </div>
 
       <div class="d-flex justify-content-center align-items-center text-center">
-      <div class="custom-menu" >
-        <div class="w-sm-auto">
-          <select class="form-select" aria-label="Default select example" (change)="onSortChangeMenu($event)">
-            <option value="Or" selected>Menu:</option>
-            <option *ngFor="let categoria of categorias" [value]="categoria.descripcion">{{categoria.descripcion}}</option>
-          </select>
+        <div class="custom-menu">
+
+          <!-- Menú de categorías -->
+          <div class="w-sm-auto mb-2">
+            <select class="form-select d-flex align-items-center gap-2" aria-label="Default select example" (change)="onSortChangeMenu($event)">
+              <option value="Or" selected>
+                &#9776; Menu:
+              </option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.descripcion">{{categoria.descripcion}}</option>
+            </select>
+          </div>
+
+          <!-- Menú de orden -->
+          <div class="w-sm-auto mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0">
+                <!-- Icono de ordenar -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                  <path d="M1.5 1.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .4.8l-4.1 5.5v5.7a.5.5 0 0 1-.8.4l-2-1.5a.5.5 0 0 1-.2-.4V7.3L1.1 1.8a.5.5 0 0 1 .4-.8z"/>
+                </svg>
+              </span>
+              <select class="form-select border-start-0" aria-label="Default select example" (change)="onSortChangeOrden($event)">
+                <option value="Or" selected>Ordenar Por:</option>
+                <option value="az">Ordenar A/Z</option>
+                <option value="za">Ordenar Z/A</option>
+                <option value="highPrice">Mayor Precio</option>
+                <option value="lowPrice">Menor precio</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Botón de vaciar carrito -->
+          <div class="w-sm-auto mb-2">
+            <button (click)="vaciarCarro()" class="btn btn-light d-flex align-items-center gap-2">
+              <!-- Icono del carrito -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                <path d="M6.5 1a1 1 0 0 0-1 1V2H3.5a.5.5 0 0 0 0 1h.5v10.5A1.5 1.5 0 0 0 5.5 15h5a1.5 1.5 0 0 0 1.5-1.5V3h.5a.5.5 0 0 0 0-1H10.5v-.5a1 1 0 0 0-1-1h-3zm1 1V2h1v.5h-1zm-2 3.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+              </svg>
+
+              Vaciar carrito
+            </button>
+          </div>
+
         </div>
-
-      <div class="w-sm-auto">
-        <select class="form-select" aria-label="Default select example" (change)="onSortChangeOrden($event)">
-          <option value="Or" selected>Ordenar Por:</option>
-          <option value="az">Ordenar A/Z</option>
-          <option value="za">Ordenar Z/A</option>
-          <option value="highPrice">Mayor Precio</option>
-          <option value="lowPrice">Menor precio</option>
-        </select>
       </div>
 
-      <div class="w-sm-auto">
-        <button (click)="vaciarCarro()" class="btn btn-light">
-          Vaciar carrito
-        </button>
-      </div>
-
-    </div></div>
 
 
       <div class="row mt-5 justify-content-center">
@@ -80,4 +101,7 @@
       </div>
 
     </main>
+
+<button class="floating-button-purchase" (click)="pasarAcompra()">Comprar</button>
+
 </div>
