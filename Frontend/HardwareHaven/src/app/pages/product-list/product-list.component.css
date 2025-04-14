@@ -43,30 +43,32 @@ header {
    align-items: center;
    width: 75%;
    margin-right: 50px;
-
-
 }
 
 
 
 
 
-
-
+.custom-menu-fixed{
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 35px;
+  right: 10px;
+  display: flex;
+  width: 400px;
+}
 
 
 
 .floating-button-purchase {
-  position: fixed;
-  right: 70px;
-  bottom: 40px;
-  z-index: 1050;
+
   width: 240px;
   height: 65px;
   padding: 0 20px;
   border: none;
   border-radius: 10px;
-  background-color: #0d6efd; /* mismo color, menos saturado */
+  background-color: #0d6efd;
   color: white;
   font-size: 17px;
   font-weight: 500;
@@ -74,14 +76,14 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* sombra más suave y natural */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .floating-button-purchase:hover {
-  background-color: #0b5ed7; /* un poco más oscuro al hacer hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* sombra más sutil que antes */
+  background-color: #0b5ed7;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
 
@@ -92,10 +94,7 @@ header {
 
 
 .floating-button-shopcar {
-  position: fixed;
-  right: 318px;
-  bottom: 35px;
-  z-index: 1050;
+
 
   display: flex;
   align-items: center;
@@ -105,7 +104,7 @@ header {
   width: 75px;
   height: 75px;
   border-radius: 100%;
-  background-color: #007bff; /* color azul Bootstrap */
+  background-color: #007bff;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: none;
@@ -124,10 +123,7 @@ header {
 }
 
 .floating-button-trash{
-  position: fixed;
-  right: 0px;
-  bottom: 42px;
-  z-index: 1050;
+
 
   display: flex;
   align-items: center;
@@ -137,7 +133,7 @@ header {
   width: 60px;
   height: 60px;
   border-radius: 100%;
-  background-color: #ff0800; /* color azul Bootstrap */
+  background-color: #ff0800;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: none;
@@ -156,8 +152,8 @@ header {
   }
 
   .navbar-collapse {
-    display: flex !important;  /* Asegura que el contenido se mantenga visible */
-    flex-direction: column-reverse !important; /* Alinea los elementos horizontalmente */
+    display: flex !important;
+    flex-direction: column-reverse !important;
     justify-content: center !important;
   }
   .navbar-toggler {
@@ -175,4 +171,15 @@ header {
     z-index: 10;
   }
 
+  .floating-button-purchase {
+    width: 50%;
+  }
+  .custom-menu-fixed{
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+
 }
+
+

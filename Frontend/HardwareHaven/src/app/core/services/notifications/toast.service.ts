@@ -26,7 +26,7 @@ export class ToastService {
       position: 'right',
       className: "toast-added",
       style: {
-        background: 'rgba(2, 255, 44, 0.8)'
+        background: 'rgba(2, 175, 255, 0.8)'
       },
       stopOnFocus: true
     }).showToast();

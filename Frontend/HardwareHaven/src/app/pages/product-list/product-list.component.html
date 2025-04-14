@@ -102,19 +102,21 @@
 
     </main>
 
-<div>
-<button class="floating-button-purchase" (click)="pasarAcompra()">
-  Comprar
-</button>
+<div class="custom-menu-fixed">
 
-<div class=" floating-button-shopcar" (click)="pasarAcompra()">
+
+<div class=" floating-button-shopcar item-menu-fixed" (click)="pasarAcompra()">
   <img src="assets\images\Carrito.png" width="25" height="25" alt="" title="" class="img-small">
   <span class="ms-1 text-light">
   <p class="carrito-shopcar">{{carrito.length}}</p>
   </span>
   </div>
 
-  <div class="floating-button-trash" (click)="vaciarCarro()">
+  <button class="floating-button-purchase v" (click)="pasarAcompra()">
+    Comprar
+  </button>
+
+  <div class="floating-button-trash item-menu-fixed" (click)="vaciarCarro()">
     <img src="assets\images\Tachito.png" width="25" height="25" alt="" title="" class="img-small">
   </div>
 
