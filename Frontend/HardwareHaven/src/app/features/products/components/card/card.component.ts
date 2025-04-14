@@ -1,3 +1,5 @@
+import { ToastService } from './../../../../core/services/notifications/toast.service';
+
 import { Component, Input, Output, EventEmitter, NgModule , OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +23,9 @@ export class CardComponent implements OnInit {
   public isSelected: boolean= false;
   products: { name: string, imageUrl: string }[] = [];
 
-  constructor(private http: HttpClient, private sweetAlertService: SweetAlertService) {}
+  constructor(private http: HttpClient, private sweetAlertService: SweetAlertService
+    , private toastService:ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -40,6 +44,10 @@ export class CardComponent implements OnInit {
     return getMaxPrice(precios);
   }
 
+  selectButtonAdd(){
+    this.selectProduct();
+    this.toastService.showToastSusses("Añadido");
+  }
 
   selectProduct() {
     if(!this.isSelected){

@@ -43,9 +43,103 @@ header {
    align-items: center;
    width: 75%;
    margin-right: 50px;
-
-
 }
+
+
+
+
+
+.custom-menu-fixed{
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 35px;
+  right: 10px;
+  display: flex;
+  width: 400px;
+}
+
+
+
+.floating-button-purchase {
+
+  width: 240px;
+  height: 65px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0d6efd;
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.floating-button-purchase:hover {
+  background-color: #0b5ed7;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.floating-button-purchase:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.floating-button-shopcar {
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+}
+
+.carrito-shopcar {
+  background-color: rgb(9, 101, 124);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.floating-button-trash{
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #ff0800;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+}
+
 
 @media (max-width: 768px){
   .custom-menu{
@@ -58,8 +152,8 @@ header {
   }
 
   .navbar-collapse {
-    display: flex !important;  /* Asegura que el contenido se mantenga visible */
-    flex-direction: column-reverse !important; /* Alinea los elementos horizontalmente */
+    display: flex !important;
+    flex-direction: column-reverse !important;
     justify-content: center !important;
   }
   .navbar-toggler {
@@ -77,45 +171,15 @@ header {
     z-index: 10;
   }
 
+  .floating-button-purchase {
+    width: 50%;
+  }
+  .custom-menu-fixed{
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+
 }
 
 
-
-
-
-
-
-
-.floating-button-purchase {
-  position: fixed;
-  right: 70px;
-  bottom: 40px;
-  z-index: 1050;
-  width: 240px;
-  height: 65px;
-  padding: 0 20px;
-  border: none;
-  border-radius: 10px;
-  background-color: #0d6efd; /* mismo color, menos saturado */
-  color: white;
-  font-size: 17px;
-  font-weight: 500;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* sombra más suave y natural */
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.floating-button-purchase:hover {
-  background-color: #0b5ed7; /* un poco más oscuro al hacer hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* sombra más sutil que antes */
-  transform: translateY(-2px);
-}
-
-.floating-button-purchase:active {
-  transform: translateY(1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}

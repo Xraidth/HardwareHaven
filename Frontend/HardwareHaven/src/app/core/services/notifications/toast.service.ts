@@ -18,5 +18,19 @@ export class ToastService {
     }).showToast();
   }
 
+  showToastSusses(message: string, duration: number = 1000) {
+    Toastify({
+      text: message,
+      duration: duration,
+      gravity: 'top',
+      position: 'right',
+      className: "toast-added",
+      style: {
+        background: 'rgba(2, 175, 255, 0.8)'
+      },
+      stopOnFocus: true
+    }).showToast();
+  }
+
 }
 
