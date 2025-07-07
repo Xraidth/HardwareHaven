@@ -59,6 +59,7 @@
 }
 
 .message-bot {
+    white-space: pre-wrap;
   background-color: #b2dbf76c;
   padding: 10px;
   border-radius: 5px;

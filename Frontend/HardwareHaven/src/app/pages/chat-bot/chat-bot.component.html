@@ -1,33 +1,44 @@
-
 <button class="volver-btn" (click)="gotoHome()">Volver</button>
+
 <div class="chat-container">
   <button class="close-btn" (click)="closeChat()">
     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 20 20">
       <line x1="0" y1="0" x2="20" y2="20" stroke="white" stroke-width="2"/>
       <line x1="0" y1="20" x2="20" y2="0" stroke="white" stroke-width="2"/>
     </svg>
-
   </button>
 
   <div class="chat-box">
-    <div class="message-box" *ngFor="let m of chat; let i = index">
+    <!-- Mostrar todos los mensajes -->
+    <div class="message-box" *ngFor="let m of chat">
       <p class="mt-3"
          [ngClass]="{
-           'message-user': i % 2 !== 0,
-           'message-bot': (i % 2 === 0) && !m.startsWith('Escribiendo.'),
-           'txt-dark':  m.startsWith('Escribiendo.')
+           'message-user': m.startsWith('Tú:'),
+           'message-bot': m.startsWith('Bot:')
          }">
         <span class="message-text">{{ m }}</span>
-        <span class="message-hour" *ngIf="!(m.startsWith('Escribiendo.'))">{{ currentTime | date:'shortTime' }}</span>
+        <span class="message-hour">{{ currentTime | date:'shortTime' }}</span>
+      </p>
+    </div>
+
+    <!-- Indicador de escritura del bot -->
+    <div *ngIf="isTyping" class="message-box">
+      <p class="mt-3 message-bot typing-indicator">
+        <span class="message-text">{{ typingMessage }}</span>
       </p>
     </div>
   </div>
 
+  <!-- Input del usuario -->
   <div class="input-container">
-      <input type="text" id="userInput" (keydown.enter)="sendMessage()" [(ngModel)]="userInput" placeholder="Escribe un mensaje..." />
-      <button (click)="sendMessage()" >Enviar</button>
+    <input
+      type="text"
+      id="userInput"
+      [(ngModel)]="userInput"
+      placeholder="Escribe un mensaje..."
+      (keydown.enter)="sendMessage()"
+      [disabled]="isTyping"
+    />
+    <button (click)="sendMessage()" [disabled]="isTyping">Enviar</button>
   </div>
 </div>
-
-
-
