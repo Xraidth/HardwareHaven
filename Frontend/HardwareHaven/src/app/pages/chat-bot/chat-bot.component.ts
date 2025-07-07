@@ -20,7 +20,7 @@ export class ChatBotComponent implements OnInit {
   chat: string[] = [];
   typingMessage = "Escribiendo";
   typingInterval: any;
-
+isTyping: boolean = false;
   ngOnInit(): void {
     this.initialChat();
   }
@@ -36,27 +36,27 @@ export class ChatBotComponent implements OnInit {
     this.respondBot(messageToSend);
   }
 
-  respondBot(userMessage: string) {
-    this.chat.push(this.typingMessage + "...");
-    let dots = 0;
-    this.typingInterval = setInterval(() => {
-      dots = (dots + 1) % 4;
-      this.chat[this.chat.length - 1] = this.typingMessage + ".".repeat(dots);
-    }, 500);
+ respondBot(userMessage: string) {
+  this.isTyping = true;
+  let dots = 0;
+  this.typingInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    this.typingMessage = "Escribiendo" + ".".repeat(dots);
+  }, 500);
 
-    this.openClassService.chat({ message: userMessage }).subscribe({
-      next: (res: any) => {
-        clearInterval(this.typingInterval);
-        this.chat.pop(); // Quitar mensaje "Escribiendo..."
-        this.chat.push("Bot: " + (res.response || "No hay respuesta del bot."));
-      },
-      error: () => {
-        clearInterval(this.typingInterval);
-        this.chat.pop();
-        this.chat.push("Bot: Por el momento, nuestros servidores están fuera de servicio. No podemos ayudarte en este momento. Por favor, contactá a tu proveedor");
-      }
-    });
-  }
+  this.openClassService.chat({ message: userMessage }).subscribe({
+    next: (res: any) => {
+      clearInterval(this.typingInterval);
+      this.isTyping = false;
+      this.chat.push("Bot: " + (res.response || "No hay respuesta del bot."));
+    },
+    error: () => {
+      clearInterval(this.typingInterval);
+      this.isTyping = false;
+      this.chat.push("Bot: Por el momento, nuestros servidores están fuera de servicio. No podemos ayudarte en este momento. Por favor, contactá a tu proveedor");
+    }
+  });
+}
 
   closeChat() {
     this.chat = [];
