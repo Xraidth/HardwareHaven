@@ -33,6 +33,61 @@
       <h1 class="text-center title-product mb-4 mt-3">Productos</h1>
       </div>
 
+
+      <div class="container mt-5">
+        <div *ngIf="products.length > 0; else noProducts">
+          <div id="productsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+
+              <div class="carousel-item active">
+                <div class="row">
+                  <div
+                    class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3"
+                    *ngFor="let product of products.slice(0, 4)">
+                    <app-card
+                      [product]="product"
+                      (productSelected)="onProductSelected($event)"
+                      (productUnSelected)="onProductUnSelected($event)">
+                    </app-card>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" *ngIf="products.length > 4">
+                <div class="row">
+                  <div
+                    class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3"
+                    *ngFor="let product of products.slice(4, 8)">
+                    <app-card
+                      [product]="product"
+                      (productSelected)="onProductSelected($event)"
+                      (productUnSelected)="onProductUnSelected($event)">
+                    </app-card>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productsCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productsCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
+        </div>
+
+        <ng-template #noProducts>
+          <p class="text-center">No hay productos disponibles.</p>
+        </ng-template>
+      </div>
+
       <div class="d-flex justify-content-center align-items-center text-center">
         <div class="custom-menu">
 
@@ -79,6 +134,9 @@
 
         </div>
       </div>
+
+
+
 
 
 

@@ -151,4 +151,7 @@ export class ProductListComponent implements OnInit {
     SessionService.shopcar= this.carrito;
     this.getAllProducts();
   }
+
+
+
 }
