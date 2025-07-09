@@ -36,14 +36,14 @@ export class BarChartComponent {
   showYAxisLabel = true;
   yAxisLabel = 'Ingresos ($)';
 
-  // Esquema de color con mayor contraste en fondo blanco
+
 
 
   colorScheme: Color = {
-    name: 'custom',            // Nombre del esquema de colores
-    selectable: true,          // Si el esquema es seleccionable
-    group: ScaleType.Ordinal,          // Tipo de grupo, puede ser 'Ordinal' o 'Linear'
-    domain: ['#808080', '#000000'], // Gris y negro
+    name: 'custom',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#808080', '#000000'],
   };
 
 }
