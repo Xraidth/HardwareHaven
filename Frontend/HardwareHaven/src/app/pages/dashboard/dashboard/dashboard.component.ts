@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StartDashBoardComponent } from '../../../features/dashboard/start-dash-board/start-dash-board.component';
 import { CommonModule } from '@angular/common';
 import { TimeChartComponent } from '../../../features/dashboard/charts/time-chart/time-chart.component';
 import { BarLateralChartComponent } from '../../../features/dashboard/charts/bar-lateral-chart/bar-lateral-chart.component';
 import { PieChartComponent } from '../../../features/dashboard/charts/pie-chart/pie-chart.component';
 import { Router } from '@angular/router';
+import { UserNavComponent } from '../../../shared/user-nav/user-nav.component';
+import { SessionService } from '../../../core/services/share/session.service';
 
 
 
@@ -12,15 +14,21 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [StartDashBoardComponent, CommonModule, TimeChartComponent, BarLateralChartComponent, PieChartComponent ],
+  imports: [UserNavComponent, StartDashBoardComponent, CommonModule, TimeChartComponent, BarLateralChartComponent, PieChartComponent ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   public currentView:string = 'start';
   public currentDetail:string = 'view';
-
+  public usuario:any;
+  public today: Date = new Date();
   constructor(private router:Router){}
+ngOnInit(): void {
+  this.usuario = SessionService.user;
+
+
+}
 
   setView(view: string) {
     this.currentView = view;
@@ -93,9 +101,9 @@ export class DashboardComponent {
   ];
 
   payData = [
-    { name: "Cash", value: 90 },
-    { name: "Card", value: 7 },
-    { name: "Electronic payment", value: 3 },
+    { name: "Cash", value: 100 },
+    { name: "Card", value: 0 },
+    { name: "Electronic payment", value: 0 },
 
   ];
 
