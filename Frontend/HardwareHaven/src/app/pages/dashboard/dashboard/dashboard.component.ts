@@ -93,9 +93,9 @@ export class DashboardComponent {
   ];
 
   payData = [
-    { name: "Cash", value: 90 },
-    { name: "Card", value: 7 },
-    { name: "Electronic payment", value: 3 },
+    { name: "Cash", value: 100 },
+    { name: "Card", value: 0 },
+    { name: "Electronic payment", value: 0 },
 
   ];
 
